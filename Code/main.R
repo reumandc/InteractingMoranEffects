@@ -6,6 +6,9 @@
 #Clean the data
 source("CleanData_SuperBasic.R")
 
+#Do linear models to help demo the need for specific lags
+
+
 #
 source("Approach_ModellingSpectra_General.R")
 

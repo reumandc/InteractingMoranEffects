@@ -150,7 +150,7 @@ LAInd<-which(dists==min(dists))
 #The main function for doing the analysis on a particular of locations
 #***
 
-#Uses the spectral mathemtics from my notes begun on 2021 02 01 to get information about fractions of 
+#Uses the spectral mathematics from my notes begun on 2021 02 01 to get information about fractions of 
 #synchrony explained by NO3, waves, and interactions. Assumes all the variables created above are in the 
 #workspace when run.
 #
