@@ -3,12 +3,16 @@
 #
 #Before running this script, set the working directory of R to this directory.
 
+rm(list=ls())
+graphics.off()
+
 #Clean the data
-source("CleanData_SuperBasic.R")
+source("AnalysisStep_CleanData_SuperBasic.R")
+source("AnalysisStep_CleanData_MoreInvolved.R")
 
-#Do linear models to help demo the need for specific lags
+#Do linear models to help demo the need for specific lags - this also performs and saves the final level of data cleaning
+source("AnalysisStep_LinearModels.R")
 
-
-#
-source("Approach_ModellingSpectra_General.R")
+#Do the spectra decomposition analysis
+source("AnalysisStep_SpectralDecomp.R")
 

@@ -1,6 +1,24 @@
-#Cleans the data in a very basic way
+#Cleans the data in a very basic way. Just removes quarters and sites with no data for one 
+#of the variables, and puts sites in "paddle order," the order you would pass the sites in 
+#if you paddled a kayak from north to south, going into all the bays and such.
 
 rm(list=ls())
+
+#***
+#External codes needed
+#***
+
+#packages needed (invoked with "::"): profvis
+
+#***
+#Location for storing results and other prep
+#***
+
+resloc<-"../Results/DataAfterSuperBasicCleaning/"
+if (!dir.exists(resloc))
+{
+  dir.create(resloc,recursive=TRUE)
+}
 
 #***
 #Load the data
@@ -168,20 +186,14 @@ dim(climind)
 #save the results
 #***
 
-resloc<-"../Results/DataAfterSuperBasicCleaning/"
-if (!dir.exists(resloc))
-{
-  dir.create(resloc,recursive=TRUE)
-}
-
 saveRDS(kelp,file=paste0(resloc,"Kelp_Quarterly_CleanedSuperBasic.Rds"))
 write.table(kelp,file=paste0(resloc,"Kelp_Quarterly_CleanedSuperBasic.csv"),row.names = FALSE,col.names = FALSE,sep=",")
 
 saveRDS(NO3,file=paste0(resloc,"NO3_Quarterly_CleanedSuperBasic.Rds"))
 write.table(NO3,file=paste0(resloc,"NO3_Quarterly_CleanedSuperBasic.csv"),row.names = FALSE,col.names = FALSE,sep=",")
 
-saveRDS(wave,file=paste0(resloc,"wave_Quarterly_CleanedSuperBasic.Rds"))
-write.table(wave,file=paste0(resloc,"wave_Quarterly_CleanedSuperBasic.csv"),row.names = FALSE,col.names = FALSE,sep=",")
+saveRDS(wave,file=paste0(resloc,"Waves_Quarterly_CleanedSuperBasic.Rds"))
+write.table(wave,file=paste0(resloc,"Waves_Quarterly_CleanedSuperBasic.csv"),row.names = FALSE,col.names = FALSE,sep=",")
 
 saveRDS(locs,file=paste0(resloc,"Locs_CleanedSuperBasic.Rds"))
 write.table(locs,file=paste0(resloc,"Locs_CleanedSuperBasic.csv"),row.names = FALSE,col.names = TRUE,sep=",")
@@ -189,7 +201,7 @@ write.table(locs,file=paste0(resloc,"Locs_CleanedSuperBasic.csv"),row.names = FA
 saveRDS(quarters,file=paste0(resloc,"Quarters_CleanedSuperBasic.Rds"))
 write.table(quarters,file=paste0(resloc,"Quarters_CleanedSuperBasic.csv"),row.names = FALSE,col.names = TRUE,sep=",")
 
-saveRDS(climind,file=paste0(resloc,"Climind_Quarterly_CleanedSuperBasic.Rds"))
-write.table(climind,file=paste0(resloc,"Climind_Quarterly_CleanedSuperBasic.csv"),row.names = FALSE,col.names = TRUE,sep=",")
+saveRDS(climind,file=paste0(resloc,"Climinds_Quarterly_CleanedSuperBasic.Rds"))
+write.table(climind,file=paste0(resloc,"Climinds_Quarterly_CleanedSuperBasic.csv"),row.names = FALSE,col.names = TRUE,sep=",")
 
 
