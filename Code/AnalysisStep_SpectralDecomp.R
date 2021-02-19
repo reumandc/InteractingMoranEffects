@@ -8,9 +8,7 @@ rm(list=ls())
 #External codes needed
 #***
 
-#packages needed (invoked with "::"): parallel, wsyn, ncf
-source("FillSeasonalMedian.R")
-source("FindZeroNAYears.R")
+#packages needed (invoked with "::"): parallel, wsyn, ncf, graphics
 source("SpectralTools.R")
 source("AvgOffDiags.R")
 
@@ -18,7 +16,7 @@ source("AvgOffDiags.R")
 #Location for storing results and other prep
 #***
 
-resloc<-"../Results/Approach_ModellingSpectral_General/"
+resloc<-"../Results/SpectralDecompResults/"
 if (!dir.exists(resloc))
 {
   dir.create(resloc,recursive=TRUE)
@@ -31,80 +29,22 @@ saveRDS(theseed,file=paste0(resloc,"theseed.Rds"))
 saveRDS(BiasVariance,file=paste0(resloc,"BiasVariance.Rds"))
 
 #***
-#Load the quarterly data with only super basic cleaning done to it
+#Load the data
 #***
 
 #load the data
-datloc<-"../Results/DataAfterSuperBasicCleaning/"
-kelpQ<-readRDS(paste0(datloc,"Kelp_Quarterly_CleanedSuperBasic.Rds")) 
-NO3Q<-readRDS(paste0(datloc,"NO3_Quarterly_CleanedSuperBasic.Rds")) 
-wavesQ<-readRDS(paste0(datloc,"wave_Quarterly_CleanedSuperBasic.Rds")) 
-locs<-readRDS(paste0(datloc,"Locs_CleanedSuperBasic.Rds"))
-quarters<-readRDS(paste0(datloc,"Quarters_CleanedSuperBasic.Rds"))
-timesQ<-1:(dim(quarters)[1])
+datloc<-"../Results/DataAfterAllCleaning/"
+kelp<-readRDS(paste0(datloc,"Kelp_Quarterly_CleanedFinal.Rds")) 
+NO3<-readRDS(paste0(datloc,"NO3_Quarterly_CleanedFinal.Rds")) 
+waves<-readRDS(paste0(datloc,"Waves_Quarterly_CleanedFinal.Rds")) 
+locs<-readRDS(paste0(datloc,"Locs_CleanedFinal.Rds"))
+quarters<-readRDS(paste0(datloc,"Quarters_CleanedFinal.Rds"))
+climinds<-readRDS(paste0(datloc,"Climinds_Quarterly_CleanedFinal.Rds"))
+times<-1:(dim(quarters)[1])
 
-#***
-#Slightly more extensive data prep - throw out sites with too many NAs or zeroes, then fill remaining NAs 
-#with seasonal medians
-#***
+numts<-dim(kelp)[1]
+lents<-dim(kelp)[2]
 
-#Remove all sites which have kelp 0/NA for more than 3 whole calendar years any time during the data 
-#duration. This is a conservative definition of "persistent" kelp sites - we want to work with 
-#sites driven by kelp dynamics, not sediment dynamics.
-badyrs<-apply(FUN=find_zero_NA_years,X=kelpQ,MARGIN=1)
-hist(badyrs)
-numbadyrslte<-c()
-for (counter in 0:20)
-{
-  numbadyrslte[counter+1]<-sum(badyrs<=counter)
-}
-sum(badyrs==0)
-sum(badyrs<=1)
-sum(badyrs<=2)
-sum(badyrs<=3)
-plot(0:20,numbadyrslte,ylim=c(0,dim(kelpQ)[1]))
-numbadyrslte<-data.frame(numlocs=0:20,numbadyrs=numbadyrslte)
-
-goodlocs<-which(badyrs<=3)
-kelpQ<-kelpQ[goodlocs,]
-NO3Q<-NO3Q[goodlocs,]
-wavesQ<-wavesQ[goodlocs,]
-locs<-locs[goodlocs,]
-rownames(locs)<-1:dim(locs)[1]
-
-#Fill remaining NAs with seasonal medians
-kelp_mf<-t(apply(FUN=fill_with_seasonal_median,X=kelpQ,MARGIN=1))
-sum(kelpQ==kelp_mf,na.rm=TRUE)+sum(is.na(kelpQ))
-prod(dim(kelpQ))
-kelpQ<-kelp_mf
-rm(kelp_mf)
-
-#do the same for nitrates and waves
-NO3Q<-t(apply(FUN=fill_with_seasonal_median,X=NO3Q,MARGIN=1))
-wavesQ<-t(apply(FUN=fill_with_seasonal_median,X=wavesQ,MARGIN=1))
-
-#check to make sure there are now no missing values
-apply(FUN=function(x){sum(is.na(x))},X=kelpQ,MARGIN=2)
-apply(FUN=function(x){sum(is.na(x))},X=NO3Q,MARGIN=2)
-apply(FUN=function(x){sum(is.na(x))},X=wavesQ,MARGIN=2)
-
-numlocs<-dim(kelpQ)[1]
-lents<-dim(kelpQ)[2]
-
-rm(badyrs,counter,fill_with_seasonal_median,find_zero_NA_years,goodlocs,numbadyrslte)
-
-#***
-#More extensive data prep - detrend, demean and variance standardize all time series individually
-#***
-
-kelp<-wsyn::cleandat(kelpQ,times=timesQ,clev=3)$cdat
-NO3<-wsyn::cleandat(NO3Q,times=timesQ,clev=3)$cdat
-waves<-wsyn::cleandat(wavesQ,times=timesQ,clev=3)$cdat
-
-times<-timesQ
-
-rm(kelpQ,wavesQ,NO3Q)
-  
 #***
 #Which site is closest to pt conception, same for SB and some other locations, for later use
 #***
@@ -162,16 +102,17 @@ LAInd<-which(dists==min(dists))
 #                   and 0 up to the value input for NO3, and the same for waves.
 #frg              The frequency range to use for display
 #fnpre            A prefix for file names of pdf plots exported by the function, with path but without the
-#                   extension "pdf"
+#                   extension "pdf" of "jpg"
+#plottype         Use "jpg" to make jpg plots, "pdf" to make pdf plots
 #
 do_analysis<-function(Args)
 {
   #**argument unpacking and error catching - global vars accessed here (kelp)
-  if (class(Args)!="list" || length(Args)!=4)
+  if (class(Args)!="list" || length(Args)!=5)
   {
-    stop("Error in do_analysis: Args must be a list of length 4")
+    stop("Error in do_analysis: Args must be a list of length 5")
   }
-  if (any(names(Args)!=c("locstouse","lags","frg","fnpre")))
+  if (any(names(Args)!=c("locstouse","lags","frg","fnpre","plottype")))
   {
     stop("Error in do_analysis: bad value for Args")
   }
@@ -179,9 +120,10 @@ do_analysis<-function(Args)
   lags<-Args$lags
   frg<-Args$frg
   fnpre<-Args$fnpre
+  plottype<-Args$plottype
   if (any(locstouse<1) || any(locstouse>dim(kelp)[1]))
   {
-    stop("Error in do_analysis: bad value for lags")
+    stop("Error in do_analysis: bad value for locstouse")
   }
   if (length(locstouse)<length(unique(locstouse)))
   {
@@ -193,6 +135,10 @@ do_analysis<-function(Args)
   {
     stop("Error in do_analysis: bad value for lags")
   }
+  if (!(plottype %in% c("jpg","pdf")))
+  {
+    stop("Error in do_analysis: bad value for plottype")
+  }
   
   #**filter the data to only the specified locations - global vars accessed here (kelp, NO3, waves)
   kelp_l<-kelp[locstouse,]
@@ -203,7 +149,7 @@ do_analysis<-function(Args)
   #**do regression to get coefficients for fB, fP1, fP2
   
   #construct the regression formula object
-  form_rhs_terms<-c(paste0("kelp_l",1:lags[1]),paste0("NO3_l",0:lags[2]),paste0("waves_l",0:lags[2]))
+  form_rhs_terms<-c(paste0("kelp_l",1:lags[1]),paste0("NO3_l",0:lags[2]),paste0("waves_l",0:lags[3]))
   form<-as.formula(paste0("kelp_l0~",paste0(form_rhs_terms,collapse="+"),sep=""))
   
   #construct the regression data frame
@@ -378,23 +324,161 @@ do_analysis<-function(Args)
   freq<-freq[frg[1]<freq & freq<=frg[2]]
   
   #**make and export the plot
-  jpeg(paste0(resloc,fnpre,"_MainPlot.jpg"),quality=95)
+  
   sumexpl<-T1_avg+T2_avg+T4_avg
   sumunexpl<-T3_avg+T5_avg+T6_avg
   sumterms<-sumexpl+sumunexpl
-  ylimits<-range(totsync,T1_avg,T2_avg,T4_avg,sumexpl,sumterms)
-  plot(freq,totsync,type="l",xlab="Frequency, cycles per quarter",ylab="Synchrony contribution",col="black",ylim=ylimits)
-  lines(freq,T1_avg,type="l",col="green") #direct effects of NO3
-  lines(freq,T2_avg,type="l",col="blue") #direct effects of waves
-  lines(freq,T4_avg,type="l",lty="solid",col="green") 
-  lines(freq,T4_avg,type="l",lty="dashed",col="blue") #interactions between waves and NO3
-  lines(freq,sumexpl,type="l",col="yellow") #explained stuff - sum of all the terms relating only to NO3 and waves (direct NO3 and wave effects, and interactions between those two)
-  lines(freq,sumterms,type="l",lty="dashed") #total of all terms, should approx equal the plot of totsync
-  lines(freq,sumunexpl,type="l",lty="solid",col="red") #unexplained
-  lines(freq,rep(0,length(freq)))
-  lines(rep(1/4,2),ylimits) #plot a vertical line at the annual frequency
-  lines(rep(1/8,2),ylimits) #plot a vertical line at the biannual frequency
-  lines(rep(1/16,2),ylimits) #plot another one at the 4-year timescale
+  
+  # #these lines plot against frequency, one plot for all frequencies
+  # if (plottype=="jpg")
+  # {
+  #   jpeg(paste0(resloc,fnpre,"_MainPlot.jpg"),quality=95)
+  # }
+  # if (plottype=="pdf")
+  # {
+  #   pdf(paste0(resloc,fnpre,"_MainPlot.pdf"))
+  # }
+  # 
+  # ylimits<-range(totsync,T1_avg,T2_avg,T4_avg,sumexpl,sumterms)
+  # xlimits<-range(freq)
+  # 
+  # plot(freq,totsync,type="l",xlab="Frequency, cycles per quarter",ylab="Synchrony contribution",col="black",
+  #    ylim=ylimits,xlim=xlimits)
+  # lines(freq,T1_avg,type="l",col="green") #direct effects of NO3
+  # lines(freq,T2_avg,type="l",col="blue") #direct effects of waves
+  # lines(freq,T4_avg,type="l",lty="solid",col="green") 
+  # lines(freq,T4_avg,type="l",lty="dashed",col="blue") #interactions between waves and NO3
+  # lines(freq,sumexpl,type="l",col="red",lty="solid") #explained stuff - sum of all the terms relating only to NO3 and waves (direct NO3 and wave effects, and interactions between those two)
+  # lines(freq,sumterms,type="l",lty="dashed") #total of all terms, should approx equal the plot of totsync
+  # #lines(freq,sumunexpl,type="l",lty="solid",col="red") #unexplained
+  # lines(freq,rep(0,length(freq)))
+  # lines(rep(1/4,2),ylimits) #plot a vertical line at the annual frequency
+  # lines(rep(1/8,2),ylimits) #plot a vertical line at the biannual frequency
+  # lines(rep(1/16,2),ylimits) #plot another one at the 4-year timescale
+   
+  # #these lines plot against log2 timescale, one plot for all timescales
+  # if (plottype=="jpg")
+  # {
+  #   jpeg(paste0(resloc,fnpre,"_MainPlot.jpg"),quality=95)
+  # }
+  # if (plottype=="pdf")
+  # {
+  #   pdf(paste0(resloc,fnpre,"_MainPlot.pdf"))
+  # }
+  # 
+  # timescales<-1/freq
+  # l2timescales<-log2(timescales)
+  # tslocs<-c(2,4,8,16,32,64,128) #pretty(timescales,n=8)
+  # tslabs<-tslocs/4
+  # xlimits<-range(l2timescales)
+  # ylimits<-range(totsync,T1_avg,T2_avg,T4_avg,sumexpl,sumterms)
+  # 
+  # plot(l2timescales,totsync,type="l",xaxt="n",xlab="Timescale, years",ylab="Synchrony contribution",col="black",
+  #      ylim=ylimits,xlim=xlimits)
+  # graphics::axis(1,at=log2(tslocs),labels=tslabs)
+  # lines(l2timescales,T1_avg,type="l",col="green") #direct effects of NO3
+  # lines(l2timescales,T2_avg,type="l",col="blue") #direct effects of waves
+  # lines(l2timescales,T4_avg,type="l",lty="solid",col="green") 
+  # lines(l2timescales,T4_avg,type="l",lty="dashed",col="blue") #interactions between waves and NO3
+  # lines(l2timescales,sumexpl,type="l",col="red",lty="solid") #explained stuff - sum of all the terms relating only to NO3 and waves (direct NO3 and wave effects, and interactions between those two)
+  # lines(l2timescales,sumterms,type="l",lty="dashed") #total of all terms, should approx equal the plot of totsync
+  # #lines(l2timescales,sumunexpl,type="l",lty="solid",col="red") #unexplained
+  # lines(l2timescales,rep(0,length(timescales)))
+  # lines(rep(log2(4),2),ylimits) #plot a vertical line at the annual frequency
+  # lines(rep(log2(8),2),ylimits) #plot a vertical line at the biannual frequency
+  # lines(rep(log2(16),2),ylimits) #plot another one at the 4-year timescale
+  
+  #these lines plot against log2 timescales, but on three panels for different ranges of timescales,
+  #so that different y-axis extents can be used to prevent the annual peak from swamping everything else
+  timescales<-1/freq
+  l2timescales<-log2(timescales)
+  xlimits<-range(l2timescales)
+  xlimits_short<-c(xlimits[1],log2(8))
+  xlimits_mid<-c(log2(8),log2(16))
+  xlimits_long<-c(log2(16),xlimits[2])
+  
+  gap<-.15
+  yaxnumwd<-.4
+  yaxlabwd<-.2
+  yaxwd<-yaxnumwd+yaxlabwd
+  xaxht<-yaxwd
+  panht<-3
+  panwd_short<-2
+  panwd_mid<-1
+  panwd_long<-2
+  totpanwd<-panwd_short+panwd_mid+panwd_long
+  totht<-xaxht+panht+gap
+  totwd<-yaxwd+2*yaxnumwd+totpanwd+gap
+  
+  if (plottype=="jpg")
+  {
+    jpeg(paste0(resloc,fnpre,"_MainPlot.jpg"),quality=95,width=totwd,height=totht,units="in",res=300)
+  }
+  if (plottype=="pdf")
+  {
+    pdf(paste0(resloc,fnpre,"_MainPlot.pdf"),width=totwd,height=totht)
+  }
+
+  par(fig=c((yaxwd)/totwd,
+            (yaxwd+panwd_short)/totwd,
+            (xaxht)/totht,
+            (xaxht+panht)/totht),
+      mai=c(0,0,0,0),mgp=c(3,0.75,0))
+  inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  ylimits<-range(totsync[inds],T1_avg[inds],T2_avg[inds],T4_avg[inds],sumexpl[inds],sumterms[inds])
+  plot(l2timescales[inds],totsync[inds],type="l",xaxt="n",col="black",
+      ylim=ylimits,xlim=xlimits_short,xaxs="i")
+  mtext("Synchrony contribution",2,1.7)
+  graphics::axis(1,at=log2(c(2,4,8)),labels=c(0.5,1,2))
+  lines(l2timescales[inds],T1_avg[inds],type="l",col="green") #direct effects of NO3
+  lines(l2timescales[inds],T2_avg[inds],type="l",col="blue") #direct effects of waves
+  lines(l2timescales[inds],T4_avg[inds],type="l",lty="solid",col="green") 
+  lines(l2timescales[inds],T4_avg[inds],type="l",lty="dashed",col="blue") #interactions between waves and NO3
+  lines(l2timescales[inds],sumexpl[inds],type="l",col="red",lty="solid") #explained stuff - sum of all the terms relating only to NO3 and waves (direct NO3 and wave effects, and interactions between those two)
+  lines(l2timescales[inds],sumterms[inds],type="l",lty="dashed") #total of all terms, should approx equal the plot of totsync
+  #lines(l2timescales[inds],sumunexpl[inds],type="l",lty="solid",col="red") #unexplained
+  lines(l2timescales[inds],rep(0,length(timescales[inds])))
+  lines(rep(log2(4),2),ylimits) #plot a vertical line at the annual frequency
+
+  par(fig=c((yaxwd+panwd_short+yaxnumwd)/totwd,
+            (yaxwd+panwd_short+yaxnumwd+panwd_mid)/totwd,
+            (xaxht)/totht,
+            (xaxht+panht)/totht),
+      mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  ylimits<-range(totsync[inds],T1_avg[inds],T2_avg[inds],T4_avg[inds],sumexpl[inds],sumterms[inds])
+  plot(l2timescales[inds],totsync[inds],type="l",xaxt="n",col="black",
+       ylim=ylimits,xlim=xlimits_mid,xaxs="i")
+  mtext("Timescale, years",1,1.7)
+  graphics::axis(1,at=log2(c(8,16)),labels=c(2,4))
+  lines(l2timescales[inds],T1_avg[inds],type="l",col="green") #direct effects of NO3
+  lines(l2timescales[inds],T2_avg[inds],type="l",col="blue") #direct effects of waves
+  lines(l2timescales[inds],T4_avg[inds],type="l",lty="solid",col="green") 
+  lines(l2timescales[inds],T4_avg[inds],type="l",lty="dashed",col="blue") #interactions between waves and NO3
+  lines(l2timescales[inds],sumexpl[inds],type="l",col="red",lty="solid") #explained stuff - sum of all the terms relating only to NO3 and waves (direct NO3 and wave effects, and interactions between those two)
+  lines(l2timescales[inds],sumterms[inds],type="l",lty="dashed") #total of all terms, should approx equal the plot of totsync
+  #lines(l2timescales[inds],sumunexpl[inds],type="l",lty="solid",col="red") #unexplained
+  lines(l2timescales[inds],rep(0,length(timescales[inds])))
+
+  par(fig=c((yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd)/totwd,
+            (yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd+panwd_long)/totwd,
+            (xaxht)/totht,
+            (xaxht+panht)/totht),
+      mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  ylimits<-range(totsync[inds],T1_avg[inds],T2_avg[inds],T4_avg[inds],sumexpl[inds],sumterms[inds])
+  plot(l2timescales[inds],totsync[inds],type="l",xaxt="n",col="black",
+       ylim=ylimits,xlim=xlimits_long,xaxs="i")
+  graphics::axis(1,at=log2(c(16,32,64,128)),labels=c(4,8,16,32))
+  lines(l2timescales[inds],T1_avg[inds],type="l",col="green") #direct effects of NO3
+  lines(l2timescales[inds],T2_avg[inds],type="l",col="blue") #direct effects of waves
+  lines(l2timescales[inds],T4_avg[inds],type="l",lty="solid",col="green") 
+  lines(l2timescales[inds],T4_avg[inds],type="l",lty="dashed",col="blue") #interactions between waves and NO3
+  lines(l2timescales[inds],sumexpl[inds],type="l",col="red",lty="solid") #explained stuff - sum of all the terms relating only to NO3 and waves (direct NO3 and wave effects, and interactions between those two)
+  lines(l2timescales[inds],sumterms[inds],type="l",lty="dashed") #total of all terms, should approx equal the plot of totsync
+  #lines(l2timescales[inds],sumunexpl[inds],type="l",lty="solid",col="red") #unexplained
+  lines(l2timescales[inds],rep(0,length(timescales[inds])))
+
   dev.off()
   
   #return results
@@ -405,9 +489,9 @@ do_analysis<-function(Args)
 #some tests of the function, based on comparison to analyses done elsewhere using seperate code
 #***
 
-Args<-list(locstouse=25:220,lags=c(4,1,1),frg=c(0,.3),fnpre="Test1")
+Args<-list(locstouse=25:220,lags=c(4,1,0),frg=c(0,.35),fnpre="Test1",plottype="pdf")
 do_analysis(Args)
-Args<-list(locstouse=25:220,lags=c(8,1,1),frg=c(0,.3),fnpre="Test2")
+Args<-list(locstouse=25:220,lags=c(8,1,0),frg=c(0,.35),fnpre="Test2",plottype="pdf")
 do_analysis(Args)
 
 #***
@@ -424,11 +508,13 @@ for (counter in 1:(dim(locs)[1]))
   locstouse<-which(alldists[counter,]<25)
   if (length(locstouse)<20){ next }
   centerinds<-c(centerinds,counter)
-  curargs1<-list(locstouse=locstouse,lags=c(4,1,1),frg=c(0,.3),fnpre=paste0("KelpLag_4_Center_",counter))
-  curargs2<-list(locstouse=locstouse,lags=c(8,1,1),frg=c(0,.3),fnpre=paste0("KelpLag_8_Center_",counter))
+  curargs1<-list(locstouse=locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre=paste0("KelpLag_04_Center_",counter),plottype="jpg")
+  curargs2<-list(locstouse=locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre=paste0("KelpLag_08_Center_",counter),plottype="jpg")
+  curargs3<-list(locstouse=locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre=paste0("KelpLag_12_Center_",counter),plottype="jpg")
   allargs[[allargsind]]<-curargs1
   allargs[[allargsind+1]]<-curargs2
-  allargsind<-allargsind+2
+  allargs[[allargsind+2]]<-curargs3
+  allargsind<-allargsind+3
 }
 allres<-parallel::mclapply(FUN=do_analysis,X=allargs,mc.cores=10)
 
@@ -440,22 +526,31 @@ saveRDS(allres,file=paste0(resloc,"allres.Rds"))
 #***
 
 #put the results in a data frame for lag 4
-allres4<-matrix(NA,length(allres)/2,length(allres[[1]]))
+allres4<-matrix(NA,length(allres)/3,length(allres[[1]]))
 colnames(allres4)<-names(allres[[1]])
-for (counter in seq(from=1,by=2,to=length(allres)))
+for (counter in seq(from=1,by=3,to=length(allres)))
 {
-  allres4[(counter+1)/2,]<-allres[[counter]]
+  allres4[(counter+2)/3,]<-allres[[counter]]
 }
 saveRDS(allres4,paste0(resloc,"allres4.Rds"))
 
 #same for lag 8
-allres8<-matrix(NA,length(allres)/2,length(allres[[2]]))
+allres8<-matrix(NA,length(allres)/3,length(allres[[2]]))
 colnames(allres8)<-names(allres[[2]])
-for (counter in seq(from=1,by=2,to=length(allres)))
+for (counter in seq(from=1,by=3,to=length(allres)))
 {
-  allres8[(counter+1)/2,]<-allres[[counter+1]]
+  allres8[(counter+2)/3,]<-allres[[counter+1]]
 }
 saveRDS(allres8,paste0(resloc,"allres8.Rds"))
+
+#same for lag 12
+allres12<-matrix(NA,length(allres)/3,length(allres[[3]]))
+colnames(allres12)<-names(allres[[3]])
+for (counter in seq(from=1,by=3,to=length(allres)))
+{
+  allres12[(counter+2)/3,]<-allres[[counter+2]]
+}
+saveRDS(allres12,paste0(resloc,"allres12.Rds"))
 
 #get variables we can use as x axes of the plots below
 mdlocind<-c() #will be median of indices of locations used in each run
@@ -499,15 +594,17 @@ put_loc_lines<-function()
   text(LAInd,ylimits[2],"LA",srt=90,adj=c(1,0))
 }
 
+#***kelp lag 4 plots
+
 #make plots about R^2 - how well does the ARMA capture the dynamics
-pdf(paste0(resloc,"LinearModel_Rsq_v_centerind.pdf"))
+pdf(paste0(resloc,"LinearModel_Rsq_v_centerind_kelplag4.pdf"))
 ylimits<-range(allres4[,'model r sq'])
 plot(centerinds,allres4[,'model r sq'],type='b',xlab="Center index",ylab="Linear model R sq")
 put_loc_lines()
 dev.off()
 
 #make plots about coefficients - kelp coefficients first
-pdf(paste0(resloc,"LinearModel_KelpCoefs_v_centerind.pdf"))
+pdf(paste0(resloc,"LinearModel_KelpCoefs_v_centerind_kelplag4.pdf"))
 ylimits<-range(allres4[,'coef_kelp_l1'],allres4[,'coef_kelp_l2'],allres4[,'coef_kelp_l2'],allres4[,'coef_kelp_l4'])
 plot(centerinds,allres4[,'coef_kelp_l1'],type='b',xlab="Center index",ylab="Kelp coefficient",pch=1,
      ylim=ylimits)
@@ -518,7 +615,7 @@ put_loc_lines()
 dev.off()
 
 #now NO3 coefficients
-pdf(paste0(resloc,"LinearModel_NO3Coefs_v_centerind.pdf"))
+pdf(paste0(resloc,"LinearModel_NO3Coefs_v_centerind_kelplag4.pdf"))
 ylimits<-range(allres4[,'coef_NO3_l0'],allres4[,'coef_NO3_l1'])
 plot(centerinds,allres4[,'coef_NO3_l0'],type='b',xlab="Center index",ylab="NO3 coefficient",pch=1,
      ylim=ylimits)
@@ -526,17 +623,16 @@ lines(centerinds,allres4[,'coef_NO3_l1'],type='b',pch=2)
 put_loc_lines()
 dev.off()
 
-#now waves coefficients
-pdf(paste0(resloc,"LinearModel_wavesCoefs_v_centerind.pdf"))
-ylimits<-range(allres4[,'coef_waves_l0'],allres4[,'coef_waves_l1'])
+#now waves coefficient
+pdf(paste0(resloc,"LinearModel_wavesCoefs_v_centerind_kelplag4.pdf"))
+ylimits<-range(allres4[,'coef_waves_l0'])
 plot(centerinds,allres4[,'coef_waves_l0'],type='b',xlab="Center index",ylab="Waves coefficient",pch=1,
      ylim=ylimits)
-lines(centerinds,allres4[,'coef_waves_l1'],type='b',pch=2)
 put_loc_lines()
 dev.off()
 
 #now plot info about annual-timescale sycnhrony
-pdf(paste0(resloc,"Synchrony_AnnualTimescale_v_centerind.pdf"))
+pdf(paste0(resloc,"Synchrony_AnnualTimescale_v_centerind_kelplag4.pdf"))
 ylimits<-range(0,allres4[,'Ann sync tot'],allres4[,'Ann sync NO3'],allres4[,'Ann sync waves'],allres4[,'Ann sync NO3/waves'])
 plot(centerinds,allres4[,'Ann sync tot'],type='b',col="black",xlab="Center index",ylab="Component of synchrony, annual timescales",pch=20,
      ylim=ylimits)
@@ -557,7 +653,7 @@ dev.off()
 #a similar fraction of synchrony. This is consistent with the hypothesis.
 
 #to follow up on the above idea, plot the difference
-pdf(paste0(resloc,"SynchronyDiff_AnnualTimescale_TotMinusExplained_v_centerind.pdf"))
+pdf(paste0(resloc,"SynchronyDiff_AnnualTimescale_TotMinusExplained_v_centerind_kelplag4.pdf"))
 plot(centerinds,allres4[,'Ann sync tot']-(allres4[,'Ann sync NO3']+allres4[,'Ann sync waves']+allres4[,'Ann sync NO3/waves']),type='b')
 put_loc_lines()
 dev.off()
@@ -567,7 +663,7 @@ mean(h[PtConcInd:SBInd])
 #these are not wildly different, which may support the hypothesis.
 
 #now do 2-4 year timescales
-pdf(paste0(resloc,"Synchrony_2to4yrTimescales_v_centerind.pdf"))
+pdf(paste0(resloc,"Synchrony_2to4yrTimescales_v_centerind_kelplag4.pdf"))
 ylimits<-range(0,allres4[,'2to4yr sync tot'],allres4[,'2to4yr sync NO3'],allres4[,'2to4yr sync waves'],allres4[,'2to4yr sync NO3/waves'])
 plot(centerinds,allres4[,'2to4yr sync tot'],type='b',col="black",xlab="Center index",ylab="Component of synchrony, 2-4 yr timescales",pch=20,
      ylim=ylimits)
@@ -582,7 +678,7 @@ put_loc_lines()
 dev.off()
 
 #now do >4 yr timescales
-pdf(paste0(resloc,"Synchrony_gt4yrTimescales_v_centerind.pdf"))
+pdf(paste0(resloc,"Synchrony_gt4yrTimescales_v_centerind_kelplag4.pdf"))
 ylimits<-range(0,allres4[,'>4yr sync tot'],allres4[,'>4yr sync NO3'],allres4[,'>4yr sync waves'],allres4[,'>4yr sync NO3/waves'])
 plot(centerinds,allres4[,'>4yr sync tot'],type='b',col="black",xlab="Center index",ylab="Component of synchrony, >4 yr timescales",pch=20,
      ylim=ylimits)
@@ -597,7 +693,7 @@ put_loc_lines()
 dev.off()
 
 #plot numbers of sites used 
-pdf(paste0(resloc,"Numsitesused_v_centerind.pdf"))
+pdf(paste0(resloc,"Numsitesused_v_centerind_kelplag4.pdf"))
 ylimits<-range(allres4[,'num locs'])
 plot(centerinds,allres4[,'num locs'],type='b',xlab="Center index",ylab="Number of sites used")
 lines(rep(PtConcInd,2),ylimits)
@@ -611,8 +707,198 @@ dev.off()
 #to do this analsis). The idea would be to present one analysis from Central Cal and one from So Cal 
 #and then say those are representative of if we had used different areas. Maybe do two from Central CA, 
 #since it's bigger than the usable So Cal area. Then you would not have to say your selected area is
-#representative, since you'd be using the bulk of the Central CA sites. So split up Carmel Bay to Morro 
-#Bay into two sets of sites, and use Pt Conc to Oxnard for the So Cal sites.
+#representative, since you'd be using the bulk of the sites. So split up Carmel Bay to Morro Bay into 
+#two sets of sites, and use Pt Conc to Oxnard for the So Cal sites.
+
+#***kelp lag 8 plots
+
+#make plots about R^2 - how well does the ARMA capture the dynamics
+pdf(paste0(resloc,"LinearModel_Rsq_v_centerind_kelplag8.pdf"))
+ylimits<-range(allres8[,'model r sq'])
+plot(centerinds,allres8[,'model r sq'],type='b',xlab="Center index",ylab="Linear model R sq")
+put_loc_lines()
+dev.off()
+
+#make plots about coefficients - kelp coefficients first - don't bother, too many lags
+
+#now NO3 coefficients
+pdf(paste0(resloc,"LinearModel_NO3Coefs_v_centerind_kelplag8.pdf"))
+ylimits<-range(allres8[,'coef_NO3_l0'],allres8[,'coef_NO3_l1'])
+plot(centerinds,allres8[,'coef_NO3_l0'],type='b',xlab="Center index",ylab="NO3 coefficient",pch=1,
+     ylim=ylimits)
+lines(centerinds,allres8[,'coef_NO3_l1'],type='b',pch=2)
+put_loc_lines()
+dev.off()
+
+#now waves coefficient
+pdf(paste0(resloc,"LinearModel_wavesCoefs_v_centerind_kelplag8.pdf"))
+ylimits<-range(allres8[,'coef_waves_l0'])
+plot(centerinds,allres8[,'coef_waves_l0'],type='b',xlab="Center index",ylab="Waves coefficient",pch=1,
+     ylim=ylimits)
+put_loc_lines()
+dev.off()
+
+#now plot info about annual-timescale sycnhrony
+pdf(paste0(resloc,"Synchrony_AnnualTimescale_v_centerind_kelplag8.pdf"))
+ylimits<-range(0,allres8[,'Ann sync tot'],allres8[,'Ann sync NO3'],allres8[,'Ann sync waves'],allres8[,'Ann sync NO3/waves'])
+plot(centerinds,allres8[,'Ann sync tot'],type='b',col="black",xlab="Center index",ylab="Component of synchrony, annual timescales",pch=20,
+     ylim=ylimits)
+lines(centerinds,allres8[,'Ann sync NO3'],type='b',pch=20,col="green")
+lines(centerinds,allres8[,'Ann sync waves'],type='b',pch=20,col="blue")
+lines(centerinds,allres8[,'Ann sync NO3/waves'],type='b',pch=19,col="green")
+lines(centerinds,allres8[,'Ann sync NO3/waves'],type='b',lty="dashed",pch=20,col="blue",cex=.5)
+lines(centerinds,allres8[,'Ann sync NO3']+allres8[,'Ann sync waves']+allres8[,'Ann sync NO3/waves'],
+      type="b",col="yellow",pch=20)
+lines(centerinds,rep(0,length(centerinds)),type="l")
+put_loc_lines()
+dev.off()
+
+#to follow up on the above idea, plot the difference
+pdf(paste0(resloc,"SynchronyDiff_AnnualTimescale_TotMinusExplained_v_centerind_kelplag8.pdf"))
+plot(centerinds,allres8[,'Ann sync tot']-(allres8[,'Ann sync NO3']+allres8[,'Ann sync waves']+allres8[,'Ann sync NO3/waves']),type='b')
+put_loc_lines()
+dev.off()
+h<-allres8[,'Ann sync tot']-(allres8[,'Ann sync NO3']+allres8[,'Ann sync waves']+allres8[,'Ann sync NO3/waves'])
+mean(h[CarBInd:PtConcInd])
+mean(h[PtConcInd:SBInd]) 
+#these are more different than was the case for kelp lag 4
+
+#now do 2-4 year timescales
+pdf(paste0(resloc,"Synchrony_2to4yrTimescales_v_centerind_kelplag8.pdf"))
+ylimits<-range(0,allres8[,'2to4yr sync tot'],allres8[,'2to4yr sync NO3'],allres8[,'2to4yr sync waves'],allres8[,'2to4yr sync NO3/waves'])
+plot(centerinds,allres8[,'2to4yr sync tot'],type='b',col="black",xlab="Center index",ylab="Component of synchrony, 2-4 yr timescales",pch=20,
+     ylim=ylimits)
+lines(centerinds,allres8[,'2to4yr sync NO3'],type='b',pch=20,col="green")
+lines(centerinds,allres8[,'2to4yr sync waves'],type='b',pch=20,col="blue")
+lines(centerinds,allres8[,'2to4yr sync NO3/waves'],type='b',pch=19,col="green")
+lines(centerinds,allres8[,'2to4yr sync NO3/waves'],type='b',lty="dashed",pch=20,col="blue",cex=.5)
+lines(centerinds,allres8[,'2to4yr sync NO3']+allres8[,'2to4yr sync waves']+allres8[,'2to4yr sync NO3/waves'],
+      type="b",col="yellow",pch=20)
+lines(centerinds,rep(0,length(centerinds)),type="l")
+put_loc_lines()
+dev.off()
+
+#now do >4 yr timescales
+pdf(paste0(resloc,"Synchrony_gt4yrTimescales_v_centerind_kelplag8.pdf"))
+ylimits<-range(0,allres8[,'>4yr sync tot'],allres8[,'>4yr sync NO3'],allres8[,'>4yr sync waves'],allres8[,'>4yr sync NO3/waves'])
+plot(centerinds,allres8[,'>4yr sync tot'],type='b',col="black",xlab="Center index",ylab="Component of synchrony, >4 yr timescales",pch=20,
+     ylim=ylimits)
+lines(centerinds,allres8[,'>4yr sync NO3'],type='b',pch=20,col="green")
+lines(centerinds,allres8[,'>4yr sync waves'],type='b',pch=20,col="blue")
+lines(centerinds,allres8[,'>4yr sync NO3/waves'],type='b',pch=19,col="green")
+lines(centerinds,allres8[,'>4yr sync NO3/waves'],type='b',lty="dashed",pch=20,col="blue",cex=.5)
+lines(centerinds,allres8[,'>4yr sync NO3']+allres8[,'>4yr sync waves']+allres8[,'>4yr sync NO3/waves'],
+      type="b",col="yellow",pch=20)
+lines(centerinds,rep(0,length(centerinds)),type="l")
+put_loc_lines()
+dev.off()
+
+#plot numbers of sites used - should be exactly the same as the corresponding kelp lag 4 plot
+pdf(paste0(resloc,"Numsitesused_v_centerind_kelplag8.pdf"))
+ylimits<-range(allres8[,'num locs'])
+plot(centerinds,allres8[,'num locs'],type='b',xlab="Center index",ylab="Number of sites used")
+lines(rep(PtConcInd,2),ylimits)
+lines(rep(SBInd,2),ylimits,lty="dashed")
+put_loc_lines()
+dev.off()
+
+#***kelp lag 12 plots
+
+#make plots about R^2 - how well does the ARMA capture the dynamics
+pdf(paste0(resloc,"LinearModel_Rsq_v_centerind_kelplag12.pdf"))
+ylimits<-range(allres12[,'model r sq'])
+plot(centerinds,allres12[,'model r sq'],type='b',xlab="Center index",ylab="Linear model R sq")
+put_loc_lines()
+dev.off()
+
+#make plots about coefficients - kelp coefficients first - don't bother, too many lags
+
+#now NO3 coefficients
+pdf(paste0(resloc,"LinearModel_NO3Coefs_v_centerind_kelplag12.pdf"))
+ylimits<-range(allres12[,'coef_NO3_l0'],allres12[,'coef_NO3_l1'])
+plot(centerinds,allres12[,'coef_NO3_l0'],type='b',xlab="Center index",ylab="NO3 coefficient",pch=1,
+     ylim=ylimits)
+lines(centerinds,allres12[,'coef_NO3_l1'],type='b',pch=2)
+put_loc_lines()
+dev.off()
+
+#now waves coefficient
+pdf(paste0(resloc,"LinearModel_wavesCoefs_v_centerind_kelplag12.pdf"))
+ylimits<-range(allres12[,'coef_waves_l0'])
+plot(centerinds,allres12[,'coef_waves_l0'],type='b',xlab="Center index",ylab="Waves coefficient",pch=1,
+     ylim=ylimits)
+put_loc_lines()
+dev.off()
+
+#now plot info about annual-timescale sycnhrony
+pdf(paste0(resloc,"Synchrony_AnnualTimescale_v_centerind_kelplag12.pdf"))
+ylimits<-range(0,allres12[,'Ann sync tot'],allres12[,'Ann sync NO3'],allres12[,'Ann sync waves'],allres12[,'Ann sync NO3/waves'])
+plot(centerinds,allres12[,'Ann sync tot'],type='b',col="black",xlab="Center index",ylab="Component of synchrony, annual timescales",pch=20,
+     ylim=ylimits)
+lines(centerinds,allres12[,'Ann sync NO3'],type='b',pch=20,col="green")
+lines(centerinds,allres12[,'Ann sync waves'],type='b',pch=20,col="blue")
+lines(centerinds,allres12[,'Ann sync NO3/waves'],type='b',pch=19,col="green")
+lines(centerinds,allres12[,'Ann sync NO3/waves'],type='b',lty="dashed",pch=20,col="blue",cex=.5)
+lines(centerinds,allres12[,'Ann sync NO3']+allres12[,'Ann sync waves']+allres12[,'Ann sync NO3/waves'],
+      type="b",col="yellow",pch=20)
+lines(centerinds,rep(0,length(centerinds)),type="l")
+put_loc_lines()
+dev.off()
+
+#to follow up on the above idea, plot the difference
+pdf(paste0(resloc,"SynchronyDiff_AnnualTimescale_TotMinusExplained_v_centerind_kelplag12.pdf"))
+plot(centerinds,allres12[,'Ann sync tot']-(allres12[,'Ann sync NO3']+allres12[,'Ann sync waves']+allres12[,'Ann sync NO3/waves']),type='b')
+put_loc_lines()
+dev.off()
+h<-allres12[,'Ann sync tot']-(allres12[,'Ann sync NO3']+allres12[,'Ann sync waves']+allres12[,'Ann sync NO3/waves'])
+mean(h[CarBInd:PtConcInd])
+mean(h[PtConcInd:SBInd]) 
+#These are even more more different than was the case for kelp lag 8, so that tends to
+#make my hypothesis less convincing. The change is mostly because with the longer kelp 
+#lags, NO3 and waves (and interactions) explain less of the synchrony in Central CA
+#than they do with kelp lags 4 and 8. 
+
+#***DAN: IDEA: Maybe I need to add to my linear modelling analysis an analysis that assesses
+#the appropriate number of kelp lags to use? 
+
+#now do 2-4 year timescales
+pdf(paste0(resloc,"Synchrony_2to4yrTimescales_v_centerind_kelplag12.pdf"))
+ylimits<-range(0,allres12[,'2to4yr sync tot'],allres12[,'2to4yr sync NO3'],allres12[,'2to4yr sync waves'],allres12[,'2to4yr sync NO3/waves'])
+plot(centerinds,allres12[,'2to4yr sync tot'],type='b',col="black",xlab="Center index",ylab="Component of synchrony, 2-4 yr timescales",pch=20,
+     ylim=ylimits)
+lines(centerinds,allres12[,'2to4yr sync NO3'],type='b',pch=20,col="green")
+lines(centerinds,allres12[,'2to4yr sync waves'],type='b',pch=20,col="blue")
+lines(centerinds,allres12[,'2to4yr sync NO3/waves'],type='b',pch=19,col="green")
+lines(centerinds,allres12[,'2to4yr sync NO3/waves'],type='b',lty="dashed",pch=20,col="blue",cex=.5)
+lines(centerinds,allres12[,'2to4yr sync NO3']+allres12[,'2to4yr sync waves']+allres12[,'2to4yr sync NO3/waves'],
+      type="b",col="yellow",pch=20)
+lines(centerinds,rep(0,length(centerinds)),type="l")
+put_loc_lines()
+dev.off()
+
+#now do >4 yr timescales
+pdf(paste0(resloc,"Synchrony_gt4yrTimescales_v_centerind_kelplag12.pdf"))
+ylimits<-range(0,allres12[,'>4yr sync tot'],allres12[,'>4yr sync NO3'],allres12[,'>4yr sync waves'],allres12[,'>4yr sync NO3/waves'])
+plot(centerinds,allres12[,'>4yr sync tot'],type='b',col="black",xlab="Center index",ylab="Component of synchrony, >4 yr timescales",pch=20,
+     ylim=ylimits)
+lines(centerinds,allres12[,'>4yr sync NO3'],type='b',pch=20,col="green")
+lines(centerinds,allres12[,'>4yr sync waves'],type='b',pch=20,col="blue")
+lines(centerinds,allres12[,'>4yr sync NO3/waves'],type='b',pch=19,col="green")
+lines(centerinds,allres12[,'>4yr sync NO3/waves'],type='b',lty="dashed",pch=20,col="blue",cex=.5)
+lines(centerinds,allres12[,'>4yr sync NO3']+allres12[,'>4yr sync waves']+allres12[,'>4yr sync NO3/waves'],
+      type="b",col="yellow",pch=20)
+lines(centerinds,rep(0,length(centerinds)),type="l")
+put_loc_lines()
+dev.off()
+
+#plot numbers of sites used - should be exactly the same as the corresponding kelp lag 4 plot
+pdf(paste0(resloc,"Numsitesused_v_centerind_kelplag12.pdf"))
+ylimits<-range(allres12[,'num locs'])
+plot(centerinds,allres12[,'num locs'],type='b',xlab="Center index",ylab="Number of sites used")
+lines(rep(PtConcInd,2),ylimits)
+lines(rep(SBInd,2),ylimits,lty="dashed")
+put_loc_lines()
+dev.off()
 
 #***
 #Select some regions
@@ -647,36 +933,44 @@ ncf::gcdist(locs$Lon[h],locs$Lat[h]) #78.46km
 #Now do the analysis for these three regions and save
 #***
 
-Args<-list(locstouse=CC1locstouse,lags=c(4,1,1),frg=c(0,.3),fnpre="RegionalAnalysis_CentCal1_KelpLag4")
+Args<-list(locstouse=CC1locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag4",plottype="pdf")
 res_CentCal1_KelpLag4<-do_analysis(Args)
 saveRDS(res_CentCal1_KelpLag4,paste0(resloc,"res_CentCal1_KelpLag4.Rds"))
 
-Args<-list(locstouse=CC1locstouse,lags=c(8,1,1),frg=c(0,.3),fnpre="RegionalAnalysis_CentCal1_KelpLag8")
+Args<-list(locstouse=CC1locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag8",plottype="pdf")
 res_CentCal1_KelpLag8<-do_analysis(Args)
 saveRDS(res_CentCal1_KelpLag8,paste0(resloc,"res_CentCal1_KelpLag8.Rds"))
 
-Args<-list(locstouse=CC2locstouse,lags=c(4,1,1),frg=c(0,.3),fnpre="RegionalAnalysis_CentCal2_KelpLag4")
+Args<-list(locstouse=CC1locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag12",plottype="pdf")
+res_CentCal1_KelpLag12<-do_analysis(Args)
+saveRDS(res_CentCal1_KelpLag12,paste0(resloc,"res_CentCal1_KelpLag12.Rds"))
+
+Args<-list(locstouse=CC2locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag4",plottype="pdf")
 res_CentCal2_KelpLag4<-do_analysis(Args)
 saveRDS(res_CentCal2_KelpLag4,paste0(resloc,"res_CentCal2_KelpLag4.Rds"))
 
-Args<-list(locstouse=CC2locstouse,lags=c(8,1,1),frg=c(0,.3),fnpre="RegionalAnalysis_CentCal2_KelpLag8")
+Args<-list(locstouse=CC2locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag8",plottype="pdf")
 res_CentCal2_KelpLag8<-do_analysis(Args)
 saveRDS(res_CentCal2_KelpLag8,paste0(resloc,"res_CentCal2_KelpLag8.Rds"))
 
-Args<-list(locstouse=SBlocstouse,lags=c(4,1,1),frg=c(0,.3),fnpre="RegionalAnalysis_SoCal_KelpLag4")
+Args<-list(locstouse=CC2locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag12",plottype="pdf")
+res_CentCal2_KelpLag12<-do_analysis(Args)
+saveRDS(res_CentCal2_KelpLag12,paste0(resloc,"res_CentCal2_KelpLag12.Rds"))
+
+Args<-list(locstouse=SBlocstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag4",plottype="pdf")
 res_SoCal_KelpLag4<-do_analysis(Args)
 saveRDS(res_SoCal_KelpLag4,paste0(resloc,"res_SoCal_KelpLag4.Rds"))
 
-Args<-list(locstouse=SBlocstouse,lags=c(8,1,1),frg=c(0,.3),fnpre="RegionalAnalysis_SoCal_KelpLag8")
+Args<-list(locstouse=SBlocstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag8",plottype="pdf")
 res_SoCal_KelpLag8<-do_analysis(Args)
 saveRDS(res_SoCal_KelpLag8,paste0(resloc,"res_SoCal_KelpLag8.Rds"))
 
-#***DAN: IDEA: Change do_analysis so it takes an argument which controls the format of the plot generated
-#(jpg or pdf), so that you can make the above plots pdf while still making the many plots up and down the
-#coast jpgs, for easy rapid viewing.
-#IDEA: Find another way to plot that does not excessively de-emphasize the >4yr timescale range. Maybe
-#plot against timescale, though that may de-emphasize the annual timescale. Maybe do line is done
-#with wavelets, which uses log-spaced plotting - review it and consider making the change here.
-#IDEA: Consider plotting the y-axis differently so that the huge annual peak does not drown out what is
-#happening at >4 yr timescales. Maybe plot two panels, one for annual, one for super-annual timescales,
-#with different y axis extents?
+Args<-list(locstouse=SBlocstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag12",plottype="pdf")
+res_SoCal_KelpLag12<-do_analysis(Args)
+saveRDS(res_SoCal_KelpLag12,paste0(resloc,"res_SoCal_KelpLag12.Rds"))
+
+#***DAN: Next steps: Write some code that tracks and explains the contributions of the parts of the interation
+#term in the spectral equation. We want to see the phase relationship between waves and NO3, and the difference
+#between the phase delays of the effects of these things on kelp, and how that produces different interaction
+#effects at annual and >4yr timescales in central and southern CA. Figure out how to display this.
+
