@@ -43,6 +43,7 @@ saveRDS(numsurrog,paste0(resloc2,"numsurrog"))
 #load the data
 datloc<-"../Results/DataAfterMoreInvolvedCleaning/"
 kelp<-readRDS(paste0(datloc,"Kelp_Quarterly_CleanedMoreInvolved.Rds")) 
+kelpA<-readRDS(paste0(datloc,"KelpA_Quarterly_CleanedMoreInvolved.Rds")) 
 NO3<-readRDS(paste0(datloc,"NO3_Quarterly_CleanedMoreInvolved.Rds")) 
 waves<-readRDS(paste0(datloc,"Waves_Quarterly_CleanedMoreInvolved.Rds")) 
 locs<-readRDS(paste0(datloc,"Locs_CleanedMoreInvolved.Rds"))
@@ -54,7 +55,7 @@ numts<-dim(kelp)[1]
 lents<-dim(kelp)[2]
 
 #***
-#Get surrogates and create centered, detrended, variance standardized versions of everything
+#Get surrogates and create centered, appropriately normalized versions of everything
 #***
 
 #centered (but not detrended) versions of the environmental variables, necessary to get surrog to work below
@@ -68,18 +69,37 @@ h<-wsyn::surrog(dat=rbind(NO3_c,waves_c),nsurrogs=numsurrog,surrtype="aaft",sync
 NO3_c_s<-lapply(FUN=function(m){return(m[1:numts,])},X=h)
 waves_c_s<-lapply(FUN=function(m){return(m[(numts+1):(2*numts),])},X=h)
 
-#Now detrend and variance standardize the data and the surrogates, and make a list for NO3 and one for 
-#waves with the data and then the surrogates, these are the data (and surrogates) I will then work with. 
-kelp<-wsyn::cleandat(kelp,times,3)$cdat
+#Now detrend but don't variance standardize the NO3 and waves data and surrogates, and make a list for NO3 
+#and one for waves with the data and then the surrogates, these are the data (and surrogates) I will then 
+#work with. 
 NO3<-c(list(NO3_c),NO3_c_s)
-NO3<-parallel::mclapply(FUN=function(x){wsyn::cleandat(x,times=times,clev=3)$cdat},X=NO3,mc.cores=10)
+NO3<-parallel::mclapply(FUN=function(x){wsyn::cleandat(x,times=times,clev=2)$cdat},X=NO3,mc.cores=10)
 waves<-c(list(waves_c),waves_c_s)
-waves<-parallel::mclapply(FUN=function(x){wsyn::cleandat(x,times=times,clev=3)$cdat},X=waves,mc.cores=10)
+waves<-parallel::mclapply(FUN=function(x){wsyn::cleandat(x,times=times,clev=2)$cdat},X=waves,mc.cores=10)
 
-#detrend and variance standardize climate indices
-climinds$NPGO<-wsyn::cleandat(climinds$NPGO,times,3)$cdat
-climinds$MEI<-wsyn::cleandat(climinds$MEI,times,3)$cdat
-climinds$PDO<-wsyn::cleandat(climinds$PDO,times,3)$cdat
+#Option 1: Detrend and variance standardize the kelp
+#kelp<-wsyn::cleandat(kelp,times,3)$cdat
+
+#Option 2: Divide each kelp time series by its max and then detrend.
+#for (counter in 1:(dim(kelp)[1]))
+#{
+#  kelp[counter,]<-kelp[counter,]/max(kelp[counter,])
+#}
+#kelp<-wsyn::cleandat(kelp,times,2)$cdat
+
+#Option 3: Compute a kelp density per unit useable habitat. To do this, take the max kelp area value ever
+#achieved for each habitat patch, use that as the measure of available habitat, and divide the kelp biomass
+#time series at that location through by that value. Then detrend.
+for (counter in 1:(dim(kelp)[1]))
+{
+  kelp[counter,]<-kelp[counter,]/(unname(quantile(kelpA[counter,],prob=.9))) #use the 90th percentile for robustness, instead of the max
+}
+kelp<-wsyn::cleandat(kelp,times,2)$cdat
+
+#detrend climate indices
+climinds$NPGO<-wsyn::cleandat(climinds$NPGO,times,2)$cdat
+climinds$MEI<-wsyn::cleandat(climinds$MEI,times,2)$cdat
+climinds$PDO<-wsyn::cleandat(climinds$PDO,times,2)$cdat
 
 #throw out large variables you no longer need, to save memory
 rm(h,NO3_c,NO3_c_s,waves_c,waves_c_s)
@@ -90,6 +110,9 @@ rm(h,NO3_c,NO3_c_s,waves_c,waves_c_s)
 
 saveRDS(kelp,file=paste0(resloc1,"Kelp_Quarterly_CleanedFinal.Rds"))
 write.table(kelp,file=paste0(resloc1,"Kelp_Quarterly_CleanedFinal.csv"),row.names = FALSE,col.names = FALSE,sep=",")
+
+saveRDS(kelpA,file=paste0(resloc1,"KelpA_Quarterly_CleanedFinal.Rds"))
+write.table(kelpA,file=paste0(resloc1,"KelpA_Quarterly_CleanedFinal.csv"),row.names = FALSE,col.names = FALSE,sep=",")
 
 saveRDS(NO3[[1]],file=paste0(resloc1,"NO3_Quarterly_CleanedFinal.Rds"))
 write.table(NO3[[1]],file=paste0(resloc1,"NO3_Quarterly_CleanedFinal.csv"),row.names = FALSE,col.names = FALSE,sep=",")
