@@ -10,6 +10,9 @@ graphics.off()
 source("AnalysisStep_CleanData_SuperBasic.R")
 source("AnalysisStep_CleanData_MoreInvolved.R")
 
+#plot time series for visual inspection
+source("AnalysisStep_PlotTimeSeries.R")
+
 #Do linear models to help demo the need for specific lags - this also performs and saves the final level of data cleaning
 source("AnalysisStep_LinearModels.R")
 
