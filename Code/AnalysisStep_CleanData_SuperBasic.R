@@ -58,6 +58,36 @@ sum(h1==h2,na.rm=TRUE)+length(inds_df) #number of equal locations plus number of
 kelp<-unname(kelp_mat) #this is a matrix consisting of numbers and NAs, dimensions are locations by quarters
 rm(kelp_df,kelp_mat,h,h1,h2,inds_df,inds_mat,inds_neq,counter)
 
+#Same for kelp area - this is area of kelp canopy
+kelp_df<-read.csv(file=paste0(datloc,"Kelp_Area_2019_v3.csv"),header=TRUE)
+for (counter in 1:(dim(kelp_df)[2]))
+{
+  h<-kelp_df[,counter]
+  h[is.nan(h)]<-NA
+  kelp_df[,counter]<-h
+}
+
+#make it a matrix, locations by quarters
+kelp_mat<-as.matrix(kelp_df[,2:(dim(kelp_df)[2])])
+
+#check for the same values
+h1<-kelp_df[,2:(dim(kelp_df)[2])]
+h2<-kelp_mat
+dim(h1)
+dim(h2) #dimensions should be the same
+inds_df<-which(is.na(h1))
+inds_mat<-which(is.na(h2))
+length(inds_df)
+length(inds_mat)
+sum(inds_df==inds_mat) #both the matrix and data frame versions should have the same NAs
+inds_neq<-which(h1!=h2)
+length(inds_neq) #should be none
+prod(dim(h1))
+sum(h1==h2,na.rm=TRUE)+length(inds_df) #number of equal locations plus number of NA locations should be all the locations
+
+kelpA<-unname(kelp_mat) #this is a matrix consisting of numbers and NAs, dimensions are locations by quarters
+rm(kelp_df,kelp_mat,h,h1,h2,inds_df,inds_mat,inds_neq,counter)
+
 #load the quarters
 quarters<-read.csv(file=paste0(datloc,"Quarters.csv"),header=TRUE)
 head(quarters)
@@ -115,6 +145,7 @@ dim(kelp)
 paddle<-paddle[order(paddle$Paddle_Number),]
 
 kelp<-kelp[paddle$Site_Number,]
+kelpA<-kelpA[paddle$Site_Number,]
 NO3<-NO3[paddle$Site_Number,]
 wave<-wave[paddle$Site_Number,]
 locs<-paddle[,1:2]
@@ -140,6 +171,7 @@ for (counter in 2:(dim(locs)[1]))
 
 #the first 12 quarters were all NAs for the waves, so throw them out for everything
 kelp<-kelp[,-(1:12)]
+kelpA<-kelpA[,-(1:12)]
 NO3<-NO3[,-(1:12)]
 wave<-wave[,-(1:12)]
 quarters<-quarters[-(1:12),]
@@ -166,6 +198,7 @@ num0k
 
 #some sites have no kelp data, so remove those sites for all variables
 kelp<-kelp[numNAk!=132,]
+kelpA<-kelpA[numNAk!=132,]
 NO3<-NO3[numNAk!=132,]
 wave<-wave[numNAk!=132,]
 locs<-locs[numNAk!=132,]
@@ -176,6 +209,7 @@ rm(hN,hW)
 #***
 
 dim(kelp)
+dim(kelpA)
 dim(NO3)
 dim(wave)
 dim(locs)
@@ -188,6 +222,9 @@ dim(climind)
 
 saveRDS(kelp,file=paste0(resloc,"Kelp_Quarterly_CleanedSuperBasic.Rds"))
 write.table(kelp,file=paste0(resloc,"Kelp_Quarterly_CleanedSuperBasic.csv"),row.names = FALSE,col.names = FALSE,sep=",")
+
+saveRDS(kelpA,file=paste0(resloc,"KelpA_Quarterly_CleanedSuperBasic.Rds"))
+write.table(kelpA,file=paste0(resloc,"KelpA_Quarterly_CleanedSuperBasic.csv"),row.names = FALSE,col.names = FALSE,sep=",")
 
 saveRDS(NO3,file=paste0(resloc,"NO3_Quarterly_CleanedSuperBasic.Rds"))
 write.table(NO3,file=paste0(resloc,"NO3_Quarterly_CleanedSuperBasic.csv"),row.names = FALSE,col.names = FALSE,sep=",")

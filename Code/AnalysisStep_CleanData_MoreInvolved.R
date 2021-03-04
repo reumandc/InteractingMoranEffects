@@ -30,6 +30,7 @@ if (!dir.exists(resloc))
 #load the data
 datloc<-"../Results/DataAfterSuperBasicCleaning/"
 kelpQ<-readRDS(paste0(datloc,"Kelp_Quarterly_CleanedSuperBasic.Rds")) 
+kelpAQ<-readRDS(paste0(datloc,"KelpA_Quarterly_CleanedSuperBasic.Rds")) 
 NO3Q<-readRDS(paste0(datloc,"NO3_Quarterly_CleanedSuperBasic.Rds")) 
 wavesQ<-readRDS(paste0(datloc,"Waves_Quarterly_CleanedSuperBasic.Rds")) 
 locs<-readRDS(paste0(datloc,"Locs_CleanedSuperBasic.Rds"))
@@ -61,6 +62,7 @@ numbadyrslte<-data.frame(numlocs=0:20,numbadyrs=numbadyrslte)
 
 goodlocs<-which(badyrs<=3)
 kelpQ<-kelpQ[goodlocs,]
+kelpAQ<-kelpAQ[goodlocs,]
 NO3Q<-NO3Q[goodlocs,]
 wavesQ<-wavesQ[goodlocs,]
 locs<-locs[goodlocs,]
@@ -73,7 +75,14 @@ prod(dim(kelpQ))
 kelpQ<-kelp_mf
 rm(kelp_mf)
 
-#do the same for nitrates and waves
+#do the same for kelpA
+kelp_mf<-t(apply(FUN=fill_with_seasonal_median,X=kelpAQ,MARGIN=1))
+sum(kelpAQ==kelp_mf,na.rm=TRUE)+sum(is.na(kelpAQ))
+prod(dim(kelpAQ))
+kelpAQ<-kelp_mf
+rm(kelp_mf)
+
+#do the same for nitrates and waves 
 NO3Q<-t(apply(FUN=fill_with_seasonal_median,X=NO3Q,MARGIN=1))
 wavesQ<-t(apply(FUN=fill_with_seasonal_median,X=wavesQ,MARGIN=1))
 
@@ -94,6 +103,9 @@ rm(badyrs,counter,fill_with_seasonal_median,find_zero_NA_years,goodlocs,numbadyr
 saveRDS(kelpQ,file=paste0(resloc,"Kelp_Quarterly_CleanedMoreInvolved.Rds"))
 write.table(kelpQ,file=paste0(resloc,"Kelp_Quarterly_CleanedMoreInvolved.csv"),row.names = FALSE,col.names = FALSE,sep=",")
 
+saveRDS(kelpAQ,file=paste0(resloc,"KelpA_Quarterly_CleanedMoreInvolved.Rds"))
+write.table(kelpAQ,file=paste0(resloc,"KelpA_Quarterly_CleanedMoreInvolved.csv"),row.names = FALSE,col.names = FALSE,sep=",")
+
 saveRDS(NO3Q,file=paste0(resloc,"NO3_Quarterly_CleanedMoreInvolved.Rds"))
 write.table(NO3Q,file=paste0(resloc,"NO3_Quarterly_CleanedMoreInvolved.csv"),row.names = FALSE,col.names = FALSE,sep=",")
 
@@ -108,6 +120,7 @@ write.table(quarters,file=paste0(resloc,"Quarters_CleanedMoreInvolved.csv"),row.
 
 saveRDS(climinds,file=paste0(resloc,"Climinds_Quarterly_CleanedMoreInvolved.Rds"))
 write.table(climinds,file=paste0(resloc,"Climinds_Quarterly_CleanedMoreInvolved.csv"),row.names = FALSE,col.names = TRUE,sep=",")
+
 
 
 
