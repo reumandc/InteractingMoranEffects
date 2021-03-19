@@ -1,0 +1,88 @@
+\documentclass[letterpaper,11pt]{article}
+
+%packages
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[left=2cm,top=2cm,right=2cm,bottom=2cm,head=.5cm,foot=.5cm]{geometry}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{lineno}
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{xr}
+\usepackage{authblk}
+
+%new commands and so on
+\providecommand{\keywords}[1]
+{
+  \small	
+  \textbf{\textit{Keywords---}} #1
+}
+\newcommand{\mcP}{\mathcal{P}}
+\newcommand{\mcB}{\mathcal{P}}
+
+%external documents
+\externaldocument[SM-]{SupMat}
+ 
+%header material for paper
+\title{How environmental drivers of spatial synchrony interact}
+\date{}
+
+%***Tentative author order
+\author[a,b]{Daniel C. Reuman}
+\author[c]{Max Castorani}
+\author[d,e]{Tom Bell}
+\author[f]{Kyle Cavanaugh}
+\author[c]{Jonathan Walter}
+\author[g]{Lawrence W. Sheppard}
+
+\affil[a]{Department of Ecology and Evolutionary Biology and Kansas Biological Survey, University of Kansas}
+\affil[b]{Laboratory of Populations, Rockefeller University}
+\affil[c]{University of Virginia}
+\affil[d]{WHOI}
+\affil[e]{UCSB}
+\affil[f]{UCLA}
+\affil[g]{MBA}
+
+%***Need to indicate corresponding author Reuman
+
+\begin{document}
+
+%The following is where you load in the numeric results that will be embedded in the text
+<<eval=T,echo=F,message=F,warning=F>>=
+#place R code here for loading in necessary variables from Results
+@
+
+\maketitle
+
+\begin{abstract}
+Place abstract here
+\end{abstract}
+
+%***Add to these
+\keywords{kelp, synchrony, Moran effects}
+
+\section{Introduction}
+
+
+\section{Theory}
+
+\section{Methods}
+
+
+\section{Results}
+
+
+\section{Discussion}
+
+\section{References}
+
+
+
+
+
+\end{document}

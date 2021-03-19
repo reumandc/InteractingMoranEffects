@@ -1,0 +1,266 @@
+\documentclass[letterpaper,11pt]{article}
+
+%packages
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage[left=2cm,top=2cm,right=2cm,bottom=2cm,head=.5cm,foot=.5cm]{geometry}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{lineno}
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{xr}
+\usepackage{authblk}
+
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\setcounter{table}{0}
+\renewcommand{\thetable}{S\arabic{table}}
+\setcounter{section}{0}
+\renewcommand{\thesection}{S\arabic{section}}
+
+%new commands and so on
+\newcommand{\mcP}{\mathcal{P}}
+\newcommand{\mcB}{\mathcal{B}}
+\newcommand{\Rp}{\text{Re}}
+\newcommand{\cov}{\text{cov}}
+\let\conj\overline
+
+%external documents
+\externaldocument[MT-]{Paper}
+
+%header material for paper
+\title{How environmental drivers of spatial synchrony interact}
+\date{}
+
+%***Tentative author order
+\author[a,b]{Daniel C. Reuman}
+\author[c]{Max Castorani}
+\author[d,e]{Tom Bell}
+\author[f]{Kyle Cavanaugh}
+\author[c]{Jonathan Walter}
+\author[g]{Lawrence W. Sheppard}
+
+\affil[a]{Department of Ecology and Evolutionary Biology and Kansas Biological Survey, University of Kansas}
+\affil[b]{Laboratory of Populations, Rockefeller University}
+\affil[c]{University of Virginia}
+\affil[d]{WHOI}
+\affil[e]{UCSB}
+\affil[f]{UCLA}
+\affil[g]{MBA}
+
+\begin{document}
+
+%The following is where you load in the numeric results that will be embedded in the text
+<<eval=T,echo=F,message=F,warning=F>>=
+#place R code here for loading in necessary variables from Results
+@
+
+\maketitle
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\section{Measuring synchrony} \label{Sect:measuring_sync}
+
+If $w=(w_1,\ldots,w_N)$ is a stationary stochastic process, where the index $i=1,\ldots,N$ corresponds
+to sampling locations, then we measure the synchrony of $w$ as 
+\begin{equation}
+\rho_{ww} = \left( \frac{1}{N^2-N}  \right) \sum_{i \neq j} S_{w_i w_j},
+\end{equation}
+where $S_{ww}$ is the spectral matrix of the process $w$. This is a function of frequency or timescale.
+To see that $\rho_{ww}$ is a real-valued function, note that $\conj{S_{ww}}=S_{ww}^\tau$, where the superscript 
+$\tau$ denotes matrix transpose (REF to Brillinger theorem 2.5.1 on p. 24).
+%***DAN: Don't forget to fill in this reference!
+Therefore 
+\begin{align}
+\conj{\rho_{ww}} &= \left( \frac{1}{N^2-N}  \right) \sum_{i \neq j} \conj{S_{w_i w_j}} \\
+&= \left( \frac{1}{N^2-N}  \right) \sum_{i \neq j} S_{w_j w_i} \\
+&= \left( \frac{1}{N^2-N}  \right) \sum_{i \neq j} S_{w_i w_j} \\
+&= \rho_{ww}.
+\end{align} 
+The quantity $\rho_{ww}$ makes sense as a measure of synchrony in part because 
+\begin{align}
+\rho_{ww} &= \Rp(\rho_{ww}) \\
+&= \left( \frac{1}{N^2-N} \right) \sum_{i \neq j} \Rp(S_{w_i w_j}).
+\end{align}
+The quantity $\Rp(S_{w_i w_j})$ is the cospectrum of the component processes $w_i$ and $w_j$, 
+and an appropriate integral across frequencies of the cospectrum equals the covariance, 
+$\cov(w_i,w_j)$ (REF to some specific page/theorem in Brillinger). 
+%***DAN: Don't forget to add
+Thus an integral of $\rho_{ww}$ across frequencies equals 
+\begin{equation}
+\left( \frac{1}{N^2-N} \right) \sum_{i \neq j} \cov(w_i,w_j),
+\end{equation}
+which is a standard quantity that can be used to measure non-frequency-specific synchrony.
+Thus $\rho_{ww}$ is a frequency-specific generalization of a classic, non-frequency-specific 
+measure of synchrony.
+
+If $\epsilon^{(1)}=(\epsilon^{(1)}_1,\ldots,\epsilon^{(1)}_N)$ and 
+$\epsilon^{(2)}=(\epsilon^{(2)}_1,\ldots,\epsilon^{(2)}_N)$
+are two stationary stochastic processes, we define the \emph{cross-variable spatial synchrony}
+(or, simply, the \emph{cross synchrony}) between $\epsilon^{(1)}$ and $\epsilon^{(2)}$ as
+\begin{equation}
+\rho_{\epsilon^{(1)} \epsilon^{(2)}} = \left( \frac{1}{N^2-N} \right) \sum_{i \neq j} S_{\epsilon^{(1)}_i \epsilon^{(2)}_j}.
+\end{equation}
+This is a complex-valued function of frequency or timescale. Why is this interpretable as cross-variable 
+spatial synchrony? A quantity representing spatial synchrony should compare values of the processes 
+$\epsilon^{(1)}$ and $\epsilon^{(2)}$ in one location to values in another location, since spatial synchrony
+is about relationships between distinct locations; hence our sum is over $i \neq j$. 
+A quantity representing cross-variable synchrony should 
+make comparisons between two variables, as opposed to comparisons between the same variable in different locations;
+hence we use the cross spectrum between variable $1$ in location $i$ ($\epsilon^{(1)}_i$) and variable 
+$2$ in location $j$ ($\epsilon^{(2)}_j$). 
+Finally, a quantity representing cross-variable synchrony needs to
+include the possibility of time delays in the relationship between the two variables. For instance, 
+if $\epsilon^{(2)}_j$ is a time-lagged version of $\epsilon^{(1)}_i$, but the effects of 
+$\epsilon^{(2)}_j$ on a biotic process $w_j$ are immediate, whereas the effects of $\epsilon^{(1)}_i$
+on $w_i$ are delayed by the same lag, then the effects of $\epsilon^{(1)}_i$ on $w_i$ will be correlated
+with the effects of $\epsilon^{(2)}_j$ on $w_j$, i.e., this combination of properties of $\epsilon^{(1)}$
+and $\epsilon^{(2)}$ will produce synchrony, in the classic sense of correlation, between the biotic
+process $w_i$ and $w_j$.
+Thus we use the cross spectrum, $S_{\epsilon^{(1)}_i \epsilon^{(2)}_j}$, for which the phase angle at 
+frequency $f$ measures the time delay between frequency-$f$ oscillations of $\epsilon^{(1)}_i$ and 
+frequency-$f$ oscillations of $\epsilon^{(2)}_j$. The following examples should help clarify these features of
+the definition of cross synchrony.
+
+%***DAN: See page 51 of your hand-written notes for descriptions of the examples, which you need to code up and 
+%make some figure or something and describe and report here.
+
+\section{Model specification, full details}
+
+The population model is specified starting with the equation
+\begin{align}
+w_i(t) &= b_1 w_i(t-1)+ \cdots + b_n w_i(t-n) \label{main_model_1} \\ 
+&+ p_0^{(1)} \epsilon_i^{(1)}(t)+ \cdots + p_{m_1}^{(1)} \epsilon_i^{(1)}(t-m_1) \label{main_model_2} \\
+&+ p_0^{(2)} \epsilon_i^{(2)}(t)+ \cdots + p_{m_2}^{(2)} \epsilon_i^{(2)}(t-m_2) \label{main_model_3} \\
+&+ \delta_i(t), \label{main_model_4}
+\end{align}
+where $i=1,\ldots,N$ indexes habitat patches or sampling locations, $w_i(t)$ is a measure of the 
+population in location $i$ at time $t$, and $\epsilon^{(1)}=(\epsilon_1^{(1)},\ldots,\epsilon_N^{(1)})$,
+$\epsilon^{(2)}=(\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)})$ and $\delta=(\delta_1,\ldots,\delta_N)$ are
+environmental processes influencing the populations. Note that this model assumes from the outset 
+a homogeneous influence of the environmental variables on the populations in the different
+sampling locations, i.e., the parameters $p$ are spatially homogeneous. We also assume that the 
+combined process $(\epsilon_1^{(1)},\ldots,\epsilon_N^{(1)},\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)},\delta_1,\ldots,\delta_N)$ is a second-order stationary stochastic process (REF)
+%***DAN: REFS here to Brillinger
+with the expected values of its component processes equal to $0$. Finally, we assume the complex roots of the
+polynomial $1-b_1 z - \cdots - b_n z^n = 0$ have modulus greater than $1$, an assumption needed for invertability of
+the filter $\mcB$ which we will define below. See REF
+%***DAN: add refs to Brilliger, Shumway and Stoffer, Rinsel
+for background on the statistical theory of stationary stochastic processes.
+
+Letting $I_N$ denote the $N \times N$ identity matrix, we define the linear filters 
+\begin{align}
+\mcP^{(1)} &= p_0^{(1)} I_N + p_1^{(1)} I_N B + \cdots + p_{m_1}^{(1)} I_N B^{m_1}, \\
+\mcP^{(2)} &= p_0^{(2)} I_N + p_1^{(2)} I_N B + \cdots + p_{m_2}^{(2)} I_N B^{m_2}, \\
+\mcB &= I_N - b_1 I_N B - b_2 I_N B^2 - \cdots b_n I_N B^n. \\
+\end{align}
+Using the language of filters and stochastic processes, the original model 
+(\ref{main_model_1}-\ref{main_model_4}) can then be written as
+\begin{equation}
+\mcB w = \mcP^{(1)} \epsilon^{(1)} +\mcP^{(2)} \epsilon^{(2)} +\delta.\label{main_model_stochproc}
+\end{equation}
+Writing the model in the language of stochastic processes and linear filters makes it straightforward
+to calculate the spectral matrix, $S_{ww}$, of the stochastic process, $w$, which we do in section \ref{sect:derivation}.
+
+%***DAN: Do you need to have some sort of section gtiving background info on spectral stuff, or is that all assumed?
+%Probably no, we just assume it here, and give some info in the main text on how to interpret these quantities, but
+%we do not have to give any definitions and so on because we are not going to give anything like a proper into
+%to stochastic processes and spectral approaches either in the main text or here, so better just to assume it 
+%(here) and take the attitude in the main text of "you won't understand where this comes from (see sup mat for that)
+%but we can tell you how to interpret it.
+
+\section{Derivation of the main equation}\label{sect:derivation}
+
+Computing the spectral matrix of both sides of the model (\ref{main_model_stochproc}) gives
+\begin{align}
+T(\mcB)S_{ww} T(\mcB)^* &= T(\mcP^{(1)}) S_{\epsilon^{(1)} \epsilon^{(1)}} T(\mcP^{(1)})^* \label{spectmat_eq1_t1}\\
+  &+ T(\mcP^{(2)}) S_{\epsilon^{(2)} \epsilon^{(2)}} T(\mcP^{(2)})^* \\
+  &+ S_{\delta \delta} \\
+  &+ T(\mcP^{(1)}) S_{\epsilon^{(1)} \epsilon^{(2)}} T(\mcP^{(2)})^*+T(\mcP^{(2)}) S_{\epsilon^{(2)} \epsilon^{(1)}} T(\mcP^{(1)})^* \\
+  &+ T(\mcP^{(1)}) S_{\epsilon^{(1)}\delta} + S_{\delta \epsilon^{(1)}} T(\mcP^{(1)})^* \\
+  &+ T(\mcP^{(2)}) S_{\epsilon^{(2)}\delta} + S_{\delta \epsilon^{(2)}} T(\mcP^{(2)})^*, \label{spectmat_eq1_t6}
+\end{align}
+where $T(\mcB)$, $T(\mcP^{(1)})$ and $T(\mcP^{(2)})$ are the tranfer functions of the filters
+$\mcB$, $\mcP^{(1)}$ and $\mcP^{(2)}$, respectively, $S_{ww}$ is the spectral matrix of the process $w$,
+$S_{\epsilon^{(i)} \epsilon^{(i)}}$ is the spectral matrix of the process $\epsilon^{(i)}$, $S_{\delta \delta}$
+is the spectral matrix of the process $\delta$,  $S_{\epsilon^{(i)} \epsilon^{(j)}}$ is the cross spectral
+matrix of the processes $\epsilon^{(i)}$ and $\epsilon^{(j)}$, $S_{\epsilon^{(i)} \delta}$ is the cross 
+spectral matrix of the processes $\epsilon^{(i)}$ and $\delta$, $S_{\delta \epsilon^{(i)}}$ is the cross
+spectral matrix of the processes $\delta$ and $\epsilon^{(i)}$, and the superscript $*$ denotes
+the conjugate transpose of a matrix.
+
+Letting $\mu=\exp(-2\pi i f)$ where $f$ is frequency in units of cycles per time steps, we have
+\begin{align}
+T(\mcB) &= (1-b_1 \mu - b_2 \mu^2 - \cdots - b_n \mu^n) I_N \\
+T(\mcP^{(1)}) &= (p_0^{(1)} + p_1^{(1)} \mu + \cdots + p_{m_1}^{(1)} \mu^{m_1}) I_N \\
+T(\mcP^{(2)}) &= (p_0^{(2)} + p_1^{(2)} \mu + \cdots + p_{m_2}^{(2)} \mu^{m_2}) I_N.
+\end{align}
+\noindent These are all scalar matrices, so (\ref{spectmat_eq1_t1}-\ref{spectmat_eq1_t6}) simplifies to
+\begin{align}
+S_{ww} &= \frac{|f_{\mcP^{(1)}}|^2}{|f_{\mcB}|^2} S_{\epsilon^{(1)} \epsilon^{(1)}} \label{Sww_T1}\\
+&+ \frac{|f_{\mcP^{(2)}}|^2}{|f_{\mcB}|^2} S_{\epsilon^{(2)} \epsilon^{(2)}} \\
+&+ \frac{1}{|f_{\mcB}|^2} S_{\delta \delta}\\
+&+ \frac{1}{|f_{\mcB}|^2} \left[  f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}  S_{\epsilon^{(1)} \epsilon^{(2)}} + 
+f_{\mcP^{(2)}} \conj{f_{\mcP^{(1)}}} S_{\epsilon^{(2)} \epsilon^{(1)}}\right] \label{Sww_T4}\\
+&+ \frac{1}{|f_{\mcB}|^2} \left[f_{\mcP^{(1)}} S_{\epsilon^{(1)} \delta} + \conj{f_{\mcP^{(1)}}}  S_{\delta \epsilon^{(1)}}\right]\\
+&+ \frac{1}{|f_{\mcB}|^2} \left[ f_{\mcP^{(2)}} S_{\epsilon^{(2)} \delta} + \conj{f_{\mcP^{(2)}}}  S_{\delta \epsilon^{(2)}} \right], \label{Sww_T6}
+\end{align}
+where 
+\begin{align}
+f_{\mcB} &= 1-b_1 \mu - b_2 \mu^2 - \cdots - b_n \mu^n \\
+f_{\mcP^{(1)}} &= p_0^{(1)} + p_1^{(1)} \mu + \cdots + p_{m_1}^{(1)} \mu^{m_1} \\
+f_{\mcP^{(2)}} &= p_0^{(2)} + p_1^{(2)} \mu + \cdots + p_{m_2}^{(2)} \mu^{m_2}.
+\end{align}
+We here made use of the assumption that the complex roots of the
+polynomial $1-b_1 z - \cdots - b_n z^n = 0$ have modulus greater than $1$, so that $f_{\mcB}$ is non-zero.
+
+Now, averaging the off-diagonal entries of both sides of (\ref{Sww_T1}-\ref{Sww_T6}) gives
+\begin{align}
+\left(\frac{1}{N^2-N}\right) \sum_{i \neq j} S_{w_i w_j} &= 
+\frac{|f_{\mcP^{(1)}}|^2}{|f_{\mcB}|^2} \left(\frac{1}{N^2-N}\right) \sum_{i \neq j} S_{\epsilon_i^{(1)} \epsilon_j^{(1)}} \\
+ &+ \frac{|f_{\mcP^{(2)}}|^2}{|f_{\mcB}|^2} \left(\frac{1}{N^2-N}\right) \sum_{i \neq j} S_{\epsilon_i^{(2)} \epsilon_j^{(2)}} \\
+ &+ \frac{1}{|f_{\mcB}|^2} \left(\frac{1}{N^2-N}\right) \sum_{i \neq j} S_{\delta_i \delta_j} \\
+ &+ \frac{2}{|f_{\mcB}|^2} \left(\frac{1}{N^2-N}\right) \sum_{i \neq j} 
+  \Rp \left( f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} S_{\epsilon_i^{(1)} \epsilon_j^{(2)}} \right) \label{SumSww_T4}\\
+ &+ \frac{2}{|f_{\mcB}|^2} \left(\frac{1}{N^2-N}\right)  \sum_{i \neq j} \Rp \left( f_{\mcP^{(1)}}  
+ S_{\epsilon_i^{(1)} \delta_j}\right)  \label{SumSww_T5}\\
+ &+ \frac{2}{|f_{\mcB}|^2} \left(\frac{1}{N^2-N}\right) \sum_{i \neq j} \Rp \left( f_{\mcP^{(2)}}    
+ S_{\epsilon_i^{(2)} \delta_j}\right), \label{SumSww_T6}
+\end{align}
+\noindent where $\Rp(\cdot)$ denotes the real part, and where (\ref{SumSww_T4}-\ref{SumSww_T6})
+follows from two observations: that the two summands in the brackets of each of the terms 
+(\ref{Sww_T4}-\ref{Sww_T6}) are conjugate-transpose pairs; and that, for any complex matrix, $A$,
+$\sum_{i \neq j} (A_{ij} +\conj{A_{ji}}) = \sum_{i \neq j} (A_{ij} +\conj{A_{ij}}) = 2 \sum_{i \neq j} \Rp (A_{ij})$.
+Now, making use of the definitions of section \ref{Sect:measuring_sync}, this becomes
+\begin{align}
+\rho_{ww} &= \frac{|f_{\mcP^{(1)}}|^2}{|f_{\mcB}|^2} \rho_{\epsilon^{(1)} \epsilon^{(1)}}
++ \frac{|f_{\mcP^{(2)}}|^2}{|f_{\mcB}|^2} \rho_{\epsilon^{(2)} \epsilon^{(2)}}
++ \frac{1}{|f_{\mcB}|^2} \rho_{\delta \delta} \\
+&+ \frac{2}{|f_{\mcB}|^2} \Rp \left(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}} \right) \\
+&+ \frac{2}{|f_{\mcB}|^2} \Rp \left( f_{\mcP^{(1)}} \rho_{\epsilon^{(1)} \delta} \right) \\
+&+ \frac{2}{|f_{\mcB}|^2} \Rp \left( f_{\mcP^{(2)}} \rho_{\epsilon^{(2)} \delta} \right).
+\end{align}
+If the processes $\epsilon^{(1)}$ and $\epsilon^{(2)}$ were measured and the process $\delta$ represents
+the aggregate effects of unknown processes, then we can write
+\begin{align}
+\rho_{ww} &= \frac{|f_{\mcP^{(1)}}|^2}{|f_{\mcB}|^2} \rho_{\epsilon^{(1)} \epsilon^{(1)}} \label{rhoww_T1}\\
+&+ \frac{|f_{\mcP^{(2)}}|^2}{|f_{\mcB}|^2} \rho_{\epsilon^{(2)} \epsilon^{(2)}} \label{rhoww_T2}\\
+&+ \frac{2}{|f_{\mcB}|^2} \Rp \left(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}} \right) \label{rhoww_Tint} \\
+&+ \text{other contributions}.
+\end{align}
+The term (\ref{rhoww_T1}) is contributions to the synchrony of $w$ due to direct Moran effects of $\epsilon^{(1)}$.
+The term (\ref{rhoww_T2}) is contributions to the synchrony of $w$ due to direct Moran effects of $\epsilon^{(2)}$.
+The term (\ref{rhoww_Tint}) is contributions to the synchrony of $w$ due to interactions between the Moran effects
+of $\epsilon^{(1)}$ and $\epsilon^{(2)}$. The ``other contributions'' may include direct Moran effects of other,
+unmeasured factors, and interactions between these effects and Moran effects of the measured factors
+$\epsilon^{(1)}$ and $\epsilon^{(2)}$.
+
+
+\end{document}
