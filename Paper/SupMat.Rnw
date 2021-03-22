@@ -259,8 +259,8 @@ The term (\ref{rhoww_T1}) is contributions to the synchrony of $w$ due to direct
 The term (\ref{rhoww_T2}) is contributions to the synchrony of $w$ due to direct Moran effects of $\epsilon^{(2)}$.
 The term (\ref{rhoww_Tint}) is contributions to the synchrony of $w$ due to interactions between the Moran effects
 of $\epsilon^{(1)}$ and $\epsilon^{(2)}$. The ``other contributions'' may include direct Moran effects of other,
-unmeasured factors, and interactions between these effects and Moran effects of the measured factors
-$\epsilon^{(1)}$ and $\epsilon^{(2)}$.
+unmeasured environmental factors, as well as interactions between these effects and Moran effects of the 
+measured factors $\epsilon^{(1)}$ and $\epsilon^{(2)}$.
 
 
 \end{document}
