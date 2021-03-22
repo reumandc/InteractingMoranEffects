@@ -68,6 +68,21 @@ Place abstract here
 
 \section{Introduction}
 
+Tentative paragraph outline written on my phone on 3/20/2021
+1) Importance of synchrony
+2) Classic problem of identifying causes of synchrony, but recently largely resolved due to new methods
+  -elaborate briefly in a couple methods
+3) in fact, it has recently been discovered that environmental causes of synchrony can interact, so that ...
+  -related to, but distinct from, interaction between environmental and dispersal causes of synchrony discussed, for instance by Kendal et al
+  -make sure you describe the two cases
+4) the simplest form of interacting moran effects can be demonstrated when a simple model, though elaboration of the true nature of this mechanism will take the rest of this manuscript
+  -use Moran model
+  -but with two drivers
+  -moran theorem says correlation of pops equals correlation of sum of drivers, so work it out
+5) general idea of two noises lagged or time delayed relative to each other and their effects oppositely lagged
+6) paragraph on why we would expect interacting moran effects to be common
+7) final para on goals, ma structure, etc.
+
 
 \section{Theory}
 
