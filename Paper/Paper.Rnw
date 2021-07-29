@@ -24,6 +24,8 @@
 }
 \newcommand{\mcP}{\mathcal{P}}
 \newcommand{\mcB}{\mathcal{P}}
+\newcommand{\var}{\text{var}}
+\newcommand{\cov}{\text{cov}}
 
 %external documents
 \externaldocument[SM-]{SupMat}
@@ -32,21 +34,26 @@
 \title{How environmental drivers of spatial synchrony interact}
 \date{}
 
-%***Tentative author order
+%Alternative titles
+%Interactions among Moran effects
+%Interacting Moran effects
+%Interactions between environmental drivers of spatial synchrony
+
+%***Tentative author order, who is last yet to be determined
 \author[a,b]{Daniel C. Reuman}
 \author[c]{Max Castorani}
 \author[d,e]{Tom Bell}
 \author[f]{Kyle Cavanaugh}
 \author[c]{Jonathan Walter}
-\author[g]{Lawrence W. Sheppard}
+\author[a,g]{Lawrence W. Sheppard}
 
 \affil[a]{Department of Ecology and Evolutionary Biology and Kansas Biological Survey, University of Kansas}
 \affil[b]{Laboratory of Populations, Rockefeller University}
-\affil[c]{University of Virginia}
-\affil[d]{WHOI}
-\affil[e]{UCSB}
-\affil[f]{UCLA}
-\affil[g]{MBA}
+\affil[c]{Department of Environmental Sciences, University of Virginia}
+\affil[d]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
+\affil[e]{Earth Research Institute, University of California, Santa Barbara}
+\affil[f]{Department of Geography, University of California, Los Angeles}
+\affil[g]{Marine Biological Association of the United Kingdom}
 
 %***Need to indicate corresponding author Reuman
 
@@ -68,23 +75,70 @@ Place abstract here
 
 \section{Introduction}
 
-Tentative paragraph outline written on my phone on 3/20/2021
-1) Importance of synchrony
-2) Classic problem of identifying causes of synchrony, but recently largely resolved due to new methods
-  -elaborate briefly in a couple methods
-3) in fact, it has recently been discovered that environmental causes of synchrony can interact, so that ...
-  -related to, but distinct from, interaction between environmental and dispersal causes of synchrony discussed, for instance by Kendal et al
-  -make sure you describe the two cases
-4) the simplest form of interacting moran effects can be demonstrated when a simple model, though elaboration of the true nature of this mechanism will take the rest of this manuscript
-  -use Moran model
-  -but with two drivers
-  -moran theorem says correlation of pops equals correlation of sum of drivers, so work it out
-5) general idea of two noises lagged or time delayed relative to each other and their effects oppositely lagged
-6) paragraph on why we would expect interacting moran effects to be common
-7) final para on goals, ma structure, etc.
-
+%Tentative paragraph outline written on my phone on 3/20/2021
+%1) Importance of synchrony
+%2) Classic problem of identifying causes of synchrony, but recently largely resolved due to new methods
+%  -elaborate briefly on a couple methods
+%3) in fact, it has recently been discovered that environmental causes of synchrony can interact, so that ...
+%  -related to, but distinct from, interaction between environmental and dispersal causes of synchrony discussed, for instance by Kendal et al
+%  -make sure you describe the two cases, cite the earlier papers, mention a few words about the two systems
+%4) the simplest form of interacting moran effects can be demonstrated when a simple model, though elaboration of the true nature of this mechanism %will take the rest of this manuscript
+%  -use Moran model
+%  -but with two drivers
+%  -moran theorem says correlation of pops equals correlation of sum of drivers, so work it out
+%5) general idea of two noises lagged or time delayed relative to each other and their effects oppositely lagged - this may be where a pedagogical %fig comes in, or maybe it is just worsd here and then the pedagog fig comes in later, at end of theory section, in form of examples.
+%6) paragraph on why we would expect interacting moran effects to be common, return to this point in the discussion
+%7) final para on goals, manuscript structure, etc.
+%  -G1) Elaborate a mathematical/statistical theory of interacting Moran effects which both allows both a detailed understanding 
+%      of how the mechanism works and fecilitates statistical investigation of whether the effect is present in empirical systems.
+%  -G2) Apply the theory and associated stats to revisiting kelp, the intention being to further elaborate the mechanism itself
+%  -G3) Apply the theory and associated stats to plankton, the intention being to further elaborate the mechanism itself
+%
+%Notes:
+%1) You need to make it clear the earlier papers already identified interacting Moran effects, so what are we doing?
+%We are exploring theoreitically what the mechanism is, here, and how general it might be, and what different forms it 
+%might take, using the theory, and also using the theory to further illuminate the two examples. The emphasis here
+%is on illuminating the general mechanism of interacting Moran effects through the theory and its application, whereas
+%the earlier papers focussed on the specific cases. The Fourier theory here serves to illuminate the general mechanism,
+%whereas the earlier papers used wavelet statistics applied directly to data and did not really explore the general 
+%mechanism. Need to work some of these thoughts in without seeming defensive.
 
 \section{Theory}
+
+%Tentative broad outline:
+%DONE 1) Intro spectral quantities, the spectrum, the cospectrum, and the cross spectrum of two time series/processes. And the spectral
+%matrix for putting them all in one structure.
+%2) Define your measures of timescale/frequency-specific synchrony and crosss-variable synchrony, explain why these make sense as
+%ways to measure those things.
+%3) Present the model and the theory
+%4) Present "toy" examples and fig 1 (need to think a lot about these)
+%
+%Notes:
+%Compared to the deer paper, this is a much deeper presentation of the theory in the main text. I'm not sure that's avoidable.
+%For one thing, the theory is explicitly applied to get the results, later, and that was not the case for the deer paper.
+
+\noindent Our main theoretical work requires a conceptual understanding of the \emph{spectrum} of an environmental 
+or population time series, as well as of the \emph{cospectrum} and \emph{cross spectrum} of two time series.
+If $w_i(t)$ is a stochastic process or time series measured at location $i$, the spectrum $S_{w_i w_i}(f)$ is a function
+of frequency, $f$. For a periodic ocillation, $f$ can be defined as one over the timescale, or period, of the oscillation. 
+The spectrum, $S_{w_i w_i}(f)$ is larger for frequencies at which $w_i(t)$ oscillates more. So, for example, a 
+population $w_i(t)$ that shows strong oscillatory dynamics at $5$-year period will have a large value of 
+$S_{w_i w_i}(f)$ for $f=1/5 \text{y}^{-1}$. The spectrum separates the overall variance of a time series into
+contributions which occur on different timescales, in the sense that an integral of $S_{w_i w_i}(f)$ across all 
+frequencies equals $\var(w_i)$. In a similar way, the cospectrum of two time series, $w_i(t)$ and $w_j(t)$,
+is a function of $f$ that takes large values at frequencies for which oscillations in $w_i(t)$ and 
+$w_j(t)$ are strong, and are strongly correlated, i.e., they have the same or similar phase. 
+(Here, $j$ refers to another location where measurements were performed.) The cospectrum is 
+the real part of the cross spectrum, $S_{w_i w_j}(f)$, which is a complex-valued function of frequency.
+The cross-spectrum takes large-magnitude values at frequencies, $f$, for which the oscillatory components
+of $w_i$ and $w_j$ are strong; and the complex phase of the cross spectrum at $f$ then quantifies
+the phase lag between those oscillations. The notation $S_{ww}$ refers to the \emph{spectral matrix}, a 
+matrix for which the $ij^{\text{th}}$ entry is $S_{w_i w_j}$. 
+Spectral methods are standard tools in many fields of science, 
+including ecology \citep{Vasseur2007,Reuman2008,Defriez2017}, and many background references are available 
+[e.g., \cite{Brillinger2001}]. 
+
+
 
 \section{Methods}
 
@@ -96,7 +150,8 @@ Tentative paragraph outline written on my phone on 3/20/2021
 
 \section{References}
 
-
+\bibliographystyle{ecology_letters2}
+\bibliography{refs} 
 
 
 

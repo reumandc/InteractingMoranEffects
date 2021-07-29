@@ -27,6 +27,7 @@
 \newcommand{\mcP}{\mathcal{P}}
 \newcommand{\mcB}{\mathcal{B}}
 \newcommand{\Rp}{\text{Re}}
+\newcommand{\var}{\text{var}}
 \newcommand{\cov}{\text{cov}}
 \let\conj\overline
 
