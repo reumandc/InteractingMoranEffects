@@ -68,12 +68,13 @@
 
 \section{Measuring synchrony} \label{Sect:measuring_sync}
 
-If $w=(w_1,\ldots,w_N)$ is a stationary stochastic process, where the index $i=1,\ldots,N$ corresponds
+If $w=(w_1,\ldots,w_N)$ is an $N$-dimensional stationary stochastic process, where the index $i=1,\ldots,N$ corresponds
 to sampling locations, then we measure the synchrony of $w$ as 
 \begin{equation}
 \rho_{ww} = \left( \frac{1}{N^2-N}  \right) \sum_{i \neq j} S_{w_i w_j},
 \end{equation}
-where $S_{ww}$ is the spectral matrix of the process $w$. This is a function of frequency or timescale.
+where $S_{ww}$ is the spectral matrix of the process $w$. This is a function of frequency or timescale because
+$S_{w_i w_j}$ is a function of frequency or timescale.
 To see that $\rho_{ww}$ is a real-valued function, note that $\conj{S_{ww}}=S_{ww}^\tau$, where the superscript 
 $\tau$ denotes matrix transpose (REF to Brillinger theorem 2.5.1 on p. 24).
 %***DAN: Don't forget to fill in this reference!
@@ -103,7 +104,7 @@ measure of synchrony.
 
 If $\epsilon^{(1)}=(\epsilon^{(1)}_1,\ldots,\epsilon^{(1)}_N)$ and 
 $\epsilon^{(2)}=(\epsilon^{(2)}_1,\ldots,\epsilon^{(2)}_N)$
-are two stationary stochastic processes, we define the \emph{cross-variable spatial synchrony}
+are two $N$-dimensional stationary stochastic processes, we define the \emph{cross-variable spatial synchrony}
 (or, simply, the \emph{cross synchrony}) between $\epsilon^{(1)}$ and $\epsilon^{(2)}$ as
 \begin{equation}
 \rho_{\epsilon^{(1)} \epsilon^{(2)}} = \left( \frac{1}{N^2-N} \right) \sum_{i \neq j} S_{\epsilon^{(1)}_i \epsilon^{(2)}_j}.
@@ -123,7 +124,7 @@ $\epsilon^{(2)}_j$ on a biotic process $w_j$ are immediate, whereas the effects 
 on $w_i$ are delayed by the same lag, then the effects of $\epsilon^{(1)}_i$ on $w_i$ will be correlated
 with the effects of $\epsilon^{(2)}_j$ on $w_j$, i.e., this combination of properties of $\epsilon^{(1)}$
 and $\epsilon^{(2)}$ will produce synchrony, in the classic sense of correlation, between the biotic
-process $w_i$ and $w_j$.
+processes $w_i$ and $w_j$.
 Thus we use the cross spectrum, $S_{\epsilon^{(1)}_i \epsilon^{(2)}_j}$, for which the phase angle at 
 frequency $f$ measures the time delay between frequency-$f$ oscillations of $\epsilon^{(1)}_i$ and 
 frequency-$f$ oscillations of $\epsilon^{(2)}_j$. The following examples should help clarify these features of
@@ -146,20 +147,24 @@ population in location $i$ at time $t$, and $\epsilon^{(1)}=(\epsilon_1^{(1)},\l
 $\epsilon^{(2)}=(\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)})$ and $\delta=(\delta_1,\ldots,\delta_N)$ are
 environmental processes influencing the populations. Note that this model assumes from the outset 
 a homogeneous influence of the environmental variables on the populations in the different
-sampling locations, i.e., the parameters $p$ are spatially homogeneous. We also assume that the 
+sampling locations, i.e., the parameters $p$ are spatially homogeneous. 
+%We also assume spatial homogeneity of the AR coefficients, need to add a mention of that
+We also assume that the 
 combined process $(\epsilon_1^{(1)},\ldots,\epsilon_N^{(1)},\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)},\delta_1,\ldots,\delta_N)$ is a second-order stationary stochastic process (REF)
 %***DAN: REFS here to Brillinger
 with the expected values of its component processes equal to $0$. Finally, we assume the complex roots of the
-polynomial $1-b_1 z - \cdots - b_n z^n = 0$ have modulus greater than $1$, an assumption needed for invertability of
+polynomial $1-b_1 z - \cdots - b_n z^n = 0$ have modulus greater than $1$, an assumption needed for the 
+existence of a stationary stochastic process solution for the model and for invertability of
 the filter $\mcB$ which we will define below. See REF
 %***DAN: add refs to Brilliger, Shumway and Stoffer, Rinsel
 for background on the statistical theory of stationary stochastic processes.
 
-Letting $I_N$ denote the $N \times N$ identity matrix, we define the linear filters 
+Letting $I_N$ denote the $N \times N$ identity matrix and letting $B$ denote the backshift operator, 
+we define the linear filters 
 \begin{align}
 \mcP^{(1)} &= p_0^{(1)} I_N + p_1^{(1)} I_N B + \cdots + p_{m_1}^{(1)} I_N B^{m_1}, \\
 \mcP^{(2)} &= p_0^{(2)} I_N + p_1^{(2)} I_N B + \cdots + p_{m_2}^{(2)} I_N B^{m_2}, \\
-\mcB &= I_N - b_1 I_N B - b_2 I_N B^2 - \cdots b_n I_N B^n. \\
+\mcB &= I_N - b_1 I_N B - b_2 I_N B^2 - \cdots b_n I_N B^n.
 \end{align}
 Using the language of filters and stochastic processes, the original model 
 (\ref{main_model_1}-\ref{main_model_4}) can then be written as
@@ -245,8 +250,9 @@ Now, making use of the definitions of section \ref{Sect:measuring_sync}, this be
 + \frac{1}{|f_{\mcB}|^2} \rho_{\delta \delta} \\
 &+ \frac{2}{|f_{\mcB}|^2} \Rp \left(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}} \right) \\
 &+ \frac{2}{|f_{\mcB}|^2} \Rp \left( f_{\mcP^{(1)}} \rho_{\epsilon^{(1)} \delta} \right) \\
-&+ \frac{2}{|f_{\mcB}|^2} \Rp \left( f_{\mcP^{(2)}} \rho_{\epsilon^{(2)} \delta} \right).
+&+ \frac{2}{|f_{\mcB}|^2} \Rp \left( f_{\mcP^{(2)}} \rho_{\epsilon^{(2)} \delta} \right),
 \end{align}
+which expresses population synchrony in terms of noise synchrony and cross synchrony.
 If the processes $\epsilon^{(1)}$ and $\epsilon^{(2)}$ were measured and the process $\delta$ represents
 the aggregate effects of unknown processes, then we can write
 \begin{align}
@@ -261,6 +267,19 @@ The term (\ref{rhoww_Tint}) is contributions to the synchrony of $w$ due to inte
 of $\epsilon^{(1)}$ and $\epsilon^{(2)}$. The ``other contributions'' may include direct Moran effects of other,
 unmeasured environmental factors, as well as interactions between these effects and Moran effects of the 
 measured factors $\epsilon^{(1)}$ and $\epsilon^{(2)}$.
+
+\section{Details of data and data cleaning}
+
+%***DAN: This should include specification of the regions CC1, CC2, SB.
+%You have to get some info from Tom about the nature of the spatial sampling, and the process leading up to what he gave me.
+%You have to then describe the stages of cleaning I did.
+
+\section{Correlation analyses to help select autoregressive model lags}
+
+%***DAN: Describe the surrogating process
+%Probably you only need to include the results in allcorfsgtd_RE, in the Results section. 
+%See line 480 and above in AnalysisStep_LinearModels.R
+
 
 
 \end{document}
