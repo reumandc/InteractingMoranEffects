@@ -157,16 +157,14 @@ saveRDS(allfsgtd,file=paste0(resloc2,"allfsgtd"))
 #Now do the same linear regressions, but for only selected geographic regions
 #***
 
-#***The following code copied from AnalysisStep_LinearModels.R
-
 #from google maps
-MontBLatLon<-c(36.62393626182818, -121.8511283749223)
-CarBLatLon<-c(36.52316357182972, -121.95535513873469)
-MorBLatLon<-c(35.427553615598676, -120.89133343717805)
-PtConcLatLon<-c(34.44830424836278,-120.47125509005721)
-SBLatLon<-c(34.407876790966135, -119.68428533917637)
-OxLatLon<-c(34.2310543912163, -119.2726684255394)
-LALatLon<-c(34.00907538429378, -118.50422514984244)
+MontBLatLon<-c(36.62393626182818, -121.8511283749223) #Monterey Bay, closer to the southern end
+CarBLatLon<-c(36.52316357182972, -121.95535513873469) #The point to the south of Carmel Bay
+MorBLatLon<-c(35.427553615598676, -120.89133343717805) #Morro Bay, closer to the northern end
+PtConcLatLon<-c(34.44830424836278,-120.47125509005721) #Pt Conception
+SBLatLon<-c(34.407876790966135, -119.68428533917637) #Santa Barbara pier
+OxLatLon<-c(34.2310543912163, -119.2726684255394) #Oxnard, where the Santa Clara River empties
+LALatLon<-c(34.00907538429378, -118.50422514984244) #LA, near the Santa Monica pier
 
 dists<-ncf::gcdist(x=c(MontBLatLon[2],locs$Lon),y=c(MontBLatLon[1],locs$Lat))
 dists<-dists[1,2:(dim(dists)[2])]
@@ -220,8 +218,6 @@ h<-c(CC2locstouse[1],CC2locstouse[length(CC1locstouse)])
 ncf::gcdist(locs$Lon[h],locs$Lat[h]) #78.46km
 
 #So my three roughly comparable comparable regions are SBlocstouse, CC1locstouse, CC2locstouse
-
-#***The above code copied from AnalysisStep_LinearModels.R
 
 #***Now do central cal, region 1
 
@@ -313,7 +309,7 @@ for (counter in 1:5)
 names(allfsgtd_SB)<-c("Rsq","NO3_l0","NO3_l1","waves_l0","waves_l1")
 saveRDS(allfsgtd_SB,file=paste0(resloc2,"allfsgtd_SB"))
 
-#***Now do our three regions combinds
+#***Now do our three regions combined
 
 allinds<-c(CC1locstouse,CC2locstouse,SBlocstouse)
 
