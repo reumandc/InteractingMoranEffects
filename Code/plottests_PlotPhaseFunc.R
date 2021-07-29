@@ -1,5 +1,5 @@
-#This tests the function in PLotPhaseFunc.R, but since that's a plotting function this script is
-#not covered by the automated testing through the testthat package, which is while the file name
+#This tests the function in PlotPhaseFunc.R, but since that's a plotting function this script is
+#not covered by the automated testing through the testthat package, which is why the file name
 #does not start with "tests".
 
 source("PlotPhaseFunc.R")
