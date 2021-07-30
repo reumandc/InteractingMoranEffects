@@ -38,6 +38,7 @@
 %Interactions among Moran effects
 %Interacting Moran effects
 %Interactions between environmental drivers of spatial synchrony
+%Environmental drivers of spatia synchony can strongly interact
 
 %***Tentative author order, who is last yet to be determined
 \author[a,b]{Daniel C. Reuman}
@@ -60,9 +61,9 @@
 \begin{document}
 
 %The following is where you load in the numeric results that will be embedded in the text
-<<eval=T,echo=F,message=F,warning=F>>=
-#place R code here for loading in necessary variables from Results
-@
+%<<eval=T,echo=F,message=F,warning=F>>=
+%#place R code here for loading in necessary variables from Results
+%@
 
 \maketitle
 
@@ -78,7 +79,7 @@ Place abstract here
 %Tentative paragraph outline written on my phone on 3/20/2021
 %1) Importance of synchrony
 %2) Classic problem of identifying causes of synchrony, but recently largely resolved due to new methods
-%  -elaborate briefly on a couple methods
+%  -elaborate briefly on a couple methods, mention the importance of a timescale-resolved appproach
 %3) in fact, it has recently been discovered that environmental causes of synchrony can interact, so that ...
 %  -related to, but distinct from, interaction between environmental and dispersal causes of synchrony discussed, for instance by Kendal et al
 %  -make sure you describe the two cases, cite the earlier papers, mention a few words about the two systems
@@ -108,7 +109,7 @@ Place abstract here
 %Tentative broad outline:
 %DONE 1) Intro spectral quantities, the spectrum, the cospectrum, and the cross spectrum of two time series/processes. And the spectral
 %matrix for putting them all in one structure.
-%2) Define your measures of timescale/frequency-specific synchrony and crosss-variable synchrony, explain why these make sense as
+%DONE 2) Define your measures of timescale/frequency-specific synchrony and crosss-variable synchrony, explain why these make sense as
 %ways to measure those things.
 %3) Present the model and the theory
 %4) Present "toy" examples and fig 1 (need to think a lot about these)
@@ -119,24 +120,53 @@ Place abstract here
 
 \noindent Our main theoretical work requires a conceptual understanding of the \emph{spectrum} of an environmental 
 or population time series, as well as of the \emph{cospectrum} and \emph{cross spectrum} of two time series.
-If $w_i(t)$ is a stochastic process or time series measured at location $i$, the spectrum $S_{w_i w_i}(f)$ is a function
+If $w_i(t)$ is a stochastic process or time series measured at location $i$ (e.g., the population density time series
+of a species of interest in that location), the spectrum $S_{w_i w_i}(f)$ is a function
 of frequency, $f$. For a periodic ocillation, $f$ can be defined as one over the timescale, or period, of the oscillation. 
-The spectrum, $S_{w_i w_i}(f)$ is larger for frequencies at which $w_i(t)$ oscillates more. So, for example, a 
-population $w_i(t)$ that shows strong oscillatory dynamics at $5$-year period will have a large value of 
-$S_{w_i w_i}(f)$ for $f=1/5 \text{y}^{-1}$. The spectrum separates the overall variance of a time series into
-contributions which occur on different timescales, in the sense that an integral of $S_{w_i w_i}(f)$ across all 
+The spectrum $S_{w_i w_i}(f)$ is larger for frequencies at which $w_i(t)$ oscillates more. So, for example, a 
+population $w_i(t)$ that shows strong oscillatory dynamics of $5$-year period will have a large value of 
+$S_{w_i w_i}(f)$ for $f=1/5 \text{ y}^{-1}$. The spectrum separates the overall variance of a time series into
+contributions which occur on different frequencies, in the sense that an integral of $S_{w_i w_i}(f)$ across all 
 frequencies equals $\var(w_i)$. In a similar way, the cospectrum of two time series, $w_i(t)$ and $w_j(t)$,
 is a function of $f$ that takes large values at frequencies for which oscillations in $w_i(t)$ and 
-$w_j(t)$ are strong, and are strongly correlated, i.e., they have the same or similar phase. 
+$w_j(t)$ are both strong and strongly correlated, i.e., they have the same or similar phase. 
 (Here, $j$ refers to another location where measurements were performed.) The cospectrum is 
 the real part of the cross spectrum, $S_{w_i w_j}(f)$, which is a complex-valued function of frequency.
 The cross-spectrum takes large-magnitude values at frequencies, $f$, for which the oscillatory components
-of $w_i$ and $w_j$ are strong; and the complex phase of the cross spectrum at $f$ then quantifies
-the phase lag between those oscillations. The notation $S_{ww}$ refers to the \emph{spectral matrix}, a 
-matrix for which the $ij^{\text{th}}$ entry is $S_{w_i w_j}$. 
-Spectral methods are standard tools in many fields of science, 
-including ecology \citep{Vasseur2007,Reuman2008,Defriez2017}, and many background references are available 
+of $w_i(t)$ and $w_j(t)$ are both strong; and the complex phase of the cross spectrum at $f$ then quantifies
+the phase lag between those components. The notation $S_{ww}(f)$ refers to the \emph{spectral matrix}, 
+the $ij^{\text{th}}$ entry of which is $S_{w_i w_j}(f)$. Spectral methods are standard tools in many fields, 
+including ecology [e.g., \cite{Vasseur2007,Reuman2008,Defriez2017}], and many background references are available 
 [e.g., \cite{Brillinger2001}]. 
+
+Much prior work demonstrates the importance of a frequency-specific approach to
+synchrony [e.g., \cite{Vasseur2007,Keitt2008,Defriez2016,Sheppard2016,Desharnais2018,Anderson2021}], 
+and it will turn out (see below, and \emph{Discussion}) that a frequency-specific 
+approach is essential to the development of our new theory. 
+%***DAN: Good topic for a Discussion para, the fact that this could not really be done without taking frequency specificity into account, and why, though need to think a bit more before writing
+We therefore here define, using the spectral methods outlined above, a frequency-specific measure of spatial synchrony, 
+as well as a new concept of \emph{cross-variable spatial synchrony}. If time series data $w_i(t)$ for $t=1,\ldots,T$ 
+were gathered at locations $i=1,\ldots,N$, our spatial synchrony measure is simply
+$\rho_{ww}=\left( \sum_{i \neq j} S_{w_i w_j} \right)/(N^2-N)$, the average of the cross spectra for all pairs
+of distinct locations. This is a real-valued function of frequency, the integral (across frequencies) of which
+is the classic, non-frequency-specific measure $\left( \sum_{i \neq j} \cov(w_i,w_j) \right)/(N^2-N)$ (see SI section
+\ref{SM-Sect:measuring_sync} for details, here). If two time series $\epsilon_i^{(1)}(t)$ and $\epsilon_i^{(2)}(t)$
+($t=1,\ldots,T$ and $i,j=1,\ldots,N$) were measured at each sampling location (e.g., two environmental variables),
+cross-variable spatial synchrony (or, simply, \emph{cross synchrony}) between the variables
+is $\rho_{\epsilon^{(1)}\epsilon^{(2)}}=\left( \sum_{i \neq j} S_{\epsilon_i^{(1)}\epsilon_j^{(2)}} \right)/(N^2-N)$. 
+This is conceptually interpretable as pertaining to spatial synchrony because it makes comparisons across 
+distinct locations, i.e., $i \neq j$. 
+It is interpretable as cross-variable synchrony because comparisons are between the two variables, i.e., cross spectra 
+between time series components of $\epsilon^{(1)}$ and $\epsilon^{(2)}$ are used. The new index 
+takes into account possible time lags. For instance, if both $\epsilon^{(1)}$ and $\epsilon^{(2)}$ show strong $4$-year-period 
+oscillations, but peaks in the $\epsilon^{(2)}$ oscillations consistently lag peaks in the $\epsilon^{(1)}$ oscillations 
+by a year, then $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$, which is complex valued, will have high magnitude at
+frequency $f=1/4 \text{ y}^{-1}$, and will have  phase at that frequency equal to $\pi/2$, reflecting the one-year 
+lag between the variables.
+%***DAN: make sure I'm not making a sign error here when you create the additional examples for sup mat
+See SI section \ref{SM-Sect:measuring_sync} for further examples and explanations of the new cross synchrony index.
+
+
 
 
 

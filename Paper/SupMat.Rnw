@@ -44,22 +44,22 @@
 \author[d,e]{Tom Bell}
 \author[f]{Kyle Cavanaugh}
 \author[c]{Jonathan Walter}
-\author[g]{Lawrence W. Sheppard}
+\author[a,g]{Lawrence W. Sheppard}
 
 \affil[a]{Department of Ecology and Evolutionary Biology and Kansas Biological Survey, University of Kansas}
 \affil[b]{Laboratory of Populations, Rockefeller University}
-\affil[c]{University of Virginia}
-\affil[d]{WHOI}
-\affil[e]{UCSB}
-\affil[f]{UCLA}
-\affil[g]{MBA}
+\affil[c]{Department of Environmental Sciences, University of Virginia}
+\affil[d]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
+\affil[e]{Earth Research Institute, University of California, Santa Barbara}
+\affil[f]{Department of Geography, University of California, Los Angeles}
+\affil[g]{Marine Biological Association of the United Kingdom}
 
 \begin{document}
 
 %The following is where you load in the numeric results that will be embedded in the text
-<<eval=T,echo=F,message=F,warning=F>>=
-#place R code here for loading in necessary variables from Results
-@
+%<<eval=T,echo=F,message=F,warning=F>>=
+%#place R code here for loading in necessary variables from Results
+%@
 
 \maketitle
 
