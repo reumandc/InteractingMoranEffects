@@ -6,16 +6,18 @@
 rm(list=ls())
 graphics.off()
 
-#Clean the data
+#Clean the kelp data
 source("Kelp_AnalysisStep_CleanData_SuperBasic.R")
 source("Kelp_AnalysisStep_CleanData_MoreInvolved.R")
 
-#plot time series for visual inspection
+#Plot kelp time series for visual inspection
 source("Kelp_AnalysisStep_PlotTimeSeries.R")
 
-#Do linear models to help demo the need for specific lags - this also performs and saves the final level of data cleaning
+#Do linear models with kelp and related data to help demo the need for specific 
+#lags - this also performs and saves the final level of data cleaning
 source("Kelp_AnalysisStep_LinearModels.R")
 
-#Do the spectra decomposition analysis
+#Do the spectra decomposition analysis for kelp
 source("Kelp_AnalysisStep_SpectralDecomp.R")
 
+#Clean the plankton data
