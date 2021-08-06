@@ -17,7 +17,7 @@ source("FindZeroNAYears.R")
 #Location for storing results and other prep
 #***
 
-resloc<-"../Results/DataAfterMoreInvolvedCleaning/"
+resloc<-"../Results/Kelp_DataAfterMoreInvolvedCleaning/"
 if (!dir.exists(resloc))
 {
   dir.create(resloc,recursive=TRUE)
@@ -28,7 +28,7 @@ if (!dir.exists(resloc))
 #***
 
 #load the data
-datloc<-"../Results/DataAfterSuperBasicCleaning/"
+datloc<-"../Results/Kelp_DataAfterSuperBasicCleaning/"
 kelpQ<-readRDS(paste0(datloc,"Kelp_Quarterly_CleanedSuperBasic.Rds")) 
 kelpAQ<-readRDS(paste0(datloc,"KelpA_Quarterly_CleanedSuperBasic.Rds")) 
 NO3Q<-readRDS(paste0(datloc,"NO3_Quarterly_CleanedSuperBasic.Rds")) 

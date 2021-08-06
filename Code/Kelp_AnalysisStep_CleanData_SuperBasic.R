@@ -14,7 +14,7 @@ rm(list=ls())
 #Location for storing results and other prep
 #***
 
-resloc<-"../Results/DataAfterSuperBasicCleaning/"
+resloc<-"../Results/Kelp_DataAfterSuperBasicCleaning/"
 if (!dir.exists(resloc))
 {
   dir.create(resloc,recursive=TRUE)
@@ -24,7 +24,7 @@ if (!dir.exists(resloc))
 #Load the data
 #***
 
-datloc<-"../Data/"
+datloc<-"../Data/KelpData/"
 
 #Load kelp data and change NaNs to NAs. Use the biomass data, sites ordered as in the 
 #original ordering (which should match with the environmental variables), not the paddling

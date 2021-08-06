@@ -19,13 +19,13 @@ source("MnCor_Tiny.R")
 #Locations for storing results, and other prep
 #***
 
-resloc1<-"../Results/DataAfterAllCleaning/"
+resloc1<-"../Results/Kelp_DataAfterAllCleaning/"
 if (!dir.exists(resloc1))
 {
   dir.create(resloc1,recursive=TRUE)
 }
 
-resloc2<-"../Results/LinearModelResults/"
+resloc2<-"../Results/Kelp_LinearModelResults/"
 if (!dir.exists(resloc2))
 {
   dir.create(resloc2,recursive=TRUE)
@@ -41,7 +41,7 @@ saveRDS(numsurrog,paste0(resloc2,"numsurrog"))
 #***
 
 #load the data
-datloc<-"../Results/DataAfterMoreInvolvedCleaning/"
+datloc<-"../Results/Kelp_DataAfterMoreInvolvedCleaning/"
 kelp<-readRDS(paste0(datloc,"Kelp_Quarterly_CleanedMoreInvolved.Rds")) 
 kelpA<-readRDS(paste0(datloc,"KelpA_Quarterly_CleanedMoreInvolved.Rds")) 
 NO3<-readRDS(paste0(datloc,"NO3_Quarterly_CleanedMoreInvolved.Rds")) 

@@ -19,7 +19,7 @@ source("plotColLine.R")
 #Location for storing results and other prep
 #***
 
-resloc<-"../Results/SpectralDecompResults/"
+resloc<-"../Results/Kelp_SpectralDecompResults/"
 if (!dir.exists(resloc))
 {
   dir.create(resloc,recursive=TRUE)
@@ -36,7 +36,7 @@ saveRDS(BiasVariance,file=paste0(resloc,"BiasVariance.Rds"))
 #***
 
 #load the data
-datloc<-"../Results/DataAfterAllCleaning/"
+datloc<-"../Results/Kelp_DataAfterAllCleaning/"
 kelp<-readRDS(paste0(datloc,"Kelp_Quarterly_CleanedFinal.Rds")) 
 NO3<-readRDS(paste0(datloc,"NO3_Quarterly_CleanedFinal.Rds")) 
 waves<-readRDS(paste0(datloc,"Waves_Quarterly_CleanedFinal.Rds")) 

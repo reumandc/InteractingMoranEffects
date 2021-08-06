@@ -7,15 +7,15 @@ rm(list=ls())
 graphics.off()
 
 #Clean the data
-source("AnalysisStep_CleanData_SuperBasic.R")
-source("AnalysisStep_CleanData_MoreInvolved.R")
+source("Kelp_AnalysisStep_CleanData_SuperBasic.R")
+source("Kelp_AnalysisStep_CleanData_MoreInvolved.R")
 
 #plot time series for visual inspection
-source("AnalysisStep_PlotTimeSeries.R")
+source("Kelp_AnalysisStep_PlotTimeSeries.R")
 
 #Do linear models to help demo the need for specific lags - this also performs and saves the final level of data cleaning
-source("AnalysisStep_LinearModels.R")
+source("Kelp_AnalysisStep_LinearModels.R")
 
 #Do the spectra decomposition analysis
-source("AnalysisStep_SpectralDecomp.R")
+source("Kelp_AnalysisStep_SpectralDecomp.R")
 

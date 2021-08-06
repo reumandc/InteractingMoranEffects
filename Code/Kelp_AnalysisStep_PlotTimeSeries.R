@@ -7,7 +7,7 @@ rm(list=ls())
 #Locations for storing results
 #***
 
-resloc<-"../Results/TimeSeriesPlots/"
+resloc<-"../Results/Kelp_TimeSeriesPlots/"
 if (!dir.exists(resloc))
 {
   dir.create(resloc,recursive=TRUE)
@@ -18,7 +18,7 @@ if (!dir.exists(resloc))
 #***
 
 #load the data
-datloc<-"../Results/DataAfterMoreInvolvedCleaning/"
+datloc<-"../Results/Kelp_DataAfterMoreInvolvedCleaning/"
 kelp<-readRDS(paste0(datloc,"Kelp_Quarterly_CleanedMoreInvolved.Rds")) 
 kelpA<-readRDS(paste0(datloc,"KelpA_Quarterly_CleanedMoreInvolved.Rds")) 
 NO3<-readRDS(paste0(datloc,"NO3_Quarterly_CleanedMoreInvolved.Rds")) 
