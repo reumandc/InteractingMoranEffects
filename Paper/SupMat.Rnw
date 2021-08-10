@@ -134,7 +134,7 @@ the definition of cross synchrony.
 %***DAN: See page 51 of your hand-written notes for descriptions of the examples, which you need to code up and 
 %make some figure or something and describe and report here.
 
-\section{Model specification, full details}
+\section{Model specification, full details}\label{sect:model_spec}
 
 The population model is specified starting with the equation
 \begin{align}
@@ -151,13 +151,11 @@ a homogeneous influence of the environmental variables on the populations in the
 sampling locations, i.e., the parameters $p$ are spatially homogeneous. 
 %We also assume spatial homogeneity of the AR coefficients, need to add a mention of that
 We also assume that the 
-combined process $(\epsilon_1^{(1)},\ldots,\epsilon_N^{(1)},\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)},\delta_1,\ldots,\delta_N)$ is a second-order stationary stochastic process (REF)
-%***DAN: REFS here to Brillinger
+combined process $(\epsilon_1^{(1)},\ldots,\epsilon_N^{(1)},\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)},\delta_1,\ldots,\delta_N)$ is a second-order stationary stochastic process \citep{Brillinger2001}
 with the expected values of its component processes equal to $0$. Finally, we assume the complex roots of the
 polynomial $1-b_1 z - \cdots - b_n z^n = 0$ have modulus greater than $1$, an assumption needed for the 
 existence of a stationary stochastic process solution for the model and for invertability of
-the filter $\mcB$ which we will define below. See REF
-%***DAN: add refs to Brilliger, Shumway and Stoffer, Rinsel
+the filter $\mcB$ which we will define below. See \cite{Reinsel1997,Shumway2000,Brillinger2001}
 for background on the statistical theory of stationary stochastic processes.
 
 Letting $I_N$ denote the $N \times N$ identity matrix and letting $B$ denote the backshift operator, 
@@ -174,13 +172,6 @@ Using the language of filters and stochastic processes, the original model
 \end{equation}
 Writing the model in the language of stochastic processes and linear filters makes it straightforward
 to calculate the spectral matrix, $S_{ww}$, of the stochastic process, $w$, which we do in section \ref{sect:derivation}.
-
-%***DAN: Do you need to have some sort of section gtiving background info on spectral stuff, or is that all assumed?
-%Probably no, we just assume it here, and give some info in the main text on how to interpret these quantities, but
-%we do not have to give any definitions and so on because we are not going to give anything like a proper into
-%to stochastic processes and spectral approaches either in the main text or here, so better just to assume it 
-%(here) and take the attitude in the main text of "you won't understand where this comes from (see sup mat for that)
-%but we can tell you how to interpret it.
 
 \section{Derivation of the main equation}\label{sect:derivation}
 
@@ -202,7 +193,8 @@ spectral matrix of the processes $\epsilon^{(i)}$ and $\delta$, $S_{\delta \epsi
 spectral matrix of the processes $\delta$ and $\epsilon^{(i)}$, and the superscript $*$ denotes
 the conjugate transpose of a matrix.
 
-Letting $\mu=\exp(-2\pi i f)$ where $f$ is frequency in units of cycles per time steps, we have
+Letting $\mu=\exp(-2\pi \iota f)$ where $\iota$ is the imaginary unit and 
+$f$ is frequency in units of cycles per time steps, we have
 \begin{align}
 T(\mcB) &= (1-b_1 \mu - b_2 \mu^2 - \cdots - b_n \mu^n) I_N \\
 T(\mcP^{(1)}) &= (p_0^{(1)} + p_1^{(1)} \mu + \cdots + p_{m_1}^{(1)} \mu^{m_1}) I_N \\
@@ -281,6 +273,9 @@ measured factors $\epsilon^{(1)}$ and $\epsilon^{(2)}$.
 %Probably you only need to include the results in allcorfsgtd_RE, in the Results section. 
 %See line 480 and above in AnalysisStep_LinearModels.R
 
+\section{References}
 
+\bibliographystyle{ecology_letters2}
+\bibliography{refs} 
 
 \end{document}

@@ -23,9 +23,11 @@
   \textbf{\textit{Keywords---}} #1
 }
 \newcommand{\mcP}{\mathcal{P}}
-\newcommand{\mcB}{\mathcal{P}}
+\newcommand{\mcB}{\mathcal{B}}
 \newcommand{\var}{\text{var}}
 \newcommand{\cov}{\text{cov}}
+\newcommand{\Rp}{\text{Re}}
+\let\conj\overline
 
 %external documents
 \externaldocument[SM-]{SupMat}
@@ -87,14 +89,17 @@ Place abstract here
 %  -use Moran model
 %  -but with two drivers
 %  -moran theorem says correlation of pops equals correlation of sum of drivers, so work it out
-%5) general idea of two noises lagged or time delayed relative to each other and their effects oppositely lagged - this may be where a pedagogical %fig comes in, or maybe it is just worsd here and then the pedagog fig comes in later, at end of theory section, in form of examples.
-%6) paragraph on why we would expect interacting moran effects to be common, return to this point in the discussion
+%5) general idea of two noises lagged or time delayed relative to each other and their effects oppositely lagged - this may be where a pedagogical %fig comes in, or maybe it is just worsd here and then the pedagog fig comes in later, at end of theory section, in form of examples. Yes, I 
+%think I want that second approach.
+%6) brief paragraph on why we would expect interacting moran effects to be common, return to this point in the discussion
 %7) final para on goals, manuscript structure, etc.
 %  -G1) Elaborate a mathematical/statistical theory of interacting Moran effects which both allows both a detailed understanding 
 %      of how the mechanism works and fecilitates statistical investigation of whether the effect is present in empirical systems.
-%  -G2) Apply the theory and associated stats to revisiting kelp, the intention being to further elaborate the mechanism itself
+%  -G2) Apply the theory and associated stats to kelp, the intention being to further elaborate the mechanism itself
 %  -G3) Apply the theory and associated stats to plankton, the intention being to further elaborate the mechanism itself
-%
+%   Final sentence about how this paper conceptually and theoretically illuminates a new and probably common mechanism of 
+%   synchrony, and provides statistics which facilitate investigation of the mechanism in empirical systems. 
+
 %Notes:
 %1) You need to make it clear the earlier papers already identified interacting Moran effects, so what are we doing?
 %We are exploring theoreitically what the mechanism is, here, and how general it might be, and what different forms it 
@@ -111,7 +116,7 @@ Place abstract here
 %matrix for putting them all in one structure.
 %DONE 2) Define your measures of timescale/frequency-specific synchrony and crosss-variable synchrony, explain why these make sense as
 %ways to measure those things.
-%3) Present the model and the theory
+%DONE 3) Present the model and the theory
 %4) Present "toy" examples and fig 1 (need to think a lot about these)
 %
 %Notes:
@@ -164,13 +169,98 @@ by a year, then $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$, which is complex valued, 
 frequency $f=1/4 \text{ y}^{-1}$, and will have  phase at that frequency equal to $\pi/2$, reflecting the one-year 
 lag between the variables.
 %***DAN: make sure I'm not making a sign error here when you create the additional examples for sup mat
-See SI section \ref{SM-Sect:measuring_sync} for further examples and explanations of the new cross synchrony index.
+See SI section \ref{SM-Sect:measuring_sync} for further examples of the new cross synchrony index.
 
+Our model is 
+\begin{align}
+w_i(t) &= b_1 w_i(t-1)+ \cdots + b_n w_i(t-n) \label{main_model_1} \\ 
+&+ p_0^{(1)} \epsilon_i^{(1)}(t)+ \cdots + p_{m_1}^{(1)} \epsilon_i^{(1)}(t-m_1) \label{main_model_2} \\
+&+ p_0^{(2)} \epsilon_i^{(2)}(t)+ \cdots + p_{m_2}^{(2)} \epsilon_i^{(2)}(t-m_2) \label{main_model_3} \\
+&+ \delta_i(t), \label{main_model_4}
+\end{align}
+where $w_i(t)$ is an index of the population in location $i=1,\ldots,N$ at time
+$t$, and $\epsilon^{(1)}=(\epsilon_1^{(1)},\ldots,\epsilon_N^{(1)})$,
+$\epsilon^{(2)}=(\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)})$ and $\delta=(\delta_1,\ldots,\delta_N)$
+are environmental processes. The processes $\epsilon^{(1)}$ and $\epsilon^{(2)}$ are
+taken to be measured environmental processes, whereas $\delta$ represents the 
+aggregate influence of unmeasured processes. We assume that the combined process 
+$(\epsilon_1^{(1)},\ldots,\epsilon_N^{(1)},\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)},\delta_1,\ldots,\delta_N)$ is an ergodic second-order stationary stochastic process \citep{Brillinger2001}
+with expected values of its component processes equal to $0$. We make additional mild
+regularity assumptions to ensure the model is stable 
+(SI section \ref{SM-sect:model_spec}). This model can straightforwardly be seen as 
+a linearization of a very general dynamical model, influenced by ``weak noise'' [see, e.g.,
+SI section S1.2 of \cite{Desharnais2018} and SI section S1 of \citep{Walter2017}].
+Linearization and ``weak noise'' assumptions are tactics which have been made very commonly to make
+theoretical progress in ecology (REFS), and it has been demonstrated that results based on a
+weak noise assumption often also hold for quite strong noise (REF).
+%***DAN: Add refs later
+See \cite{Brillinger2001} for background on stochastic processes.
 
+The outcome of our theory is an equation which expresses population spatial synchrony 
+in terms of synchrony of the processes $\epsilon^{(1)}$ and $\epsilon^{(2)}$, and cross
+synchrony between these processes:
+\begin{align}
+\rho_{ww} &= \frac{1}{|f_{\mcB}|^2}\left[|f_{\mcP^{(1)}}|^2 \rho_{\epsilon^{(1)} \epsilon^{(1)}} 
++ |f_{\mcP^{(2)}}|^2 \rho_{\epsilon^{(2)} \epsilon^{(2)}} 
++ 2 \Rp \left(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}} \right)\right] \label{rhoww_T1to3} \\
+&+ \text{other contributions}.\label{rhoww_OC}
+\end{align}
+Here, $f_{\mcB} = 1-b_1 \mu - b_2 \mu^2 - \cdots - b_n \mu^n$, 
+$f_{\mcP^{(1)}} = p_0^{(1)} + p_1^{(1)} \mu + \cdots + p_{m_1}^{(1)} \mu^{m_1}$, and
+$f_{\mcP^{(2)}} = p_0^{(2)} + p_1^{(2)} \mu + \cdots + p_{m_2}^{(2)} \mu^{m_2}$, where 
+$\mu=\exp(-2 \pi \iota f)$, and where $\iota$, the Greek letter iota, represents the imaginary unit.
+The ``other contributions'' in this equation correspond to synchronizing influences of 
+$\delta$ and interactions between $\delta$ and the $\epsilon^{(i)}$. If data 
+$w_i(t)$, $\epsilon^{(1)}_i(t)$ and $\epsilon^{(2)}_i(t)$ are available for locations 
+$i=1,\ldots,N$ and times $t=1,\ldots,T$, then all the terms on the right side of (\ref{rhoww_T1to3})
+can be estimated from these data (see \emph{Methods}), providing an assessment of the relative 
+contributions of direct and interacting Moran effects to population synchrony. 
 
-
+%***DAN: There is still one thing left to do here, see above outline. This is a very important thing, because it is 
+%supposed to use examples to demo how the interaction terms work, bringing in the lags in effects and the lags in
+%the env vars themselves, and the interactions between these lags. This is where we take the next step with the 
+%core of the concept, after the basic intro to it in the Intro.
+%***DAN: Consider the possibility that you just want to use the same model as Plos Comp Biol, but analyze it using
+%the new theory. On the other hand, don't want to give the impression that not much is new about this paper.
 
 \section{Methods}
+
+%Tentative broad outline
+%1) Para from Tom on how remote sensing data are gathered and coverted into what he handed to me. Brief, mostly 
+%citing other works where it is laid out in much more detail. 
+%2) Para from Tom on how he got to the wave and NO3 data
+%3) Para summarizing the data cleaning I did
+%Comment) Actually, might want to send the abive 3 paras to sup mat, and just have one para describing the final format of the
+%data, especially if you make this paper also be about plankton. But do that later if you do it.
+%4) Some paras about the plankton data, similar structure to how the kelp data were presented (and using sup mat as described)
+%5) Para about the linear modelling - this is how certain parts of the main theoretical equation were estimated
+%6) Para about spectral estimates. Brief, cites appropriate parts of Brillinger, uses sup mat if needed. This is how certain
+%other parts of the main theoretical equation were estimated. 
+%Comment) I could write these now, but then if I end up having to do something slightly different for plankton, I'll have to 
+%rewrite them. Maybe now is the time to decide if I want this to be a kelp-only or a kelp-an-plankton paper and then do the
+%plankton work.
+%Comment) Somehow need to get across what was done - different parts of main equation were examined to explore the different
+%aspects of how the mechanism works for the focal taxa. Elaborate as appropriate.
+
+%Para 1 from Tom
+A process was previously developed (REFS) using remote sensing to provide quarterly kelp biomass and kelp canopy area estimates,
+from quarter 1 of 1987 to quarter 4 of 2019, at $437$ locations along the California coast, from slightly north of Monterey Bay
+to San Diego. We very briefly describe the process, refering to our earlier published works for details.
+%Need to mention: The spacing and extent of each site; where the data can be downloaded (other than in our git repo, though I'll
+%a mention of that, too); lots of references as necessary; probably need slightly more formal statements of what "kelp biomass" 
+%"kelp canopy area" mean in these contextx; anything else important. Need bibliographic data for cited papers.
+
+%Para 2 from Tom
+Another process was previously developed (REFS) to provide mean nitrate concentration and maximum wave height data
+for the same quarters and locations. We again briefly describe the process, citing earlier works for details. 
+
+%I asked Tom for these paragraphs by email on 2021 08 05
+
+
+
+%Need:
+%1) Some kind of map of the locations and display of some time series for the sup mat, to give a sense of the data. I think Max will
+%have made one of these for his paper with Lawrence, so maybe I could get him to make another one, same or appropriately modified?
 
 
 \section{Results}
