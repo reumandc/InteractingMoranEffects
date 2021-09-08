@@ -1,5 +1,5 @@
 #Just plots time series after the "more involved" cleaning (but prior to the final cleaning done in 
-#AnalysisStep_LinearModels.R), for visual inspection.
+#Kelp_AnalysisStep_LinearModels.R), for visual inspection.
 
 rm(list=ls())
 

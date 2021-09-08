@@ -240,6 +240,7 @@ for (counter in 1:5)
 }
 names(allfsgtd_CC1)<-c("Rsq","NO3_l0","NO3_l1","waves_l0","waves_l1")
 saveRDS(allfsgtd_CC1,file=paste0(resloc2,"allfsgtd_CC1"))
+#allfsgtd_CC1<-readRDS(paste0(resloc2,"allfsgtd_CC1"))
 
 #***Now do central cal, region 2
 
