@@ -166,7 +166,7 @@ do_analysis<-function(Args)
   
   #construct the regression formula object
   form_rhs_terms<-c(paste0("kelp_l",1:lags[1]),paste0("NO3_l",0:lags[2]),paste0("waves_l",0:lags[3]))
-  form<-as.formula(paste0("kelp_l0~",paste0(form_rhs_terms,collapse="+"),sep=""))
+  form<-as.formula(paste0("kelp_l0~",paste0(form_rhs_terms,collapse="+"),"-1",sep=""))
   
   #construct the regression data frame
   maxlag<-max(lags)
@@ -219,17 +219,17 @@ do_analysis<-function(Args)
   fP1<-complex(real=numeric(length(freq)),imaginary=numeric(length(freq)))
   for (counter in 0:lags[2])
   {
-    fP1<-fP1+unname(cm[lags[1]+2+counter])*mu^counter
+    fP1<-fP1+unname(cm[lags[1]+1+counter])*mu^counter
   }
   fP2<-complex(real=numeric(length(freq)),imaginary=numeric(length(freq)))
   for (counter in 0:lags[3])
   {
-    fP2<-fP2+unname(cm[lags[1]+1+lags[2]+1+1+counter])*mu^counter
+    fP2<-fP2+unname(cm[lags[1]+lags[2]+1+1+counter])*mu^counter
   }
   fB<-complex(real=numeric(length(freq))+1,imaginary=numeric(length(freq)))
   for (counter in 1:lags[1])
   {
-    fB<-fB-unname(cm[counter+1])*mu^counter
+    fB<-fB-unname(cm[counter])*mu^counter
   }
   
   #**get the terms of the spectral equation (p. 6 of my math notes)
@@ -306,8 +306,8 @@ do_analysis<-function(Args)
   res<-c()
   res[1]<-summary(mod)$r.squared
   names(res)[1]<-"model r sq"
-  res[2:(length(cm))]<-cm[2:length(cm)]
-  names(res)[2:(length(cm))]<-paste0("coef_",names(cm)[2:(length(cm))])
+  res[2:(length(cm)+1)]<-cm
+  names(res)[2:(length(cm)+1)]<-paste0("coef_",names(cm))
 
   #timescale-specific synchrony quantities, gathered by a utility function, "get_stats", which is below
   stats_cov<-get_stats(freq,T1_avg_cov,T2_avg_cov,T4_avg_cov,totsync_cov)
@@ -2353,11 +2353,11 @@ Args<-list(locstouse=CC1locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnaly
 res_CentCal1_KelpLag4<-do_analysis(Args)
 saveRDS(res_CentCal1_KelpLag4,paste0(resloc,"res_CentCal1_KelpLag4.Rds"))
 
-Args<-list(locstouse=CC1locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag8",plottype="pdf")
+Args<-list(locstouse=CC1locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_CentCal1_KelpLag8<-do_analysis(Args)
 saveRDS(res_CentCal1_KelpLag8,paste0(resloc,"res_CentCal1_KelpLag8.Rds"))
 
-Args<-list(locstouse=CC1locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag12",plottype="pdf")
+Args<-list(locstouse=CC1locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_CentCal1_KelpLag12<-do_analysis(Args)
 saveRDS(res_CentCal1_KelpLag12,paste0(resloc,"res_CentCal1_KelpLag12.Rds"))
 
@@ -2401,11 +2401,11 @@ Args<-list(locstouse=CC2locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnaly
 res_CentCal2_KelpLag4<-do_analysis(Args)
 saveRDS(res_CentCal2_KelpLag4,paste0(resloc,"res_CentCal2_KelpLag4.Rds"))
 
-Args<-list(locstouse=CC2locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag8",plottype="pdf")
+Args<-list(locstouse=CC2locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_CentCal2_KelpLag8<-do_analysis(Args)
 saveRDS(res_CentCal2_KelpLag8,paste0(resloc,"res_CentCal2_KelpLag8.Rds"))
 
-Args<-list(locstouse=CC2locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag12",plottype="pdf")
+Args<-list(locstouse=CC2locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_CentCal2_KelpLag12<-do_analysis(Args)
 saveRDS(res_CentCal2_KelpLag12,paste0(resloc,"res_CentCal2_KelpLag12.Rds"))
 
@@ -2449,11 +2449,11 @@ Args<-list(locstouse=SBlocstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalys
 res_SoCal_KelpLag4<-do_analysis(Args)
 saveRDS(res_SoCal_KelpLag4,paste0(resloc,"res_SoCal_KelpLag4.Rds"))
 
-Args<-list(locstouse=SBlocstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag8",plottype="pdf")
+Args<-list(locstouse=SBlocstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_SoCal_KelpLag8<-do_analysis(Args)
 saveRDS(res_SoCal_KelpLag8,paste0(resloc,"res_SoCal_KelpLag8.Rds"))
 
-Args<-list(locstouse=SBlocstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag12",plottype="pdf")
+Args<-list(locstouse=SBlocstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_SoCal_KelpLag12<-do_analysis(Args)
 saveRDS(res_SoCal_KelpLag12,paste0(resloc,"res_SoCal_KelpLag12.Rds"))
 
