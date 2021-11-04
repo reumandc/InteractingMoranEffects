@@ -141,7 +141,7 @@ For pedagogical clarity, we start with a white-noise example that does not illus
 idea of cross synchrony, but which is simple; we subsequently move on to an example which is more
 complex but also more illustrative. These examples are also used in the theoretical case studies (main text).
 
-For the simple example, used in theoretical case studies A and B, we 
+For the simple example, to be used in theoretical case studies A and B (Methods), we 
 assume $(\epsilon^{(1)}(t),\epsilon^{(2)}(t))$ are drawn, independently for each $t$, from a
 $2N$-dimensional multivariate normal distribution
 with mean $(0,...,0)$ and covariance matrix $\Sigma$, where the entries $\Sigma_{ij}$ of 
@@ -179,7 +179,17 @@ $\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$, and
 $\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$, based on the definitions of these 
 quantities given previously.
 
-For a more illustrative example, used in case study C, the noise process 
+These results make intuitive sense, for a white-noise process, for the following reasons.
+First, $\rho_{\epsilon^{(1)} \epsilon^{(1)}}$ and $\rho_{\epsilon^{(2)} \epsilon^{(2)}}$,
+which are automatically real-valued (SI section \ref{Sect:measuring_sync}), should be flat for a white noise
+process (as we determined above that they are), i.e., independent of timescale, because spectral quantities are flat 
+for time series with no temporal dependencies.  For the same reason, $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$,
+our cross synchrony measure, should be flat (as we determined above that it is). It makes sense
+that cross synchrony in this example is real-valued because a complex-valued 
+$\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ would imply lagged or phase-delayed relationships between 
+$\epsilon^{(1)}$ and $\epsilon^{(2)}$, not possible with a white-noise process.
+
+For a more illustrative example, used in case study C (Methods), the noise process 
 $(\epsilon^{(1)},\epsilon^{(2)})$ is generated via a three-step process. 
 First, assume $(\tilde{\zeta}^{(1)}(t),\tilde{\zeta}^{(2)}(t))$ 
 are drawn, independently for each $t$, from a $2N$-dimensional multivariate normal distribution with mean $(0,\ldots,0)$
