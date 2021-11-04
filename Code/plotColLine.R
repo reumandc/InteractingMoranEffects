@@ -27,3 +27,19 @@ plotColLine<-function(x,y,cols,lnwid,...)
   lines(c(mean(x[(lx-1):lx]),x[lx]),c(mean(y[(lx-1):lx]),y[lx]),lwd=lnwid,col=cols[lx])
 }
 
+#Same as the above, but plots on an existing plotting device.
+#
+linesColLine<-function(x,y,cols,lnwid)
+{
+  lx<-length(x)
+  
+  lines(c(x[1],mean(x[1:2])),c(y[1],mean(y[1:2])),lwd=lnwid,col=cols[1])
+  for (counter in 2:(length(x)-1))
+  {
+    lines(c(mean(c(x[counter-1],x[counter])),x[counter]),
+          c(mean(c(y[counter-1],y[counter])),y[counter]),lwd=lnwid,col=cols[counter])
+    lines(c(x[counter],mean(c(x[counter],x[counter+1]))),
+          c(y[counter],mean(c(y[counter],y[counter+1]))),lwd=lnwid,col=cols[counter])
+  }
+  lines(c(mean(x[(lx-1):lx]),x[lx]),c(mean(y[(lx-1):lx]),y[lx]),lwd=lnwid,col=cols[lx])
+}

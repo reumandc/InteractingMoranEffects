@@ -13,6 +13,7 @@
 \usepackage{lineno}
 \usepackage{natbib}
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{xr}
 \usepackage{authblk}
 
@@ -30,6 +31,10 @@
 \newcommand{\var}{\text{var}}
 \newcommand{\cov}{\text{cov}}
 \let\conj\overline
+
+%set up the theorem environment
+\newtheorem{thm}{Theorem}
+\newtheorem{corl}[thm]{Corollary}
 
 %external documents
 \externaldocument[MT-]{Paper}
@@ -55,6 +60,7 @@
 \affil[g]{Marine Biological Association of the United Kingdom}
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 
 %The following is where you load in the numeric results that will be embedded in the text
 %<<eval=T,echo=F,message=F,warning=F>>=
@@ -64,7 +70,7 @@
 \maketitle
 
 \tableofcontents
-\listoftables
+%\listoftables
 \listoffigures
 
 \section{Measuring synchrony} \label{Sect:measuring_sync}
@@ -77,8 +83,7 @@ to sampling locations, then we measure the synchrony of $w$ as
 where $S_{ww}$ is the spectral matrix of the process $w$. This is a function of frequency or timescale because
 $S_{w_i w_j}$ is a function of frequency or timescale.
 To see that $\rho_{ww}$ is a real-valued function, note that $\conj{S_{ww}}=S_{ww}^\tau$, where the superscript 
-$\tau$ denotes matrix transpose (REF to Brillinger theorem 2.5.1 on p. 24).
-%***DAN: Don't forget to fill in this reference!
+$\tau$ denotes matrix transpose [\cite{Brillinger2001}, theorem 2.5.1 on p. 24].
 Therefore 
 \begin{align}
 \conj{\rho_{ww}} &= \left( \frac{1}{N^2-N}  \right) \sum_{i \neq j} \conj{S_{w_i w_j}} \\
@@ -93,8 +98,7 @@ The quantity $\rho_{ww}$ makes sense as a measure of synchrony in part because
 \end{align}
 The quantity $\Rp(S_{w_i w_j})$ is the cospectrum of the component processes $w_i$ and $w_j$, 
 and an appropriate integral across frequencies of the cospectrum equals the covariance, 
-$\cov(w_i,w_j)$ (REF to some specific page/theorem in Brillinger). 
-%***DAN: Don't forget to add
+$\cov(w_i,w_j)$ \citep{Brillinger2001}.
 Thus an integral of $\rho_{ww}$ across frequencies equals 
 \begin{equation}
 \left( \frac{1}{N^2-N} \right) \sum_{i \neq j} \cov(w_i,w_j),
@@ -128,11 +132,141 @@ and $\epsilon^{(2)}$ will produce synchrony, in the classic sense of correlation
 processes $w_i$ and $w_j$.
 Thus we use the cross spectrum, $S_{\epsilon^{(1)}_i \epsilon^{(2)}_j}$, for which the phase angle at 
 frequency $f$ measures the time delay between frequency-$f$ oscillations of $\epsilon^{(1)}_i$ and 
-frequency-$f$ oscillations of $\epsilon^{(2)}_j$. The following examples should help clarify these features of
-the definition of cross synchrony.
+frequency-$f$ oscillations of $\epsilon^{(2)}_j$. 
 
-%***DAN: See page 51 of your hand-written notes for descriptions of the examples, which you need to code up and 
-%make some figure or something and describe and report here.
+\section{Examples of cross synchrony}\label{sect:examples_cross_sync}
+
+The following examples should help clarify the properties of our definition of cross synchrony.
+For pedagogical clarity, we start with a white-noise example that does not illustrate the full value of the
+idea of cross synchrony, but which is simple; we subsequently move on to an example which is more
+complex but also more illustrative. These examples are also used in the theoretical case studies (main text).
+
+For the simple example, used in theoretical case studies A and B, we 
+assume $(\epsilon^{(1)}(t),\epsilon^{(2)}(t))$ are drawn, independently for each $t$, from a
+$2N$-dimensional multivariate normal distribution
+with mean $(0,...,0)$ and covariance matrix $\Sigma$, where the entries $\Sigma_{ij}$ of 
+$\Sigma$ are as follows. For $i=j$, $\Sigma_{ij}=1$. For $i \neq j$ and $1 \leq i,j \leq N$, 
+$\Sigma_{ij}$ equals a parameter $v_{11}$. For $i \neq j$ and $N+1 \leq i,j \leq 2N$, 
+$\Sigma_{ij}$ equals a second parameter $v_{22}$. The remaining entries of $\Sigma$ equal a 
+third parameter, $v_{12}$. The parameters $v_{11}$, $v_{22}$ and $v_{12}$ must be chosen to yield
+a positive definite matrix $\Sigma$. 
+
+Now, having specified the noise process $(\epsilon^{(1)},\epsilon^{(2)})$, we derive the quantities 
+$\rho_{\epsilon^{(1)} \epsilon^{(1)}}$,
+$\rho_{\epsilon^{(2)} \epsilon^{(2)}}$, and 
+$\rho_{\epsilon^{(1)} \epsilon^{(2)}}$.
+For $a$ and $b$ equal to $1$ or $2$, the formula 
+$S_{\epsilon_i^{(a)}\epsilon_j^{(b)}}(f) = \sum_{u=-\infty}^\infty c_{\epsilon_i^{(a)}\epsilon_j^{(b)}}(u)
+\exp(-2 \pi \iota f u)$, where $c_{\epsilon_i^{(a)}\epsilon_j^{(b)}}(u)=\cov(\epsilon_i^{(a)}(t+u),\epsilon_j^{(b)}(t))$,
+follows from definitions of the spectrum and cross spectrum, given, for instance, in 2.5.2 on p. 23 of
+\cite{Brillinger2001}. The quantity 
+$c_{\epsilon_i^{(a)}\epsilon_j^{(b)}}(u)=\cov(\epsilon_i^{(a)}(t+u),\epsilon_j^{(b)}(t))$ is independent of 
+$t$ for any stationary process $(\epsilon^{(1)},\epsilon^{(2)})$, and in particular for the temporally iid process that 
+we assumed to operate here. Furthermore, because 
+$\epsilon_i^{(a)}(t+u)$ and $\epsilon_j^{(b)}(t)$ were assumed independent for $u \neq 0$, we have 
+\begin{equation}
+S_{\epsilon_i^{(a)}\epsilon_j^{(b)}}(f) = c_{\epsilon_i^{(a)}\epsilon_j^{(b)}}(0) =
+\begin{cases}
+1 & \text{if}\ a=b\ \text{and}\ i=j \\
+v_{11} & \text{if}\ a=b=1\ \text{and}\ i \neq j \\
+v_{22} & \text{if}\ a=b=2\ \text{and}\ i \neq j \\
+v_{12} & \text{if}\ a \neq b.
+\end{cases}
+\end{equation}
+Thus the spectra and cross spectra in this example are constant. It
+is then easy to see that $\rho_{\epsilon^{(1)} \epsilon^{(1)}}=v_{11}$,
+$\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$, and 
+$\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$, based on the definitions of these 
+quantities given previously.
+
+For a more illustrative example, used in case study C, the noise process 
+$(\epsilon^{(1)},\epsilon^{(2)})$ is generated via a three-step process. 
+First, assume $(\tilde{\zeta}^{(1)}(t),\tilde{\zeta}^{(2)}(t))$ 
+are drawn, independently for each $t$, from a $2N$-dimensional multivariate normal distribution with mean $(0,\ldots,0)$
+and covariance matrix $\Psi$, where the entries $\Psi_{ij}$ of $\Psi$ are as follows. 
+For $i=j$, $\Psi_{ij}=1$. For $i \neq j$ and $1 \leq i,j \leq N$, 
+$\Psi_{ij}$ equals a parameter $w_{11}$. For $i \neq j$ and $N+1 \leq i,j \leq 2N$, 
+$\Psi_{ij}$ equals a second parameter $w_{22}$. The remaining entries of $\Psi$ equal a 
+third parameter, $w_{12}$. The parameters $w_{11}$, $w_{22}$ and $w_{12}$ must again be chosen to yield
+a positive definite matrix. Second, let $\zeta^{(1)}(t)=\tilde{\zeta}^{(1)}(t-l_1)$ and let
+$\zeta^{(2)}(t)=\tilde{\zeta}^{(2)}(t-l_2)$ for fixed integers $l_1$ and $l_2$. Finally,
+let $\epsilon_i^{(a)}(t)=c_1 \epsilon_i^{(a)}(t-1)+c_2 \epsilon_i^{(a)}(t-2)+\zeta_i^{(a)}(t)$
+for $i=1,\ldots,N$ and $a=1,2$. The second step above ensures that $\epsilon^{(1)}$ and $\epsilon^{(2)}$
+are related to each other in a time-delayed manner, and the third step ensures that 
+$\epsilon^{(1)}$ and $\epsilon^{(2)}$ can oscillate with a dominant periodic component, depending 
+on the values of $c_1$ and $c_2$ used.
+
+To compute $\rho_{\epsilon^{(1)}\epsilon^{(1)}}$, $\rho_{\epsilon^{(2)}\epsilon^{(2)}}$ and
+$\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ for this example, we first compute 
+$S_{\epsilon^{(1)}\epsilon^{(1)}}$, $S_{\epsilon^{(2)}\epsilon^{(2)}}$ and
+$S_{\epsilon^{(1)}\epsilon^{(2)}}$ using theorem \ref{thm:useful_thm} below.  
+Letting $\epsilon=(\epsilon^{(1)},\epsilon^{(2)})$ and $\zeta(t)=(\zeta^{(1)},\zeta^{(2)})$, we 
+have $\epsilon_i(t)=c_1 \epsilon_i(t-1)+c_2 \epsilon_i(t-2) + \zeta_i(t)$ for $i=1,\ldots,2N$. We then
+apply theorem \ref{thm:useful_thm} to get that $S_{\epsilon \epsilon}=\left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 S_{\zeta \zeta}$.
+Considering upper-left $N \times N$ sub-matrices gives 
+$S_{\epsilon^{(1)} \epsilon^{(1)}}=\left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 S_{\zeta^{(1)} \zeta^{(1)}}$.
+Considering lower-right $N \times N$ sub-matrices gives 
+$S_{\epsilon^{(2)} \epsilon^{(2)}}=\left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 S_{\zeta^{(2)} \zeta^{(2)}}$.
+Considering upper-right $N \times N$ sub-matrices gives 
+$S_{\epsilon^{(1)} \epsilon^{(2)}}=\left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 S_{\zeta^{(1)} \zeta^{(2)}}$.
+Because the $\zeta^{(1)}(t)$ are iid for distinct times $t$, we can again use the definitions of the spectrum and the
+cross spectrum and reasoning similar to that used above for the previous example to show that $S_{\zeta^{(1)} \zeta^{(1)}}$
+equals the upper-left $N \times N$ sub-matrix of $\Psi$, which is a matrix with $1$ in every diagonal entry and
+$w_{11}$ in all off-diagonal entries. Likewise, $S_{\zeta^{(2)} \zeta^{(2)}}$ equals the lower-right 
+$N \times N$ sub-matrix of $\Psi$, which has $1$ in all diagonal entries and $w_{22}$ in all off-diagonal entries.
+To get $S_{\zeta^{(1)} \zeta^{(2)}}$, we write 
+$S_{\zeta_i^{(1)}\zeta_j^{(2)}}(f)=\sum_{u=-\infty}^{\infty} c_{\zeta_i^{(1)}\zeta_j^{(2)}}(u) \exp(-2 \pi \iota f u)$.
+Here, 
+\begin{align}
+c_{\zeta_i^{(1)}\zeta_j^{(2)}}(u) &= \cov(\zeta_i^{(1)}(t+u),\zeta_j^{(2)}(t)) \\
+&= \cov(\tilde{\zeta}_i^{(1)}(t+u-l_1),\tilde{\zeta}_j^{(2)}(t-l_2)) \\
+&= 
+\begin{cases}
+w_{12} & \text{if}\ u-l_1=-l_2 \\
+0 & \text{otherwise}.
+\end{cases}
+\end{align}
+So $S_{\zeta_i^{(1)}\zeta_j^{(2)}}=w_{12} \exp(-2 \pi \iota f (l_1 - l_2))$. It then follows 
+straightforwardly that $\rho_{\epsilon^{(1)} \epsilon^{(1)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{11}$,
+$\rho_{\epsilon^{(2)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{22}$ and 
+$\rho_{\epsilon^{(1)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{12} \exp(-2 \pi \iota f (l_1-l_2))$.
+The pre-factor $\left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2$ in all these expressions reflects the autoregressive 
+manner in which the noises $\epsilon$ were defined. Autoregressive models of order $2$ are well known to be capable of
+producing oscillations for certain values of the parameters. For instance, we use $c_1=0$ and $c_2=-4/9$, values
+which cause the expression $\left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2$ to have a single peak at
+frequency $0.25$ cycles per sampling interval (i.e., $1$ cycle per year). 
+The term $\exp(-2 \pi \iota f (l_1-l_2))$ in the expression for 
+$\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ reflects that fact that cross variable synchrony for this example is lagged
+by an amount $l_1-l_2$. The lack of a similar term in the expressions for $\rho_{\epsilon^{(1)}\epsilon^{(1)}}$
+or $\rho_{\epsilon^{(2)}\epsilon^{(2)}}$ reflects that fact that there are no lags built into within-variable
+synchrony in this example. Fig. \ref{fig:rhosForC} displays the quantities $\rho_{\epsilon^{(1)} \epsilon^{(1)}}$,
+$\rho_{\epsilon^{(2)} \epsilon^{(2)}}$, and $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ for the two parameterizations
+of this noise that we use for theoretical case study C.
+
+\begin{figure}
+\includegraphics[width=.75\textwidth]{../Results/Theory/TheoryFigCaseC_v01_rhos.pdf}\\
+\includegraphics[width=.75\textwidth]{../Results/Theory/TheoryFigCaseC_v02_rhos.pdf}
+\caption[Spectral quantities for noise used in case study C]{The quantities $\rho_{\epsilon^{(1)} \epsilon^{(1)}}$,
+$\rho_{\epsilon^{(2)} \epsilon^{(2)}}$, and $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ for the noise
+described in SI section \ref{sect:examples_cross_sync} and used for theoretical case study C. 
+Two alternative sets of parameters
+were used for panels a-c and d-f, respectively. See the caption of Fig. \ref{MT-fig:TheoryCaseA} in the main text
+for parameter values.}\label{fig:rhosForC}
+\end{figure}
+
+\begin{thm}\label{thm:useful_thm}
+If $\zeta(t)$ is an $N$-dimensional second-order stationary ergodic stochastic process with 
+component expected values $0$, if
+$\epsilon_i(t)=c_1 \epsilon_i(t-1)+\cdots+c_n \epsilon_i(t-n)+q_0 \zeta_i(t)+\cdots+q_m \zeta_i(t-m)$ for $i=1,\ldots,N$, 
+with $c_n \neq 0$ and $q_m \neq 0$, and if the complex roots of the polynomial
+$1-c_1 z - c_2 z^2 - \cdots c_n z^n = 0$ have modulus greater than $1$, then 
+$S_{\epsilon \epsilon}(f) = \left| \frac{\gamma}{1-\lambda} \right|^2 S_{\zeta \zeta}(f)$ where $\gamma=q_0+q_1 \mu+\cdots+q_m \mu^m$,
+$\lambda=c_1 \mu+c_2 \mu^2+\cdots+c_n \mu^n$, and $\mu=\exp(-2\pi \iota f)$, $\iota$ is the imaginary unit, and 
+$f$ is frequency in cycles per time step.
+\end{thm}
+\begin{proof}
+This theorem is identical to theorem 2 in SI section S1.5 of \cite{Anderson2021}, where a proof is also provided. 
+\end{proof}
 
 \section{Model specification, full details}\label{sect:model_spec}
 
@@ -194,7 +328,7 @@ spectral matrix of the processes $\delta$ and $\epsilon^{(i)}$, and the superscr
 the conjugate transpose of a matrix.
 
 Letting $\mu=\exp(-2\pi \iota f)$ where $\iota$ is the imaginary unit and 
-$f$ is frequency in units of cycles per time steps, we have
+$f$ is frequency in units of cycles per time step, we have
 \begin{align}
 T(\mcB) &= (1-b_1 \mu - b_2 \mu^2 - \cdots - b_n \mu^n) I_N \\
 T(\mcP^{(1)}) &= (p_0^{(1)} + p_1^{(1)} \mu + \cdots + p_{m_1}^{(1)} \mu^{m_1}) I_N \\
@@ -261,14 +395,45 @@ of $\epsilon^{(1)}$ and $\epsilon^{(2)}$. The ``other contributions'' may includ
 unmeasured environmental factors, as well as interactions between these effects and Moran effects of the 
 measured factors $\epsilon^{(1)}$ and $\epsilon^{(2)}$.
 
+\section{Details of the theoretical case studies}\label{sect:details_case_studies}
+
+The noise processes $(\epsilon^{(1)},\epsilon^{(2)})$ used 
+in case studies A, B and C, which were only partly specified in the main text, are fully specified in 
+SI section \ref{sect:examples_cross_sync}. 
+We next derive, for our case studies, the values of the terms that appear in (\ref{MT-rhoww_T1to3}) of the main text.
+For case study A, parameter specifications presented in Methods of the main text straightforwardly imply that
+$f_{\mcB}=1-b_1 \mu$, $f_{\mcP^{(1)}}=p_1^{(1)} \mu$ and $f_{\mcP^{(2)}}=p_0^{(2)}$. In 
+SI section \ref{sect:examples_cross_sync}, we computed that 
+$\rho_{\epsilon^{(1)} \epsilon^{(1)}}=v_{11}$,
+$\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$, and 
+$\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$.
+
+For case study B, details presented in Methods of the main text imply that 
+$f_{\mcB}=1-b_1 \mu$, $f_{\mcP^{(1)}}=p_n^{(1)} \mu^n$ and $f_{\mcP^{(2)}}=p_0^{(2)}$. 
+Because the noise process for B is taken to be the same as that for A, we again have 
+$\rho_{\epsilon^{(1)} \epsilon^{(1)}}=v_{11}$,
+$\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$ and 
+$\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$.
+
+For case study C, again using details from Methods, $f_{\mcB}=1-b_1 \mu$, 
+$f_{\mcP^{(1)}}=p_{n_1}^{(1)} \mu^{n_1}$ and $f_{\mcP^{(2)}}=p_{n_2}^{(2)} \mu^{n_2}$. 
+In SI section \ref{sect:examples_cross_sync}, we computed that
+$\rho_{\epsilon^{(1)} \epsilon^{(1)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{11}$,
+$\rho_{\epsilon^{(2)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{22}$ and 
+$\rho_{\epsilon^{(1)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{12} \exp(-2 \pi \iota f (l_1-l_2))$.
+
 \section{Details of data and data cleaning}
 
 %***DAN: This should include specification of the regions CC1, CC2, SB.
 %You have to get some info from Tom about the nature of the spatial sampling, and the process leading up to what he gave me.
 %You have to then describe the stages of cleaning I did.
 
-\section{Correlation analyses to help select autoregressive model lags}
 
+
+
+
+%\section{Correlation analyses to help select autoregressive model lags}
+%***DAN: Not sure to what extent I may or may not even have this section any more
 %***DAN: Describe the surrogating process
 %Probably you only need to include the results in allcorfsgtd_RE, in the Results section. 
 %See line 480 and above in AnalysisStep_LinearModels.R

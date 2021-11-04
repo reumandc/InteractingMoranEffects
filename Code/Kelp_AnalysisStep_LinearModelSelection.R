@@ -102,43 +102,60 @@ ncf::gcdist(locs$Lon[h],locs$Lat[h]) #73.35km
 h<-c(CC2locstouse[1],CC2locstouse[length(CC1locstouse)])
 ncf::gcdist(locs$Lon[h],locs$Lat[h]) #78.46km
 
-#So my three roughly comparable comparable regions are SBlocstouse, CC1locstouse, CC2locstouse
+#So my three roughly comparable regions are SBlocstouse, CC1locstouse, CC2locstouse
 
 #***
 #Pick lags for each region
 #***
 
-CC1_lag_res<-picklags(y=kelp[CC1locstouse,],x1=NO3[CC1locstouse,],x2=waves[CC1locstouse,],maxlags=c(28,8,1))
+CC1_lag_res<-picklags_mat(y=kelp[CC1locstouse,],x1=NO3[CC1locstouse,],x2=waves[CC1locstouse,],maxlags=c(28,8,1))
 CC1_lag_res_sortAIC<-CC1_lag_res[order(CC1_lag_res$AIC),]
 CC1_lag_res_sortBIC<-CC1_lag_res[order(CC1_lag_res$BIC),]
-head(CC1_lag_res_sortAIC)
-head(CC1_lag_res_sortBIC)
+head(CC1_lag_res_sortAIC,30)
+head(CC1_lag_res_sortBIC,20)
 indCC1<-which(CC1_lag_res$lagAR==4 & CC1_lag_res$lag1==1 & CC1_lag_res$lag2==0)
 CC1_lag_res[indCC1,]
-CC1lags<-CC1_lag_res_sortBIC[1,1:3]
+range(CC1_lag_res$lagAR[CC1_lag_res$DeltaAIC<=3])
+range(CC1_lag_res$lag1[CC1_lag_res$DeltaAIC<=3])
+range(CC1_lag_res$lag2[CC1_lag_res$DeltaAIC<=3])
+range(CC1_lag_res$lagAR[CC1_lag_res$DeltaBIC<=3])
+range(CC1_lag_res$lag1[CC1_lag_res$DeltaBIC<=3])
+range(CC1_lag_res$lag2[CC1_lag_res$DeltaBIC<=3])
 
-CC2_lag_res<-picklags(y=kelp[CC2locstouse,],x1=NO3[CC2locstouse,],x2=waves[CC2locstouse,],maxlags=c(28,8,1))
+CC2_lag_res<-picklags_mat(y=kelp[CC2locstouse,],x1=NO3[CC2locstouse,],x2=waves[CC2locstouse,],maxlags=c(28,8,1))
 CC2_lag_res_sortAIC<-CC2_lag_res[order(CC2_lag_res$AIC),]
 CC2_lag_res_sortBIC<-CC2_lag_res[order(CC2_lag_res$BIC),]
-head(CC2_lag_res_sortAIC)
-head(CC2_lag_res_sortBIC)
+head(CC2_lag_res_sortAIC,30)
+head(CC2_lag_res_sortBIC,20)
 indCC2<-which(CC2_lag_res$lagAR==4 & CC2_lag_res$lag1==1 & CC2_lag_res$lag2==0)
 CC2_lag_res[indCC2,]
-CC2lags<-CC2_lag_res_sortBIC[1,1:3]
+range(CC2_lag_res$lagAR[CC2_lag_res$DeltaAIC<=3])
+range(CC2_lag_res$lag1[CC2_lag_res$DeltaAIC<=3])
+range(CC2_lag_res$lag2[CC2_lag_res$DeltaAIC<=3])
+range(CC2_lag_res$lagAR[CC2_lag_res$DeltaBIC<=3])
+range(CC2_lag_res$lag1[CC2_lag_res$DeltaBIC<=3])
+range(CC2_lag_res$lag2[CC2_lag_res$DeltaBIC<=3])
 
-SB_lag_res<-picklags(y=kelp[SBlocstouse,],x1=NO3[SBlocstouse,],x2=waves[SBlocstouse,],maxlags=c(28,8,1))
+SB_lag_res<-picklags_mat(y=kelp[SBlocstouse,],x1=NO3[SBlocstouse,],x2=waves[SBlocstouse,],maxlags=c(28,8,1))
 SB_lag_res_sortAIC<-SB_lag_res[order(SB_lag_res$AIC),]
 SB_lag_res_sortBIC<-SB_lag_res[order(SB_lag_res$BIC),]
-head(SB_lag_res_sortAIC)
-head(SB_lag_res_sortBIC)
+head(SB_lag_res_sortAIC,20)
+head(SB_lag_res_sortBIC,20)
 indSB<-which(SB_lag_res$lagAR==4 & SB_lag_res$lag1==1 & SB_lag_res$lag2==0)
 SB_lag_res[indSB,]
-SBlags<-SB_lag_res_sortBIC[1,1:3]
+range(SB_lag_res$lagAR[SB_lag_res$DeltaAIC<=3])
+range(SB_lag_res$lag1[SB_lag_res$DeltaAIC<=3])
+range(SB_lag_res$lag2[SB_lag_res$DeltaAIC<=3])
+range(SB_lag_res$lagAR[SB_lag_res$DeltaBIC<=3])
+range(SB_lag_res$lag1[SB_lag_res$DeltaBIC<=3])
+range(SB_lag_res$lag2[SB_lag_res$DeltaBIC<=3])
 
 #***
 #save results
 #***
 
-save(CC1_lag_res,CC1_lag_res_sortBIC,indCC1,CC1lags,
-     CC2_lag_res,CC2_lag_res_sortBIC,indCC2,CC2lags,
-     SB_lag_res,SB_lag_res_sortBIC,indSB,SBlags,file=paste0(resloc,"MostResults.RData"))
+save(CC1_lag_res,
+     CC2_lag_res,
+     SB_lag_res,file=paste0(resloc,"MostResults.RData"))
+#load(paste0(resloc,"MostResults.RData"))
+

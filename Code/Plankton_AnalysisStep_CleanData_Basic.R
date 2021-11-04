@@ -13,7 +13,7 @@ rm(list=ls())
 #Location for storing results and other prep
 #***
 
-resloc<-"../Results/Plankton_DataAfterCleaning/"
+resloc<-"../Results/Plankton_DataAfterBasicCleaning/"
 if (!dir.exists(resloc))
 {
   dir.create(resloc,recursive=TRUE)
@@ -66,14 +66,36 @@ temp<-temp[2:(dim(temp)[1]),2:(dim(temp)[2])]
 testthat::expect_equal(dim(temp),dim(pci))
 rm(year_t,site_t)
 
+#***
+#save the results
+#***
+
+saveRDS(pci,file=paste0(resloc,"Pci_CleanedBasic.Rds"))
+write.table(pci,file=paste0(resloc,"Pci_CleanedBasic.csv"),row.names = FALSE,col.names = FALSE,sep=",")
+
+saveRDS(calfin,file=paste0(resloc,"Calfin_CleanedBasic.Rds"))
+write.table(calfin,file=paste0(resloc,"Calfin_CleanedBasic.csv"),row.names = FALSE,col.names = FALSE,sep=",")
+
+saveRDS(temp,file=paste0(resloc,"Temp_CleanedBasic.Rds"))
+write.table(temp,file=paste0(resloc,"Temp_CleanedBasic.csv"),row.names = FALSE,col.names = FALSE,sep=",")
+
+saveRDS(year,file=paste0(resloc,"Year_CleanedBasic.Rds"))
+write.table(year,file=paste0(resloc,"Year_CleanedBasic.csv"),row.names = FALSE,col.names = FALSE,sep=",")
+
+saveRDS(site,file=paste0(resloc,"Site_CleanedBasic.Rds"))
+write.table(site,file=paste0(resloc,"Site_CleanedBasic.csv"),row.names = FALSE,col.names = FALSE,sep=",")
+
 #These data just loaded have not been Box-Cox'd, or variance standardized, or detrended. They 
 #are just the "raw" annual values, with gaps filled as described in the documenation for the 
 #data and in the Plos Comp Biol paper.
 
 #At this point, the level of cleaning (i.e., none so far except what was done previously
-#for Plos Comp Biol) is similar to what was accomplished for kelp by 
-#Kelp_AnalysisStep_CleanData_SuperBasic. Next step is to look at the next level
-#of cleaning for kelp and do something appropriately similar for plankton
+#for the Plos Comp Biol Dryad-stored data) is similar to what was accomplished for kelp by 
+#Kelp_AnalysisStep_CleanData_SuperBasic and Kelp_AnalysisStep_CleanData_MoreInvolved. Next step 
+#is to plot the time series, for inspection, and then look at the next level of cleaning for 
+#kelp and do something appropriately similar for plankton, alongside doing the linear regression
+#analyses.
+
 
 
 

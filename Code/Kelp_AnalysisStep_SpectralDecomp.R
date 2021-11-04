@@ -105,7 +105,7 @@ LAInd<-which(dists==min(dists))
 #                   and 0 up to the value input for NO3, and the same for waves.
 #frg              The frequency range to use for display
 #fnpre            A prefix for file names of pdf plots exported by the function, with path but without the
-#                   extension "pdf" of "jpg"
+#                   extension "pdf" or "jpg"
 #plottype         Use "jpg" to make jpg plots, "pdf" to make pdf plots
 #PlotForMSArgs    Formatting arguments used for generating final, presentation-quality plots. If this is missing it 
 #                   means don't generate those plots.
@@ -2352,10 +2352,12 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("A","B","C"),
 Args<-list(locstouse=CC1locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_CentCal1_KelpLag4<-do_analysis(Args)
 saveRDS(res_CentCal1_KelpLag4,paste0(resloc,"res_CentCal1_KelpLag4.Rds"))
+#res_CentCal1_KelpLag4<-readRDS(paste0(resloc,"res_CentCal1_KelpLag4.Rds"))
 
 Args<-list(locstouse=CC1locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_CentCal1_KelpLag8<-do_analysis(Args)
 saveRDS(res_CentCal1_KelpLag8,paste0(resloc,"res_CentCal1_KelpLag8.Rds"))
+#res_CentCal1_KelpLag8<-readRDS(paste0(resloc,"res_CentCal1_KelpLag8.Rds"))
 
 Args<-list(locstouse=CC1locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_CentCal1_KelpLag12<-do_analysis(Args)
@@ -2400,10 +2402,12 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("A","B","C"),
 Args<-list(locstouse=CC2locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_CentCal2_KelpLag4<-do_analysis(Args)
 saveRDS(res_CentCal2_KelpLag4,paste0(resloc,"res_CentCal2_KelpLag4.Rds"))
+#res_CentCal2_KelpLag4<-readRDS(paste0(resloc,"res_CentCal2_KelpLag4.Rds"))
 
 Args<-list(locstouse=CC2locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_CentCal2_KelpLag8<-do_analysis(Args)
 saveRDS(res_CentCal2_KelpLag8,paste0(resloc,"res_CentCal2_KelpLag8.Rds"))
+#res_CentCal2_KelpLag8<-readRDS(paste0(resloc,"res_CentCal2_KelpLag8.Rds"))
 
 Args<-list(locstouse=CC2locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_CentCal2_KelpLag12<-do_analysis(Args)
@@ -2448,14 +2452,17 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("D","E","F"),
 Args<-list(locstouse=SBlocstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_SoCal_KelpLag4<-do_analysis(Args)
 saveRDS(res_SoCal_KelpLag4,paste0(resloc,"res_SoCal_KelpLag4.Rds"))
+#res_SoCal_KelpLag4<-readRDS(paste0(resloc,"res_SoCal_KelpLag4.Rds"))
 
 Args<-list(locstouse=SBlocstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_SoCal_KelpLag8<-do_analysis(Args)
 saveRDS(res_SoCal_KelpLag8,paste0(resloc,"res_SoCal_KelpLag8.Rds"))
+#res_SoCal_KelpLag8<-readRDS(paste0(resloc,"res_SoCal_KelpLag8.Rds"))
 
 Args<-list(locstouse=SBlocstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 res_SoCal_KelpLag12<-do_analysis(Args)
 saveRDS(res_SoCal_KelpLag12,paste0(resloc,"res_SoCal_KelpLag12.Rds"))
+#res_SoCal_KelpLag12<-readRDS(paste0(resloc,"res_SoCal_KelpLag12.Rds"))
 
 #DONE ***DAN: Done: Write some code that tracks and explains the contributions of the parts of the interaction
 #term in the spectral equation. We want to see the phase relationship between waves and NO3, and the difference
