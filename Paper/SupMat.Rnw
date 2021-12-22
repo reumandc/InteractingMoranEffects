@@ -40,7 +40,7 @@
 \externaldocument[MT-]{Paper}
 
 %header material for paper
-\title{How environmental drivers of spatial synchrony interact}
+\title{How environmental drivers of synchrony interact}
 \date{}
 
 %***Tentative author order, Bell last for his data contributions

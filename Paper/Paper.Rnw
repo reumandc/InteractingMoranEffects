@@ -33,7 +33,7 @@
 \externaldocument[SM-]{SupMat}
  
 %header material for paper
-\title{How environmental drivers of spatial synchrony interact}
+\title{How environmental drivers of synchrony interact}
 \date{}
 
 %Alternative titles
@@ -44,6 +44,7 @@
 %Interactions between environmental drivers of spatial synchrony
 %Environmental drivers of spatial synchony can strongly interact
 %Environmental drivers of spatial synchrony interact
+%How environmental drivers of spatial synchrony interact
 
 %***Tentative author order, Bell last for his data contributions
 \author[a,b,*]{Daniel C. Reuman}
@@ -113,18 +114,6 @@ Place abstract here
 %mechanism. Need to work some of these thoughts in without seeming defensive.
 
 \section{Theory}
-
-%Tentative broad outline:
-%DONE 1) Intro spectral quantities, the spectrum, the cospectrum, and the cross spectrum of two time series/processes. And the spectral
-%matrix for putting them all in one structure.
-%DONE 2) Define your measures of timescale/frequency-specific synchrony and crosss-variable synchrony, explain why these make sense as
-%ways to measure those things.
-%DONE 3) Present the model and the theory
-%4) Present "toy" examples and fig 1 (need to think a lot about these). DAN: perhaps these actually belong in Methods (describe the specific-case models we will consider) and results (apply the general theory to those specific cases)
-%
-%Notes:
-%Compared to the deer paper, this is a much deeper presentation of the theory in the main text. I'm not sure that's avoidable.
-%For one thing, the theory is explicitly applied to get the results, later, and that was not the case for the deer paper.
 
 \noindent Our main theoretical work requires a conceptual understanding of the \emph{spectrum} of an environmental 
 or population time series, as well as of the \emph{cospectrum} and \emph{cross spectrum} of two time series,
@@ -231,7 +220,7 @@ between Moran effects. The detailed derivation of the theory is in SI section \r
 theoretical case studies that illuminate the intuition of interacting Moran effects. 
 We develop case studies A-C. For all cases, the model time step was assumed to be one quarter, i.e., 
 four model time steps per year. This makes no real mathematical difference, but was done to 
-facilitate later comparisons with results based on kelp data, which were available on a
+facilitate later comparisons with results based on kelp data, which were available with a
 quarterly sampling frequency. 
 For case study A,  the environmental variable 
 $\epsilon^{(1)}$ is assumed to have a simple positive effect on populations, but 
@@ -248,7 +237,7 @@ $p_{n_1}^{(1)}>0$ while $p_i^{(1)}=0$ for $i \neq n_1$, and
 $p_{n_2}^{(2)}>0$ while $p_i^{(2)}=0$ for $i \neq n_2$.
 The noise process
 $(\epsilon^{(1)},\epsilon^{(2)})$ is assumed to be a Gaussian white-noise process 
-for both A and B, i.e., 
+for both A and B. So 
 the random variables $(\epsilon^{(1)}(t),\epsilon^{(2)}(t))$ are independent and 
 identically distributed (iid) for distinct times, $t$. Noise may be correlated across space,
 and the components of $\epsilon^{(1)}(t)$ may be correlated with those of $\epsilon^{(2)}(t)$.
@@ -267,13 +256,13 @@ the autoregressive order of population dynamics is assumed, for simplicity, to b
 but $b_i=0$ for $i>1$. 
 
 %Tentative broad outline
+%0) above stuff about the case studies 
 %1) Para from Tom on how remote sensing data are gathered and coverted into what he handed to me. Brief, mostly 
 %citing other works where it is laid out in much more detail. 
 %2) Para from Tom on how he got to the wave and NO3 data
 %3) Para summarizing the data cleaning I did
 %Comment) Actually, might want to send the abive 3 paras to sup mat, and just have one para describing the final format of the
 %data, especially if you make this paper also be about plankton. But do that later if you do it.
-%4) Some paras about the plankton data, similar structure to how the kelp data were presented (and using sup mat as described)
 %5) Para about the linear modelling - this is how certain parts of the main theoretical equation were estimated
 %6) Para about spectral estimates. Brief, cites appropriate parts of Brillinger, uses sup mat if needed. This is how certain
 %other parts of the main theoretical equation were estimated. 
@@ -324,7 +313,7 @@ for all case studies (Fig. \ref{fig:TheoryCaseA}a,e,i,m), and differed in sign a
 A and B and for one of the C scenarios. This augments earlier studies demonstrating that direct Moran effects can 
 depend on timescale \citep{Defriez2016,Sheppard2016,Desharnais2018,Anderson2021}. The points made in this paragraph
 also follow from the results of \cite{Sheppard2019} and \cite{CastoraniSheppardKelp}, though not necessarily
-straightforwardly. Additionally, those are case studies, so our results also provide novel theoretical generality;
+straightforwardly. Additionally, those are case studies, so our results provide novel theoretical generality;
 and our theory can be interpreted to provide intuition about how interacting Moran effects work,
 as follows. 
 
@@ -362,10 +351,10 @@ simply multiply all Moran influences by the same timescale-dependent non-negativ
 quantity without altering the relative importance or sign of those effects [see (\ref{rhoww_T1to3})].
 
 Case study B reveals how Moran effects can interact when lags are longer than 1 model time step. 
-For B, $\epsilon^{(1)}$ effects on populations were lagged by 3 quarters but 
-$\epsilon^{(2)}$ effects were unlagged (Methods). Thus interactions between Moran effects were 
+For B, $\epsilon^{(1)}$ effects on populations were lagged by $n$ quarters but 
+$\epsilon^{(2)}$ effects were unlagged (Methods). We used $n=3$. Thus interactions between Moran effects were 
 negative on the shortest timescales 
-(0.5 years = 2 quarters; Fig. \ref{fig:TheoryCaseA}e, left side of panel). This is because the 
+(0.5 years = 2 quarters; Fig. \ref{fig:TheoryCaseA}e, far left side of panel). This is because the 
 population influences of Moran effects of timescale 2
 quarters and lagged by 3 quarters are exactly out of phase with unlagged Moran effects of timescale
 2 quarters, producing negative interactions. 
@@ -390,7 +379,7 @@ the size of the 3-quarter phase lag of this scenario, relative to a given timesc
 is captured by $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$ (Fig. \ref{fig:TheoryCaseA}f).
 Because $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ is a real number for case study B,
 the phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$
-is the same as that of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$ (Fig. \ref{fig:TheoryCaseA}f); 
+is the same as that of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$ (Fig. \ref{fig:TheoryCaseA}g); 
 that common phase then controls the sign of 
 $2\Rp(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}})$, which is the 
 interaction effect term in (\ref{rhoww_T1to3}).
@@ -417,15 +406,19 @@ annually oscillating effect, which corresponds to negative interactions between 
 and less population synchrony than would have been expected if Moran effects operated independently 
 (Fig. \ref{fig:TheoryCaseA}m). The only difference between scenarios 1 and 2 of case study C
 is the relative timing of annual peaks in $\epsilon^{(1)}$ and $\epsilon^{(2)}$.
-Our theory captures these complexities because $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$
+Our theory captures these complexities
+because $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$
 quantifies the relative phase lag between the effects of $\epsilon^{(1)}$ and 
 $\epsilon^{(2)}$ relative to a given timescale, while 
 $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ captures the phase lag between 
-oscillations in the variables themselves, relative to the timescale.
+oscillations in the variables themselves, relative to the timescale (Fig. \ref{fig:TheoryCaseA}j,k,n,o).
 The phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$
 therefore captures whether relative lags of effects and lags between 
 the variables themselves align or misalign, with the degree of alignment
-reflected in the real part of this quantity.
+reflected in the real part of this quantity. On long timescales, interactions were the
+same in the two secenaios, because on those timescales sub-annual lags in environmental 
+peaks and effects on populations make negligible difference.
+
 
 
 %Current (2021 11 01) thoughts on figures:
@@ -455,10 +448,12 @@ population synchrony due to the direct Moran effects of $\epsilon^{(2)}$.
 The dashed green-blue line is 
 $\frac{2 \Rp \left(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}} \right)}{|f_{\mcB}|^2}$, 
 which is population synchrony due to interacting Moran effects.
-%***DAN: More text here as we flesh out the presentation - need to describe the middle two columns of panels 
+Middle panels show the constituent parts of the theory (labelled). For these complex functions 
+of timescale, the magnitude is displayed on the vertical axis and the phase is displayed with color.
+See text for all interpretations.
 The functions plotted on d, h, l, p are those on a, e, i, m, respectively, times 
 $|f_{\mcB}|^2$, thereby showing the influence of autoregressive population effects on
-synchrony [see (\ref{rhoww_T1to3})-(\ref{rhoww_OC})].
+synchrony [see (\ref{rhoww_T1to3})].
 Model parameters were: $N=5$ and $b_1=0.4$ for all case studies; 
 $p_1^{(1)}=1.1$ and $p_0^{(2)}=0.8$ for case study A; 
 $p_3^{(1)}=1.1$ and $p_0^{(2)}=0.8$ for case study B;
@@ -470,7 +465,8 @@ in panels i-l, and $\epsilon^{(1)}$ lagged $\epsilon^{(2)}$ by the same
 amount in m-p.
 See SI section \ref{SM-sect:examples_cross_sync} and Fig. \ref{SM-fig:rhosForC} for 
 parameters associated with the noise for each case study,
-and see Methods and SI section \ref{SM-sect:details_case_studies} for additional details.}\label{fig:TheoryCaseA}
+and see Methods and SI section \ref{SM-sect:details_case_studies} for additional details.
+Synch. contrib. = Synchrony contribution.}\label{fig:TheoryCaseA}
 \end{figure}
 
 
