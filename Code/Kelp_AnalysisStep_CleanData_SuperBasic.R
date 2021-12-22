@@ -24,7 +24,7 @@ if (!dir.exists(resloc))
 #Load the data
 #***
 
-datloc<-"../Data/KelpData/"
+datloc<-"../Data/"
 
 #Load kelp data and change NaNs to NAs. Use the biomass data, sites ordered as in the 
 #original ordering (which should match with the environmental variables), not the paddling

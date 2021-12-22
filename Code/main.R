@@ -17,10 +17,8 @@ source("Kelp_AnalysisStep_CleanData_MoreInvolved.R")
 #Plot kelp time series for visual inspection
 source("Kelp_AnalysisStep_PlotTimeSeries.R")
 
-#Do linear models with kelp and related data to help demo the need for specific 
-#lags - this also performs and saves the final level of data cleaning
-source("Kelp_AnalysisStep_LinearModels.R")
-source("Kelp_AnalysisStep_LinearModelSelection.R")
+#Final cleaning
+source("Kelp_AnalysisStep_CleanData_Final.R")
 
 #Do the spectra decomposition analysis for kelp
 source("Kelp_AnalysisStep_SpectralDecomp.R")

@@ -39,7 +39,7 @@ climinds<-readRDS(paste0(datloc,"Climinds_Quarterly_CleanedSuperBasic.Rds"))
 timesQ<-1:(dim(quarters)[1])
 
 #***
-#Slightly more extensive data prep - throw out sites with too many NAs or zeroes, then fill remaining NAs 
+#Slightly more extensive data prep - throw out sites with too many NAs or zeros, then fill remaining NAs 
 #with seasonal medians
 #***
 
