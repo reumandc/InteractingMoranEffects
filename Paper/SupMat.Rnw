@@ -43,21 +43,22 @@
 \title{How environmental drivers of spatial synchrony interact}
 \date{}
 
-%***Tentative author order
-\author[a,b]{Daniel C. Reuman}
+%***Tentative author order, Bell last for his data contributions
+\author[a,b,*]{Daniel C. Reuman}
 \author[c]{Max Castorani}
-\author[d,e]{Tom Bell}
-\author[f]{Kyle Cavanaugh}
+\author[d]{Kyle Cavanaugh}
+\author[e]{Lawrence W. Sheppard}
 \author[c]{Jonathan Walter}
-\author[a,g]{Lawrence W. Sheppard}
+\author[f,g]{Tom Bell}
 
-\affil[a]{Department of Ecology and Evolutionary Biology and Kansas Biological Survey, University of Kansas}
+\affil[a]{Department of Ecology and Evolutionary Biology and Center for Ecological Research, University of Kansas}
 \affil[b]{Laboratory of Populations, Rockefeller University}
 \affil[c]{Department of Environmental Sciences, University of Virginia}
-\affil[d]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
-\affil[e]{Earth Research Institute, University of California, Santa Barbara}
-\affil[f]{Department of Geography, University of California, Los Angeles}
-\affil[g]{Marine Biological Association of the United Kingdom}
+\affil[d]{Department of Geography, University of California, Los Angeles}
+\affil[e]{Marine Biological Association of the United Kingdom}
+\affil[f]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
+\affil[g]{Earth Research Institute, University of California, Santa Barbara}
+\affil[*]{Corresponding author, reuman@ku.edu}
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
@@ -177,7 +178,8 @@ Thus the spectra and cross spectra in this example are constant. It
 is then easy to see that $\rho_{\epsilon^{(1)} \epsilon^{(1)}}=v_{11}$,
 $\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$, and 
 $\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$, based on the definitions of these 
-quantities given previously.
+quantities given previously. For theoretical case studies A and B in the main text, we used
+$N=5$, $v_{11}=v{22}=0.6$ and $v_{12}=0.3$.
 
 These results make intuitive sense, for a white-noise process, for the following reasons.
 First, $\rho_{\epsilon^{(1)} \epsilon^{(1)}}$ and $\rho_{\epsilon^{(2)} \epsilon^{(2)}}$,
@@ -240,18 +242,25 @@ So $S_{\zeta_i^{(1)}\zeta_j^{(2)}}=w_{12} \exp(-2 \pi \iota f (l_1 - l_2))$. It 
 straightforwardly that $\rho_{\epsilon^{(1)} \epsilon^{(1)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{11}$,
 $\rho_{\epsilon^{(2)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{22}$ and 
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{12} \exp(-2 \pi \iota f (l_1-l_2))$.
+Fig. \ref{fig:rhosForC} displays these quantities for the two parameterizations
+of $(\epsilon^{(1)},\epsilon^{(2)})$ that we use for theoretical case study C.
+
+We now explore why the results above for $\rho_{\epsilon^{(1)}\epsilon^{(1)}}$, $\rho_{\epsilon^{(2)}\epsilon^{(2)}}$ and
+$\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ make sense for the noise processes we described, particularly for the sets of parameters 
+used for theoretical case study C in the main text (see Fig. \ref{fig:rhosForC}). 
 The pre-factor $\left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2$ in all these expressions reflects the autoregressive 
 manner in which the noises $\epsilon$ were defined. Autoregressive models of order $2$ are well known to be capable of
-producing oscillations for certain values of the parameters. For instance, we use $c_1=0$ and $c_2=-4/9$, values
+producing oscillations for certain values of the parameters. For instance, for case study C, we use $c_1=0$ and $c_2=-4/9$, values
 which cause the expression $\left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2$ to have a single peak at
-frequency $0.25$ cycles per sampling interval (i.e., $1$ cycle per year). 
+frequency $0.25$ cycles per sampling interval (i.e., $1$ cycle per year). It makes sense that the synchrony quantities
+$\rho_{\epsilon^{(1)}\epsilon^{(1)}}$, $\rho_{\epsilon^{(2)}\epsilon^{(2)}}$ and
+$\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ for periodically oscillating quantities should also have a peak at the 
+timescale of oscillation. 
 The term $\exp(-2 \pi \iota f (l_1-l_2))$ in the expression for 
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ reflects that fact that cross variable synchrony for this example is lagged
 by an amount $l_1-l_2$. The lack of a similar term in the expressions for $\rho_{\epsilon^{(1)}\epsilon^{(1)}}$
 or $\rho_{\epsilon^{(2)}\epsilon^{(2)}}$ reflects that fact that there are no lags built into within-variable
-synchrony in this example. Fig. \ref{fig:rhosForC} displays the quantities $\rho_{\epsilon^{(1)} \epsilon^{(1)}}$,
-$\rho_{\epsilon^{(2)} \epsilon^{(2)}}$, and $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ for the two parameterizations
-of this noise that we use for theoretical case study C.
+synchrony in this example. 
 
 \begin{figure}
 \includegraphics[width=.75\textwidth]{../Results/Theory/TheoryFigCaseC_v01_rhos.pdf}\\
@@ -259,9 +268,13 @@ of this noise that we use for theoretical case study C.
 \caption[Spectral quantities for noise used in case study C]{The quantities $\rho_{\epsilon^{(1)} \epsilon^{(1)}}$,
 $\rho_{\epsilon^{(2)} \epsilon^{(2)}}$, and $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ for the noise
 described in SI section \ref{sect:examples_cross_sync} and used for theoretical case study C. 
-Two alternative sets of parameters
-were used for panels a-c and d-f, respectively. See the caption of Fig. \ref{MT-fig:TheoryCaseA} in the main text
-for parameter values.}\label{fig:rhosForC}
+These are complex-valued functions of timescale; their magnitude is displayed on vertical axes and
+their phase is displayed in color. Two alternative sets of parameters
+were used for panels a-c and d-f, respectively. Parameters were:
+$N=5$, $c_1=0$, $c_2=-4/9$, $w_{11}=w{22}=0.6$ and $w_{12}=0.3$ for both sets of panels;
+$l_1=0$ and $l_2=1$ for panels a-c; and 
+$l_1=1$ and $l_2=0$ for panels d-f.
+}\label{fig:rhosForC}
 \end{figure}
 
 \begin{thm}\label{thm:useful_thm}

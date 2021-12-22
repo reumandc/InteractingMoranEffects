@@ -39,27 +39,28 @@
 %Alternative titles
 %Interactions among Moran effects
 %Interacting Moran effects
+%How Moran effects interact
+%On interactions between Moran effects
 %Interactions between environmental drivers of spatial synchrony
-%Environmental drivers of spatia synchony can strongly interact
+%Environmental drivers of spatial synchony can strongly interact
 %Environmental drivers of spatial synchrony interact
 
-%***Tentative author order, who is last yet to be determined
-\author[a,b]{Daniel C. Reuman}
+%***Tentative author order, Bell last for his data contributions
+\author[a,b,*]{Daniel C. Reuman}
 \author[c]{Max Castorani}
-\author[d,e]{Tom Bell}
-\author[f]{Kyle Cavanaugh}
+\author[d]{Kyle Cavanaugh}
+\author[e]{Lawrence W. Sheppard}
 \author[c]{Jonathan Walter}
-\author[a,g]{Lawrence W. Sheppard}
+\author[f,g]{Tom Bell}
 
-\affil[a]{Department of Ecology and Evolutionary Biology and Kansas Biological Survey, University of Kansas}
+\affil[a]{Department of Ecology and Evolutionary Biology and Center for Ecological Research, University of Kansas}
 \affil[b]{Laboratory of Populations, Rockefeller University}
 \affil[c]{Department of Environmental Sciences, University of Virginia}
-\affil[d]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
-\affil[e]{Earth Research Institute, University of California, Santa Barbara}
-\affil[f]{Department of Geography, University of California, Los Angeles}
-\affil[g]{Marine Biological Association of the United Kingdom}
-
-%***Need to indicate corresponding author Reuman
+\affil[d]{Department of Geography, University of California, Los Angeles}
+\affil[e]{Marine Biological Association of the United Kingdom}
+\affil[f]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
+\affil[g]{Earth Research Institute, University of California, Santa Barbara}
+\affil[*]{Corresponding author, reuman@ku.edu}
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
@@ -228,7 +229,11 @@ between Moran effects. The detailed derivation of the theory is in SI section \r
 
 \noindent We now describe how we pursue goal G2 of the Introduction, to develop 
 theoretical case studies that illuminate the intuition of interacting Moran effects. 
-We develop case studies A-C. For case study A,  the environmental variable 
+We develop case studies A-C. For all cases, the model time step was assumed to be one quarter, i.e., 
+four model time steps per year. This makes no real mathematical difference, but was done to 
+facilitate later comparisons with results based on kelp data, which were available on a
+quarterly sampling frequency. 
+For case study A,  the environmental variable 
 $\epsilon^{(1)}$ is assumed to have a simple positive effect on populations, but 
 lagged by one model time step, i.e.,
 $p_0^{(1)}=0$, $p_1^{(1)}>0$, and $p_i^{(1)}=0$ for $i>1$. 
@@ -238,7 +243,7 @@ but now lagged by $n$ time steps, so that $p_n^{(1)}>0$ while $p_i^{(1)}=0$ for 
 For both A and B, the effects of $\epsilon^{(2)}$
 are assumed to be un-lagged, i.e., $p_0^{(2)} \neq 0$ and $p_i^{(2)}=0$ for $i>0$.
 For case study C, the effects of $\epsilon^{(1)}$ are lagged by $n_1$ and the 
-effects of $\epsilon^{(2)}$ are lagged by $n_2$, i.e.,
+effects of $\epsilon^{(2)}$ are lagged by $n_2$ time steps, i.e.,
 $p_{n_1}^{(1)}>0$ while $p_i^{(1)}=0$ for $i \neq n_1$, and 
 $p_{n_2}^{(2)}>0$ while $p_i^{(2)}=0$ for $i \neq n_2$.
 The noise process
@@ -248,17 +253,18 @@ the random variables $(\epsilon^{(1)}(t),\epsilon^{(2)}(t))$ are independent and
 identically distributed (iid) for distinct times, $t$. Noise may be correlated across space,
 and the components of $\epsilon^{(1)}(t)$ may be correlated with those of $\epsilon^{(2)}(t)$.
 For C, the noise processes $\epsilon^{(1)}$ and $\epsilon^{(2)}$ are
-each assumed to exhibit spatially synchronous periodic oscillations of the same period
-but potentially different phases. Such a scenario could be realized by seasonally 
-periodic environmental fluctuations if the model time step were quarterly or monthly,
+each assumed to exhibit spatially synchronous periodic oscillations of period equal to one year, i.e.,
+four model time steps, but with different phases. Peaks in $\epsilon^{(1)}$ are assumed to 
+either lead or lag (we consider two model scenarios) peaks in $\epsilon^{(2)}$ by one quarter.
+Such a scenario could be realized by annually 
+periodic environmental fluctuations sampled quarterly,
 e.g., kelp wave action in central California peaks annually in the winter, whereas surface-water
-nitrate concentrations also fluctuate with period one year, but peak in the spring. 
+nitrate concentrations also fluctuate with period one year, but peak in the spring, a delay of one quarter
+compared to the wave peak. 
 Details of the noise processes are specified in SI section \ref{SM-sect:examples_cross_sync}.
 For all case studies,
-the autoregressive order of population dynamics is assumed to be $1$, i.e, $b_1 \neq 0$ 
+the autoregressive order of population dynamics is assumed, for simplicity, to be $1$, i.e, $b_1 \neq 0$ 
 but $b_i=0$ for $i>1$. 
-
-
 
 %Tentative broad outline
 %1) Para from Tom on how remote sensing data are gathered and coverted into what he handed to me. Brief, mostly 
@@ -300,59 +306,126 @@ for the same quarters and locations. We again briefly describe the process, citi
 
 \section{Results}
 
-% What do we learn from case study A:
-% 
-% Warmup:
-% 1) interactions between Moran effects (ref to specific term of the theory) can easily be of comparable importance
-% to the main Moran effects
-% 2) interaction effects can be positive or negative, and can differ, and even differ in sign, by timescale
-% 
-% Actually breaking it down:
-% 1) At the highest frequencies (shortest timescales) of 0.5 cycles per sampling 
-% interval (period 2 sampling intervals), a lag of 1 
-% sampling interval in the population effects of \epsilon^{(1)} is half the period of oscialltion, so 
-% causes the effects of \epsilon^{(1)}
-% on those timescales to be exactly out of phase of the effects of \epsilon^{(2)}, and so we get 
-% cancellation, i.e., negative interaction effects. The effects of \epsilon1 are multiplied by 1.1,
-% those of \epsilon2 by 0.8, and the correlation between the two (which is made to have negative effects
-% by the lag) is 0.3. So the negative interaction effects are 1.1*0.8*0.3*2, where the last factor of
-% two is because there are actually two effects here, the one where \epsilon1 is operating, lagged, at i and 
-% \epsilon2 is operating at j; and the effect where \epsilon1 is operating, lagged, at j and \epsilon2 is 
-% operating at i. 
-% 2) As timescales get to 1 year = 4 quarters, a lag of 1 quarter in the population effects of 
-% \epsilon1 puts the population effects of \epsilon1 3/4 out of phase with those of \epsilon 2,
-% and the correlation of two sin waves of the same frequency that are 3/4 out of phase is 0, so 
-% interaction effects are 0 here.
-% 3) As timescales get long, a lag of 1 quarter in the population effects of \epsilon1 is a
-% negligible time compared to the timescale being considered, so the effects of 
-% \epsilon1 and \epsilon2 on populations are closer and closer to be in phase and correlated
-% as timescales get longer and longer. The effects of \epsilon1 are multiplied by 1.1, those of 
-% \epsilon2 by 0.8, and the correlation is 0.3, so the interaction effect is 1.1*.8*.3*2 (the 
-% reason for the 2 is explained above).
-% 
-% Need to put this into good writing
-% 
-% Need to carry out similar thoughts for case B and write them, too.
-
-%Thoughts on 2021 11 01
-% Topic sentence for first para on theory results:
-% Results confirm earlier empirical work (refs) that interaction effects between Moran drivers 1) can be comparable in strength to direct Moran effects; 2) can be synergistic or destructive; and 3) can depend strongly on timescale, even to the extent that the sign of interaction effects can differ by timescale.
-% 
-% Combine all three theory figs into one multi panel fig, change the order of panels again 
-% 
-% Subsequent paras will then break things down to understand how this stuff works
-% 
-% Possible topic sentence for subsequent para: Theory reveals, as illustrated by cases A and B, how interactions between Moran effects depend on the lags with which Moran drivers influence populations. Or theory reveals how interactions between Moran effects depend on the lags with which Moran drivers influence populations, and case study begins to illustrate how this works. Or something like that. 
-% 
-%The also have a para for C
-%
-% Maybe get rid of the “confirm earlier work” phrase since it wasn’t necessarily explicitly listed in that way in earlier work 
-
 %Para basically confirming earlier work, as a starter
-Theoretical results help demonstrate that interaction effects between Moran drivers: 1) can be 
-comparable in strength to direct Moran effects; 2) can be synergistic or destructive; and 3) 
-can depend strongly on timescale, even to the extent that the sign of interaction effects can 
-differ by timescale. 
+Our theoretical results demonstrate that interaction effects between Moran drivers: 1) can be 
+comparable in strength to direct Moran effects; 2) can be either synergistic or destructive, i.e., positive or negative; and 3) 
+can depend strongly on timescale, even having different signs on different timescales 
+(Fig. \ref{fig:TheoryCaseA}a,e,i,m). First, for all case studies, the magnitude of 
+interaction effects was comparable to that of direct Moran effects (compare the dashed and solid lines on 
+Fig. \ref{fig:TheoryCaseA}a,e,i,m). So interactions can contribute substantially to overall population 
+synchrony. Second, in contrast to the direct Moran effects of a single environmental variable, which provide non-negative 
+contributions to population synchrony at all timescales for which environmental synchrony 
+is positive, interactions between Moran effects can be positive or negative. For instance, case study A
+showed negative interaction effects at short timescales (Fig. \ref{fig:TheoryCaseA}a); and, for some
+parameters, case study C showed negative interactions at annual timescales (Fig. \ref{fig:TheoryCaseA}m).
+Thus interaction effects can either augment or reduce population synchrony from what its value would be 
+if only direct Moran effects operated. Finally, interactions between Moran effects depended strongly on timescale 
+for all case studies (Fig. \ref{fig:TheoryCaseA}a,e,i,m), and differed in sign across timescales for case studies
+A and B and for one of the C scenarios. This augments earlier studies demonstrating that direct Moran effects can 
+depend on timescale \citep{Defriez2016,Sheppard2016,Desharnais2018,Anderson2021}. The points made in this paragraph
+also follow from the results of \cite{Sheppard2019} and \cite{CastoraniSheppardKelp}, though not necessarily
+straightforwardly. Additionally, those are case studies, so our results also provide novel theoretical generality;
+and our theory can be interpreted to provide intuition about how interacting Moran effects work,
+as follows. 
+
+%Case study A
+Case study A provides an intuitive understanding about how lags in Moran drivers can produce contrasting interactions between
+Moran effects on different timescales, and how our theory successfully captures that contrast.
+For case study A, for which $\epsilon^{(1)}$ effects on populations were lagged by 1 quarter but 
+$\epsilon^{(2)}$ effects were unlagged (Methods), interactions between Moran effects were negative on the shortest timescales 
+(0.5 years = 2 quarters; Fig. \ref{fig:TheoryCaseA}a, left side of panel). This is because the 
+population influences of Moran effects of timescale 2
+quarters and lagged by 1 quarter are exactly out of phase with unlagged Moran effects of timescale
+2 quarters, producing destructive interference, i.e., negative interactions. Thus, on short timescales, total
+synchrony will be less, for this example, than it would be if only direct Moran effects operated. In contrast, 
+interaction effects on long timescales were synergistic, i.e., positive, for case study A 
+(Fig. \ref{fig:TheoryCaseA}a, right side of panel). 
+This is because, on long timescales, a lag of 1 quarter does not meaningfully alter the phase relationship between 
+Moran drivers, and drivers are therefore almost in phase, reinforcing each other.
+At an intermediate timescale of 1 year, a lag of 1 quarter causes the Moran effects
+of $\epsilon^{(1)}$ and $\epsilon^{(2)}$ to be a quarter phase out of alignment (1 quarter is $1/4$ of a 1-year 
+timescale), resulting in 
+zero interaction effects, essentially because sine waves a quarter-phase out of alignment
+with each other are perfectly uncorrelated. Thus interaction effects between Moran drivers were zero 
+at timescale 1 year (Fig. \ref{fig:TheoryCaseA}a). Theory effectively captures these complexities because
+the size of the 1-quarter phase lag of this scenario, relative to a given timescale,
+is captured by $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$, which has phase $-\pi$ at short timescales
+and phase almost $0$ at long timescales (Fig. \ref{fig:TheoryCaseA}b). Because 
+$\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ has phase $0$ for all timescales, the phase of 
+$f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$ (Fig. \ref{fig:TheoryCaseA}c), which controls
+the sign of the real part of this quantity, is the same as the phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$.
+Thus $2\Rp(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}})$, which is the
+interaction term in our theory (\ref{rhoww_T1to3}), shifts 
+from negative, for short timescales, to positive for long timescales. Comparing
+Fig. \ref{fig:TheoryCaseA}a,d shows the additional influence of autoregressive population effects, which
+simply multiply all Moran influences by the same timescale-dependent non-negative 
+quantity without altering the relative importance or sign of those effects [see (\ref{rhoww_T1to3})].
+
+Case study B reveals how Moran effects can interact when lags are longer than 1 model time step. 
+For B, $\epsilon^{(1)}$ effects on populations were lagged by 3 quarters but 
+$\epsilon^{(2)}$ effects were unlagged (Methods). Thus interactions between Moran effects were 
+negative on the shortest timescales 
+(0.5 years = 2 quarters; Fig. \ref{fig:TheoryCaseA}e, left side of panel). This is because the 
+population influences of Moran effects of timescale 2
+quarters and lagged by 3 quarters are exactly out of phase with unlagged Moran effects of timescale
+2 quarters, producing negative interactions. 
+Interaction effects on long timescales were instead synergistic, i.e., positive, for case study B 
+(Fig. \ref{fig:TheoryCaseA}e, right side of panel), for the same reason as case study A (see above).
+At timescale 3 quarters, Moran effects are, of course, reinforcing because the lag equals the timescale,
+producing Moran effects of the two drivers which are in phase 
+(Fig. \ref{fig:TheoryCaseA}e, peak at timescale 3 quarters = 0.75 years). 
+At a timescale of 1 year, a lag of 3 quarters causes the Moran effects of 
+$\epsilon^{(1)}$ and $\epsilon^{(2)}$ to be $3/4$-phase out of alignment, resulting in zero interaction effects. 
+Likewise at a timescale of 3 years (12 quarters), a lag of 3 quarters 
+makes the Moran effects of 
+$\epsilon^{(1)}$ and $\epsilon^{(2)}$ be $1/4$-phase out of alignment, again producing zero interaction. 
+Finally, at timescale 1.5 years (6 quarters), the 3-quarter lag equals half the timescale, so 
+$\epsilon^{(1)}$ and $\epsilon^{(2)}$ effects counteract each other, producing negative 
+interactions. Thus interactions between Moran drivers were zero 
+at timescales 1 and 3 years for B, were 
+negative for short timescales and for timescale 1.5 years, and were positive for 
+timescale 0.75 years and for long timescales (Fig. \ref{fig:TheoryCaseA}e).
+Theory captures these complexities because 
+the size of the 3-quarter phase lag of this scenario, relative to a given timescale,
+is captured by $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$ (Fig. \ref{fig:TheoryCaseA}f).
+Because $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ is a real number for case study B,
+the phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$
+is the same as that of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$ (Fig. \ref{fig:TheoryCaseA}f); 
+that common phase then controls the sign of 
+$2\Rp(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}})$, which is the 
+interaction effect term in (\ref{rhoww_T1to3}).
+
+Cases A and B assumed white noise processes and real-valued $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$,
+but case study C illustrates what can happen when noise processes have periodic components, e.g., 
+both noise processes oscillate with annual periodicity according to the seasons, an important scenario, ecologically. 
+What matters then is whether and how the lag between the two seasonal noise processes aligns with the difference 
+between the lags of their effects on populations, as we now explain. 
+For the scenarios we considered under case study C (Fig. \ref{fig:TheoryCaseA}i-p), 
+$\epsilon^{(1)}$ effects on populations were lagged (i.e., delayed in their influence) by 1 quarter, but 
+$\epsilon^{(2)}$ effects were immediate (Methods and Fig. \ref{fig:TheoryCaseA} caption).
+For scenario 1 of case study C (Fig. \ref{fig:TheoryCaseA}i-l), peaks in the periodic
+noise process $\epsilon^{(2)}$ lagged peaks in the periodic process $\epsilon^{(1)}$ by
+1 quarter. Thus lags cancelled and the annual peak population effects of $\epsilon^{(1)}$ and
+$\epsilon^{(2)}$ arrived in sync with each other each year, producing positive interactions 
+between Moran effects on annual timescales (Fig. \ref{fig:TheoryCaseA}i), and more population
+synchrony than would have been expected if Moran effects operated independently. Contrastingly,
+for scenario 2 of case study C (Fig. \ref{fig:TheoryCaseA}m-p), peaks in the periodic
+noise process $\epsilon^{(1)}$ lagged peaks in the periodic process $\epsilon^{(2)}$ by
+1 quarter. Thus lags compounded and the annual peak population effects of $\epsilon^{(1)}$
+arrived 2 quarters after those of $\epsilon^{(2)}$ every year, a half-phase shift for an 
+annually oscillating effect, which corresponds to negative interactions between Moran influences
+and less population synchrony than would have been expected if Moran effects operated independently 
+(Fig. \ref{fig:TheoryCaseA}m). The only difference between scenarios 1 and 2 of case study C
+is the relative timing of annual peaks in $\epsilon^{(1)}$ and $\epsilon^{(2)}$.
+Our theory captures these complexities because $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$
+quantifies the relative phase lag between the effects of $\epsilon^{(1)}$ and 
+$\epsilon^{(2)}$ relative to a given timescale, while 
+$\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ captures the phase lag between 
+oscillations in the variables themselves, relative to the timescale.
+The phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$
+therefore captures whether relative lags of effects and lags between 
+the variables themselves align or misalign, with the degree of alignment
+reflected in the real part of this quantity.
 
 
 %Current (2021 11 01) thoughts on figures:
@@ -365,9 +438,8 @@ differ by timescale.
 %so that's the obvious one to cut. And then it will all fit, though the figs are really big and 
 %it seems like it is always good to have a pedagogical, warmup fig. If you do come up with a pedagog
 %fig idea, could maybe combine some figs to make it work, or put the pedagog content as the first
-%part of the theory fig? Don't worry about it for now.
+%part of the theory fig? Don't worry about it for now, but return to it later.
 
-%***DAN: add case study C to this.
 \begin{figure}
 \includegraphics[width=.75\textwidth]{../Results/Theory/TheoryFigCaseA.pdf}\\
 \includegraphics[width=.75\textwidth]{../Results/Theory/TheoryFigCaseB.pdf}\\
@@ -383,30 +455,23 @@ population synchrony due to the direct Moran effects of $\epsilon^{(2)}$.
 The dashed green-blue line is 
 $\frac{2 \Rp \left(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}} \right)}{|f_{\mcB}|^2}$, 
 which is population synchrony due to interacting Moran effects.
-%***DAN: More text here as we flesh out the presentation 
+%***DAN: More text here as we flesh out the presentation - need to describe the middle two columns of panels 
+The functions plotted on d, h, l, p are those on a, e, i, m, respectively, times 
+$|f_{\mcB}|^2$, thereby showing the influence of autoregressive population effects on
+synchrony [see (\ref{rhoww_T1to3})-(\ref{rhoww_OC})].
 Model parameters were: $N=5$ and $b_1=0.4$ for all case studies; 
 $p_1^{(1)}=1.1$ and $p_0^{(2)}=0.8$ for case study A; 
 $p_3^{(1)}=1.1$ and $p_0^{(2)}=0.8$ for case study B;
-$p_1^{(1)}=3$, $p_0^{(2)}=1.5$, $c_1=0$ and $c_2=-4/9$ for case study C;
-$v_{11}=v{22}=0.6$ and $v_{12}=0.3$ for case studies A and B;
-$w_{11}=w{22}=0.6$ and $w_{12}=0.3$ for case study C;
-$l_1=0$ and $l_2=1$ for case study C, panels i-l; and 
-$l_1=1$ and $l_2=0$ for case study C, panels m-p.
-See Methods and SI sections \ref{SM-sect:examples_cross_sync} and 
-\ref{SM-sect:details_case_studies} for the meaning of parameters and additional details.}\label{fig:TheoryCaseA}
+$p_1^{(1)}=3$, $p_0^{(2)}=1.5$ 
+%$c_1=0$ and $c_2=-4/9$ 
+for case study C. For C, peaks in the periodic noise process $\epsilon^{(2)}$
+lagged peaks in the periodic process $\epsilon^{(1)}$ by 1 quarter
+in panels i-l, and $\epsilon^{(1)}$ lagged $\epsilon^{(2)}$ by the same
+amount in m-p.
+See SI section \ref{SM-sect:examples_cross_sync} and Fig. \ref{SM-fig:rhosForC} for 
+parameters associated with the noise for each case study,
+and see Methods and SI section \ref{SM-sect:details_case_studies} for additional details.}\label{fig:TheoryCaseA}
 \end{figure}
-%#Case A
-%N<-5
-%ns<-c(.6,.6,.3)
-%p1<-c(0,1.1)
-%p2<-c(0.8)
-%b<-c(.4)
-% #Case B
-% N<-5
-% ns<-c(.6,.6,.3)
-% p1<-c(0,0,0,1.1)
-% p2<-c(0.8)
-% b<-c(.4)
 
 
 
