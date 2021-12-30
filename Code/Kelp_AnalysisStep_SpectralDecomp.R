@@ -185,10 +185,6 @@ do_analysis<-function(Args)
   waves_l<-waves[locstouse,]
   numlocs_l<-length(locstouse)
   
-  #**get variances of kelp times series, which we'll need later and want to base on the whole kelp
-  #time series instead of on the truncated version which we're about to restrict to for other purposes
-  kelpvars<-apply(FUN=var,X=kelp_l,MARGIN=1)
-  
   #**do regression to get coefficients for fB, fP1, fP2
   
   #construct the regression formula object
@@ -259,7 +255,7 @@ do_analysis<-function(Args)
     fB<-fB-unname(cm[counter])*mu^counter
   }
   
-  #**get the terms of the spectral equation (p. 6 of my math notes)
+  #**get the terms of the spectral equation (section S4 of the sup mat)
   
   #term 1
   T1pre<-((Mod(fP1))^2)/((Mod(fB))^2) 
@@ -313,19 +309,7 @@ do_analysis<-function(Args)
   T6_avg_cov<-avgoffdiags(Re(T6))
   Se1e1_avg_cov<-avgoffdiags(Re(Se1e1))
   Se2e2_avg_cov<-avgoffdiags(Re(Se2e2))
-  
   Se1e2_avg_cov<-avgoffdiags(Se1e2)
-  
-  #**same thing WITH normalizing by kelp variances
-  totsync_cor<-avgoffdiags(Re(Sww),kelpvars)
-  T1_avg_cor<-avgoffdiags(Re(T1),kelpvars)
-  T2_avg_cor<-avgoffdiags(Re(T2),kelpvars)
-  T3_avg_cor<-avgoffdiags(Re(T3),kelpvars)
-  T4_avg_cor<-avgoffdiags(Re(T4),kelpvars)
-  T5_avg_cor<-avgoffdiags(Re(T5),kelpvars)
-  T6_avg_cor<-avgoffdiags(Re(T6),kelpvars)
-  Se1e1_avg_cor<-avgoffdiags(Re(Se1e1),kelpvars)
-  Se2e2_avg_cor<-avgoffdiags(Re(Se2e2),kelpvars)
   
   #**get various statistics to return
   
@@ -338,23 +322,19 @@ do_analysis<-function(Args)
 
   #timescale-specific synchrony quantities, gathered by a utility function, "get_stats", which is below
   stats_cov<-get_stats(freq,T1_avg_cov,T2_avg_cov,T4_avg_cov,totsync_cov)
-  stats_cor<-get_stats(freq,T1_avg_cor,T2_avg_cor,T4_avg_cor,totsync_cor)
   names(stats_cov)<-paste0("cov_",names(stats_cov))
-  names(stats_cor)<-paste0("cor_",names(stats_cor))
-  res<-c(res,stats_cov,stats_cor)
-
+  res<-c(res,stats_cov)
+  
   #basics stats
   h<-c(min(locstouse),max(locstouse),numlocs_l)
   names(h)<-c("first loc","last loc","num locs")
   res<-c(res,h)
   
-  #**make plots - this is the "_MainPlot" plot that shows all the components of synchrony
+  #**make plots - this is the "_MainPlot" plot that shows all the components of synchrony, NOT formatted for publication
   make_plots(freq,frg,totsync_cov,T1_avg_cov,T2_avg_cov,T3_avg_cov,T4_avg_cov,T5_avg_cov,T6_avg_cov,resloc,
-             fnpre=paste0(fnpre,"_cov"),plottype)
-  make_plots(freq,frg,totsync_cor,T1_avg_cor,T2_avg_cor,T3_avg_cor,T4_avg_cor,T5_avg_cor,T6_avg_cor,resloc,
-             fnpre=paste0(fnpre,"_cor"),plottype)
-  
-  #make plots of components fP1, fP2, etc., for understanding, with argument and phase on separate axes
+             fnpre=paste0(fnpre,""),plottype)
+
+  #make plots of components fP1, fP2, etc., for understanding, with argument and phase on separate axes, NOT formatted for publication
   make_plot_component(freq=freq,frg=frg,comp=fP1,plotname=paste0(fnpre,"_fP1"),plottype=plottype)
   make_plot_component(freq=freq,frg=frg,comp=fP2,plotname=paste0(fnpre,"_fP2"),plottype=plottype)
   make_plot_component(freq=freq,frg=frg,comp=fP1*Conj(fP2),plotname=paste0(fnpre,"_fP1ConjfP2"),
@@ -367,34 +347,15 @@ do_analysis<-function(Args)
     h[counter,counter,]<-NA
   }
   h<-apply(FUN=sum,X=h,MARGIN=3,na.rm=TRUE)
-  make_plot_component(freq=freq,frg=frg,comp=h,plotname=paste0(fnpre,"_cov_Cross"),plottype=plottype)
+  make_plot_component(freq=freq,frg=frg,comp=h,plotname=paste0(fnpre,"_NoiseCrossSync"),plottype=plottype)
   
   #plot this same thing times fP1*Conj(fP2)
-  make_plot_component(freq=freq,frg=frg,comp=fP1*Conj(fP2)*h,plotname=paste0(fnpre,"_cov_All"),plottype=plottype)
-  
-  #now do the same things for the "cor" approach to synchrony
-  h<-Se1e2
-  for (counter in 1:(dim(h)[1]))
-  {
-    h[counter,counter,]<-NA
-  }
-  vivj<-outer(X=sqrt(kelpvars),Y=sqrt(kelpvars),FUN="*")
-  for (counter in 1:(dim(h)[3]))
-  {
-    h[,,counter]<-h[,,counter]*vivj
-  }
-  h<-apply(FUN=sum,X=h,MARGIN=3,na.rm=TRUE)
-  make_plot_component(freq=freq,frg=frg,comp=h,plotname=paste0(fnpre,"_cor_Cross"),plottype=plottype)
-  
-  #plot this same thing times fP1*Conj(fP2)
-  make_plot_component(freq=freq,frg=frg,comp=fP1*Conj(fP2)*h,plotname=paste0(fnpre,"_cor_All"),plottype=plottype)
+  make_plot_component(freq=freq,frg=frg,comp=fP1*Conj(fP2)*h,plotname=paste0(fnpre,"_NoiseCrossSyncTimesStuff"),plottype=plottype)
   
   #make plots of synchrony of NO3 and waves
-  make_plots_noise_sync(freq=freq,frg=frg,S_avg=Se1e1_avg_cov,fnpre=paste0(fnpre,"_cov_NO3"),plottype=plottype)
-  make_plots_noise_sync(freq=freq,frg=frg,S_avg=Se1e1_avg_cor,fnpre=paste0(fnpre,"_cor_NO3"),plottype=plottype)
-  make_plots_noise_sync(freq=freq,frg=frg,S_avg=Se2e2_avg_cov,fnpre=paste0(fnpre,"_cov_Waves"),plottype=plottype)
-  make_plots_noise_sync(freq=freq,frg=frg,S_avg=Se2e2_avg_cor,fnpre=paste0(fnpre,"_cor_Waves"),plottype=plottype)
-  
+  make_plots_noise_sync(freq=freq,frg=frg,S_avg=Se1e1_avg_cov,fnpre=paste0(fnpre,"_NO3Sync"),plottype=plottype)
+  make_plots_noise_sync(freq=freq,frg=frg,S_avg=Se2e2_avg_cov,fnpre=paste0(fnpre,"_WavesSync"),plottype=plottype)
+
   #make presentation-quality plots if desired
   if (class(PlotForMSArgs)=="list")
   {
@@ -404,15 +365,15 @@ do_analysis<-function(Args)
             MainPlot_mid_ylim=PlotForMSArgs$cov_MainPlot_mid_ylim,
             MainPlot_long_ylim=PlotForMSArgs$cov_MainPlot_long_ylim            )
     make_plots_ForMS(freq,frg,totsync_cov,T1_avg_cov,T2_avg_cov,T3_avg_cov,T4_avg_cov,T5_avg_cov,T6_avg_cov,resloc,
-               fnpre=paste0(fnpre,"_cov"),plottype,PlotForMSArgs=h)
+               fnpre=paste0(fnpre,""),plottype,PlotForMSArgs=h)
 
     #make the plot that explains the main effects
     explain_direct_Moran_ForMS(freq=freq,frg=frg,fP1=fP1,fP2=fP2,fB=fB,Se1e1_avg=Se1e1_avg_cov,Se2e2_avg=Se2e2_avg_cov,
-                               fnpre=paste0(fnpre,"_cov"),plottype=plottype,PlotForMSArgs=PlotForMSArgs)
+                               fnpre=paste0(fnpre,""),plottype=plottype,PlotForMSArgs=PlotForMSArgs)
     
     #make the plot that explains the interactions between Moran effects
     explain_interacting_Moran(freq=freq,frg=frg,fP1=fP1,fP2=fP2,Se1e2_avg=Se1e2_avg_cov,
-                              fnpre=paste0(fnpre,"_cov"),plottype=plottype,PlotForMSArgs=PlotForMSArgs)
+                              fnpre=paste0(fnpre,""),plottype=plottype,PlotForMSArgs=PlotForMSArgs)
   }
   
   return(res)
@@ -474,11 +435,11 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   #get the plotting device
   if (plottype=="jpg")
   {
-    jpeg(paste0(resloc,fnpre,"_ExplainInteractingMoran.jpg"),quality=95,width=totwd,height=totht,units="in",res=300)
+    jpeg(paste0(resloc,fnpre,"_ExplainInteractingMoran_ForMS.jpg"),quality=95,width=totwd,height=totht,units="in",res=300)
   }
   if (plottype=="pdf")
   {
-    pdf(paste0(resloc,fnpre,"_ExplainInteractingMoran.pdf"),width=totwd,height=totht)
+    pdf(paste0(resloc,fnpre,"_ExplainInteractingMoran_ForMS.pdf"),width=totwd,height=totht)
   }
   
   #technical stuff for the circular colorbar for phases
@@ -505,6 +466,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0))
   inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
   y<-Mod(fP1[inds])
   if (is.na(fP1_short_ylims[1]))
   {
@@ -546,6 +508,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
   y<-Mod(fP1[inds])
   if (is.na(fP1_mid_ylims[1]))
   {
@@ -569,6 +532,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
   y<-Mod(fP1[inds])
   if (is.na(fP1_long_ylims[1]))
   {
@@ -596,6 +560,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
   y<-Mod(fP2[inds])
   if (is.na(fP2_short_ylims[1]))
   {
@@ -620,6 +585,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
   y<-Mod(fP2[inds])
   if (is.na(fP2_mid_ylims[1]))
   {
@@ -643,6 +609,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
   y<-Mod(fP2[inds])
   if (is.na(fP2_long_ylims[1]))
   {
@@ -671,6 +638,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
   y<-Mod(fP1ConjfP2[inds])
   if (is.na(fP1ConjfP2_short_ylims[1]))
   {
@@ -695,6 +663,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
   y<-Mod(fP1ConjfP2[inds])
   if (is.na(fP1ConjfP2_mid_ylims[1]))
   {
@@ -718,6 +687,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
   y<-Mod(fP1ConjfP2[inds])
   if (is.na(fP1ConjfP2_long_ylims[1]))
   {
@@ -745,6 +715,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
   y<-Mod(Se1e2_avg[inds])
   if (is.na(Se1e2_short_ylims[1]))
   {
@@ -769,6 +740,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
   y<-Mod(Se1e2_avg[inds])
   if (is.na(Se1e2_mid_ylims[1]))
   {
@@ -792,6 +764,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
   y<-Mod(Se1e2_avg[inds])
   if (is.na(Se1e2_long_ylims[1]))
   {
@@ -820,6 +793,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
   y<-Mod(Prod[inds])
   if (is.na(Prod_short_ylims[1]))
   {
@@ -844,6 +818,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
   y<-Mod(Prod[inds])
   if (is.na(Prod_mid_ylims[1]))
   {
@@ -868,6 +843,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
   y<-Mod(Prod[inds])
   if (is.na(Prod_long_ylims[1]))
   {
@@ -943,11 +919,11 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   #get the plotting device
   if (plottype=="jpg")
   {
-    jpeg(paste0(resloc,fnpre,"_ExplainDirectMoran.jpg"),quality=95,width=totwd,height=totht,units="in",res=300)
+    jpeg(paste0(resloc,fnpre,"_ExplainDirectMoran_ForMS.jpg"),quality=95,width=totwd,height=totht,units="in",res=300)
   }
   if (plottype=="pdf")
   {
-    pdf(paste0(resloc,fnpre,"_ExplainDirectMoran.pdf"),width=totwd,height=totht)
+    pdf(paste0(resloc,fnpre,"_ExplainDirectMoran_ForMS.pdf"),width=totwd,height=totht)
   }
   
   #***panels for fP1 
@@ -961,6 +937,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0))
   inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
   y<-(Mod(fP1[inds]))^2
   if (is.na(fP1_short_ylims[1]))
   {
@@ -982,6 +959,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
   y<-(Mod(fP1[inds]))^2
   if (is.na(fP1_mid_ylims[1]))
   {
@@ -1002,6 +980,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
   y<-(Mod(fP1[inds]))^2
   if (is.na(fP1_long_ylims[1]))
   {
@@ -1026,6 +1005,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
   y<-Se1e1_avg[inds]
   if (is.na(Se1e1_short_ylims[1]))
   {
@@ -1047,6 +1027,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
   y<-Se1e1_avg[inds]
   if (is.na(Se1e1_mid_ylims[1]))
   {
@@ -1067,6 +1048,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
   y<-Se1e1_avg[inds]
   if (is.na(Se1e1_long_ylims[1]))
   {
@@ -1091,6 +1073,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
   y<-(Mod(fP2[inds]))^2
   if (is.na(fP2_short_ylims[1]))
   {
@@ -1112,6 +1095,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
   y<-(Mod(fP2[inds]))^2
   if (is.na(fP2_mid_ylims[1]))
   {
@@ -1132,6 +1116,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
   y<-(Mod(fP2[inds]))^2
   if (is.na(fP2_long_ylims[1]))
   {
@@ -1156,6 +1141,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
   y<-Se2e2_avg[inds]
   if (is.na(Se2e2_short_ylims[1]))
   {
@@ -1177,6 +1163,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
   y<-Se2e2_avg[inds]
   if (is.na(Se2e2_mid_ylims[1]))
   {
@@ -1197,6 +1184,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
   y<-Se2e2_avg[inds]
   if (is.na(Se2e2_long_ylims[1]))
   {
@@ -1221,6 +1209,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
   y<-1/((Mod(fB[inds]))^2)
   if (is.na(fB_short_ylims[1]))
   {
@@ -1242,6 +1231,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
   y<-1/((Mod(fB[inds]))^2)
   if (is.na(fB_mid_ylims[1]))
   {
@@ -1263,6 +1253,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
             (xaxht+(htind-1)*(panht+gap)+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
   y<-1/((Mod(fB[inds]))^2)
   if (is.na(fB_long_ylims[1]))
   {
@@ -1591,6 +1582,7 @@ make_plots_ForMS<-function(freq,frg,totsync,T1_avg,T2_avg,T3_avg,T4_avg,T5_avg,T
             (xaxht+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0))
   inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
   if (is.na(MainPlot_short_ylim[1]))
   {
     ylimits<-range(totsync[inds],T1_avg[inds],T2_avg[inds],T4_avg[inds],sumexpl[inds],sumterms[inds])
@@ -1621,6 +1613,7 @@ make_plots_ForMS<-function(freq,frg,totsync,T1_avg,T2_avg,T3_avg,T4_avg,T5_avg,T
             (xaxht+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
   if (is.na(MainPlot_mid_ylim[1]))
   {
     ylimits<-range(totsync[inds],T1_avg[inds],T2_avg[inds],T4_avg[inds],sumexpl[inds],sumterms[inds])
@@ -1650,6 +1643,7 @@ make_plots_ForMS<-function(freq,frg,totsync,T1_avg,T2_avg,T3_avg,T4_avg,T5_avg,T
             (xaxht+panht)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
   if (is.na(MainPlot_long_ylim[1]))
   {
     ylimits<-range(totsync[inds],T1_avg[inds],T2_avg[inds],T4_avg[inds],sumexpl[inds],sumterms[inds])
@@ -1728,6 +1722,7 @@ make_plot_component<-function(freq,frg,comp,plotname,plottype)
             (xaxht+2*panht+gap)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0))
   inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds,inds[length(inds)]+1)
   plot(0,0,xaxt="n",type="n",xlim=xlimits_short,ylim=c(-pi,pi),xaxs="i")
   plotphasefunc(l2timescales[inds],comp[inds],pch=20,cex=0.5,lty="solid",col="black")
   lines(xlimits_short,rep(pi/2,2),type="l",lty="dashed")
@@ -1754,6 +1749,7 @@ make_plot_component<-function(freq,frg,comp,plotname,plottype)
             (xaxht+2*panht+gap)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
   plot(0,0,xaxt="n",type="n",xlim=xlimits_mid,ylim=c(-pi,pi),xaxs="i")
   plotphasefunc(l2timescales[inds],comp[inds],pch=20,cex=0.5,lty="solid",col="black")
   lines(xlimits_mid,rep(pi/2,2),type="l",lty="dashed")
@@ -1779,6 +1775,7 @@ make_plot_component<-function(freq,frg,comp,plotname,plottype)
             (xaxht+2*panht+gap)/totht),
       mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
   inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds[1]-1,inds)
   plot(0,0,xaxt="n",type="n",xlim=xlimits_long,ylim=c(-pi,pi),xaxs="i")
   plotphasefunc(l2timescales[inds],comp[inds],pch=20,cex=0.5,lty="solid",col="black")
   lines(xlimits_long,rep(pi/2,2),type="l",lty="dashed")
@@ -1842,18 +1839,19 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("A","B","C"),
                     ExplainInteractingMoran_Prod_long_ylims=c(0.002,0.08),
                     ExplainInteractingMoran_PanLabs=LETTERS[1:15])
 Args<-list(locstouse=CC1locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-res_CentCal1_KelpLag4<-do_analysis(Args)
-saveRDS(res_CentCal1_KelpLag4,paste0(resloc,"res_CentCal1_KelpLag4.Rds"))
-#res_CentCal1_KelpLag4<-readRDS(paste0(resloc,"res_CentCal1_KelpLag4.Rds"))
+RegionalAnalysis_CentCal1_KelpLag4<-do_analysis(Args)
+saveRDS(RegionalAnalysis_CentCal1_KelpLag4,paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag4.Rds"))
+#RegionalAnalysis_CentCal1_KelpLag4<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag4.Rds"))
 
 Args<-list(locstouse=CC1locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-res_CentCal1_KelpLag8<-do_analysis(Args)
-saveRDS(res_CentCal1_KelpLag8,paste0(resloc,"res_CentCal1_KelpLag8.Rds"))
-#res_CentCal1_KelpLag8<-readRDS(paste0(resloc,"res_CentCal1_KelpLag8.Rds"))
+RegionalAnalysis_CentCal1_KelpLag8<-do_analysis(Args)
+saveRDS(RegionalAnalysis_CentCal1_KelpLag8,paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag8.Rds"))
+#RegionalAnalysis_CentCal1_KelpLag8<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag8.Rds"))
 
 Args<-list(locstouse=CC1locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-res_CentCal1_KelpLag12<-do_analysis(Args)
-saveRDS(res_CentCal1_KelpLag12,paste0(resloc,"res_CentCal1_KelpLag12.Rds"))
+RegionalAnalysis_CentCal1_KelpLag12<-do_analysis(Args)
+saveRDS(RegionalAnalysis_CentCal1_KelpLag12,paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag12.Rds"))
+#RegionalAnalysis_CentCal1_KelpLag12<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag12.Rds"))
 
 PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("A","B","C"),
                     cov_MainPlot_short_ylim=NA, #means let the data determine the ylimits
@@ -1892,18 +1890,19 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("A","B","C"),
                     ExplainInteractingMoran_Prod_long_ylims=c(0.002,0.08),
                     ExplainInteractingMoran_PanLabs=LETTERS[1:15])
 Args<-list(locstouse=CC2locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-res_CentCal2_KelpLag4<-do_analysis(Args)
-saveRDS(res_CentCal2_KelpLag4,paste0(resloc,"res_CentCal2_KelpLag4.Rds"))
-#res_CentCal2_KelpLag4<-readRDS(paste0(resloc,"res_CentCal2_KelpLag4.Rds"))
+RegionalAnalysis_CentCal2_KelpLag4<-do_analysis(Args)
+saveRDS(RegionalAnalysis_CentCal2_KelpLag4,paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag4.Rds"))
+#RegionalAnalysis_CentCal2_KelpLag4<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag4.Rds"))
 
 Args<-list(locstouse=CC2locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-res_CentCal2_KelpLag8<-do_analysis(Args)
-saveRDS(res_CentCal2_KelpLag8,paste0(resloc,"res_CentCal2_KelpLag8.Rds"))
-#res_CentCal2_KelpLag8<-readRDS(paste0(resloc,"res_CentCal2_KelpLag8.Rds"))
+RegionalAnalysis_CentCal2_KelpLag8<-do_analysis(Args)
+saveRDS(RegionalAnalysis_CentCal2_KelpLag8,paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag8.Rds"))
+#RegionalAnalysis_CentCal2_KelpLag8<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag8.Rds"))
 
 Args<-list(locstouse=CC2locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-res_CentCal2_KelpLag12<-do_analysis(Args)
-saveRDS(res_CentCal2_KelpLag12,paste0(resloc,"res_CentCal2_KelpLag12.Rds"))
+RegionalAnalysis_CentCal2_KelpLag12<-do_analysis(Args)
+saveRDS(RegionalAnalysis_CentCal2_KelpLag12,paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag12.Rds"))
+#RegionalAnalysis_CentCal2_KelpLag12<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag12.Rds"))
 
 PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("D","E","F"),
                     cov_MainPlot_short_ylim=NA, #means let the data determine the ylimits
@@ -1942,49 +1941,20 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("D","E","F"),
                     ExplainInteractingMoran_Prod_long_ylims=c(0.002,0.08),
                     ExplainInteractingMoran_PanLabs=c(LETTERS[16:26],"AA","BB","CC","DD"))
 Args<-list(locstouse=SBlocstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-res_SoCal_KelpLag4<-do_analysis(Args)
-saveRDS(res_SoCal_KelpLag4,paste0(resloc,"res_SoCal_KelpLag4.Rds"))
-#res_SoCal_KelpLag4<-readRDS(paste0(resloc,"res_SoCal_KelpLag4.Rds"))
+RegionalAnalysis_SoCal_KelpLag4<-do_analysis(Args)
+saveRDS(RegionalAnalysis_SoCal_KelpLag4,paste0(resloc,"RegionalAnalysis_SoCal_KelpLag4.Rds"))
+#RegionalAnalysis_SoCal_KelpLag4<-readRDS(paste0(resloc,"RegionalAnalysis_SoCal_KelpLag4.Rds"))
 
 Args<-list(locstouse=SBlocstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-res_SoCal_KelpLag8<-do_analysis(Args)
-saveRDS(res_SoCal_KelpLag8,paste0(resloc,"res_SoCal_KelpLag8.Rds"))
-#res_SoCal_KelpLag8<-readRDS(paste0(resloc,"res_SoCal_KelpLag8.Rds"))
+RegionalAnalysis_SoCal_KelpLag8<-do_analysis(Args)
+saveRDS(RegionalAnalysis_SoCal_KelpLag8,paste0(resloc,"RegionalAnalysis_SoCal_KelpLag8.Rds"))
+#RegionalAnalysis_SoCal_KelpLag8<-readRDS(paste0(resloc,"RegionalAnalysis_SoCal_KelpLag8.Rds"))
 
 Args<-list(locstouse=SBlocstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-res_SoCal_KelpLag12<-do_analysis(Args)
-saveRDS(res_SoCal_KelpLag12,paste0(resloc,"res_SoCal_KelpLag12.Rds"))
-#res_SoCal_KelpLag12<-readRDS(paste0(resloc,"res_SoCal_KelpLag12.Rds"))
+RegionalAnalysis_SoCal_KelpLag12<-do_analysis(Args)
+saveRDS(RegionalAnalysis_SoCal_KelpLag12,paste0(resloc,"RegionalAnalysis_SoCal_KelpLag12.Rds"))
+#RegionalAnalysis_SoCal_KelpLag12<-readRDS(paste0(resloc,"RegionalAnalysis_SoCal_KelpLag12.Rds"))
 
-#DONE ***DAN: Done: Write some code that tracks and explains the contributions of the parts of the interaction
-#term in the spectral equation. We want to see the phase relationship between waves and NO3, and the difference
-#between the phase delays of the effects of these things on kelp, and how that produces different interaction
-#effects at annual and >4yr timescales in central and southern CA. Figure out how to display this.
 
-#Next steps: Find ways to picture the lag or the cross spectrum (or both) of the relationship between waves and 
-#NO3 in the three regions. I already have some code somewhere that just looks at the average annual fluctuation 
-#and shows a peak for waves in the winter and a peak for NO3 in the spring. Is this still true in So Cal? Are waves
-#or nitrates less synchronous in So Cal? Or less influential on kelp? Or is just that the interaction effects have 
-#disappeared because of shifting lags of effects? You can dig into So Cal more I think, start by looking closely
-#again at the plots I already generated for So Cal. I will want to use elementary demonstrations of as many things
-#as possible.
 
-#Is the synchronizing effect of waves on kelp in SoCal less because waves are less synchronous, or less influential,
-#or both? I can display the prefactor and the spectral term (real-parted and summed over off-diagonal entries, probably)
-#for NO3 and for waves, and compare those also acrross the three regions. Likewise we can look at fP1*Conj(fP2) 
-#and also Se1e2 (appropriately summed across non-diagonal entries) and compare them across the three regions to
-#get a sense whether we are talking about decreased cross-location synchrony between NO3 and waves (relative to the
-#other regions) or modified influence of these factors on kelp.
-
-#DECIDED NO Should my various component plots be using the prefactor 1/|fB|^2?
-
-#Thoughts for next time I get back to work on this:
-#1) Small presentational thing: Since you are not partitioning the timescale range anyway (you don’t really do anything with 2-4 year 
-#timescales), and since the purpose of this paper is to illustrate concepts about interacting Moran effects and
-#not to explain everything about kelp, might as well focus on the immediate neighborhood of the annual timescale 
-#(where you can see the peaks) and the longest timescale (greater than 8 or 16 years, no specific need to start at 4). 
-#Results are cleanest there. Put grey rectangles on plots covering those areas. You can still use the dividers
-#at 2 and 4 years for the panel separation, no problem, since those are just to allow different y-axis extents.
-#Though there may be an argument for combining the 2-4 and >4 yr range panels into one panel, since y-axis extents 
-#tend to be similar for those. I DECIDED TO FOCUS ON THOSE RANGES, AS INDICATED, BUT NOT TO PUT THE RECTANGLES.
 

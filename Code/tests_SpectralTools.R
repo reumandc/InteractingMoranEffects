@@ -292,19 +292,26 @@ test_that("test myspecbrill",{
   res_old<-myspecbrill_old(x,detrend=TRUE,BiasVariance=0.5)
   res_new<-resTTF
   expect_equal(res_old$freq,res_new$freq)
-  expect_true(max(abs((10^res_old$log10spec)*.5*sqrt(length(x))-res_new$spec))<1e-15)
+  expect_true(max(abs((10^res_old$log10spec)*2*pi-res_new$spec))<1e-15)
   
-  #now check the average across the spectrum is the variance
+  #now check the average across the spectrum is the variance, exactly, when forvar==TRUE
   expect_true(abs(var(x)-mean(resFFT$spec))<1e-15)
   tforx<-1:length(x)
   xdetr<-stats::residuals(stats::lm(x~tforx))
   expect_true(abs(var(xdetr)-mean(resTFT$spec))<1e-15)
+  
+  #check the average across the spectrum is the variance, to within, say, 5%, even 
+  #when forvar==FALSE
+  expect_true(abs((var(x)-mean(resFFF$spec))/var(x))<.05)
 })
 
 test_that("test myspecmatbrill",{
   #test the format of the output
   set.seed(101)
-  x<-matrix(rnorm(1000),10,100)
+  sig<-matrix(.3,10,10)
+  diag(sig)<-1
+  x<-t(mvtnorm::rmvnorm(100,mean=rep(0,10),sigma=sig))
+
   resTTT<-myspecmatbrill(x,detrend=TRUE,cutsym=TRUE,forvar=TRUE,BiasVariance=0.5)
   resTTF<-myspecmatbrill(x,detrend=TRUE,cutsym=TRUE,forvar=FALSE,BiasVariance=0.5)
   resTFT<-myspecmatbrill(x,detrend=TRUE,cutsym=FALSE,forvar=TRUE,BiasVariance=0.5)
@@ -357,9 +364,9 @@ test_that("test myspecmatbrill",{
   res_old<-myspecmatbrill_old(x,detrend=TRUE,BiasVariance=0.5)
   res_new<-resTTF
   expect_equal(res_old$freq,res_new$freq)
-  expect_true(max(abs(res_old$spec*.5*sqrt(lx)-res_new$spec))<1e-15)
+  expect_true(max(abs(res_old$spec*2*pi-res_new$spec))<1e-15)
   
-  #now check the average across the cospectrum is the covariance
+  #now check the average across the cospectrum is exactly the covariance, when forvar=TRUE
   N<-dim(x)[1]
   for (a in 1:N)
   {
@@ -380,6 +387,25 @@ test_that("test myspecmatbrill",{
     for (b in 1:N)
     {
       expect_true(abs(cov(xdetr[a,],xdetr[b,])-mean(resTFT$spec[a,b,]))<1e-15)
+    }
+  }
+  
+  #now check that averages across cospectrum are covariances to within 5% even when forvar=FALSE
+  for (a in 1:N)
+  {
+    for (b in 1:N)
+    {
+      expect_true(abs((cov(x[a,],x[b,])-mean(resFFF$spec[a,b,]))/cov(x[a,],x[b,]))<.05)
+    }
+  }
+  
+  #check the same thing again with BiasVariance taking a different value
+  resFFF<-myspecmatbrill(x,detrend=FALSE,cutsym=FALSE,forvar=FALSE,BiasVariance=1)
+  for (a in 1:N)
+  {
+    for (b in 1:N)
+    {
+      expect_true(abs((cov(x[a,],x[b,])-mean(resFFF$spec[a,b,]))/cov(x[a,],x[b,]))<.05)
     }
   }
 })

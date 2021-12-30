@@ -9,6 +9,10 @@
 #removezero   TRUE or FALSE according to whether you want to remove the zero frequency from the result or not
 #cutsym       TRUE or FALSE depending on whether you want to cut out the symmetric part of the periodogram
 #
+#Note: Normalization is done so that the mean across frequencies (using all nonzero canonical frequencies from 0 
+#to 1) of the spectrum is the variance of the original time series. That's under the options detrend=F, 
+#removezero=T, cutsym=F.
+#
 myspecraw<-function(x,detrend=TRUE,removezero=TRUE,cutsym=TRUE)
 {
   lx<-length(x)
@@ -50,7 +54,8 @@ myspecraw<-function(x,detrend=TRUE,removezero=TRUE,cutsym=TRUE)
 #               returning only the results for frequency <= 0.5.
 #
 #Note: Normalization is done so that the mean across frequencies (using all nonzero canonical frequencies from 0 
-#to 1) of a spectrum/cospectrum is the variance/covariance of the original time series.
+#to 1) of a spectrum/cospectrum is the variance/covariance of the original time series. That's under the options 
+#detrend=F, removezero=T, cutsym=F.
 #
 myspecmatraw<-function(x,detrend=TRUE,removezero=TRUE,cutsym=TRUE)
 {
@@ -170,8 +175,8 @@ smoother<-function(sm,x)
 #                   symmetric part of the estimated spectrum in the output
 #forvar           TRUE or FALSE depending on whether you want the spectrum rescaled
 #                   so the mean (across all frequencies, including the symmetric part
-#                   but not including the zero frequency) equals the variance of x
-#                   (computed after detrending if that was done).
+#                   but not including the zero frequency) exactly equals the variance 
+#                   of x (computed after detrending if that was done).
 #BiasVariance     For adjusting the bias-variance tradeoff which comes from the 
 #                   degree of smoothing selected
 #
@@ -206,8 +211,9 @@ myspecbrill<-function(x,detrend=TRUE,cutsym=TRUE,forvar=FALSE,BiasVariance=0.5)
   xforW<-(-fTxBTx:fTxBTx)/TxBTx
   WT<-(15/(16*2*pi))*((xforW-1)^2)*((xforW+1)^2)
   spec<-smoother(WT,I)
-  
-  #now rescale to make the mean equal the variance of the original time series, if desired
+  spec<-2*pi*spec/(sqrt(Tx)*BiasVariance) #normalization
+
+  #now rescale to make the mean exactly equal the variance of the original time series, if desired
   if (forvar==TRUE)
   {
     spec<-var(x)*spec/mean(spec)
@@ -224,7 +230,7 @@ myspecbrill<-function(x,detrend=TRUE,cutsym=TRUE,forvar=FALSE,BiasVariance=0.5)
 }
 
 #The above function is my attempt, begun 2020 11 19, to refactor the below function, largely inspired by 
-#the need to make sure spectra appropriately integrate to exactly equal variances even when smoothing is 
+#the need to make sure spectra appropriately integrate to equal variances even when smoothing is 
 #used. But also I just saw some opportunities to clean things up. I kept the old function for testing.
 
 #The power spectrum, Brillinger's consistent estimator (5.6 of Brillinger's 2001 
@@ -309,9 +315,6 @@ myspecbrill_old<-function(x,detrend=TRUE,BiasVariance=0.5)
 #BiasVariance     For adjusting the bias-variance tradeoff which comes from the 
 #                   degree of smoothing selected
 #
-#Output
-#***DAN: fill in
-#
 myspecmatbrill<-function(x,detrend=TRUE,cutsym=TRUE,forvar=FALSE,BiasVariance=0.5)
 {
   Tx<-dim(x)[2] #length of time series
@@ -346,6 +349,7 @@ myspecmatbrill<-function(x,detrend=TRUE,cutsym=TRUE,forvar=FALSE,BiasVariance=0.
       spec[a,b,]<-smoother(WT,I[a,b,])
     }
   }
+  spec<-2*pi*spec/(sqrt(Tx)*BiasVariance) #normalization
   
   #now rescale to make the means equal the covariances of the original time series, if desired
   if (forvar==TRUE)
@@ -370,7 +374,7 @@ myspecmatbrill<-function(x,detrend=TRUE,cutsym=TRUE,forvar=FALSE,BiasVariance=0.
 }
 
 #The above function is my attempt, begun 2020 11 19, to refactor the below function, largely inspired by 
-#the need to make sure spectra appropriately integrate to exactly equal variances even when smoothing is 
+#the need to make sure spectra appropriately integrate to equal variances even when smoothing is 
 #used. But also I just saw some opportunities to clean things up. I kept the old function for testing.
 
 #The spectral matrix, Brillinger's consistent estimator (7.4 of Brillinger's 2001 
