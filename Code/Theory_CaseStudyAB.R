@@ -361,6 +361,10 @@ TheoryCaseAB<-function(b,p1,p2,N,ns,PlotName,PanLabs,XAxOn=TRUE)
   dev.off()
 }
 
+#***
+#The main code, uses the above function
+#***
+  
 #Case A
 N<-5
 ns<-c(.6,.6,.3)
@@ -368,8 +372,13 @@ p1<-c(0,1.1)
 p2<-c(0.8)
 b<-c(.4)
 PlotName<-paste0(resloc,"TheoryFigCaseA")
-PanLabs<-c("a","b","c","d")
+PanLabs<-c("(a)","(b)","(c)","(d)")
 TheoryCaseAB(b,p1,p2,N,ns,PlotName,PanLabs,XAxOn=FALSE)
+saveRDS(N,file=paste0(resloc,"Params_A_N.rds"))
+saveRDS(ns,file=paste0(resloc,"Params_A_ns.rds"))
+saveRDS(p1,file=paste0(resloc,"Params_A_p1.rds"))
+saveRDS(p2,file=paste0(resloc,"Params_A_p2.rds"))
+saveRDS(b,file=paste0(resloc,"Params_A_b.rds"))
 
 #Case B
 N<-5
@@ -378,5 +387,10 @@ p1<-c(0,0,0,1.1)
 p2<-c(0.8)
 b<-c(.4)
 PlotName<-paste0(resloc,"TheoryFigCaseB")
-PanLabs<-c("e","f","g","h")
+PanLabs<-c("(e)","(f)","(g)","(h)")
 TheoryCaseAB(b,p1,p2,N,ns,PlotName,PanLabs,XAxOn=FALSE)
+saveRDS(N,file=paste0(resloc,"Params_B_N.rds"))
+saveRDS(ns,file=paste0(resloc,"Params_B_ns.rds"))
+saveRDS(p1,file=paste0(resloc,"Params_B_p1.rds"))
+saveRDS(p2,file=paste0(resloc,"Params_B_p2.rds"))
+saveRDS(b,file=paste0(resloc,"Params_B_b.rds"))

@@ -26,10 +26,6 @@ if (!dir.exists(resloc))
 #The main function for doing both case studies
 #***
 
-#***
-#The main function for doing both case studies
-#***
-
 #This function calculates the analytic results and plots them for case study C.
 #The function is actually more general than the planned case study that will be 
 #displayed in the paper.
@@ -750,16 +746,25 @@ TestNoise<-function(N,ns,PlotName,numsims,BiasVariance)
   dev.off()
 }
 
+#***
+#The main code, uses the above function
+#***
+
 #Case C, parameter set 1
 N<-5
-ns<-c(0,-4/9,0,1,.6,.6,.3) #c1, c2, l1, l2, w11, w22, w12.
+ns<-c(0,-4/9,1,0,.6,.6,.3) #c1, c2, l1, l2, w11, w22, w12.
 p1<-c(0,3)
-p2<-c(1.5)
+p2<-c(-1.5)
 b<-c(.4)
 PlotName<-paste0(resloc,"TheoryFigCaseC_v01")
-PanLabs<-c("i","j","k","l")
-PanLabs2<-c("a","b","c")
+PanLabs<-c("(i)","(j)","(k)","(l)")
+PanLabs2<-c("(a)","(b)","(c)")
 TheoryCaseC(b,p1,p2,N,ns,PlotName,PanLabs,PanLabs2,SyncYAx=c(-10,20),RelSyncYAx=c(-10,25),XAxOn=FALSE)
+saveRDS(N,file=paste0(resloc,"Params_C1_N.rds"))
+saveRDS(ns,file=paste0(resloc,"Params_C1_ns.rds"))
+saveRDS(p1,file=paste0(resloc,"Params_C1_p1.rds"))
+saveRDS(p2,file=paste0(resloc,"Params_C1_p2.rds"))
+saveRDS(b,file=paste0(resloc,"Params_C1_b.rds"))
 
 #now do the test for consistency between analytic and simulation approaches for the noise, essentially
 #a test that my estimators of synchrony quantities are good estimators of my analytically calculated 
@@ -770,14 +775,19 @@ BiasVariance<-0.5
 TestNoise(N,ns,PlotName,numsims,BiasVariance)
 
 #Case study C, parameter set 2
-ns<-c(0,-4/9,1,0,.6,.6,.3) #c1, c2, l1, l2, w11, w22, w12.
+ns<-c(0,-4/9,0,1,.6,.6,.3) #c1, c2, l1, l2, w11, w22, w12.
 p1<-c(0,3)
-p2<-c(1.5)
+p2<-c(-1.5)
 b<-c(.4)
 PlotName<-paste0(resloc,"TheoryFigCaseC_v02")
-PanLabs<-c("m","n","o","p")
-PanLabs2<-c("d","e","f")
+PanLabs<-c("(m)","(n)","(o)","(p)")
+PanLabs2<-c("(d)","(e)","(f)")
 TheoryCaseC(b,p1,p2,N,ns,PlotName,PanLabs,PanLabs2,SyncYAx=c(-10,20),RelSyncYAx=c(-10,25),XAxOn=TRUE)
+saveRDS(N,file=paste0(resloc,"Params_C2_N.rds"))
+saveRDS(ns,file=paste0(resloc,"Params_C2_ns.rds"))
+saveRDS(p1,file=paste0(resloc,"Params_C2_p1.rds"))
+saveRDS(p2,file=paste0(resloc,"Params_C2_p2.rds"))
+saveRDS(b,file=paste0(resloc,"Params_C2_b.rds"))
 
 #now do the test for consistency between analytic and simulation approaches for the noise, essentially
 #a test that my estimators of synchrony quantities are good estimators of my analytically calculated 
