@@ -30,6 +30,7 @@
 \newcommand{\Rp}{\text{Re}}
 \newcommand{\var}{\text{var}}
 \newcommand{\cov}{\text{cov}}
+\newcommand{\cor}{\text{cor}}
 \let\conj\overline
 
 %set up the theorem environment
@@ -40,7 +41,7 @@
 \externaldocument[MT-]{Paper}
 
 %header material for paper
-\title{How environmental drivers of synchrony interact}
+\title{Supporting information for ``How environmental drivers of synchrony interact''}
 \date{}
 
 %***Tentative author order, Bell last for his data contributions
@@ -64,9 +65,35 @@
 \SweaveOpts{concordance=TRUE}
 
 %The following is where you load in the numeric results that will be embedded in the text
-%<<eval=T,echo=F,message=F,warning=F>>=
-%#place R code here for loading in necessary variables from Results
-%@
+<<eval=T,echo=F,message=F,warning=F>>=
+
+#place R code here for loading in necessary variables from Results, Theory
+resloc<-"../Results/Theory/"
+N_A<-readRDS(paste0(resloc,"Params_A_N.rds"))
+ns_A<-readRDS(paste0(resloc,"Params_A_ns.rds"))
+p1_A<-readRDS(paste0(resloc,"Params_A_p1.rds"))
+p2_A<-readRDS(paste0(resloc,"Params_A_p2.rds"))
+b_A<-readRDS(paste0(resloc,"Params_A_b.rds"))
+
+N_B<-readRDS(paste0(resloc,"Params_B_N.rds"))
+ns_B<-readRDS(paste0(resloc,"Params_B_ns.rds"))
+p1_B<-readRDS(paste0(resloc,"Params_B_p1.rds"))
+p2_B<-readRDS(paste0(resloc,"Params_B_p2.rds"))
+b_B<-readRDS(paste0(resloc,"Params_B_b.rds"))
+
+N_C1<-readRDS(paste0(resloc,"Params_C1_N.rds"))
+ns_C1<-readRDS(paste0(resloc,"Params_C1_ns.rds"))
+p1_C1<-readRDS(paste0(resloc,"Params_C1_p1.rds"))
+p2_C1<-readRDS(paste0(resloc,"Params_C1_p2.rds"))
+b_C1<-readRDS(paste0(resloc,"Params_C1_b.rds"))
+
+N_C2<-readRDS(paste0(resloc,"Params_C2_N.rds"))
+ns_C2<-readRDS(paste0(resloc,"Params_C2_ns.rds"))
+p1_C2<-readRDS(paste0(resloc,"Params_C2_p1.rds"))
+p2_C2<-readRDS(paste0(resloc,"Params_C2_p2.rds"))
+b_C2<-readRDS(paste0(resloc,"Params_C2_b.rds"))
+
+@
 
 \maketitle
 
@@ -179,14 +206,14 @@ is then easy to see that $\rho_{\epsilon^{(1)} \epsilon^{(1)}}=v_{11}$,
 $\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$, and 
 $\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$, based on the definitions of these 
 quantities given previously. For theoretical case studies A and B in the main text, we used
-$N=5$, $v_{11}=v{22}=0.6$ and $v_{12}=0.3$.
+$N=\Sexpr{N_A}$, $v_{11}=v{22}=\Sexpr{ns_A[1]}$ and $v_{12}=\Sexpr{ns_A[3]}$.
 
 These results make intuitive sense, for a white-noise process, for the following reasons.
 First, $\rho_{\epsilon^{(1)} \epsilon^{(1)}}$ and $\rho_{\epsilon^{(2)} \epsilon^{(2)}}$,
 which are automatically real-valued (SI section \ref{Sect:measuring_sync}), should be flat for a white noise
-process (as we determined above that they are), i.e., independent of timescale, because spectral quantities are flat 
-for time series with no temporal dependencies.  For the same reason, $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$,
-our cross synchrony measure, should be flat (as we determined above that it is). It makes sense
+process, i.e., independent of timescale, because spectral quantities are flat 
+for time series with no temporal dependencies.  For the same reason, $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$
+should be flat. It makes sense
 that cross synchrony in this example is real-valued because a complex-valued 
 $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ would imply lagged or phase-delayed relationships between 
 $\epsilon^{(1)}$ and $\epsilon^{(2)}$, not possible with a white-noise process.
@@ -204,9 +231,10 @@ a positive definite matrix. Second, let $\zeta^{(1)}(t)=\tilde{\zeta}^{(1)}(t-l_
 $\zeta^{(2)}(t)=\tilde{\zeta}^{(2)}(t-l_2)$ for fixed integers $l_1$ and $l_2$. Finally,
 let $\epsilon_i^{(a)}(t)=c_1 \epsilon_i^{(a)}(t-1)+c_2 \epsilon_i^{(a)}(t-2)+\zeta_i^{(a)}(t)$
 for $i=1,\ldots,N$ and $a=1,2$. The second step above ensures that $\epsilon^{(1)}$ and $\epsilon^{(2)}$
-are related to each other in a time-delayed manner, and the third step ensures that 
+are related to each other in a time-delayed manner. The third step ensures that 
 $\epsilon^{(1)}$ and $\epsilon^{(2)}$ can oscillate with a dominant periodic component, depending 
-on the values of $c_1$ and $c_2$ used.
+on the values of $c_1$ and $c_2$ used: the autoregressive order-two process used
+can produce dynamics with a peaked spectrum, as we will see below (see also theorem \ref{thm:useful_thm} below).
 
 To compute $\rho_{\epsilon^{(1)}\epsilon^{(1)}}$, $\rho_{\epsilon^{(2)}\epsilon^{(2)}}$ and
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ for this example, we first compute 
@@ -222,7 +250,7 @@ $S_{\epsilon^{(2)} \epsilon^{(2)}}=\left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right
 Considering upper-right $N \times N$ sub-matrices gives 
 $S_{\epsilon^{(1)} \epsilon^{(2)}}=\left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 S_{\zeta^{(1)} \zeta^{(2)}}$.
 Because the $\zeta^{(1)}(t)$ are iid for distinct times $t$, we can again use the definitions of the spectrum and the
-cross spectrum and reasoning similar to that used above for the previous example to show that $S_{\zeta^{(1)} \zeta^{(1)}}$
+cross spectrum and reasoning similar to that used above for the previous examples to show that $S_{\zeta^{(1)} \zeta^{(1)}}$
 equals the upper-left $N \times N$ sub-matrix of $\Psi$, which is a matrix with $1$ in every diagonal entry and
 $w_{11}$ in all off-diagonal entries. Likewise, $S_{\zeta^{(2)} \zeta^{(2)}}$ equals the lower-right 
 $N \times N$ sub-matrix of $\Psi$, which has $1$ in all diagonal entries and $w_{22}$ in all off-diagonal entries.
@@ -250,9 +278,10 @@ $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ make sense for the noise processes we desc
 used for theoretical case study C in the main text (see Fig. \ref{fig:rhosForC}). 
 The pre-factor $\left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2$ in all these expressions reflects the autoregressive 
 manner in which the noises $\epsilon$ were defined. Autoregressive models of order $2$ are well known to be capable of
-producing oscillations for certain values of the parameters. For instance, for case study C, we use $c_1=0$ and $c_2=-4/9$, values
+producing oscillations for certain values of the parameters. For instance, for case study C, we 
+use $c_1=\Sexpr{ns_C1[1]}$ and $c_2=\Sexpr{round(ns_C1[2],4)}$, values
 which cause the expression $\left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2$ to have a single peak at
-frequency $0.25$ cycles per sampling interval (i.e., $1$ cycle per year). It makes sense that the synchrony quantities
+frequency $0.25$ cycles per sampling interval. It makes sense that the synchrony quantities
 $\rho_{\epsilon^{(1)}\epsilon^{(1)}}$, $\rho_{\epsilon^{(2)}\epsilon^{(2)}}$ and
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ for periodically oscillating quantities should also have a peak at the 
 timescale of oscillation. 
@@ -270,10 +299,12 @@ $\rho_{\epsilon^{(2)} \epsilon^{(2)}}$, and $\rho_{\epsilon^{(1)} \epsilon^{(2)}
 described in SI section \ref{sect:examples_cross_sync} and used for theoretical case study C. 
 These are complex-valued functions of timescale; their magnitude is displayed on vertical axes and
 their phase is displayed in color. Two alternative sets of parameters
-were used for panels a-c and d-f, respectively. Parameters were:
-$N=5$, $c_1=0$, $c_2=-4/9$, $w_{11}=w{22}=0.6$ and $w_{12}=0.3$ for both sets of panels;
-$l_1=0$ and $l_2=1$ for panels a-c; and 
-$l_1=1$ and $l_2=0$ for panels d-f.
+were used for panels a-c and d-f, respectively, and are also used in the two scenarios
+considered for case study C. Parameters were:
+$N=\Sexpr{N_C1}$, $c_1=\Sexpr{ns_C1[1]}$, $c_2=\Sexpr{round(ns_C1[2],4)}$, 
+$w_{11}=w{22}=\Sexpr{ns_C1[5]}$ and $w_{12}=\Sexpr{ns_C1[7]}$ for both sets of panels;
+$l_1=\Sexpr{ns_C1[3]}$ and $l_2=\Sexpr{ns_C1[4]}$ for panels a-c; and 
+$l_1=\Sexpr{ns_C2[3]}$ and $l_2=\Sexpr{ns_C2[4]}$ for panels d-f.
 }\label{fig:rhosForC}
 \end{figure}
 
@@ -453,15 +484,94 @@ $\rho_{\epsilon^{(1)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \r
 
 
 
+\section{Supporting results for kelp}
+
+\begin{figure}[!h]
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_MainPlot_ForMS.pdf}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_MainPlot_ForMS.pdf} \\
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag4_MainPlot_ForMS.pdf}
+\caption[Extension of main text Fig. \ref{MT-fig:SummaryKelpFig}]{Same format as Fig. \ref{MT-fig:SummaryKelpFig} of the main text, but including not only results
+for the first central CA region (a-c) and the southern CA region (d-f), but also results from the 
+second central CA region (g-i).}\label{fig:SummaryKelpFig_SM_lag4}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag8_MainPlot_ForMS.pdf}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag8_MainPlot_ForMS.pdf} \\
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag8_MainPlot_ForMS.pdf}
+\caption[Like Fig. \ref{fig:SummaryKelpFig_SM_lag4} but with kelp lag effects up to 8 quarters]{Same format as Fig. \ref{fig:SummaryKelpFig_SM_lag4}, but based on a model that considered 
+potential kelp lag effects from up to 8 quarters in the past (see Methods). Results were substantively
+the same as for Fig. \ref{fig:SummaryKelpFig_SM_lag4}.}\label{fig:SummaryKelpFig_SM_lag8}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag12_MainPlot_ForMS.pdf}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag12_MainPlot_ForMS.pdf} \\
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag12_MainPlot_ForMS.pdf}
+\caption[Like Fig. \ref{fig:SummaryKelpFig_SM_lag4} but with kelp lag effects up to 12 quarters]{Same format as Fig. \ref{fig:SummaryKelpFig_SM_lag4}, but based on a model that considered 
+potential kelp lag effects from up to 12 quarters in the past (see Methods). Results were substantively
+the same as for Fig. \ref{fig:SummaryKelpFig_SM_lag4}.}\label{fig:SummaryKelpFig_SM_lag12}
+\end{figure}
 
 
-%\section{Correlation analyses to help select autoregressive model lags}
-%***DAN: Not sure to what extent I may or may not even have this section any more
-%***DAN: Describe the surrogating process
-%Probably you only need to include the results in allcorfsgtd_RE, in the Results section. 
-%See line 480 and above in AnalysisStep_LinearModels.R
+\begin{figure}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_ExplainDirectMoran_ForMS.pdf}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_ExplainDirectMoran_ForMS.pdf} \\
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag4_ExplainDirectMoran_ForMS.pdf}
+\caption[Extension of main text Fig. \ref{MT-fig:directMoran}]{Same format as Fig. \ref{MT-fig:directMoran} of the main text, but including not only results
+for the first central CA region (a-o) and the southern CA region (p-dd), but also results from the 
+second central CA region (ee-ss).}\label{fig:directMoran_SM_lag4}
+\end{figure}
 
-\section{References}
+\begin{figure}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag8_ExplainDirectMoran_ForMS.pdf}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag8_ExplainDirectMoran_ForMS.pdf} \\
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag8_ExplainDirectMoran_ForMS.pdf}
+\caption[Like Fig. \ref{fig:directMoran_SM_lag4} but with kelp lag effects up to 8 quarters]{Same format as Fig. \ref{fig:directMoran_SM_lag4}, but based on a model that considered 
+potential kelp lag effects from up to 8 quarters in the past (see Methods). Results were substantively
+the same as for Fig. \ref{fig:directMoran_SM_lag4}.}\label{fig:directMoran_SM_lag8}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag12_ExplainDirectMoran_ForMS.pdf}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag12_ExplainDirectMoran_ForMS.pdf} \\
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag12_ExplainDirectMoran_ForMS.pdf}
+\caption[Like Fig. \ref{fig:directMoran_SM_lag4} but with kelp lag effects up to 12 quarters]{Same format as Fig. \ref{fig:directMoran_SM_lag4}, but based on a model that considered 
+potential kelp lag effects from up to 12 quarters in the past (see Methods). Results were substantively
+the same as for Fig. \ref{fig:directMoran_SM_lag4}.}\label{fig:directMoran_SM_lag12}
+\end{figure}
+
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_ExplainInteractingMoran_ForMS.pdf}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_ExplainInteractingMoran_ForMS.pdf} \\
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag4_ExplainInteractingMoran_ForMS.pdf} 
+\caption[Extension of main text Fig. \ref{MT-fig:indirectMoran}]{Same format as Fig. \ref{MT-fig:indirectMoran} of the main text, but including not only results
+for the first central CA region (a-o) and the southern CA region (p-dd), but also results from the 
+second central CA region (ee-ss).}\label{fig:indirectMoran_SM_lag4}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag8_ExplainInteractingMoran_ForMS.pdf}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag8_ExplainInteractingMoran_ForMS.pdf} \\
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag8_ExplainInteractingMoran_ForMS.pdf} 
+\caption[Like Fig. \ref{fig:indirectMoran_SM_lag4} but with kelp lag effects up to 8 quarters]{Same format as Fig. \ref{fig:indirectMoran_SM_lag4}, but based on a model that considered 
+potential kelp lag effects from up to 8 quarters in the past (see Methods). Results were substantively
+the same as for Fig. \ref{fig:indirectMoran_SM_lag4}.}\label{fig:indirectMoran_SM_lag8}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag12_ExplainInteractingMoran_ForMS.pdf}
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag12_ExplainInteractingMoran_ForMS.pdf} \\
+\includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag12_ExplainInteractingMoran_ForMS.pdf} 
+\caption[Like Fig. \ref{fig:indirectMoran_SM_lag4} but with kelp lag effects up to 12 quarters]{Same format as Fig. \ref{fig:indirectMoran_SM_lag4}, but based on a model that considered 
+potential kelp lag effects from up to 12 quarters in the past (see Methods). Results were substantively
+the same as for Fig. \ref{fig:indirectMoran_SM_lag4}.}\label{fig:indirectMoran_SM_lag12}
+\end{figure}
+
+
+\clearpage
+\newpage
 
 \bibliographystyle{ecology_letters2}
 \bibliography{refs} 
