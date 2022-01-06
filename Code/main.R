@@ -9,6 +9,8 @@ graphics.off()
 #Develop the theoretical case studies
 source("Theory_CaseStudyAB.R")
 source("Theory_CaseStudyC.R")
+source("Theory_IntroExample.R")
+source("Theory_PedagogFig.R")
 
 #Clean the kelp data
 source("Kelp_AnalysisStep_CleanData_SuperBasic.R")
