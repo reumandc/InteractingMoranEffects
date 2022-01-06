@@ -1802,7 +1802,8 @@ make_plot_component<-function(freq,frg,comp,plotname,plottype)
 #Now do the analysis for these three regions and save
 #***
 
-PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("A","B","C"),
+#Calculations for all three regions using lags c(4,1,0)
+PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("(a)","(b)","(c)"),
                     cov_MainPlot_short_ylim=NA, #means let the data determine the ylimits
                     cov_MainPlot_mid_ylim=NA,
                     cov_MainPlot_long_ylim=NA,
@@ -1816,12 +1817,12 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("A","B","C"),
                     ExplainDirectMoran_fP2_mid_ylims=c(.01,.08),
                     ExplainDirectMoran_fP2_long_ylims=c(.01,.08),
                     ExplainDirectMoran_Se2e2_short_ylims=c(0,8),
-                    ExplainDirectMoran_Se2e2_mid_ylims=c(0.06,0.53),
+                    ExplainDirectMoran_Se2e2_mid_ylims=c(0.06,0.6),
                     ExplainDirectMoran_Se2e2_long_ylims=c(0.05,0.9),
                     ExplainDirectMoran_fB_short_ylims=c(0.4,3),
                     ExplainDirectMoran_fB_mid_ylims=c(0.8,1.65),
                     ExplainDirectMoran_fB_long_ylims=c(1.2,3),
-                    ExplainDirectMoran_PanLabs=LETTERS[1:15],
+                    ExplainDirectMoran_PanLabs=paste0("(",letters[1:15],")"),
                     ExplainInteractingMoran_fP1_short_ylims=c(0.064,0.15),
                     ExplainInteractingMoran_fP1_mid_ylims=c(0.0716,0.117),
                     ExplainInteractingMoran_fP1_long_ylims=c(0.0725,0.1125),
@@ -1837,123 +1838,150 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("A","B","C"),
                     ExplainInteractingMoran_Prod_short_ylims=c(0,0.7),
                     ExplainInteractingMoran_Prod_mid_ylims=c(0,0.028),
                     ExplainInteractingMoran_Prod_long_ylims=c(0.002,0.08),
-                    ExplainInteractingMoran_PanLabs=LETTERS[1:15])
+                    ExplainInteractingMoran_PanLabs=paste0("(",letters[1:15],")"))
+
 Args<-list(locstouse=CC1locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 RegionalAnalysis_CentCal1_KelpLag4<-do_analysis(Args)
 saveRDS(RegionalAnalysis_CentCal1_KelpLag4,paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag4.Rds"))
 #RegionalAnalysis_CentCal1_KelpLag4<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag4.Rds"))
+
+PlotForMSArgs$cov_MainPlot_PanLabs=c("(d)","(e)","(f)")
+PlotForMSArgs$ExplainDirectMoran_PanLabs=c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
+PlotForMSArgs$ExplainInteractingMoran_PanLabs=c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
+Args<-list(locstouse=SBlocstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
+RegionalAnalysis_SoCal_KelpLag4<-do_analysis(Args)
+saveRDS(RegionalAnalysis_SoCal_KelpLag4,paste0(resloc,"RegionalAnalysis_SoCal_KelpLag4.Rds"))
+#RegionalAnalysis_SoCal_KelpLag4<-readRDS(paste0(resloc,"RegionalAnalysis_SoCal_KelpLag4.Rds"))
+
+PlotForMSArgs$cov_MainPlot_PanLabs=c("(g)","(h)","(i)")
+PlotForMSArgs$ExplainDirectMoran_PanLabs=paste0("(",letters[5:19],letters[5:19],")")
+PlotForMSArgs$ExplainInteractingMoran_PanLabs=paste0("(",letters[5:19],letters[5:19],")")
+Args<-list(locstouse=CC2locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
+RegionalAnalysis_CentCal2_KelpLag4<-do_analysis(Args)
+saveRDS(RegionalAnalysis_CentCal2_KelpLag4,paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag4.Rds"))
+#RegionalAnalysis_CentCal2_KelpLag4<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag4.Rds"))
+
+
+#Calculations for all three regions using lags c(8,1,0)
+PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("(a)","(b)","(c)"),
+                    cov_MainPlot_short_ylim=NA, #means let the data determine the ylimits
+                    cov_MainPlot_mid_ylim=NA,
+                    cov_MainPlot_long_ylim=NA,
+                    ExplainDirectMoran_fP1_short_ylims=c(0,.022),
+                    ExplainDirectMoran_fP1_mid_ylims=c(0,.0136),
+                    ExplainDirectMoran_fP1_long_ylims=c(0,.0124),
+                    ExplainDirectMoran_Se1e1_short_ylims=c(0,105),
+                    ExplainDirectMoran_Se1e1_mid_ylims=c(1,18),
+                    ExplainDirectMoran_Se1e1_long_ylims=c(2,40),
+                    ExplainDirectMoran_fP2_short_ylims=c(0.016,0.05),
+                    ExplainDirectMoran_fP2_mid_ylims=c(0.016,0.05),
+                    ExplainDirectMoran_fP2_long_ylims=c(0.016,0.05),
+                    ExplainDirectMoran_Se2e2_short_ylims=c(0,8),
+                    ExplainDirectMoran_Se2e2_mid_ylims=c(0.06,0.7),
+                    ExplainDirectMoran_Se2e2_long_ylims=c(0.05,1),
+                    ExplainDirectMoran_fB_short_ylims=c(0,4),
+                    ExplainDirectMoran_fB_mid_ylims=c(1.2,1.9),
+                    ExplainDirectMoran_fB_long_ylims=c(1.5,3),
+                    ExplainDirectMoran_PanLabs=paste0("(",letters[1:15],")"),
+                    ExplainInteractingMoran_fP1_short_ylims=c(0.051,0.145),
+                    ExplainInteractingMoran_fP1_mid_ylims=c(0.058,0.115),
+                    ExplainInteractingMoran_fP1_long_ylims=c(0.05885,0.111),
+                    ExplainInteractingMoran_fP2_short_ylims=c(0.13,0.2225),
+                    ExplainInteractingMoran_fP2_mid_ylims=c(0.13,0.2225),
+                    ExplainInteractingMoran_fP2_long_ylims=c(0.13,0.2225),
+                    ExplainInteractingMoran_fP1ConjfP2_short_ylims=c(0.01125,0.0215),
+                    ExplainInteractingMoran_fP1ConjfP2_mid_ylims=c(0.0129,0.0152),
+                    ExplainInteractingMoran_fP1ConjfP2_long_ylims=c(0.01308,0.0146),
+                    ExplainInteractingMoran_Se1e2_short_ylims=c(0,27),
+                    ExplainInteractingMoran_Se1e2_mid_ylims=c(0,1.4),
+                    ExplainInteractingMoran_Se1e2_long_ylims=c(0,5),
+                    ExplainInteractingMoran_Prod_short_ylims=c(0,.45),
+                    ExplainInteractingMoran_Prod_mid_ylims=c(0.00125,0.02),
+                    ExplainInteractingMoran_Prod_long_ylims=c(0.002,0.06),
+                    ExplainInteractingMoran_PanLabs=paste0("(",letters[1:15],")"))
 
 Args<-list(locstouse=CC1locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 RegionalAnalysis_CentCal1_KelpLag8<-do_analysis(Args)
 saveRDS(RegionalAnalysis_CentCal1_KelpLag8,paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag8.Rds"))
 #RegionalAnalysis_CentCal1_KelpLag8<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag8.Rds"))
 
-Args<-list(locstouse=CC1locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-RegionalAnalysis_CentCal1_KelpLag12<-do_analysis(Args)
-saveRDS(RegionalAnalysis_CentCal1_KelpLag12,paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag12.Rds"))
-#RegionalAnalysis_CentCal1_KelpLag12<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag12.Rds"))
-
-PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("A","B","C"),
-                    cov_MainPlot_short_ylim=NA, #means let the data determine the ylimits
-                    cov_MainPlot_mid_ylim=NA,
-                    cov_MainPlot_long_ylim=NA,
-                    ExplainDirectMoran_fP1_short_ylims=c(0.0041,0.022),
-                    ExplainDirectMoran_fP1_mid_ylims=c(0.00514,0.0136),
-                    ExplainDirectMoran_fP1_long_ylims=c(0.00526,0.0126),
-                    ExplainDirectMoran_Se1e1_short_ylims=c(0,95),
-                    ExplainDirectMoran_Se1e1_mid_ylims=c(1.5,16),
-                    ExplainDirectMoran_Se1e1_long_ylims=c(2,38),
-                    ExplainDirectMoran_fP2_short_ylims=c(.01,.08),
-                    ExplainDirectMoran_fP2_mid_ylims=c(.01,.08),
-                    ExplainDirectMoran_fP2_long_ylims=c(.01,.08),
-                    ExplainDirectMoran_Se2e2_short_ylims=c(0,8),
-                    ExplainDirectMoran_Se2e2_mid_ylims=c(0.06,0.53),
-                    ExplainDirectMoran_Se2e2_long_ylims=c(0.05,0.9),
-                    ExplainDirectMoran_fB_short_ylims=c(0.4,3),
-                    ExplainDirectMoran_fB_mid_ylims=c(0.8,1.65),
-                    ExplainDirectMoran_fB_long_ylims=c(1.2,3),
-                    ExplainDirectMoran_PanLabs=LETTERS[1:15],
-                    ExplainInteractingMoran_fP1_short_ylims=c(0.064,0.15),
-                    ExplainInteractingMoran_fP1_mid_ylims=c(0.0716,0.117),
-                    ExplainInteractingMoran_fP1_long_ylims=c(0.0725,0.1125),
-                    ExplainInteractingMoran_fP2_short_ylims=c(0.12,0.25),
-                    ExplainInteractingMoran_fP2_mid_ylims=c(0.12,0.25),
-                    ExplainInteractingMoran_fP2_long_ylims=c(0.12,0.25),
-                    ExplainInteractingMoran_fP1ConjfP2_short_ylims=c(0.014,0.032),
-                    ExplainInteractingMoran_fP1ConjfP2_mid_ylims=c(0.0139,0.0215),
-                    ExplainInteractingMoran_fP1ConjfP2_long_ylims=c(0.01375,0.02),
-                    ExplainInteractingMoran_Se1e2_short_ylims=c(0,30),
-                    ExplainInteractingMoran_Se1e2_mid_ylims=c(0.04,1.4),
-                    ExplainInteractingMoran_Se1e2_long_ylims=c(0.2,4),
-                    ExplainInteractingMoran_Prod_short_ylims=c(0,0.7),
-                    ExplainInteractingMoran_Prod_mid_ylims=c(0,0.028),
-                    ExplainInteractingMoran_Prod_long_ylims=c(0.002,0.08),
-                    ExplainInteractingMoran_PanLabs=LETTERS[1:15])
-Args<-list(locstouse=CC2locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-RegionalAnalysis_CentCal2_KelpLag4<-do_analysis(Args)
-saveRDS(RegionalAnalysis_CentCal2_KelpLag4,paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag4.Rds"))
-#RegionalAnalysis_CentCal2_KelpLag4<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag4.Rds"))
-
-Args<-list(locstouse=CC2locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-RegionalAnalysis_CentCal2_KelpLag8<-do_analysis(Args)
-saveRDS(RegionalAnalysis_CentCal2_KelpLag8,paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag8.Rds"))
-#RegionalAnalysis_CentCal2_KelpLag8<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag8.Rds"))
-
-Args<-list(locstouse=CC2locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-RegionalAnalysis_CentCal2_KelpLag12<-do_analysis(Args)
-saveRDS(RegionalAnalysis_CentCal2_KelpLag12,paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag12.Rds"))
-#RegionalAnalysis_CentCal2_KelpLag12<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag12.Rds"))
-
-PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("D","E","F"),
-                    cov_MainPlot_short_ylim=NA, #means let the data determine the ylimits
-                    cov_MainPlot_mid_ylim=NA,
-                    cov_MainPlot_long_ylim=NA,
-                    ExplainDirectMoran_fP1_short_ylims=c(0.0041,0.022),
-                    ExplainDirectMoran_fP1_mid_ylims=c(0.00514,0.0136),
-                    ExplainDirectMoran_fP1_long_ylims=c(0.00526,0.0126),
-                    ExplainDirectMoran_Se1e1_short_ylims=c(0,95),
-                    ExplainDirectMoran_Se1e1_mid_ylims=c(1.5,16),
-                    ExplainDirectMoran_Se1e1_long_ylims=c(2,38),
-                    ExplainDirectMoran_fP2_short_ylims=c(.01,.08),
-                    ExplainDirectMoran_fP2_mid_ylims=c(.01,.08),
-                    ExplainDirectMoran_fP2_long_ylims=c(.01,.08),
-                    ExplainDirectMoran_Se2e2_short_ylims=c(0,8),
-                    ExplainDirectMoran_Se2e2_mid_ylims=c(0.06,0.53),
-                    ExplainDirectMoran_Se2e2_long_ylims=c(0.05,0.9),
-                    ExplainDirectMoran_fB_short_ylims=c(0.4,3),
-                    ExplainDirectMoran_fB_mid_ylims=c(0.8,1.65),
-                    ExplainDirectMoran_fB_long_ylims=c(1.2,3),
-                    ExplainDirectMoran_PanLabs=c(LETTERS[16:26],"AA","BB","CC","DD"),
-                    ExplainInteractingMoran_fP1_short_ylims=c(0.064,0.15),
-                    ExplainInteractingMoran_fP1_mid_ylims=c(0.0716,0.117),
-                    ExplainInteractingMoran_fP1_long_ylims=c(0.0725,0.1125),
-                    ExplainInteractingMoran_fP2_short_ylims=c(0.12,0.25),
-                    ExplainInteractingMoran_fP2_mid_ylims=c(0.12,0.25),
-                    ExplainInteractingMoran_fP2_long_ylims=c(0.12,0.25),
-                    ExplainInteractingMoran_fP1ConjfP2_short_ylims=c(0.014,0.032),
-                    ExplainInteractingMoran_fP1ConjfP2_mid_ylims=c(0.0139,0.0215),
-                    ExplainInteractingMoran_fP1ConjfP2_long_ylims=c(0.01375,0.02),
-                    ExplainInteractingMoran_Se1e2_short_ylims=c(0,30),
-                    ExplainInteractingMoran_Se1e2_mid_ylims=c(0.04,1.4),
-                    ExplainInteractingMoran_Se1e2_long_ylims=c(0.2,4),
-                    ExplainInteractingMoran_Prod_short_ylims=c(0,0.7),
-                    ExplainInteractingMoran_Prod_mid_ylims=c(0,0.028),
-                    ExplainInteractingMoran_Prod_long_ylims=c(0.002,0.08),
-                    ExplainInteractingMoran_PanLabs=c(LETTERS[16:26],"AA","BB","CC","DD"))
-Args<-list(locstouse=SBlocstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
-RegionalAnalysis_SoCal_KelpLag4<-do_analysis(Args)
-saveRDS(RegionalAnalysis_SoCal_KelpLag4,paste0(resloc,"RegionalAnalysis_SoCal_KelpLag4.Rds"))
-#RegionalAnalysis_SoCal_KelpLag4<-readRDS(paste0(resloc,"RegionalAnalysis_SoCal_KelpLag4.Rds"))
-
+PlotForMSArgs$cov_MainPlot_PanLabs=c("(d)","(e)","(f)")
+PlotForMSArgs$ExplainDirectMoran_PanLabs=c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
+PlotForMSArgs$ExplainInteractingMoran_PanLabs=c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
 Args<-list(locstouse=SBlocstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 RegionalAnalysis_SoCal_KelpLag8<-do_analysis(Args)
 saveRDS(RegionalAnalysis_SoCal_KelpLag8,paste0(resloc,"RegionalAnalysis_SoCal_KelpLag8.Rds"))
 #RegionalAnalysis_SoCal_KelpLag8<-readRDS(paste0(resloc,"RegionalAnalysis_SoCal_KelpLag8.Rds"))
 
+PlotForMSArgs$cov_MainPlot_PanLabs=c("(g)","(h)","(i)")
+PlotForMSArgs$ExplainDirectMoran_PanLabs=paste0("(",letters[5:19],letters[5:19],")")
+PlotForMSArgs$ExplainInteractingMoran_PanLabs=paste0("(",letters[5:19],letters[5:19],")")
+Args<-list(locstouse=CC2locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
+RegionalAnalysis_CentCal2_KelpLag8<-do_analysis(Args)
+saveRDS(RegionalAnalysis_CentCal2_KelpLag8,paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag8.Rds"))
+#RegionalAnalysis_CentCal2_KelpLag8<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag8.Rds"))
+
+
+#Calculations for all three regions using lags c(12,1,0)
+PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("(a)","(b)","(c)"),
+                    cov_MainPlot_short_ylim=NA, #means let the data determine the ylimits
+                    cov_MainPlot_mid_ylim=NA,
+                    cov_MainPlot_long_ylim=NA,
+                    ExplainDirectMoran_fP1_short_ylims=NA,
+                    ExplainDirectMoran_fP1_mid_ylims=NA,
+                    ExplainDirectMoran_fP1_long_ylims=NA,
+                    ExplainDirectMoran_Se1e1_short_ylims=NA,
+                    ExplainDirectMoran_Se1e1_mid_ylims=NA,
+                    ExplainDirectMoran_Se1e1_long_ylims=NA,
+                    ExplainDirectMoran_fP2_short_ylims=NA,
+                    ExplainDirectMoran_fP2_mid_ylims=NA,
+                    ExplainDirectMoran_fP2_long_ylims=NA,
+                    ExplainDirectMoran_Se2e2_short_ylims=NA,
+                    ExplainDirectMoran_Se2e2_mid_ylims=NA,
+                    ExplainDirectMoran_Se2e2_long_ylims=NA,
+                    ExplainDirectMoran_fB_short_ylims=NA,
+                    ExplainDirectMoran_fB_mid_ylims=NA,
+                    ExplainDirectMoran_fB_long_ylims=NA,
+                    ExplainDirectMoran_PanLabs=paste0("(",letters[1:15],")"),
+                    ExplainInteractingMoran_fP1_short_ylims=NA,
+                    ExplainInteractingMoran_fP1_mid_ylims=NA,
+                    ExplainInteractingMoran_fP1_long_ylims=NA,
+                    ExplainInteractingMoran_fP2_short_ylims=NA,
+                    ExplainInteractingMoran_fP2_mid_ylims=NA,
+                    ExplainInteractingMoran_fP2_long_ylims=NA,
+                    ExplainInteractingMoran_fP1ConjfP2_short_ylims=NA,
+                    ExplainInteractingMoran_fP1ConjfP2_mid_ylims=NA,
+                    ExplainInteractingMoran_fP1ConjfP2_long_ylims=NA,
+                    ExplainInteractingMoran_Se1e2_short_ylims=NA,
+                    ExplainInteractingMoran_Se1e2_mid_ylims=NA,
+                    ExplainInteractingMoran_Se1e2_long_ylims=NA,
+                    ExplainInteractingMoran_Prod_short_ylims=NA,
+                    ExplainInteractingMoran_Prod_mid_ylims=NA,
+                    ExplainInteractingMoran_Prod_long_ylims=NA,
+                    ExplainInteractingMoran_PanLabs=paste0("(",letters[1:15],")"))
+
+Args<-list(locstouse=CC1locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
+RegionalAnalysis_CentCal1_KelpLag12<-do_analysis(Args)
+saveRDS(RegionalAnalysis_CentCal1_KelpLag12,paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag12.Rds"))
+#RegionalAnalysis_CentCal1_KelpLag12<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag12.Rds"))
+
+PlotForMSArgs$cov_MainPlot_PanLabs=c("(d)","(e)","(f)")
+PlotForMSArgs$ExplainDirectMoran_PanLabs=c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
+PlotForMSArgs$ExplainInteractingMoran_PanLabs=c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
 Args<-list(locstouse=SBlocstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 RegionalAnalysis_SoCal_KelpLag12<-do_analysis(Args)
 saveRDS(RegionalAnalysis_SoCal_KelpLag12,paste0(resloc,"RegionalAnalysis_SoCal_KelpLag12.Rds"))
 #RegionalAnalysis_SoCal_KelpLag12<-readRDS(paste0(resloc,"RegionalAnalysis_SoCal_KelpLag12.Rds"))
+
+PlotForMSArgs$cov_MainPlot_PanLabs=c("(g)","(h)","(i)")
+PlotForMSArgs$ExplainDirectMoran_PanLabs=paste0("(",letters[5:19],letters[5:19],")")
+PlotForMSArgs$ExplainInteractingMoran_PanLabs=paste0("(",letters[5:19],letters[5:19],")")
+Args<-list(locstouse=CC2locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal2_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
+RegionalAnalysis_CentCal2_KelpLag12<-do_analysis(Args)
+saveRDS(RegionalAnalysis_CentCal2_KelpLag12,paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag12.Rds"))
+#RegionalAnalysis_CentCal2_KelpLag12<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag12.Rds"))
+
+
 
 
 
