@@ -114,7 +114,10 @@ ncf::gcdist(locs$Lon[h],locs$Lat[h]) #73.35km
 h<-c(CC2locstouse[1],CC2locstouse[length(CC1locstouse)])
 ncf::gcdist(locs$Lon[h],locs$Lat[h]) #78.46km
 
-#So my three roughly comparable regions are SBlocstouse, CC1locstouse, CC2locstouse
+#So my three roughly comparable regions are SBlocstouse, CC1locstouse, CC2locstouse. Save them.
+saveRDS(SBlocstouse,file=paste0(resloc,"SBlocstouse.Rds"))
+saveRDS(CC1locstouse,file=paste0(resloc,"CC1locstouse.Rds"))
+saveRDS(CC2locstouse,file=paste0(resloc,"CC2locstouse.Rds"))
 
 #***
 #The main function for doing the analysis on a particular of locations

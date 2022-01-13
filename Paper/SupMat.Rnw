@@ -93,6 +93,10 @@ p1_C2<-readRDS(paste0(resloc,"Params_C2_p1.rds"))
 p2_C2<-readRDS(paste0(resloc,"Params_C2_p2.rds"))
 b_C2<-readRDS(paste0(resloc,"Params_C2_b.rds"))
 
+resloc<-"../Results/Kelp_DataAfterSuperBasicCleaning/"
+kelp_SB<-readRDS(paste0(resloc,"Kelp_Quarterly_CleanedSuperBasic.Rds"))
+resloc<-"../Results/Kelp_DataAfterMoreInvolvedCleaning/"
+kelp_MI<-readRDS(paste0(resloc,"Kelp_Quarterly_CleanedMoreInvolved.Rds"))
 @
 
 \maketitle
@@ -476,12 +480,47 @@ $\rho_{\epsilon^{(1)} \epsilon^{(1)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \
 $\rho_{\epsilon^{(2)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{22}$ and 
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{12} \exp(-2 \pi \iota f (l_1-l_2))$.
 
-\section{Details of data and data cleaning}
+\section{Details of data and data cleaning}\label{sect:data}
 
-%***DAN: This should include specification of the regions CC1, CC2, SB.
-%You have to get some info from Tom about the nature of the spatial sampling, and the process leading up to what he gave me.
-%You have to then describe the stages of cleaning I did.
+Floating surface canopy of kelp was measured by remote sensing, with details and
+validation reported by \cite{Cavanaugh2011} and \cite{Bell2020, Bell2021}. Multispectral Landsat
+imagery of $30$m resolution was used. Quarterly mean biomass values and spatial extent of canopy  
+within $500$m coastline segments (henceforth called ``loactions'')
+were computed by averaging. Quarters were: Q1, January-March; Q2, April-June; 
+Q3, July-September; Q4, October-December. 
+Data were thusly available from $\Sexpr{dim(kelp_SB)[1]}$ locations spanning 
+approximately from Monterey Bay to San Diego. 
+We then chose locations for analysis for which kelp was ``persistent'', in this 
+context meaning absent or missing data for no more than three years; this was to focus on 
+population dynamics of kelp rather than extinction-recolonization dynamics, which occur in some 
+locations and which can relate to sediment dynamics on the ocean floor and other factors
+not currently of primary interest. Of the original $\Sexpr{dim(kelp_SB)[1]}$ locations,
+$\Sexpr{dim(kelp_MI)[1]}$ ($\Sexpr{100*round(dim(kelp_MI)[1]/dim(kelp_SB)[1],2)}$\%) 
+were deemed persistent according to this criterion. Missing values in the remaining 
+time series were then filled with seasonal medians. The biomass and spatial extent time series
+for each location were then used together to produce one time series estimating biomass
+density per unit useable habitat at the site, as follows: every value of 
+the biomass time series was divided by the $90^{\text{th}}$ quantile of the distribution
+of the spatial extent time series at the site. The $90^{\text{th}}$ quantile was used instead
+of the maximum value of the spatial extent time series because maximum statistics have high variance. 
+This procedure served to normalize total biomass by an estimate
+of total useable habitat at a site. Kelp establish on rocky substrate, and areas with sandy or
+sedimented substrate are not useable kelp habitat. All time series were then linearly detrended,
+and only those time series were utilized which were located within the three regions pictured
+in Fig. \ref{MT-fig:map} in the main text. Regions were selected to represent distinct dynamical
+patterns known to occur in central and southern CA, and also to have another the same number
+of time series per selected region.
 
+Wave nutrient data were also available for each quarter at each location. Wave data were derived 
+by applying a swell propagation model with bouy-based wave measurements and a validation 
+techniques \citep{Wingeart2001,Hansen2009,Bell2015,OReilly2016}. Data on nitrates 
+were produced \citep{Snyder2020} by exploiting an established empirical 
+relationship between surface nitrate concentration
+and sea surface temperature (SST) in coastal CA \citep{Zimmerman1984,Palacios2013,Snyder2020}
+and SST data derived from Advanced Very High Resolution Radiometer satellite imagery. 
+Wave and nutrient time series in each location were again linearly detrended before use.
+
+\section{Details of statistical methods}
 
 
 \section{Supporting results for kelp}

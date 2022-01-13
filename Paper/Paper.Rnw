@@ -96,6 +96,13 @@ p1_C2<-readRDS(paste0(resloc,"Params_C2_p1.rds"))
 p2_C2<-readRDS(paste0(resloc,"Params_C2_p2.rds"))
 b_C2<-readRDS(paste0(resloc,"Params_C2_b.rds"))
 
+resloc<-"../Results/Kelp_DataAfterAllCleaning/"
+quarters<-readRDS(paste0(resloc,"Quarters_CleanedFinal.Rds"))
+
+resloc<-"../Results/Kelp_SpectralDecompResults/"
+SBlocstouse<-readRDS(paste0(resloc,"SBlocstouse.Rds"))
+CC1locstouse<-readRDS(paste0(resloc,"CC1locstouse.Rds"))
+CC2locstouse<-readRDS(paste0(resloc,"CC2locstouse.Rds"))
 @
 
 \maketitle
@@ -142,8 +149,8 @@ drivers operated independently \citep{Sheppard2019,CastoraniSheppardKelp}. Effec
 in the seas around the United Kingdom is substantially augmented by interactions between environmental 
 drivers of synchrony and drivers linked with consumption by a copepod predator.
 \cite{CastoraniSheppardKelp} showed that nutrient dynamics and wave disturbance, two Moran drivers
-of synchrony in giant kelp populations on the California coast, interact either synergistically 
-or destructively, depending on which portion of the California coast is examined and on 
+of synchrony in giant kelp populations on the California (CA) coast, interact either synergistically 
+or destructively, depending on which portion of the CA coast is examined and on 
 timescale of analysis. 
 Both of these studies argued that interactions between Moran effects may be a general feature of many 
 systems, because of the large number of interrelated factors driving population fluctuations in most 
@@ -201,14 +208,14 @@ Thus our specific goals for thus study are the following. First, (G1) we will el
 theory of interacting Moran effects which allows a detailed understanding of how the mechanism works. Second, 
 (G2) we will consider theoretical case studies, which emerge as important special cases of our general theory, and 
 which illuminate the intuition behind how Moran effects may interact in real systems. Third, (G3) we will 
-apply our theory to populations of giant kelp off the California coast. Whereas \cite{CastoraniSheppardKelp}
-already carried out a detailed analysis of interacting Moran effects in California kelp populations and their importance 
+apply our theory to populations of giant kelp off the CA coast. Whereas \cite{CastoraniSheppardKelp}
+already carried out a detailed analysis of interacting Moran effects in CA kelp populations and their importance 
 for kelp ecology, we instead use a simplified subset of the available kelp data, and our analysis is instead intended 
 to illuminate the inner workings of our theory and of the general mechanisms we describe. In the Discussion, we 
 extend the arguments of \cite{Sheppard2019} and \cite{CastoraniSheppardKelp} that interactions between Moran 
 effects are likely to be common, and hence that our general theory seems likely to pertain to numerous 
-ecosystems. Overall, this study serves to introduce a general theory of Moran interactions and to conceptually
-illuminate a newly observed but potentially quite common mechanism of spatiotemporal population dynamics. 
+ecosystems. Overall, this study introduces a general theory of Moran interactions and uses it to conceptually
+illuminate this newly observed but potentially quite common mechanism of spatiotemporal population dynamics. 
 
 \section{General theory}
 
@@ -315,6 +322,7 @@ between Moran effects. The derivation of the theory is in SI section \ref{SM-sec
 
 \section{Methods}
 
+%Theoretical case studies
 \noindent We now describe how we pursue goal G2 of the Introduction, to develop 
 theoretical case studies that illuminate the intuition of interacting Moran effects. 
 We develop case studies A-C. For all cases, the model time step was assumed to be one quarter, i.e., 
@@ -346,7 +354,7 @@ four model time steps, but with different phases. Peaks in $\epsilon^{(1)}$ are 
 either lead or lag (we consider two model scenarios) peaks in $\epsilon^{(2)}$ by one quarter.
 Such a scenario could be realized by annually 
 periodic environmental fluctuations sampled quarterly,
-e.g., kelp wave action in central California peaks annually in the winter, whereas surface-water
+e.g., kelp wave action in central CA peaks annually in the winter, whereas surface-water
 nitrate concentrations also fluctuate with period one year, but peak in the spring, a delay of one quarter
 compared to the wave peak. 
 Details of the noise processes are specified in SI section \ref{SM-sect:examples_cross_sync}.
@@ -354,40 +362,55 @@ For all case studies,
 the autoregressive order of population dynamics is assumed, for simplicity, to be $1$, i.e, $b_1 \neq 0$ 
 but $b_i=0$ for $i>1$. 
 
+%Description of data after cleaning
+The core of this paper is the new theory, but to help illustrate that theory, we also apply
+it to an exceptional dataset on giant kelp (\emph{Macrocyctis pyrifera}) dynamics off the CA coast, and 
+associated environmental measurements. 
+The data are based on a subset of those used by \cite{CastoraniSheppardKelp} and
+\cite{Walter2021}, and data details are given in those papers and in SI section \ref{SM-sect:data}. We here
+summarize the format of the data after a preparation and cleaning process was implemented. 
+\cite{CastoraniSheppardKelp} and \cite{Walter2021} also provide an introduction to 
+kelp ecology, and information on why giant kelp is an excellent species 
+for studies of synchrony. After preparation, kelp data consisted of
+$\Sexpr{length(SBlocstouse)+length(CC1locstouse)+length(CC2locstouse)}$ quarterly kelp abundance time series
+from locations along the CA coast, each time series spanning from quarter $\Sexpr{quarters[1,3]}$ 
+of $\Sexpr{quarters[1,2]}$ to quarter $\Sexpr{quarters[dim(quarters)[1],3]}$ of 
+$\Sexpr{quarters[dim(quarters)[1],2]}$.   
+Time series were grouped into three regions which were analyzed separately: a more northerly
+central CA group of $\Sexpr{length(CC1locstouse)}$ locations (called CCA1); a more southerly central CA group of 
+$\Sexpr{length(CC2locstouse)}$ locations (CCA2); and a group of $\Sexpr{length(SBlocstouse)}$ locations 
+from southern CA, close to Santa Barbara
+(SB; see Fig. \ref{fig:map}). Each kelp measurement is an estimate of mean quarterly kelp biomass per unit 
+useable habitat in a 500m stretch of coastline. We used coastline segments where kelp was persistent
+through essentially all of the $\Sexpr{quarters[1,2]}$-$\Sexpr{quarters[dim(quarters)[1],2]}$ 
+period (SI section \ref{SM-sect:data}). We also had estimates
+of maximum wave height and mean nitrate concentration for each quarter and location; both waves
+and nutrients are known to influence kelp population dynamics and synchrony 
+\citep{Cavanaugh2013,CastoraniSheppardKelp}.
+
+
 
 %Tentative broad outline
-%0) above stuff about the case studies 
-%1) Para from Tom on how remote sensing data are gathered and coverted into what he handed to me. Brief, mostly 
-%citing other works where it is laid out in much more detail. 
-%2) Para from Tom on how he got to the wave and NO3 data
-%3) Para summarizing the data cleaning I did
-%Comment) Actually, might want to send the abive 3 paras to sup mat, and just have one para describing the final format of the
-%data, especially if you make this paper also be about plankton. But do that later if you do it.
-%5) Para about the linear modelling - this is how certain parts of the main theoretical equation were estimated
-%6) Para about spectral estimates. Brief, cites appropriate parts of Brillinger, uses sup mat if needed. This is how certain
-%other parts of the main theoretical equation were estimated. 
-%Comment) Somehow need to get across what was done - different parts of main equation were examined to explore the different
-%aspects of how the mechanism works for the focal taxa. Elaborate as appropriate.
+%2) Para about the linear modelling - this is how certain parts of the main theoretical equation were estimated,
+%about the lags we used, and justification for them etc. Might also need to cite a sup mat section. Maybe 
+%we need one single sup mat section called "supplementary methods" or "details of methods" or something. Actually
+%let's have two of these, one for data, one for stats
+%3) Para about spectral estimates. Brief, cites appropriate parts of Brillinger, uses sup mat if needed. This is how certain
+%other parts of the main theoretical equation were estimated. Basically it's just about how to do spectral
+%estimates of spectra and cross spectra, and then rest follows from the main theoretical equation.
+%4) Somehow need to get across what was done - different parts of main equation were examined to explore the different
+%aspects of how the mechanism works for the focal taxon. Elaborate as appropriate.
 
-%Para 1 from Tom
-A process was previously developed (REFS) using remote sensing to provide quarterly kelp biomass and kelp canopy area estimates,
-from quarter 1 of 1987 to quarter 4 of 2019, at $437$ locations along the California coast, from slightly north of Monterey Bay
-to San Diego. We very briefly describe the process, refering to our earlier published works for details.
-%Need to mention: The spacing and extent of each site; where the data can be downloaded (other than in our git repo, though I'll
-%a mention of that, too); lots of references as necessary; probably need slightly more formal statements of what "kelp biomass" 
-%"kelp canopy area" mean in these contextx; anything else important. Need bibliographic data for cited papers.
-
-%Para 2 from Tom
-Another process was previously developed (REFS) to provide mean nitrate concentration and maximum wave height data
-for the same quarters and locations. We again briefly describe the process, citing earlier works for details. 
-
-%I asked Tom for these paragraphs by email on 2021 08 05
+Data for the project are archived at X.
+%***DAN: Need to get the data location from Jon, I think he posted it, right? Maybe he did not put it all i
+%one place. Check with him. At the end of the Max/Lawrence paper, several data locations are listed.
+%I have an email out to Jon and Max.
+All computations were done in R version 3.4.4 on an ordinary laptop which was running Ubuntu Linux
+16.04. Complete codes and data are at \url{https://github.com/reumandc/InteractingMoranEffects.git}.
 
 
 
-%Need:
-%1) Some kind of map of the locations and display of some time series for the sup mat, to give a sense of the data. I think Max will
-%have made one of these for his paper with Lawrence, so maybe I could get him to make another one, same or appropriately modified?
+
 
 
 \section{Results}
@@ -549,6 +572,21 @@ positive and those of $\epsilon^{(2)}$ were negative.
 %our theory, and our work does demonstrate the importance of interaction effects for the synchrony of kelp
 %as observed from space. But future work could look at this more, certainly, perhaps using state-space models
 %which can separate biological from observation processes.   
+%   Tom also told me in a meeting zoom call that in central CA growth of new fronds will be slower because 
+%there are not other fronds (left) on the same plant to provide a sugar subsidy to new fronds. In central CA,
+%basically all fronds from the same plant are ripped out.
+
+%Need a paragraph (already mentioned above) on how a frequency/timescale-specific approach
+%is necessary for all this. Need to think more about it first, i.e., how would you attempt to 
+%do this without such an approach, and how far would you get? Or maybe that is not quite the 
+%right at it (though you should try thinking that through and see what you get), maybe another
+%possibly better way would be to see that everything we list here can depend on timescale.
+%You can get a non-timescale-specific approach just by integrating our main equation across
+%frequencies. However, that will obscure the fact that you can get strong positive interaction 
+%effects on some timescales and strong negative ones on others. What would you get in our 
+%theoretical case studies if you integrated and would it reveal what's really going on? What 
+%are the implications of timescale structure for practical situations where populations and
+%environmental variables are measured over a certain typical duration (i.e, short time series)?
 
 %We definitely need a discussion para comparing my results to those of Max and Lawrence (hopefully they are 
 %basically consistent). Note differences in methods. Note differences in results (hopefully small). 
@@ -598,6 +636,13 @@ populations, i.e., $l_{e1}$ differs from $l_{e2}+l_n$ by half the given timescal
 as in panel (b), so that the distinct influences tend to work against each other in 
 bringing about population oscillations on the given timescale.  
 A timescale-specific approach is essential to this reasoning.}\label{fig:IntroTheory}
+\end{figure}
+
+\clearpage
+\newpage
+
+\begin{figure}
+\caption{To fill.}\label{fig:map}
 \end{figure}
 
 \clearpage
