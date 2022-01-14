@@ -1604,7 +1604,7 @@ make_plots_ForMS<-function(freq,frg,totsync,T1_avg,T2_avg,T3_avg,T4_avg,T5_avg,T
   lines(l2timescales[inds],T4_avg[inds],type="l",lty="solid",col="green") 
   lines(l2timescales[inds],T4_avg[inds],type="l",lty="dashed",col="blue") #interactions between waves and NO3
   lines(l2timescales[inds],sumexpl[inds],type="l",col="red",lty="solid") #explained stuff - sum of all the terms relating only to NO3 and waves (direct NO3 and wave effects, and interactions between those two)
-  lines(l2timescales[inds],sumterms[inds],type="l",lty="dashed") #total of all terms, should approx equal the plot of totsync
+  #lines(l2timescales[inds],sumterms[inds],type="l",lty="dashed") #total of all terms, should approx equal the plot of totsync
   #lines(l2timescales[inds],sumunexpl[inds],type="l",lty="solid",col="red") #unexplained
   lines(l2timescales[inds],rep(0,length(timescales[inds])))
   lines(rep(log2(4),2),ylimits) #plot a vertical line at the annual frequency
@@ -1635,7 +1635,7 @@ make_plots_ForMS<-function(freq,frg,totsync,T1_avg,T2_avg,T3_avg,T4_avg,T5_avg,T
   lines(l2timescales[inds],T4_avg[inds],type="l",lty="solid",col="green") 
   lines(l2timescales[inds],T4_avg[inds],type="l",lty="dashed",col="blue") #interactions between waves and NO3
   lines(l2timescales[inds],sumexpl[inds],type="l",col="red",lty="solid") #explained stuff - sum of all the terms relating only to NO3 and waves (direct NO3 and wave effects, and interactions between those two)
-  lines(l2timescales[inds],sumterms[inds],type="l",lty="dashed") #total of all terms, should approx equal the plot of totsync
+  #lines(l2timescales[inds],sumterms[inds],type="l",lty="dashed") #total of all terms, should approx equal the plot of totsync
   #lines(l2timescales[inds],sumunexpl[inds],type="l",lty="solid",col="red") #unexplained
   lines(l2timescales[inds],rep(0,length(timescales[inds])))
   
@@ -1664,7 +1664,7 @@ make_plots_ForMS<-function(freq,frg,totsync,T1_avg,T2_avg,T3_avg,T4_avg,T5_avg,T
   lines(l2timescales[inds],T4_avg[inds],type="l",lty="solid",col="green") 
   lines(l2timescales[inds],T4_avg[inds],type="l",lty="dashed",col="blue") #interactions between waves and NO3
   lines(l2timescales[inds],sumexpl[inds],type="l",col="red",lty="solid") #explained stuff - sum of all the terms relating only to NO3 and waves (direct NO3 and wave effects, and interactions between those two)
-  lines(l2timescales[inds],sumterms[inds],type="l",lty="dashed") #total of all terms, should approx equal the plot of totsync
+  #lines(l2timescales[inds],sumterms[inds],type="l",lty="dashed") #total of all terms, should approx equal the plot of totsync
   #lines(l2timescales[inds],sumunexpl[inds],type="l",lty="solid",col="red") #unexplained
   lines(l2timescales[inds],rep(0,length(timescales[inds])))
   

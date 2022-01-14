@@ -45,20 +45,19 @@
 \date{}
 
 %***Tentative author order, Bell last for his data contributions
-\author[a,b,*]{Daniel C. Reuman}
-\author[c]{Max Castorani}
-\author[d]{Kyle Cavanaugh}
-\author[e]{Lawrence W. Sheppard}
-\author[c]{Jonathan Walter}
-\author[f,g]{Tom Bell}
+\author[a,*]{Daniel C. Reuman}
+\author[b]{Max Castorani}
+\author[c]{Kyle Cavanaugh}
+\author[d]{Lawrence W. Sheppard}
+\author[b]{Jonathan Walter}
+\author[e,f]{Tom Bell}
 
 \affil[a]{Department of Ecology and Evolutionary Biology and Center for Ecological Research, University of Kansas}
-\affil[b]{Laboratory of Populations, Rockefeller University}
-\affil[c]{Department of Environmental Sciences, University of Virginia}
-\affil[d]{Department of Geography, University of California, Los Angeles}
-\affil[e]{Marine Biological Association of the United Kingdom}
-\affil[f]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
-\affil[g]{Earth Research Institute, University of California, Santa Barbara}
+\affil[b]{Department of Environmental Sciences, University of Virginia}
+\affil[c]{Department of Geography, University of California, Los Angeles}
+\affil[d]{Marine Biological Association of the United Kingdom}
+\affil[e]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
+\affil[f]{Earth Research Institute, University of California, Santa Barbara}
 \affil[*]{Corresponding author, reuman@ku.edu}
 
 \begin{document}
@@ -97,6 +96,17 @@ resloc<-"../Results/Kelp_DataAfterSuperBasicCleaning/"
 kelp_SB<-readRDS(paste0(resloc,"Kelp_Quarterly_CleanedSuperBasic.Rds"))
 resloc<-"../Results/Kelp_DataAfterMoreInvolvedCleaning/"
 kelp_MI<-readRDS(paste0(resloc,"Kelp_Quarterly_CleanedMoreInvolved.Rds"))
+
+resloc<-"../Results/Kelp_SpectralDecompResults/"
+CCA1l4<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag4.Rds"))
+CCA2l4<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag4.Rds"))
+SBl4<-readRDS(paste0(resloc,"RegionalAnalysis_SoCal_KelpLag4.Rds"))
+CCA1l8<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag8.Rds"))
+CCA2l8<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag8.Rds"))
+SBl8<-readRDS(paste0(resloc,"RegionalAnalysis_SoCal_KelpLag8.Rds"))
+CCA1l12<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag12.Rds"))
+CCA2l12<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal2_KelpLag12.Rds"))
+SBl12<-readRDS(paste0(resloc,"RegionalAnalysis_SoCal_KelpLag12.Rds"))
 @
 
 \maketitle
@@ -520,9 +530,6 @@ and sea surface temperature (SST) in coastal CA \citep{Zimmerman1984,Palacios201
 and SST data derived from Advanced Very High Resolution Radiometer satellite imagery. 
 Wave and nutrient time series in each location were again linearly detrended before use.
 
-\section{Details of statistical methods}
-
-
 \section{Supporting results for kelp}
 
 \begin{figure}[!h]
@@ -530,8 +537,8 @@ Wave and nutrient time series in each location were again linearly detrended bef
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_MainPlot_ForMS.pdf} \\
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag4_MainPlot_ForMS.pdf}
 \caption[Extension of main text Fig. \ref{MT-fig:SummaryKelpFig}]{Same format as Fig. \ref{MT-fig:SummaryKelpFig} of the main text, but including not only results
-for the first central CA region (a-c) and the southern CA region (d-f), but also results from the 
-second central CA region (g-i).}\label{fig:SummaryKelpFig_SM_lag4}
+for the CCA1 region (a-c) and the SB region (d-f), but also results from the 
+CCA2 region (g-i).}\label{fig:SummaryKelpFig_SM_lag4}
 \end{figure}
 
 \begin{figure}
@@ -558,8 +565,8 @@ the same as for Fig. \ref{fig:SummaryKelpFig_SM_lag4}.}\label{fig:SummaryKelpFig
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_ExplainDirectMoran_ForMS.pdf} \\
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag4_ExplainDirectMoran_ForMS.pdf}
 \caption[Extension of main text Fig. \ref{MT-fig:directMoran}]{Same format as Fig. \ref{MT-fig:directMoran} of the main text, but including not only results
-for the first central CA region (a-o) and the southern CA region (p-dd), but also results from the 
-second central CA region (ee-ss).}\label{fig:directMoran_SM_lag4}
+for the CCA1 region (a-o) and the SB region (p-dd), but also results from the 
+CCA2 region (ee-ss).}\label{fig:directMoran_SM_lag4}
 \end{figure}
 
 \begin{figure}
@@ -586,8 +593,8 @@ the same as for Fig. \ref{fig:directMoran_SM_lag4}.}\label{fig:directMoran_SM_la
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_ExplainInteractingMoran_ForMS.pdf} \\
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag4_ExplainInteractingMoran_ForMS.pdf} 
 \caption[Extension of main text Fig. \ref{MT-fig:indirectMoran}]{Same format as Fig. \ref{MT-fig:indirectMoran} of the main text, but including not only results
-for the first central CA region (a-o) and the southern CA region (p-dd), but also results from the 
-second central CA region (ee-ss).}\label{fig:indirectMoran_SM_lag4}
+for the CCA1 region (a-o) and the SB region (p-dd), but also results from the 
+CCA2 region (ee-ss).}\label{fig:indirectMoran_SM_lag4}
 \end{figure}
 
 \begin{figure}
@@ -608,9 +615,31 @@ potential kelp lag effects from up to 12 quarters in the past (see Methods). Res
 the same as for Fig. \ref{fig:indirectMoran_SM_lag4}.}\label{fig:indirectMoran_SM_lag12}
 \end{figure}
 
-
 \clearpage
-\newpage
+
+\begin{table}[!h]
+\caption{Regression coefficients used to parameters (\ref{MT-main_model_1})-(\ref{MT-main_model_4}) of the main text for each 
+of our three regions. All values rounded to two decimal places.}\label{tab:regcoefs}
+\begin{center}
+\begin{tabular}{r|l|l|l|l|l}
+ & $p_0^{(1)}$ & $p_1^{(1)}$ & $p_0^{(2)}$ & $b_1,b_2,\ldots,b_n$ & $R^2$\\
+ \hline
+%n=4
+CCA1, $n=4$ & \Sexpr{round(unname(CCA1l4[6]),2)} & \Sexpr{round(unname(CCA1l4[7]),2)} & \Sexpr{round(unname(CCA1l4[8]),2)} & \Sexpr{paste0(round(unname(CCA1l4[2:5]),2),collapse=",")} & \Sexpr{round(unname(CCA1l4[1]),2)} \\
+CCA2, $n=4$ & \Sexpr{round(unname(CCA2l4[6]),2)} & \Sexpr{round(unname(CCA2l4[7]),2)} & \Sexpr{round(unname(CCA2l4[8]),2)} & \Sexpr{paste0(round(unname(CCA2l4[2:5]),2),collapse=",")} & \Sexpr{round(unname(CCA2l4[1]),2)} \\
+SB, $n=4$ & \Sexpr{round(unname(SBl4[6]),2)} & \Sexpr{round(unname(SBl4[7]),2)} & \Sexpr{round(unname(SBl4[8]),2)} & \Sexpr{paste0(round(unname(SBl4[2:5]),2),collapse=",")} & \Sexpr{round(unname(SBl4[1]),2)} \\
+%n=8
+CCA1, $n=8$ & \Sexpr{round(unname(CCA1l8[10]),2)} & \Sexpr{round(unname(CCA1l8[11]),2)} & \Sexpr{round(unname(CCA1l8[12]),2)} & \Sexpr{paste0(round(unname(CCA1l8[2:9]),2),collapse=",")} & \Sexpr{round(unname(CCA1l8[1]),2)} \\
+CCA2, $n=8$ & \Sexpr{round(unname(CCA2l8[10]),2)} & \Sexpr{round(unname(CCA2l8[11]),2)} & \Sexpr{round(unname(CCA2l8[12]),2)} & \Sexpr{paste0(round(unname(CCA2l8[2:9]),2),collapse=",")} & \Sexpr{round(unname(CCA2l8[1]),2)} \\
+SB, $n=8$ & \Sexpr{round(unname(SBl8[10]),2)} & \Sexpr{round(unname(SBl8[11]),2)} & \Sexpr{round(unname(SBl8[12]),2)} & \Sexpr{paste0(round(unname(SBl8[2:9]),2),collapse=",")} & \Sexpr{round(unname(SBl8[1]),2)} \\
+%n=12
+CCA1, $n=12$ & \Sexpr{round(unname(CCA1l12[14]),2)} & \Sexpr{round(unname(CCA1l12[15]),2)} & \Sexpr{round(unname(CCA1l12[16]),2)} & \Sexpr{paste0(round(unname(CCA1l12[2:13]),2),collapse=",")} & \Sexpr{round(unname(CCA1l12[1]),2)} \\
+CCA2, $n=12$ & \Sexpr{round(unname(CCA2l12[14]),2)} & \Sexpr{round(unname(CCA2l12[15]),2)} & \Sexpr{round(unname(CCA2l12[16]),2)} & \Sexpr{paste0(round(unname(CCA2l12[2:13]),2),collapse=",")} & \Sexpr{round(unname(CCA2l12[1]),2)} \\
+SB, $n=12$ & \Sexpr{round(unname(SBl12[14]),2)} & \Sexpr{round(unname(SBl12[15]),2)} & \Sexpr{round(unname(SBl12[16]),2)} & \Sexpr{paste0(round(unname(SBl12[2:13]),2),collapse=",")} & \Sexpr{round(unname(SBl12[1]),2)} \\
+\end{tabular}
+\end{center}
+\end{table}
+
 
 \bibliographystyle{ecology_letters2}
 \bibliography{refs} 

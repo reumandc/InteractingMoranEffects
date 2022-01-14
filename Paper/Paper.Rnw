@@ -48,20 +48,19 @@
 %How environmental drivers of spatial synchrony interact
 
 %***Tentative author order, Bell last for his data contributions
-\author[a,b,*]{Daniel C. Reuman}
-\author[c]{Max Castorani}
-\author[d]{Kyle Cavanaugh}
-\author[e]{Lawrence W. Sheppard}
-\author[c]{Jonathan Walter}
-\author[f,g]{Tom Bell}
+\author[a,*]{Daniel C. Reuman}
+\author[b]{Max Castorani}
+\author[c]{Kyle Cavanaugh}
+\author[d]{Lawrence W. Sheppard}
+\author[b]{Jonathan Walter}
+\author[e,f]{Tom Bell}
 
 \affil[a]{Department of Ecology and Evolutionary Biology and Center for Ecological Research, University of Kansas}
-\affil[b]{Laboratory of Populations, Rockefeller University}
-\affil[c]{Department of Environmental Sciences, University of Virginia}
-\affil[d]{Department of Geography, University of California, Los Angeles}
-\affil[e]{Marine Biological Association of the United Kingdom}
-\affil[f]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
-\affil[g]{Earth Research Institute, University of California, Santa Barbara}
+\affil[b]{Department of Environmental Sciences, University of Virginia}
+\affil[c]{Department of Geography, University of California, Los Angeles}
+\affil[d]{Marine Biological Association of the United Kingdom}
+\affil[e]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
+\affil[f]{Earth Research Institute, University of California, Santa Barbara}
 \affil[*]{Corresponding author, reuman@ku.edu}
 
 \begin{document}
@@ -217,7 +216,7 @@ effects are likely to be common, and hence that our general theory seems likely 
 ecosystems. Overall, this study introduces a general theory of Moran interactions and uses it to conceptually
 illuminate this newly observed but potentially quite common mechanism of spatiotemporal population dynamics. 
 
-\section{General theory}
+\section{General Theory}
 
 \noindent Our main theoretical work requires a conceptual understanding of the \emph{spectrum} of an environmental 
 or population time series, as well as of the \emph{cospectrum} and \emph{cross spectrum} of two time series,
@@ -363,8 +362,9 @@ the autoregressive order of population dynamics is assumed, for simplicity, to b
 but $b_i=0$ for $i>1$. 
 
 %Description of data after cleaning
-The core of this paper is the new theory, but to help illustrate that theory, we also apply
-it to an exceptional dataset on giant kelp (\emph{Macrocyctis pyrifera}) dynamics off the CA coast, and 
+The core of this paper is the new theory, but to help illustrate that theory, fulfilling goal G3 of the 
+Introduction, we also apply
+the theory to an exceptional dataset on giant kelp (\emph{Macrocyctis pyrifera}) dynamics off the CA coast, and 
 associated environmental measurements. 
 The data are based on a subset of those used by \cite{CastoraniSheppardKelp} and
 \cite{Walter2021}, and data details are given in those papers and in SI section \ref{SM-sect:data}. We here
@@ -388,35 +388,49 @@ of maximum wave height and mean nitrate concentration for each quarter and locat
 and nutrients are known to influence kelp population dynamics and synchrony 
 \citep{Cavanaugh2013,CastoraniSheppardKelp}.
 
+Coefficients of the model (\ref{main_model_1})-(\ref{main_model_4}) were separately selected for each of our three regions 
+using linear regression methods and building on extensive prior work on the drivers of kelp dynamics. A no-intercept 
+regression model of kelp at time $t$ in location $i$, i.e., 
+$w_i(t)$ in (\ref{main_model_1}), against lagged values of kelp 
+($w_i(t-l)$ for $l=1,\ldots,n$ in (\ref{main_model_1})), lagged and unlagged values of nitrates
+($\epsilon_i^{(1)}(t-l)$ for $l=0,\ldots,m_1$ in (\ref{main_model_2})), and values of waves
+($\epsilon_i^{(2)}(t-l)$ for $l=0,\ldots,m_2$ in (\ref{main_model_3})) was fitted using standard regression methods.
+The same regression coefficients were used for all locations within a region.
+Waves influence kelp dynamics through direct disturbance events which can damage kelp or extirpate kelp locally 
+when waves are large \citep{Dayton1992,Cavanaugh2011,Bell2015}. Thus wave effects 
+are immediate and $m_2=0$ was used. Nitrates are known to fuel rapid kelp growth, though in some areas
+effects appear delayed by about one quarter because our kelp data quantify canopy (surface) biomass, and it can
+take time for damaged kelp to grow back to the surface 
+\citep{Zimmerman1986,Cavanaugh2011,Bell2015}. 
+Therefore $m_1=1$ was used. Kelp holdfasts on the sea floor can last for multiple years, so kelp lag effects were considered:
+we used $n=4, 8, 12$ in separate analysis, with this choice making no substantive difference to results (see Results).
+Regression coefficient determined the quantities $b_1,\ldots,b_n$, $p_0^{(1)}$, $p_1^{(1)}$, and $p_0^{(2)}$
+in (\ref{main_model_1})-(\ref{main_model_3}), and therefore the quantities $f_{\mcB}$, $f_{\mcP^{(1)}}$ and
+$f_{\mcP^{(2)}}$ in (\ref{rhoww_T1to3}), for each of our three regions (see General Theory).
 
+To estimate the components $\rho_{ww}$, $\rho_{\epsilon^{(1)}\epsilon^{(1)}}$, $\rho_{\epsilon^{(2)}\epsilon^{(2)}}$ and 
+$\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ in (\ref{rhoww_T1to3}), where $w$ was detrended kelp time series in one of our regions, 
+$\epsilon^{(1)}$ was detrended nitrate time
+series in the region, and $\epsilon^{(2)}$ was detrended wave disturbance time series in the region, 
+we applied the definitions of these quantities (see General Theory), which required estimation from data of
+the spectra and cross spectra $S_{w_i w_j}$ and $S_{\epsilon_i^{(a)}\epsilon_j^{(b)}}$ for $i,j=1,\ldots,N$
+and $a,b=1,2$, where $N$ is the number of locations in the region being considered. Spectral quantities were
+computed using the consistent estimator of section 7.4 of \cite{Brillinger2001}. 
+%***DAN: check this section number, and if possible give a specific formula of theorem or something, and also 
+%check the below text and maybe augment it
+The estimator is a smoothed periodogram, with the width of the smoothing kernel selected to 
+increase with the square root of time series length. Theory was interpreted in relation to kelp ecology and
+theoretical case studies by plotting the components of (\ref{rhoww_T1to3}) for each of our regions.
 
-%Tentative broad outline
-%2) Para about the linear modelling - this is how certain parts of the main theoretical equation were estimated,
-%about the lags we used, and justification for them etc. Might also need to cite a sup mat section. Maybe 
-%we need one single sup mat section called "supplementary methods" or "details of methods" or something. Actually
-%let's have two of these, one for data, one for stats
-%3) Para about spectral estimates. Brief, cites appropriate parts of Brillinger, uses sup mat if needed. This is how certain
-%other parts of the main theoretical equation were estimated. Basically it's just about how to do spectral
-%estimates of spectra and cross spectra, and then rest follows from the main theoretical equation.
-%4) Somehow need to get across what was done - different parts of main equation were examined to explore the different
-%aspects of how the mechanism works for the focal taxon. Elaborate as appropriate.
-
-Data for the project are archived at X.
-%***DAN: Need to get the data location from Jon, I think he posted it, right? Maybe he did not put it all i
-%one place. Check with him. At the end of the Max/Lawrence paper, several data locations are listed.
-%I have an email out to Jon and Max.
+Data for the project are publicly archived \citep{SBCLTER2021}.
 All computations were done in R version 3.4.4 on an ordinary laptop which was running Ubuntu Linux
-16.04. Complete codes and data are at \url{https://github.com/reumandc/InteractingMoranEffects.git}.
-
-
-
-
-
+16.04. Complete codes for the entire project workflow are at \url{https://github.com/reumandc/InteractingMoranEffects.git}.
 
 \section{Results}
 
 %Para basically confirming earlier work, as a starter
-Our theoretical results demonstrate that interaction effects between Moran drivers: 1) can be 
+Helping fulfill goal G2 of the Introduction, our theoretical results 
+demonstrate that interaction effects between Moran drivers: 1) can be 
 comparable in strength to direct Moran effects; 2) can be either synergistic or destructive, i.e., positive or negative; and 3) 
 can depend strongly on timescale, even having different signs on different timescales. 
 First, for all of our theoretical case studies, the magnitude of 
@@ -475,6 +489,7 @@ Fig. \ref{fig:TheoryCaseA}a,d shows the additional influence of autoregressive p
 simply multiply all Moran influences by the same timescale-dependent non-negative 
 quantity without altering the relative importance or sign of the direct and indirect Moran effects [see (\ref{rhoww_T1to3})].
 
+%Case syiudy B
 Case study B reveals how Moran effects can interact when lags are longer than 1 model time step. 
 For B, $\epsilon^{(1)}$ effects on populations were lagged by $n$ quarters but 
 $\epsilon^{(2)}$ effects were unlagged (Methods). We used $n=3$. Interactions between Moran effects were 
@@ -509,6 +524,7 @@ which controls the sign of the interaction term,
 $2\Rp(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}})$, in our 
 theory (\ref{rhoww_T1to3}).
 
+%Case study C
 Cases A and B assumed white noise processes, and therefore real-valued $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$
 (SI sections \ref{SM-sect:examples_cross_sync}, \ref{SM-sect:details_case_studies}),
 but case study C illustrates what can happen when noise processes have periodic components, e.g., 
@@ -550,6 +566,57 @@ same in the two scenarios because, on those timescales, sub-annual lags
 make negligible difference. Interactions were then negative 
 because the effects of $\epsilon^{(1)}$ on populations were 
 positive and those of $\epsilon^{(2)}$ were negative.
+
+%Paralels the first para, but for kelp
+We now apply our theory to kelp, fulfilling goal G3 of the Introduction. Kelp results confirm
+the earlier theoretical results, based on our case studies 
+(see above text and Fig. \ref{fig:TheoryCaseA}a,e,i,m),
+that interaction effects between Moran drivers: 1) can be comparble in strength to direct Moran
+effects; 2) can be either synergistic or destructive; and 3) can 
+depend strongly on timescale, even having different signs on different timescales.
+First, for all of our regions and for essentially all timescales, the magintude of interaction 
+effects was comparable to that of direct Moran effects (Fig. \ref{fig:SummaryKelpFig}
+for the CCA1 and SB regions and Fig. \ref{SM-fig:SummaryKelpFig_SM_lag4} for the CCA2 region).
+Second, interaction effects could be positive (e.g., annual timescales, CCA1 region on Fig. 
+\ref{fig:SummaryKelpFig}a), or negative (e.g., annual timescales, SB region on Fig. 
+\ref{fig:SummaryKelpFig}d, or long timescales $>8$y for either region, Fig. 
+\ref{fig:SummaryKelpFig}c,f). Finally, interactions depended on timescale, e.g., for the CCA1 
+region they were positive on annual timescales (Fig. \ref{fig:SummaryKelpFig}a) and
+negative on timescales $>8$y (Fig. \ref{fig:SummaryKelpFig}c). 
+
+The way direct Moran effects work in our theory is fairly straightforward. 
+For instance, the direct Moran effect
+term in (\ref{rhoww_T1to3}) for nitrates, i.e., 
+$|f_{\mcP^{(1)}}|^2 \rho_{\epsilon^{(1)} \epsilon^{(1)}}/|f_{\mcB}|^2$, 
+equals the synchrony of the nitrate time series themselves, i.e.,
+$\rho_{\epsilon^{(1)} \epsilon^{(1)}}$, times the 
+timescale-specific strength of influence of nitrates on kelp, 
+i.e., $|f_{\mcP^{(1)}}|^2$, and modulated
+by a term quantifying the autoregressive nature of kelp dynamics,
+$1/|f_{\mcB}|^2$. These components are plotted in Fig. \ref{fig:directMoran} (CCA1 and SB regions) and 
+Fig. \ref{SM-fig:directMoran_SM_lag4} (CCA2 region) so their 
+effects on synchrony can be assessed across timescales and regions. 
+Both nitrates and waves fluctuate seasonally in CA. Thus nitrate and wave 
+synchrony had a strong annual component (Fig. \ref{fig:directMoran}b,d,q,s), which produced 
+some of the annual synchrony observed in kelp 
+(Fig. \ref{fig:SummaryKelpFig}a,d, green and blue lines).
+Nitrates and waves are also synchronous on long timescales $>8$y in CA 
+(Fig. \ref{fig:directMoran}l,n,aa,cc), possibly due to the North Pacific Gyre Oscillation [NPGO; \cite{CastoraniSheppardKelp}]. The long-timescale synchrony
+in nitrates and waves produced some of the long-timescale
+synchrony observed in kelp (Fig. \ref{fig:SummaryKelpFig}c,f, green and blue lines).
+Kelp synchrony was generally stronger in the CCA1 region compared to the SB region 
+(compare Fig. \ref{fig:SummaryKelpFig}a-c to d-f) in part because the synchrony of nitrates, and of 
+waves, was more pronounced in the CCA1 region than in the SB region 
+(compare Fig. \ref{fig:directMoran}b,g,l to q,v,aa, and 
+Fig. \ref{fig:directMoran}d,i,n to s,x,cc), and also because waves
+had a stronger influence on kelp in CCA1 compared to SB (compare 
+Fig. \ref{fig:directMoran}c,h,m to r,w,bb).
+Regression coefficients which determined $f_{\mcP^{(1)}}$, $f_{\mcP^{(2)}}$
+and $f_{\mcB}$ (see Methods) are in Table \ref{SM-tab:regcoefs}.
+
+
+
+
 
 
 
@@ -635,14 +702,16 @@ effect can occur when lags produce out-of-phase influence of environmental varia
 populations, i.e., $l_{e1}$ differs from $l_{e2}+l_n$ by half the given timescale/period,
 as in panel (b), so that the distinct influences tend to work against each other in 
 bringing about population oscillations on the given timescale.  
-A timescale-specific approach is essential to this reasoning.}\label{fig:IntroTheory}
+A timescale-specific approach is essential to this reasoning. See the online version for a color
+rendering of all figures.}\label{fig:IntroTheory}
 \end{figure}
 
 \clearpage
 \newpage
 
 \begin{figure}
-\caption{To fill.}\label{fig:map}
+\caption{To fill. See the online version for a color
+rendering of all figures.}\label{fig:map}
 \end{figure}
 
 \clearpage
@@ -681,7 +750,8 @@ amount in m-p.
 See SI section \ref{SM-sect:examples_cross_sync} and Fig. \ref{SM-fig:rhosForC} for 
 parameters associated with the noise for each case study,
 and see Methods and SI section \ref{SM-sect:details_case_studies} for additional details.
-Synch. contrib. = Synchrony contribution.}\label{fig:TheoryCaseA}
+Synch. contrib. = Synchrony contribution. See the online version for a color
+rendering of all figures.}\label{fig:TheoryCaseA}
 \end{figure}
 
 \clearpage
@@ -690,7 +760,31 @@ Synch. contrib. = Synchrony contribution.}\label{fig:TheoryCaseA}
 \begin{figure}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_MainPlot_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_MainPlot_ForMS.pdf}
-\caption{Filler.}\label{fig:SummaryKelpFig}
+\caption{Main components of the new theory as applied kelp, central CA 1 (CCA1) region (a-c) and 
+Santa Barbara (SB) region (d-f). Panels show the terms on the right side of 
+(\ref{rhoww_T1to3}). Green lines show 
+$\frac{|f_{\mcP^{(1)}}|^2}{|f_{\mcB}|^2} \rho_{\epsilon^{(1)} \epsilon^{(1)}}$, quantifying 
+kelp population synchrony due to the direct Moran effects of $\epsilon^{(1)}$, which, in this 
+context, is nitrates. The blue line
+is $\frac{|f_{\mcP^{(2)}}|^2}{|f_{\mcB}|^2} \rho_{\epsilon^{(2)} \epsilon^{(2)}}$, quantifying 
+kelp population synchrony due to the direct Moran effects of $\epsilon^{(2)}$, which,
+in this context, is waves.
+The dashed green-blue line is 
+$\frac{2 \Rp \left(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}} \right)}{|f_{\mcB}|^2}$, 
+which is population synchrony due to interacting Moran effects. The red line is the sum of the
+green, blue and green-blue lines, and is the portion of synchrony explained by nitrates,
+waves, and their interactions. Explained synchrony does not equal total kelp synchrony
+(black line) because other, unmeasured factors also help synchronize kelp dynamics.
+The CCA1 and SB regional results, respectively, approximately parallel the 
+results for theoretical case
+study C scenarios 1 and 2 (Fig. \ref{fig:TheoryCaseA}i,m; see text for details).
+See Fig. \ref{SM-fig:SummaryKelpFig_SM_lag4} for the central CA 2 (CCA2) region,
+for which results were substantially the same as for CCA1. This figure used 
+kelp lag $n=4$ (see (\ref{main_model_1}) for the meaning of $n$); 
+see Figs \ref{SM-fig:SummaryKelpFig_SM_lag8} 
+and \ref{SM-fig:SummaryKelpFig_SM_lag12} for $n=8, 12$, respectively.
+See the online version for a color rendering of this 
+figure.}\label{fig:SummaryKelpFig}
 \end{figure}
 
 \clearpage
@@ -699,7 +793,16 @@ Synch. contrib. = Synchrony contribution.}\label{fig:TheoryCaseA}
 \begin{figure}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_ExplainDirectMoran_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_ExplainDirectMoran_ForMS.pdf}
-\caption{Filler.}\label{fig:directMoran}
+\caption{Components of direct Moran effects for kelp, for the CCA1 (a-o)
+and SB regions (p-dd). The index $1$ denotes nitrates, and $2$ denotes waves.
+Vertical axis extents are the same for corresponding panels for the
+two regions, to facilitate comparisons. 
+See Fig. \ref{SM-fig:directMoran_SM_lag4} for the central CCA2 region,
+for which results were similar to CCA1. This figure used 
+kelp lag $n=4$; see Figs \ref{SM-fig:directMoran_SM_lag8} 
+and \ref{SM-fig:directMoran_SM_lag12} for $n=8, 12$, respectively.
+See the online version for a color
+rendering of all figures.}\label{fig:directMoran}
 \end{figure}
 
 \clearpage
@@ -708,7 +811,8 @@ Synch. contrib. = Synchrony contribution.}\label{fig:TheoryCaseA}
 \begin{figure}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_ExplainInteractingMoran_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_ExplainInteractingMoran_ForMS.pdf}
-\caption{Filler.}\label{fig:indirectMoran}
+\caption{Filler. See the online version for a color
+rendering of all figures.}\label{fig:indirectMoran}
 \end{figure}
 
 
