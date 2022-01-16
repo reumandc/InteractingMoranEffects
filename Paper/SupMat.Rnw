@@ -220,7 +220,7 @@ is then easy to see that $\rho_{\epsilon^{(1)} \epsilon^{(1)}}=v_{11}$,
 $\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$, and 
 $\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$, based on the definitions of these 
 quantities given previously. For theoretical case studies A and B in the main text, we used
-$N=\Sexpr{N_A}$, $v_{11}=v{22}=\Sexpr{ns_A[1]}$ and $v_{12}=\Sexpr{ns_A[3]}$.
+$N=\Sexpr{N_A}$, $v_{11}=v_{22}=\Sexpr{ns_A[1]}$ and $v_{12}=\Sexpr{ns_A[3]}$.
 
 These results make intuitive sense, for a white-noise process, for the following reasons.
 First, $\rho_{\epsilon^{(1)} \epsilon^{(1)}}$ and $\rho_{\epsilon^{(2)} \epsilon^{(2)}}$,
@@ -463,39 +463,12 @@ of $\epsilon^{(1)}$ and $\epsilon^{(2)}$. The ``other contributions'' may includ
 unmeasured environmental factors, as well as interactions between these effects and Moran effects of the 
 measured factors $\epsilon^{(1)}$ and $\epsilon^{(2)}$.
 
-\section{Details of the theoretical case studies}\label{sect:details_case_studies}
-
-The noise processes $(\epsilon^{(1)},\epsilon^{(2)})$ used 
-in case studies A, B and C, which were only partly specified in the main text, are fully specified in 
-SI section \ref{sect:examples_cross_sync}. 
-We next derive, for our case studies, the values of the terms that appear in (\ref{MT-rhoww_T1to3}) of the main text.
-For case study A, parameter specifications presented in Methods of the main text straightforwardly imply that
-$f_{\mcB}=1-b_1 \mu$, $f_{\mcP^{(1)}}=p_1^{(1)} \mu$ and $f_{\mcP^{(2)}}=p_0^{(2)}$. In 
-SI section \ref{sect:examples_cross_sync}, we computed that 
-$\rho_{\epsilon^{(1)} \epsilon^{(1)}}=v_{11}$,
-$\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$, and 
-$\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$.
-
-For case study B, details presented in Methods of the main text imply that 
-$f_{\mcB}=1-b_1 \mu$, $f_{\mcP^{(1)}}=p_n^{(1)} \mu^n$ and $f_{\mcP^{(2)}}=p_0^{(2)}$. 
-Because the noise process for B is taken to be the same as that for A, we again have 
-$\rho_{\epsilon^{(1)} \epsilon^{(1)}}=v_{11}$,
-$\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$ and 
-$\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$.
-
-For case study C, again using details from Methods, $f_{\mcB}=1-b_1 \mu$, 
-$f_{\mcP^{(1)}}=p_{n_1}^{(1)} \mu^{n_1}$ and $f_{\mcP^{(2)}}=p_{n_2}^{(2)} \mu^{n_2}$. 
-In SI section \ref{sect:examples_cross_sync}, we computed that
-$\rho_{\epsilon^{(1)} \epsilon^{(1)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{11}$,
-$\rho_{\epsilon^{(2)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{22}$ and 
-$\rho_{\epsilon^{(1)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{12} \exp(-2 \pi \iota f (l_1-l_2))$.
-
 \section{Details of data and data cleaning}\label{sect:data}
 
 Floating surface canopy of kelp was measured by remote sensing, with details and
 validation reported by \cite{Cavanaugh2011} and \cite{Bell2020, Bell2021}. Multispectral Landsat
 imagery of $30$m resolution was used. Quarterly mean biomass values and spatial extent of canopy  
-within $500$m coastline segments (henceforth called ``loactions'')
+within $500$m coastline segments (henceforth called ``locations'')
 were computed by averaging. Quarters were: Q1, January-March; Q2, April-June; 
 Q3, July-September; Q4, October-December. 
 Data were thusly available from $\Sexpr{dim(kelp_SB)[1]}$ locations spanning 
@@ -529,6 +502,33 @@ relationship between surface nitrate concentration
 and sea surface temperature (SST) in coastal CA \citep{Zimmerman1984,Palacios2013,Snyder2020}
 and SST data derived from Advanced Very High Resolution Radiometer satellite imagery. 
 Wave and nutrient time series in each location were again linearly detrended before use.
+
+\section{Details of the theoretical case studies}\label{sect:details_case_studies}
+
+The noise processes $(\epsilon^{(1)},\epsilon^{(2)})$ used 
+in case studies A, B and C, which were only partly specified in the main text, are fully specified in 
+SI section \ref{sect:examples_cross_sync}. 
+We next derive, for our case studies, the values of the terms that appear in (\ref{MT-rhoww_T1to3}) of the main text.
+For case study A, parameter specifications presented in Methods of the main text straightforwardly imply that
+$f_{\mcB}=1-b_1 \mu$, $f_{\mcP^{(1)}}=p_1^{(1)} \mu$ and $f_{\mcP^{(2)}}=p_0^{(2)}$. In 
+SI section \ref{sect:examples_cross_sync}, we computed that 
+$\rho_{\epsilon^{(1)} \epsilon^{(1)}}=v_{11}$,
+$\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$, and 
+$\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$.
+
+For case study B, details presented in Methods of the main text imply that 
+$f_{\mcB}=1-b_1 \mu$, $f_{\mcP^{(1)}}=p_n^{(1)} \mu^n$ and $f_{\mcP^{(2)}}=p_0^{(2)}$. 
+Because the noise process for B is taken to be the same as that for A, we again have 
+$\rho_{\epsilon^{(1)} \epsilon^{(1)}}=v_{11}$,
+$\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$ and 
+$\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$.
+
+For case study C, again using details from Methods, $f_{\mcB}=1-b_1 \mu$, 
+$f_{\mcP^{(1)}}=p_{n_1}^{(1)} \mu^{n_1}$ and $f_{\mcP^{(2)}}=p_{n_2}^{(2)} \mu^{n_2}$. 
+In SI section \ref{sect:examples_cross_sync}, we computed that
+$\rho_{\epsilon^{(1)} \epsilon^{(1)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{11}$,
+$\rho_{\epsilon^{(2)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{22}$ and 
+$\rho_{\epsilon^{(1)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{12} \exp(-2 \pi \iota f (l_1-l_2))$.
 
 \section{Supporting results for kelp}
 

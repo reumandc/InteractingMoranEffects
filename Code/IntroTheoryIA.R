@@ -13,7 +13,7 @@
 #
 #Note
 #Returns NA for sync if covmat is not positive definite, returns NA for sync.in if the analogous
-#covariance matrix for is is not positive definite.
+#covariance matrix for it is not positive definite.
 #
 IntroTheoryIA<-function(a,b,covmat)
 {

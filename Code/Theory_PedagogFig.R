@@ -45,7 +45,7 @@ par(fig=c((gap)/totwd,
 tim<-seq(from=0,to=100,length.out=10001)
 period<-20
 phi1<-(-1.5)
-phi2<-phi1+pi/2
+phi2<-phi1-pi/2
 sin1<-sin(2*pi*tim/period+phi1)
 sin2<-sin(2*pi*tim/period+phi2)
 offset1<-0
@@ -74,21 +74,21 @@ lines(rep((pi/2-phi1)*period/2/pi,2),c(1,3.8),type="l",lty="dashed")
 text(mean(c((pi/2-phi2)*period/2/pi,(pi/2-phi1)*period/2/pi)),3.5,latex2exp::TeX("$l_n$"),adj=c(0.5,0.5),cex=0.8)
 
 #illustrate the delay of env effects on population
-mutdel<-7
+mutdel<-2
 lines(rep((pi/2-phi2)*period/2/pi+3*period,2),c(6,3.5),type="l",lty="solid")
 lines(c((pi/2-phi2)*period/2/pi+3*period,(pi/2-phi2)*period/2/pi+3*period+period/4+mutdel),rep(3.5,2))
 shape::Arrows((pi/2-phi2)*period/2/pi+3*period+period/4+mutdel,3.5,
               (pi/2-phi2)*period/2/pi+3*period+period/4+mutdel,ctr+.2,
               arr.length=.2)
-text(.75*((pi/2-phi2)*period/2/pi+3*period+.75)+.25*((pi/2-phi2)*period/2/pi+3*period+period/4+mutdel),
+text(.55*((pi/2-phi2)*period/2/pi+3*period+.75)+.45*((pi/2-phi2)*period/2/pi+3*period+period/4+mutdel),
       3.5,latex2exp::TeX("$l_{e1}$"),cex=0.8,adj=c(0.5,-.2))
 
 lines(rep((pi/2-phi1)*period/2/pi+3*period,2),c(1,1.25),type="l",lty="solid")
-lines(c((pi/2-phi1)*period/2/pi+3*period,(pi/2-phi1)*period/2/pi+3*period+mutdel),rep(1.25,2))
-shape::Arrows((pi/2-phi1)*period/2/pi+3*period+mutdel,1.25,
-              (pi/2-phi1)*period/2/pi+3*period+mutdel,ctr-.2,
+lines(c((pi/2-phi1)*period/2/pi+3*period,(pi/2-phi1)*period/2/pi+3*period+mutdel+period/2),rep(1.25,2))
+shape::Arrows((pi/2-phi1)*period/2/pi+3*period+mutdel+period/2,1.25,
+              (pi/2-phi1)*period/2/pi+3*period+mutdel+period/2,ctr-.2,
               arr.length=.2)
-text(.5*((pi/2-phi1)*period/2/pi+3*period)+.5*((pi/2-phi1)*period/2/pi+3*period+mutdel),
+text(.5*((pi/2-phi1)*period/2/pi+3*period)+.5*((pi/2-phi1)*period/2/pi+3*period+mutdel+period/2),
      1.25,latex2exp::TeX("$l_{e2}"),cex=0.8,adj=c(0.5,-.2))
 
 #illustrate which way time goes
@@ -96,7 +96,7 @@ text(.5*((pi/2-phi1)*period/2/pi+3*period)+.5*((pi/2-phi1)*period/2/pi+3*period+
 #text(20,6.8,latex2exp::TeX("time, $t$"),adj=c(0,-.2),cex=0.8)
 
 #panel label
-text(100,6,"(b)",cex=1.1,adj=c(1.2,0))
+text(0,6,"(b)",cex=1.1,adj=c(-.2,0))
 
 #***part 2, which shows antagonistic effects
 
@@ -111,7 +111,7 @@ par(fig=c((gap)/totwd,
 tim<-seq(from=0,to=100,length.out=10001)
 period<-20
 phi1<-(-1.5)
-phi2<-phi1+pi/2
+phi2<-phi1-pi/2
 sin1<-sin(2*pi*tim/period+phi1)
 sin2<-sin(2*pi*tim/period+phi2)
 offset1<-0
@@ -151,11 +151,11 @@ text(.75*((pi/2-phi2)*period/2/pi+3*period+.75)+.25*((pi/2-phi2)*period/2/pi+3*p
      3.5,latex2exp::TeX("$l_{e1}$"),cex=0.8,adj=c(0.5,-.2))
 
 lines(rep((pi/2-phi1)*period/2/pi+3*period,2),c(1,1.25),type="l",lty="solid")
-lines(c((pi/2-phi1)*period/2/pi+3*period,(pi/2-phi1)*period/2/pi+3*period+mutdel),rep(1.25,2))
-shape::Arrows((pi/2-phi1)*period/2/pi+3*period+mutdel,1.25,
-              (pi/2-phi1)*period/2/pi+3*period+mutdel,ctr-.2,
+lines(c((pi/2-phi1)*period/2/pi+3*period,(pi/2-phi1)*period/2/pi+3*period+mutdel-period/2),rep(1.25,2))
+shape::Arrows((pi/2-phi1)*period/2/pi+3*period+mutdel-period/2,1.25,
+              (pi/2-phi1)*period/2/pi+3*period+mutdel-period/2,ctr-.2,
               arr.length=.2)
-text(.25*((pi/2-phi1)*period/2/pi+3*period)+.75*((pi/2-phi1)*period/2/pi+3*period+mutdel),
+text(.5*((pi/2-phi1)*period/2/pi+3*period)+.5*((pi/2-phi1)*period/2/pi+3*period+mutdel-period/2),
      1.25,latex2exp::TeX("$l_{e2}"),cex=0.8,adj=c(0.5,-.2))
 
 #illustrate which way time goes
@@ -163,6 +163,6 @@ text(.25*((pi/2-phi1)*period/2/pi+3*period)+.75*((pi/2-phi1)*period/2/pi+3*perio
 #text(20,6.8,latex2exp::TeX("time, $t$"),adj=c(0,-.2),cex=0.8)
 
 #panel label
-text(100,6,"(c)",cex=1.1,adj=c(1.2,0))
+text(0,6,"(c)",cex=1.1,adj=c(-.2,0))
 
 dev.off()
