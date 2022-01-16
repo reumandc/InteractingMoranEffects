@@ -17,7 +17,7 @@ source("Kelp_AnalysisStep_CleanData_SuperBasic.R")
 source("Kelp_AnalysisStep_CleanData_MoreInvolved.R")
 
 #Plot kelp time series for visual inspection
-source("Kelp_AnalysisStep_PlotTimeSeries.R")
+#source("Kelp_AnalysisStep_PlotTimeSeries.R")
 
 #Final cleaning
 source("Kelp_AnalysisStep_CleanData_Final.R")

@@ -155,15 +155,15 @@ rm(paddle)
 #check visually to make sure it is paddle order
 #***
 
-pl<-.1
-plot(locs$Lon[1],locs$Lat[1],type="p",pch=20,cex=.1,ylim=range(locs$Lat),xlim=range(locs$Lon))
-profvis::pause(pl)
-for (counter in 2:(dim(locs)[1]))
-{
-  points(locs$Lon[counter],locs$Lat[counter],type="p",pch=20,cex=.1)
-  profvis::pause(pl)
-}
-#paddling order visually confirmed
+# pl<-.1
+# plot(locs$Lon[1],locs$Lat[1],type="p",pch=20,cex=.1,ylim=range(locs$Lat),xlim=range(locs$Lon))
+# profvis::pause(pl)
+# for (counter in 2:(dim(locs)[1]))
+# {
+#   points(locs$Lon[counter],locs$Lat[counter],type="p",pch=20,cex=.1)
+#   profvis::pause(pl)
+# }
+# #paddling order visually confirmed
 
 #***
 #Do some early-stage cleaning
