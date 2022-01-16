@@ -22,6 +22,10 @@ source("Kelp_AnalysisStep_PlotTimeSeries.R")
 #Final cleaning
 source("Kelp_AnalysisStep_CleanData_Final.R")
 
+#Make the map fig, to help orient the reader of the paper to the dataset
+source("Kelp_AnalysisStep_MakeMapFig.R")
+
 #Do the spectra decomposition analysis for kelp
 source("Kelp_AnalysisStep_SpectralDecomp.R")
+
 
