@@ -389,7 +389,7 @@ but $b_i=0$ for $i>1$.
 %***DAN: Right now sup mat section S7 is not cited. It only has figures and tables, not sure I plan to 
 %add anything to it other than that. Either get rid of it as a section, or else cite it in some of the places 
 %where you currently cite the figures and tables in it. My current hunch is that the first of those options is
-%better.
+%better. Have to decide what to do with Fig. S1 in that case.
 
 %Description of data after cleaning
 The core of this paper is the new theory, but to help illustrate that theory, for goal G3 of the 
@@ -479,8 +479,6 @@ depend on timescale \citep{Defriez2016,Sheppard2016,Desharnais2018,Anderson2021}
 also follow from \cite{Sheppard2019} and \cite{CastoraniSheppardKelp}, though not 
 straightforwardly. And those papers are case studies, so our results provide novel theoretical generality.
 
-%***DAN: stopped here
-
 %Case study A, new try
 CaA helps provide an intuitive understanding about how lags in Moran drivers can produce contrasting interactions between
 Moran effects on different timescales, and how our theory captures that contrast.
@@ -503,7 +501,7 @@ $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$ because $l_n=0$ and $\rho_{\epsilon^{(1)}
 p_1^{(1)} p_0^{(2)} \mu = p_1^{(1)} p_0^{(2)} \exp(-2 \pi \iota f) = 
 p_1^{(1)} p_0^{(2)} \exp(-2 \pi \iota /\sigma)$ (SI section \ref{SM-sect:details_case_studies}), 
 which has phase $-\pi$ at short timescales, $\sigma \approx 2 \text{q}$,
-and phase almost $0$ at long timescales (Fig. \ref{fig:TheoryCaseA}b).
+and phase almost $0$ at long timescales (Fig. \ref{fig:TheoryCaseA}b,c).
 The phase controls the sign of $2\Rp(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}})$, the
 interaction term in (\ref{rhoww_T1to3}), as described in General Theory. Comparing
 Fig. \ref{fig:TheoryCaseA}a,d shows the additional influence of autoregressive population effects, which
@@ -562,8 +560,8 @@ The quantity $l_{e1}-l_{e2}+l_n=3$q exactly equaled the timescale for $\sigma=3 
 equaled half the timescale for $\sigma=6 \text{q} = 1.5 \text{y}$, hence interactions effects
 were positive for $\sigma=0.75 \text{y}$ and negative for $\sigma=1.5$y 
 (Fig. \ref{fig:TheoryCaseA}e). Theory captures these complexities because 
-the size of the $3$q relative lag of this scenario, relative to $\sigma$,
-is again captured by the phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$ (Fig. \ref{fig:TheoryCaseA}f).
+the size of the $3$q lag of this scenario, relative to $\sigma$,
+is again captured by the phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$ (Fig. \ref{fig:TheoryCaseA}f,g).
 
 % %Case study B, old version
 % CaB reveals how Moran effects can interact when lags are longer than 1 model time step. 
@@ -600,68 +598,90 @@ is again captured by the phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$ (Fig. \
 % $2\Rp(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}})$, in our 
 % theory (\ref{rhoww_T1to3}).
 
-%***DAN: stopped here
+%Case study C, new
+CaA and CaB assumed white noise processes, and therefore real-valued $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$
+and $l_n=0$.
+But CaC illustrates what can happen when noise processes have periodic components and lagged interdependences, e.g., 
+both processes oscillate with annual periodicity and distinct phenology, an important scenario because seasonality is common.
+For CaC, $\epsilon^{(1)}$ effects on populations were lagged by $n_1$q and 
+$\epsilon^{(2)}$ effects were lagged by $n_2$q (Methods). We used $n_1=1$, $n_2=0$, $p_1^{(1)}=3$ and $p_0^{(2)}=-1.5$, so 
+$\epsilon^{(1)}$ effects were lagged and positive, and $\epsilon^{(2)}$ effects were immediate and negative. The language and logic of 
+Fig. \ref{fig:IntroTheory} does not directly apply, because we there assumed, in order to introduce concepts simply,
+that environmental effects were positive, and we now take $p_0^{(2)}=-1.5$. But similar logic does apply, with
+both the current and Fig. \ref{fig:IntroTheory} paradigms covered by our general theory.
+For CaC1 (Fig. \ref{fig:TheoryCaseA}i-l), peaks in the periodic
+noise process $\epsilon^{(1)}$ lagged peaks in the periodic process $\epsilon^{(2)}$ by
+$1$q (Methods, SI section \ref{SM-sect:examples_cross_sync}). Thus lags compounded: the annual positive population effects of $\epsilon^{(1)}$ 
+were exactly $2$q offset from the annual negative effects of $\epsilon^{(2)}$, 
+producing reinforcing interactions 
+between Moran effects on annual timescales (Fig. \ref{fig:TheoryCaseA}i).
+Contrastingly, for CaC2 (Fig. \ref{fig:TheoryCaseA}m-p), peaks in the periodic
+noise process $\epsilon^{(2)}$ lagged peaks in the periodic process $\epsilon^{(1)}$ by
+$1$q. Thus lags cancelled: the annual positive population effects of $\epsilon^{(1)}$
+coincided with the negative effects of $\epsilon^{(2)}$ every year, producing 
+negative interactions between Moran influences (Fig. \ref{fig:TheoryCaseA}m).
+Our theory captures these complexities
+because $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$
+quantifies the degree of alignment between the effects of $\epsilon^{(1)}$ and 
+$\epsilon^{(2)}$ compared to a given timescale, while 
+$\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ captures the degree of aslignment between 
+oscillations in the variables themselves, compared to the timescale (Fig. \ref{fig:TheoryCaseA}j,k,n,o).
+The phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$
+therefore captures whether delays in effects and lags between 
+variables align or misalign, with alignment
+reflected in the real part of this quantity, $\Rp(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}})$,
+which is half the interaction term in our theory (\ref{rhoww_T1to3}).
+On long timescales, interactions were the
+same in the two scenarios, and were negative, because, on those timescales, sub-annual lags 
+make negligible difference, and the effects of $\epsilon^{(1)}$ on populations were 
+positive and those of $\epsilon^{(2)}$ were negative.
+
+% %Case study C, old
+% CaA and CaB assumed white noise processes, and therefore real-valued $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$
+% (SI sections \ref{SM-sect:examples_cross_sync}, \ref{SM-sect:details_case_studies}),
+% but CaC illustrates what can happen when noise processes have periodic components, e.g., 
+% both processes oscillate with annual periodicity, an important scenario because seasonality is common. 
+% What matters then is whether and how the lag between the two seasonal noise processes aligns with the difference 
+% between the lags of their effects on populations, as we now explain. 
+% For the scenarios we considered under CaC (Fig. \ref{fig:TheoryCaseA}i-p), 
+% $\epsilon^{(1)}$ effects on populations were positive, and were 
+% lagged (i.e., delayed in their influence) by 1 quarter; but 
+% $\epsilon^{(2)}$ effects were immediate and negative (Methods and Fig. \ref{fig:TheoryCaseA} caption).
+% For CaC1 (Fig. \ref{fig:TheoryCaseA}i-l), peaks in the periodic
+% noise process $\epsilon^{(1)}$ lagged peaks in the periodic process $\epsilon^{(2)}$ by
+% 1 quarter. Thus lags compounded: the annual positive population effects of $\epsilon^{(1)}$ 
+% were exactly 2 quarters offset from the annual negative effects of $\epsilon^{(2)}$, 
+% producing reinforcing interactions 
+% between Moran effects on annual timescales (Fig. \ref{fig:TheoryCaseA}i), and more population
+% synchrony on annual timescales than would have been expected if Moran effects operated independently. Contrastingly,
+% for CaC2 (Fig. \ref{fig:TheoryCaseA}m-p), peaks in the periodic
+% noise process $\epsilon^{(2)}$ lagged peaks in the periodic process $\epsilon^{(1)}$ by
+% 1 quarter. Thus lags cancelled: the annual positive population effects of $\epsilon^{(1)}$
+% coincided with the negative effects of $\epsilon^{(2)}$ every year, a half-phase shift for an 
+% annually oscillating effect, which corresponds to negative interactions between Moran influences
+% and less population synchrony, on annual timescales, than would have been expected if Moran effects operated independently 
+% (Fig. \ref{fig:TheoryCaseA}m). The only difference between CaC1 and CaC2 
+% is the relative timing of annual peaks in $\epsilon^{(1)}$ and $\epsilon^{(2)}$.
+% Our theory captures these complexities
+% because $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$
+% quantifies the relative phase lag between the effects of $\epsilon^{(1)}$ and 
+% $\epsilon^{(2)}$ compared to a given timescale, while 
+% $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ captures the phase lag between 
+% oscillations in the variables themselves, compared to the timescale (Fig. \ref{fig:TheoryCaseA}j,k,n,o).
+% The phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$
+% therefore captures whether relative lags of effects and lags between 
+% the variables themselves align or misalign, with the degree of alignment
+% reflected in the real part of this quantity, $\Rp(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}})$,
+% which is half the interaction term in our theory (\ref{rhoww_T1to3}).
+% On long timescales, interactions were the
+% same in the two scenarios because, on those timescales, sub-annual lags 
+% make negligible difference. Interactions were then negative 
+% because the effects of $\epsilon^{(1)}$ on populations were 
+% positive and those of $\epsilon^{(2)}$ were negative.
 
 %***DAN: Don't forget to appropriately use q in place of quarter from here on as you edit. If you forget, do a 
 %search and replace.
 
-%Case study C, new
-CaA and CaB assumed white noise processes, and therefore real-valued $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$
-and $l_n=0$ (SI sections \ref{SM-sect:examples_cross_sync}).
-But CaC illustrates what can happen when noise processes have periodic components, e.g., 
-both processes oscillate with annual periodicity, an important scenario because seasonality is common.
-For CaC, $\epsilon^{(1)}$ effects on populations were lagged by $n_1$q and 
-$\epsilon^{(2)}$ effects were lagged by $n_2$q (Methods). We used $n_1=1$, $n_2=0$, $p_1^{(1)}=3$ and $p_0^{(2)}=-1.5$, so 
-$\epsilon^{(1)}$ effects were lagged and positive, and $\epsilon^{(2)}$ effects were immediate and negative
-(Fig. \ref{fig:TheoryCaseA} caption). The lagged positive effects of $\epsilon^{(1)}$ correspond to 
-$l_{e1}=1$q, in the language of Fig. \ref{fig:IntroTheory}. But, for that figure, we assumed environmental 
-variables had positive effects on populations, whereas for CaC $\epsilon^{(2)}$ had negative effects.
-Immediate negative effects of an annually oscillating variable are the same as positive effects lagged 
-by $2$q, so we can take $l_{e2}=2$q for CaC.  
-%***DAN: pretty confused, come back to this
-
-%Case study C, old
-CaA and CaB assumed white noise processes, and therefore real-valued $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$
-(SI sections \ref{SM-sect:examples_cross_sync}, \ref{SM-sect:details_case_studies}),
-but CaC illustrates what can happen when noise processes have periodic components, e.g., 
-both processes oscillate with annual periodicity, an important scenario because seasonality is common. 
-What matters then is whether and how the lag between the two seasonal noise processes aligns with the difference 
-between the lags of their effects on populations, as we now explain. 
-For the scenarios we considered under CaC (Fig. \ref{fig:TheoryCaseA}i-p), 
-$\epsilon^{(1)}$ effects on populations were positive, and were 
-lagged (i.e., delayed in their influence) by 1 quarter; but 
-$\epsilon^{(2)}$ effects were immediate and negative (Methods and Fig. \ref{fig:TheoryCaseA} caption).
-For CaC1 (Fig. \ref{fig:TheoryCaseA}i-l), peaks in the periodic
-noise process $\epsilon^{(1)}$ lagged peaks in the periodic process $\epsilon^{(2)}$ by
-1 quarter. Thus lags compounded: the annual positive population effects of $\epsilon^{(1)}$ 
-were exactly 2 quarters offset from the annual negative effects of $\epsilon^{(2)}$, 
-producing reinforcing interactions 
-between Moran effects on annual timescales (Fig. \ref{fig:TheoryCaseA}i), and more population
-synchrony on annual timescales than would have been expected if Moran effects operated independently. Contrastingly,
-for CaC2 (Fig. \ref{fig:TheoryCaseA}m-p), peaks in the periodic
-noise process $\epsilon^{(2)}$ lagged peaks in the periodic process $\epsilon^{(1)}$ by
-1 quarter. Thus lags cancelled: the annual positive population effects of $\epsilon^{(1)}$
-coincided with the negative effects of $\epsilon^{(2)}$ every year, a half-phase shift for an 
-annually oscillating effect, which corresponds to negative interactions between Moran influences
-and less population synchrony, on annual timescales, than would have been expected if Moran effects operated independently 
-(Fig. \ref{fig:TheoryCaseA}m). The only difference between CaC1 and CaC2 
-is the relative timing of annual peaks in $\epsilon^{(1)}$ and $\epsilon^{(2)}$.
-Our theory captures these complexities
-because $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$
-quantifies the relative phase lag between the effects of $\epsilon^{(1)}$ and 
-$\epsilon^{(2)}$ compared to a given timescale, while 
-$\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ captures the phase lag between 
-oscillations in the variables themselves, compared to the timescale (Fig. \ref{fig:TheoryCaseA}j,k,n,o).
-The phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$
-therefore captures whether relative lags of effects and lags between 
-the variables themselves align or misalign, with the degree of alignment
-reflected in the real part of this quantity, $\Rp(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}})$,
-which is half the interaction term in our theory (\ref{rhoww_T1to3}).
-On long timescales, interactions were the
-same in the two scenarios because, on those timescales, sub-annual lags 
-make negligible difference. Interactions were then negative 
-because the effects of $\epsilon^{(1)}$ on populations were 
-positive and those of $\epsilon^{(2)}$ were negative.
 
 %Paralels the first para, but for kelp
 We now apply our theory to kelp, fulfilling goal G3 of the Introduction. Kelp results confirm
