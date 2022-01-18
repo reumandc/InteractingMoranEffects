@@ -119,4 +119,12 @@ CC2locs<-locs[CC2locstouse,] #lat lon of locations corresponding to rows of CC2k
 SBkelpdat<-kelp[SBlocstouse,] #each row is a location with time running left to right, columns corresponding to quarters as in the variable "quarters"
 SBlocs<-locs[SBlocstouse,] #lat lon of locations corresponding to rows of SBkelpdat
 
+#temp save files just so I can send these all to Max without him even accessing the repo
+saveRDS(CC1kelpdat,file=paste0(resloc,"CC1kelpdat.Rds"))
+saveRDS(CC2kelpdat,file=paste0(resloc,"CC2kelpdat.Rds"))
+saveRDS(SBkelpdat,file=paste0(resloc,"SBkelpdat.Rds"))
+saveRDS(CC1locs,file=paste0(resloc,"CC1locs.Rds"))
+saveRDS(CC2locs,file=paste0(resloc,"CC2locs.Rds"))
+saveRDS(SBlocs,file=paste0(resloc,"SBlocs.Rds"))
+
 #OK, MAX, TAKE IT FROM HERE...

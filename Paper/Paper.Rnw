@@ -679,25 +679,21 @@ positive and those of $\epsilon^{(2)}$ were negative.
 % because the effects of $\epsilon^{(1)}$ on populations were 
 % positive and those of $\epsilon^{(2)}$ were negative.
 
-%***DAN: Don't forget to appropriately use q in place of quarter from here on as you edit. If you forget, do a 
-%search and replace.
-
-
 %Paralels the first para, but for kelp
 We now apply our theory to kelp, fulfilling goal G3 of the Introduction. Kelp results confirm
 the earlier theoretical results, based on our case studies 
-(see above text and Fig. \ref{fig:TheoryCaseA}a,e,i,m),
+(above text and Fig. \ref{fig:TheoryCaseA}a,e,i,m),
 that interaction effects between Moran drivers: 1) can be comparble in strength to direct Moran
 effects; 2) can be either synergistic or destructive; and 3) can 
-depend strongly on timescale, even having different signs on different timescales.
-First, for all of our regions and for essentially all timescales, the magintude of interaction 
+depend strongly on timescale.
+First, for all of our regions and for essentially all timescales, the magnitude of interaction 
 effects was comparable to that of direct Moran effects (Fig. \ref{fig:SummaryKelpFig}
 for the CCA1 and SB regions and Fig. \ref{SM-fig:SummaryKelpFig_SM_lag4} for the CCA2 region).
 Second, interaction effects could be positive (e.g., annual timescales, CCA1 region on Fig. 
 \ref{fig:SummaryKelpFig}a), or negative (e.g., annual timescales, SB region on Fig. 
-\ref{fig:SummaryKelpFig}d, or long timescales $>8$y for either region, Fig. 
-\ref{fig:SummaryKelpFig}c,f). Finally, interactions depended on timescale, e.g., for the CCA1 
-region they were positive on annual timescales (Fig. \ref{fig:SummaryKelpFig}a) and
+\ref{fig:SummaryKelpFig}d; or long timescales $>8$y for either region, Fig. 
+\ref{fig:SummaryKelpFig}c,f). Finally, interactions depended on timescale, e.g., for CCA1 
+they were positive on annual timescales (Fig. \ref{fig:SummaryKelpFig}a) and
 negative on timescales $>8$y (Fig. \ref{fig:SummaryKelpFig}c). 
 
 %Direct Moran effects
@@ -709,79 +705,112 @@ equals the synchrony of the nitrate time series themselves, i.e.,
 $\rho_{\epsilon^{(1)} \epsilon^{(1)}}$, times the 
 timescale-specific strength of influence of nitrates on kelp, 
 i.e., $|f_{\mcP^{(1)}}|^2$, and modulated
-by a term quantifying the autoregressive nature of kelp dynamics,
-$1/|f_{\mcB}|^2$. These components are plotted in Fig. \ref{fig:directMoran} (CCA1 and SB regions) and 
-Fig. \ref{SM-fig:directMoran_SM_lag4} (CCA2 region) so their 
-effects on synchrony can be assessed across timescales and regions. 
+by the autoregressive nature of kelp dynamics,
+$1/|f_{\mcB}|^2$. These components are plotted in Fig. \ref{fig:directMoran} (CCA1 and SB) and 
+Fig. \ref{SM-fig:directMoran_SM_lag4} (CCA2) so their 
+effects on synchrony can be assessed across timescales and regions.
+Nitrates are henceforth identified with $\epsilon^{(1)}$ and waves with $\epsilon^{(2)}$. 
 Both nitrates and waves fluctuate seasonally in CA (REFS). 
 %***DAN: Fugure out a ref for this later
 Thus nitrate and wave 
 synchrony had a strong annual component (Fig. \ref{fig:directMoran}b,d,q,s), which produced 
 some of the annual synchrony observed in kelp 
 (Fig. \ref{fig:SummaryKelpFig}a,d, green and blue lines).
-Nitrates and waves are also synchronous on long timescales $>8$y in CA 
+Nitrates and waves are also synchronous on long timescales $>8$y  
 (Fig. \ref{fig:directMoran}l,n,aa,cc), possibly due to the North Pacific Gyre Oscillation 
 [NPGO; \cite{CastoraniSheppardKelp}]. The long-timescale synchrony
 in nitrates and waves produced some of the long-timescale
-synchrony observed in kelp (Fig. \ref{fig:SummaryKelpFig}c,f, green and blue lines).
-Kelp synchrony was generally stronger in the CCA1 region compared to the SB region 
-(compare Fig. \ref{fig:SummaryKelpFig}a-c to d-f) in part because the synchrony of nitrates, and of 
-waves, was more pronounced in the CCA1 region than in the SB region 
-(compare Fig. \ref{fig:directMoran}b,g,l to q,v,aa, and 
-Fig. \ref{fig:directMoran}d,i,n to s,x,cc), and also because waves
-had a stronger influence on kelp in CCA1 compared to SB (compare 
-Fig. \ref{fig:directMoran}c,h,m to r,w,bb).
-Regression coefficients which determined $f_{\mcP^{(1)}}$, $f_{\mcP^{(2)}}$
-and $f_{\mcB}$ (see Methods) are in Table \ref{SM-tab:regcoefs}.
+synchrony in kelp (Fig. \ref{fig:SummaryKelpFig}c,f, green and blue lines).
+Kelp synchrony was stronger in CCA1 than in SB 
+(Fig. \ref{fig:SummaryKelpFig}a-c v. d-f, black lines) in part because the synchrony of nitrates, and of 
+waves, was more pronounced in CCA1 than in SB 
+(Fig. \ref{fig:directMoran}b,g,l v. q,v,aa, and 
+Fig. \ref{fig:directMoran}d,i,n v. s,x,cc), and also because waves
+had a stronger influence on kelp in CCA1 than in SB (Fig. \ref{fig:directMoran}c,h,m v. r,w,bb).
+Regression coefficients determining $f_{\mcP^{(1)}}$, $f_{\mcP^{(2)}}$
+and $f_{\mcB}$ (Methods) are in Table \ref{SM-tab:regcoefs}.
 
 %Interactions between Moran effects, CCA1
-Interactions between Moran effects in CCA1 were parallel to scenario 1 of theoretical case study C.
-In CCA1, nitrates have a one-quarter-delayed positive effect on observed 
-kelp populations and waves have immediate negative effect (REFS), 
+Interactions between Moran effects in CCA1 were parallel to one of the theoretical case studies, CaC1.
+In CCA1, nitrates had a $1$q-delayed positive effect on observed 
+kelp populations and waves had immediate negative effect (REFS), 
 %***DAN: ask Tom/Kyle/Max what is a good reference for this
-just as $\epsilon^{(1)}$ effects in case study C, scenario 1, 
-were positive and delayed by a quarter and $\epsilon^{(2)}$ effects were negative and immediate.
+just as $\epsilon^{(1)}$ effects in CaC 
+were positive and delayed by $1$q and $\epsilon^{(2)}$ effects were negative and immediate.
 Delayed effects are reflected, for CCA1, in Fig. \ref{fig:indirectMoran}a, and for 
-case study C scenario 1, in Fig. \ref{fig:TheoryCaseA}j, both of which show 
+CaC1, in Fig. \ref{fig:TheoryCaseA}j, both of which show 
 that $f_{\mcP^{(1)}}$ has phase about $-\pi/2$ at the annual timescale. The delay is also 
 reflected, for CCA1, in Table \ref{SM-tab:regcoefs}, where 
-the CCA1 entries for $p_0^{(1)}$ were close to $0$ and those for $p_1^{(1)}$ were positive.
-Immediate negative effects of waves in CCA1 are reflected in Fig. \ref{fig:indirectMoran}b,
-and for case study C scenario 1, in Fig. \ref{fig:TheoryCaseA}j, both of which show 
-that $f_{\mcP^{(2)}}$ has phase $-\pi$ at all timescales. See also the CCA1 $p_0^{(2)}$
-coefficients in Table \ref{SM-tab:regcoefs}, which are negative.
+the entries for $p_0^{(1)}$ for CCA1 are close to $0$ and those for $p_1^{(1)}$ are positive.
+Immediate negative effects of waves in CCA1 are reflected in Fig. \ref{fig:indirectMoran}b,g,l
+and for CaC1 in Fig. \ref{fig:TheoryCaseA}j, both of which show 
+that $f_{\mcP^{(2)}}$ has phase $-\pi$ at all timescales. See also the $p_0^{(2)}$
+coefficients for CCA1 in Table \ref{SM-tab:regcoefs}, which are negative.
 In CCA1, annual peak nitrates tend to come in spring, whereas annual peak waves 
 tend to come in winter (REFS). 
 %***DAN: add refs later
 Thus annual nitrate peaks tend to lag annual 
-wave peaks by one quarter, just as $\epsilon^{(1)}$ peaks lagged $\epsilon^{(2)}$
-peaks by a quarter in theoretical case study C, scenario 1.
-This is reflected, for CCA1, in Fig. \ref{fig:indirectMoran}d, and for case study C scenario 1 
+wave peaks by $1$q, just as $\epsilon^{(1)}$ peaks lagged $\epsilon^{(2)}$
+peaks by $1$q in CaC1.
+This is reflected, for CCA1, in Fig. \ref{fig:indirectMoran}d, and for CaC1 
 in Fig. \ref{fig:TheoryCaseA}k, both of which show that $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$
 has a phase of about $-\pi/2$ at the annual timescale.
 Thus lags compound on the annual timescale, in the CCA1 case as in the theoretical case: the annual positive 
-effects of nitrates on kelp tend to come in the summer, and the annual negative effects of waves come in the winter,
+effects of nitrates on kelp tend to come in summer, and the annual negative effects of waves come in winter,
 producing reinforcing interactions between Moran effects. Likewise, the $\pi/2$ phase 
-of $f_{\mcP^{(1)}}\overline{f_{\mcP^{(2)}}}$ (Fig. \ref{fig:indirectMoran}c for CCA1, Fig. \ref{fig:TheoryCaseA}k for case study C scenario 1)
-approximately cancels the $-\pi/2$ phase of $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ 
-(Fig. \ref{fig:indirectMoran}d for CCA1, Fig. \ref{fig:TheoryCaseA}k for case study C scenario 1) on annual timescales, so that  
+of $f_{\mcP^{(1)}}\overline{f_{\mcP^{(2)}}}$ on annual timescales (Fig. \ref{fig:indirectMoran}c for CCA1, Fig. \ref{fig:TheoryCaseA}k for CaC1)
+approximately cancels the $-\pi/2$ phase of $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ on annual timescales
+(Fig. \ref{fig:indirectMoran}d for CCA1, Fig. \ref{fig:TheoryCaseA}k for CaC1), so that  
 $f_{\mcP^{(1)}}\overline{f_{\mcP^{(2)}}}\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ has phase 
-approximately $0$, and the interaction-effect term 
-$\Rp(f_{\mcP^{(1)}}\overline{f_{\mcP^{(2)}}}\rho_{\epsilon^{(1)}\epsilon^{(2)}})$ is strongly positive 
-on annual timescales in both the theoretical and emprical cases. 
+approximately $0$, making the interaction-effect term 
+$\Rp(f_{\mcP^{(1)}}\overline{f_{\mcP^{(2)}}}\rho_{\epsilon^{(1)}\epsilon^{(2)}})$ strongly positive 
+on annual timescales for both the theoretical and emprical cases 
+(Fig. \ref{fig:indirectMoran}e for CCA1, Fig. \ref{fig:TheoryCaseA}k for CaC1). 
 %***DAN: read the below sentence again and see if it sucks
 Interactions between Moran effects on long-timescales ($>8$y) were also similar for both CCA1 and
-for case study C, scenario 1, and for the same reason in both cases: on long timescales, sub-annual lags
+CaC1, and for the same reason in both cases: on long timescales, sub-annual lags
 are inconsequential, and the positive effects of nitrates/$\epsilon^{(1)}$ and the negative
 effects of waves/$\epsilon^{(2)}$ therefore lead to negative interactions.
-Interactions between Moran effects in CCA2 operated in a similar manner to CCA1 (Fig. \ref{SM-fig:indirectMoran_SM_lag4}).
+Interactions between Moran effects in CCA2 operated similarly to CCA1 (Fig. \ref{SM-fig:indirectMoran_SM_lag4}).
+
+%***DAN: Don't forget to appropriately use q in place of quarter from here on as you edit. If you forget, do a 
+%search and replace.
 
 %Interactions between Moran effects, SB
-
-
-
+Due to different nitrate effects on observable kelp growth in SB compared to 
+CCA1, interactions between Moran effects followed a different 
+mechanism in SB compared to CCA1, leading to the slightly negative versus positive interactions already 
+documented on annual timescales for the two regions in Fig. \ref{fig:SummaryKelpFig}d v. a. 
+Whereas in CCA1, nitrate effects on observed kelp density were delayed by $1$q, in SB nitrate effects 
+were observable within the same quarter (Fig. \ref{fig:indirectMoran}a v. p; see also Table 
+\ref{SM-tab:regcoefs}, where $p_0^{(1)}$ terms were close to zero for CCA1 and positive for SB,
+whereas $p_1^{(1)}$ terms were positive for CCA1 and close to zero for SB). Wave effects were negative and
+immediate in both regions, though they were less pronounced in SB (Fig. \ref{fig:indirectMoran}b,g,l v. q,v,aa; see also 
+Table \ref{SM-tab:regcoefs}). Annual peaks in nitrates still tended to lag annual peaks in waves by $1$q in SB,
+as in CCA1, though the seasonal periodicity of both variables was reduced in SB compared to 
+CCA1 (Fig. \ref{fig:indirectMoran}s v. d). 
+Whereas in CCA1, the tendency of nitrate annual peaks to follow wave annual peaks by $1$q, added to the tendency of 
+nitrate effects on kelp to be delayed by $1$q, resulted in summertime positive nitrate effects and wintertime 
+negative wave effects which reinforced sycnhrony; in SB nitrate instead both peaked and had its positive effects on kelp in spring,
+while waves still had negative effects on kelp in wintertime. Thus the effects of nitrates and waves in SB
+were approximately a quarter-cycle separated from each other with respect to the annual timescale (Fig \ref{fig:indirectMoran}t), 
+and so produced neither
+much reinforcement nor much destructive interference of synchrony on annual timescales (Fig. \ref{fig:SummaryKelpFig}d). Slightly negative 
+interactions were observed (Fig. \ref{fig:SummaryKelpFig}d) because of slight deviations from the approximate phase
+alignments described above. On long timescales, interactions between Moran effects were analogous in CCA1 and SB
+(though weaker in SB; Fig. \ref{fig:indirectMoran}o v. dd and Fig. \ref{fig:SummaryKelpFig}c v. f) because, again, 
+sub-annual lags are inconsequential on long timescales and what mattered instead was the oppositely signed 
+influences of the two environmental variables.
 
 \section{Discussion}
+
+%Maybe a para somewwhere about how it can work that synchrony explained by one factor (or the sum of 
+%synchrony explained by two) can add up to more than 100% and then interaction effects can bring the total
+%down. Basically this means if the two factors were independent, synchrony would be much greater. E.g.,
+%CCA1 on long timescales. Might want to use the analogy with two parents pushing a kid on a swing,
+%and then multiple sets of such setups. Or maybe make it more official sounding by talking about 
+%oscillators instead of swings. Not sure a swing is a good example because it has a very specific 
+%intrinsic dynamics. Likewise for a oscillator. Think about it, not sure what to do here. 
 
 %Note that we get differences in intereaction effects between central and southern CA because we 
 %have lagged effects of nitrate on observed kelp density in central CA, but unlagged effects in southern
@@ -818,7 +847,11 @@ Interactions between Moran effects in CCA2 operated in a similar manner to CCA1 
 %We definitely need a discussion para comparing my results to those of Max and Lawrence (hopefully they are 
 %basically consistent). Note differences in methods. Note differences in results (hopefully small). 
 %Explain/explore how my theory goes beyond what they did - the intention is to get at the mechanism
-%better and how it actually works. It may be sufficient to keep this a fairly brief para.
+%better and how it actually works. It may be sufficient to keep this a fairly brief para. One diff is that
+%my Fourier approach facilitates analytic examination of interaction effects for the model I consider.
+%Their approach is better for dealing with non-stationarity and other features of some datasets. My
+%approach facilitates understanding the inner workings of the mechanism of interacting Moran effects, 
+%their approach facilitates identifying such effects in datasets.
 
 %Go back to the Kendall study of 2000 (I think that's the year), the one that looked at interactions
 %between Moran and dispersal causes of synchrony. If I remember it correctly (review it), it's a bit silly,
@@ -831,7 +864,8 @@ Interactions between Moran effects in CCA2 operated in a similar manner to CCA1 
 %independent (or, rather, it's a bit less than that, and has to do with the cross synchrony measure
 %being 0). This is not to belittle the achievements of that paper, which was groundbreaking in its time,
 %instead it's just to explore the value of perspective that we now have based on 20 years of hindsight
-%and ongoing work.
+%and ongoing work. Note that you cannot really make dispersal and Moran effects independent/uncorrelated
+%in the same way you can make two Moran effects independent/uncorrelated.
 
 \bibliographystyle{ecology_letters2}
 \bibliography{refs} 
@@ -921,7 +955,7 @@ rendering of all figures.}\label{fig:TheoryCaseA}
 \begin{figure}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_MainPlot_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_MainPlot_ForMS.pdf}
-\caption{Main components of the new theory as applied kelp, central CA 1 (CCA1) region (a-c) and 
+\caption{Main components of the new theory as applied to kelp, central CA 1 (CCA1) region (a-c) and 
 Santa Barbara (SB) region (d-f). Panels show the terms on the right side of 
 (\ref{rhoww_T1to3}). Green lines show 
 $\frac{|f_{\mcP^{(1)}}|^2}{|f_{\mcB}|^2} \rho_{\epsilon^{(1)} \epsilon^{(1)}}$, quantifying 
@@ -936,12 +970,12 @@ which is population synchrony due to interacting Moran effects. The red line is 
 green, blue and green-blue lines, and is the portion of synchrony explained by nitrates,
 waves, and their interactions. Explained synchrony does not equal total kelp synchrony
 (black line) because other, unmeasured factors also help synchronize kelp dynamics.
-The CCA1 and SB regional results, respectively, approximately parallel the 
+The CCA1 results approximately parallel the 
 results for theoretical case
-study C scenarios 1 and 2 (Fig. \ref{fig:TheoryCaseA}i,m; see text for details).
+study C scenario 1 (Fig. \ref{fig:TheoryCaseA}i; see text for details).
 See Fig. \ref{SM-fig:SummaryKelpFig_SM_lag4} for the central CA 2 (CCA2) region,
 for which results were substantially the same as for CCA1. This figure used 
-kelp lag $n=4$ (see (\ref{main_model_1}) for the meaning of $n$); 
+kelp lag $n=4$ [see (\ref{main_model_1})]; 
 see Figs \ref{SM-fig:SummaryKelpFig_SM_lag8} 
 and \ref{SM-fig:SummaryKelpFig_SM_lag12} for $n=8, 12$, respectively.
 See the online version for a color rendering of this 
@@ -954,16 +988,14 @@ figure.}\label{fig:SummaryKelpFig}
 \begin{figure}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_ExplainDirectMoran_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_ExplainDirectMoran_ForMS.pdf}
-\caption{Components of direct Moran effects for kelp, for the CCA1 (a-o)
-and SB regions (p-dd). The index $1$ denotes nitrates, and $2$ denotes waves.
+\caption{Components of direct Moran effects for kelp, for CCA1 (a-o)
+and SB (p-dd). Nitrates are identified with $\epsilon^{(1)}$ and waves with $\epsilon^{(2)}$. 
 Vertical axis extents are the same for corresponding panels for the
 two regions, to facilitate comparisons. 
-See Fig. \ref{SM-fig:directMoran_SM_lag4} for the central CCA2 region,
+See Fig. \ref{SM-fig:directMoran_SM_lag4} for CCA2,
 for which results were similar to CCA1. This figure used 
 kelp lag $n=4$; see Figs \ref{SM-fig:directMoran_SM_lag8} 
-and \ref{SM-fig:directMoran_SM_lag12} for $n=8, 12$, respectively.
-See the online version for a color
-rendering of all figures.}\label{fig:directMoran}
+and \ref{SM-fig:directMoran_SM_lag12} for $n=8, 12$, respectively.}\label{fig:directMoran}
 \end{figure}
 
 \clearpage
@@ -972,7 +1004,15 @@ rendering of all figures.}\label{fig:directMoran}
 \begin{figure}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_ExplainInteractingMoran_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_ExplainInteractingMoran_ForMS.pdf}
-\caption{Filler. See the online version for a color
+\caption{Components of interactions between Moran effects for kelp, for CCA1 (a-o) and SB (b-dd). 
+Nitrates are identified with $\epsilon^{(1)}$ and waves with $\epsilon^{(2)}$. 
+Vertical axis extents are the same for corresponding panels for the
+two regions, to facilitate comparisons. 
+See Fig. \ref{SM-fig:indirectMoran_SM_lag4} for CCA2,
+for which results were similar to CCA1. This figure used 
+kelp lag $n=4$; see Figs \ref{SM-fig:indirectMoran_SM_lag8} 
+and \ref{SM-fig:indirectMoran_SM_lag12} for $n=8, 12$, respectively.
+See the online version for a color
 rendering of all figures.}\label{fig:indirectMoran}
 \end{figure}
 
