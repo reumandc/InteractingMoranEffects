@@ -15,6 +15,7 @@
 \usepackage{amsmath}
 \usepackage{xr}
 \usepackage{authblk}
+\usepackage{lineno}
 
 %new commands and so on
 \providecommand{\keywords}[1]
@@ -32,7 +33,12 @@
 
 %external documents
 \externaldocument[SM-]{SupMat}
- 
+
+%Get line numbers to work, also in figure captions
+\linenumbers
+\DeclareCaptionFont{linenumbers}{\internallinenumbers}
+\captionsetup[figure]{font+=linenumbers} % use \internallinenumbers inside figure caption
+
 %header material for paper
 \title{How environmental drivers of synchrony interact}
 \date{}
@@ -157,7 +163,7 @@ spatially extended systems. The main purpose of this study is to establish a gen
 of interacting Moran effects and to use examples and applications of the theory to provide 
 ecological intuition for how the mechanism of interacting Moran effects works. Our goals are
 distinct from those of \cite{Kendall2000}, who examined interactions between Moran and dispersal
-causes of synchrony. We relate our work to that study in the Discussion.
+causes of synchrony. 
 
 The basic fact that Moran drivers can interact, synergistically or destructively, can be demonstrated 
 with a very simple model which we now elaborate, though understanding the nature of the interaction
@@ -246,9 +252,8 @@ which has $ij^{\text{th}}$ entry $S_{w_i w_j}(f)$. Spectral methods are standard
 Much prior work demonstrates the importance of a frequency- or timescale-specific approach to
 synchrony [e.g., \cite{Vasseur2007,Keitt2008,Defriez2016,Sheppard2016,Desharnais2018,Anderson2021}; frequency- and timescale-specific approaches
 are equivalent because frequency and timescale are reciprocal], 
-and it will turn out (see below, and \emph{Discussion}) that a timescale-specific 
+and it will turn out (see below, and Discussion) that a timescale-specific 
 approach is essential to the development of our new theory. 
-%***DAN: Good topic for a Discussion para, the fact that this could not really be done without taking frequency specificity into account, and why, though need to think a bit more before writing
 We therefore here define, using the spectral methods outlined above, a frequency/timescale-specific measure of spatial synchrony, 
 as well as a new concept of \emph{cross-variable spatial synchrony}. If time series data $w_i(t)$ for $t=1,\ldots,T$ 
 were gathered at locations $i=1,\ldots,N$, our spatial synchrony measure is simply
@@ -273,12 +278,14 @@ lag between the variables.
 See SI section \ref{SM-sect:examples_cross_sync} for further examples of the new cross synchrony index.
 
 Our population model is 
+\begin{linenomath}
 \begin{align}
 w_i(t) &= b_1 w_i(t-1)+ \cdots + b_n w_i(t-n) \label{main_model_1} \\ 
 &+ p_0^{(1)} \epsilon_i^{(1)}(t)+ \cdots + p_{m_1}^{(1)} \epsilon_i^{(1)}(t-m_1) \label{main_model_2} \\
 &+ p_0^{(2)} \epsilon_i^{(2)}(t)+ \cdots + p_{m_2}^{(2)} \epsilon_i^{(2)}(t-m_2) \label{main_model_3} \\
 &+ \delta_i(t), \label{main_model_4}
 \end{align}
+\end{linenomath}
 where $w_i(t)$ is an index of the population in location $i=1,\ldots,N$ at time
 $t$, and $\epsilon^{(1)}=(\epsilon_1^{(1)},\ldots,\epsilon_N^{(1)})$,
 $\epsilon^{(2)}=(\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)})$ and $\delta=(\delta_1,\ldots,\delta_N)$
@@ -292,21 +299,22 @@ regularity assumptions for model stability
 a linearization of a very general dynamical model, influenced by ``weak noise'' [see, e.g.,
 SI section S1.2 of \cite{Desharnais2018} and SI section S1 of \cite{Walter2017}].
 Linearization and ``weak noise'' assumptions have been commonly adopted to make
-theoretical progress in ecology (REFS), and it has been demonstrated that results based on a
-weak noise assumption often hold for noise which is fairly strong (REF).
-%***DAN: Add refs later
+theoretical progress in ecology, and it has been demonstrated that results based on a
+weak noise assumption often hold for noise which is fairly strong \citep{Nisbet1977,Reuman2006,Desharnais2018}.
 See \cite{Brillinger2001} for background on stochastic processes.
 
 Fulfilling goal G1 of the Introduction (i.e., to elaborate theory of interacting Moran effects), 
 the outcome of our theory is an equation which expresses population spatial synchrony 
 in terms of synchrony of the environmenal processes $\epsilon^{(1)}$ and $\epsilon^{(2)}$, and cross
-synchrony between those processes:
+synchrony between those processes: 
+\begin{linenomath}
 \begin{align}
 \rho_{ww} &= \frac{1}{|f_{\mcB}|^2}\left[|f_{\mcP^{(1)}}|^2 \rho_{\epsilon^{(1)} \epsilon^{(1)}} 
 + |f_{\mcP^{(2)}}|^2 \rho_{\epsilon^{(2)} \epsilon^{(2)}} 
 + 2 \Rp \left(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}} \right)\right] \label{rhoww_T1to3} \\
 &+ \text{other contributions}.\label{rhoww_OC}
 \end{align}
+\end{linenomath}
 Here, $f_{\mcB} = 1-b_1 \mu - b_2 \mu^2 - \cdots - b_n \mu^n$, 
 $f_{\mcP^{(1)}} = p_0^{(1)} + p_1^{(1)} \mu + \cdots + p_{m_1}^{(1)} \mu^{m_1}$, and
 $f_{\mcP^{(2)}} = p_0^{(2)} + p_1^{(2)} \mu + \cdots + p_{m_2}^{(2)} \mu^{m_2}$, where 
@@ -427,11 +435,11 @@ $w_i(t)$ in (\ref{main_model_1}), against lagged values of kelp
 ($\epsilon_i^{(2)}(t-l)$ for $l=0,\ldots,m_2$ in (\ref{main_model_3})) was fitted using standard regression methods.
 The same regression coefficients were used for all locations within a region.
 Waves influence kelp dynamics through direct disturbance events which can damage kelp or extirpate kelp locally 
-when waves are large \citep{Dayton1992,Cavanaugh2011,Bell2015}. Thus wave effects 
+when waves are large \citep{Cavanaugh2011,Bell2015,Schiel2015}. Thus wave effects 
 are immediate and $m_2=0$ was used. Nitrates are known to fuel rapid kelp growth, though in some areas
 effects appear delayed by about $1$q because our kelp data quantify canopy (surface) biomass, and it can
 take time for damaged kelp to grow back to the surface 
-\citep{Zimmerman1986,Cavanaugh2011,Bell2015}. 
+\citep{Cavanaugh2011,Bell2015,Schiel2015}. 
 Therefore $m_1=1$ was used. Kelp holdfasts on the sea floor can last for multiple years, so kelp lag effects were considered:
 we used $n=4, 8, 12$ in separate analysis, with this choice making no substantive difference to results (see Results).
 Fitted regression coefficients determined the quantities $b_1,\ldots,b_n$, $p_0^{(1)}$, $p_1^{(1)}$, and $p_0^{(2)}$
@@ -446,8 +454,6 @@ we applied the definitions of these quantities (see General Theory), which requi
 the spectra and cross spectra $S_{w_i w_j}$ and $S_{\epsilon_i^{(a)}\epsilon_j^{(b)}}$ for $i,j=1,\ldots,N$
 and $a,b=1,2$, where $N$ is the number of locations in the region being considered. Spectral quantities were
 computed using the consistent estimator of section 7.4 of \cite{Brillinger2001}. 
-%***DAN: check this section number, and if possible give a specific formula of theorem or something, and also 
-%check the below text and maybe augment it
 The estimator is a smoothed periodogram, with the width of the smoothing kernel selected to 
 increase with the square root of time series length. Theory was interpreted in relation to kelp ecology and
 theoretical case studies by plotting the components of (\ref{rhoww_T1to3}) for each of our regions.
@@ -733,8 +739,7 @@ and $f_{\mcB}$ (Methods) are in Table \ref{SM-tab:regcoefs}.
 %Interactions between Moran effects, CCA1
 Interactions between Moran effects in CCA1 were parallel to one of the theoretical case studies, CaC1.
 In CCA1, nitrates had a $1$q-delayed positive effect on observed 
-kelp populations and waves had immediate negative effect (REFS), 
-%***DAN: ask Tom/Kyle/Max what is a good reference for this
+kelp populations and waves had immediate negative effect \citep{Cavanaugh2011,Bell2015,Schiel2015}, 
 just as $\epsilon^{(1)}$ effects in CaC 
 were positive and delayed by $1$q and $\epsilon^{(2)}$ effects were negative and immediate.
 Delayed effects are reflected, for CCA1, in Fig. \ref{fig:indirectMoran}a, and for 
@@ -766,15 +771,11 @@ approximately $0$, making the interaction-effect term
 $\Rp(f_{\mcP^{(1)}}\overline{f_{\mcP^{(2)}}}\rho_{\epsilon^{(1)}\epsilon^{(2)}})$ strongly positive 
 on annual timescales for both the theoretical and emprical cases 
 (Fig. \ref{fig:indirectMoran}e for CCA1, Fig. \ref{fig:TheoryCaseA}k for CaC1). 
-%***DAN: read the below sentence again and see if it sucks
 Interactions between Moran effects on long-timescales ($>8$y) were also similar for both CCA1 and
 CaC1, and for the same reason in both cases: on long timescales, sub-annual lags
 are inconsequential, and the positive effects of nitrates/$\epsilon^{(1)}$ and the negative
 effects of waves/$\epsilon^{(2)}$ therefore lead to negative interactions.
 Interactions between Moran effects in CCA2 operated similarly to CCA1 (Fig. \ref{SM-fig:indirectMoran_SM_lag4}).
-
-%***DAN: Don't forget to appropriately use q in place of quarter from here on as you edit. If you forget, do a 
-%search and replace.
 
 %Interactions between Moran effects, SB
 Due to different nitrate effects on observable kelp growth in SB compared to 
@@ -804,14 +805,109 @@ influences of the two environmental variables.
 
 \section{Discussion}
 
-%Maybe a para somewwhere about how it can work that synchrony explained by one factor (or the sum of 
-%synchrony explained by two) can add up to more than 100% and then interaction effects can bring the total
-%down. Basically this means if the two factors were independent, synchrony would be much greater. E.g.,
-%CCA1 on long timescales. Might want to use the analogy with two parents pushing a kid on a swing,
-%and then multiple sets of such setups. Or maybe make it more official sounding by talking about 
-%oscillators instead of swings. Not sure a swing is a good example because it has a very specific 
-%intrinsic dynamics. Likewise for a oscillator. Think about it, not sure what to do here. 
+%*DONE Summary
+We provided a general mathematical theory of interactions between Moran effects. When two related spatially 
+synchronous environmental drivers both influence a set of populations across a landscape, interactions can make 
+synchrony in the populations either substantially stronger or markedly weaker 
+than would be expected if the 
+two drivers were unrelated, a new mechanism of population spatial synchrony.
+Our general theory illuminates precisely how timings of 
+influences of the Moran drivers on populations can interact with relationships between the
+drivers to produce interaction effects, which may vary by timescale in both their strength and
+sign. Moran effects are very common. Interactions between Moran effects have been tested for, and observed, twice previously, and may
+be common [\cite{Sheppard2019,CastoraniSheppardKelp}; see also below]. 
+Our study is the first to provide a comprehensive theory of the new mechanism. 
+We used our theory and several case studies based on models and 
+California kelp populations to provide improved intuition about the mechanism.
 
+%*DONE arguments about likelihood that interactions will be common, extending earlier arguments
+We argue that it is likely that interactions between Moran effect are common. Most species
+are influenced by more than one environmental driver. Drivers are frequently spatially autocorrelated,
+and are also often related to each other because of their common origin in underlying meteorological 
+phenomena including major climatic oscillations such as 
+the NPGO or El Ni\~{n}o Southern Oscillation (ENSO).
+Driver pairs which may commonly produce interacting Moran effects include instances where the same quantity 
+is measured in distinct parts of the year (e.g., spring and summer temperatures, or March and April rainfall,
+or December and January snowfall); or when distinct variables are measured in the same part of the 
+year (e.g., spring temperature and precipitation). Future work should systematically 
+investigate cross synchrony of environmental variables, and could then use our theory
+to directly assess the potential for interacting Moran effects to occur under a variety of biological scenarios. Since 
+interactions between Moran effects have been discovered in both of the two systems so far 
+tested \citep{Sheppard2019,CastoraniSheppardKelp}, future work should also, when
+data are available, test directly for interactions. 
+
+%*Revist intuition
+We revisit and extend the intuition behind interacting Moran effects, using the central CA kelp
+example as a vehicle \citep{CastoraniSheppardKelp}. Large winter waves 
+have immediate negative effects on kelp in central CA, whereas the positive
+effects of spring nitrates manifest in summer. So nutrient and wave effects can 
+reinforce each other in producing annual oscillations: large kelp increases in summer due 
+to abundant nutrients can be followed by big crashes in winter due to waves, both factors combining
+to accentuate the annual cycle. Thus positive
+interactions between Moran effects on annual timescales occur whenever 
+years with above-average waves coincide with years with plentiful nutrients in other locations:
+if a large-wave year in location A coincides with a high-nutrient year in location B, 
+both locations will tend to have bigger annual fluctuations that year, accentuating 
+annual-timescale synchrony. Sub-annual lags and delays make essentially no difference, 
+however, on long timescales. On long timescales, large-wave and abundant-nutrient years
+counteract each other. If a multi-year period of large waves in location A coincides with
+a multi-year period of abundant nutrients in location B, the multi-year-average kelp abundance
+in A will tend to be reduced, whereas the multi-year-average kelp abundance in B will
+tend to be augmented, reducing long-timescale synchrony. Lags and interactions between
+drivers must always be compared to the timescale of interest to determine interaction effects,
+as in Fig. \ref{fig:IntroTheory}, and as captured mathematically in (\ref{rhoww_T1to3}).
+
+%*DONE Comparison to Castorani et al paper, and maybe also a bit on comparison to the Sheppard et al 2019 paper
+Our results about kelp were consistent with those of \cite{CastoraniSheppardKelp}, though
+the two papers have complementary emphases. In spite of numerous methodological choices which differed between the 
+two studies, both our results and \cite{CastoraniSheppardKelp}
+show positive effects of both nutrients and waves on synchrony on both annual and long ($>4$y)
+timescales in both central and southern CA. And both studies
+show positive interactions between nutrient and wave Moran effects on annual timescales
+in central CA, but negative interactions in southern CA at annual timescales and in both central
+and southern CA at long timescales. The Fourier approach of this study was designed to facilitate 
+mathematical examination of interactions between Moran effect as a general mechanism, whereas the 
+wavelet approach of \cite{CastoraniSheppardKelp} was instead optimized for detecting interactions 
+and identifying Moran mechanisms in data, in spite of non-stationarity and
+other complicating features which are present in many ecological datasets. The study of
+\citep{Sheppard2019} developed the wavelet methods applied by \cite{CastoraniSheppardKelp}.
+The approach of this study relates indirectly to the approach of \cite{Anderson2021}, though that
+study concerned different research questions.
+
+%*DONE relationship to earlier papers comparing synchrony of drivers and pops
+It has been a frequent topic of research why populations are often less synchronous, or sychronous over a smaller
+spatial extent, than might be expected given the strength or extent of 
+synchrony of environmental drivers \citep{Herfindal2022}.
+Antagonistic (negative) interaction effects between Moran drivers may be one common and previously
+unrecognized mechanism contributing to this discrepancy. On the other hand,
+a recent paper descibed an ``enhanced Moran effect'' by which specific 
+patterns of temporal autocorrelation
+in Moran drivers can theoretically cause greater synchrony in populations 
+than in the drivers themselves \citep{Massie2015}.
+Synergistic (positive) interaction effects is another mechanism by which populations can
+be more synchronous than expected.
+
+%*DONE How/why a frequency-specific approach is necessary for all this
+An ever growing body of work shows that synchrony is, and should be analyzed as, a timescale-specific 
+phenomenon \citep{Vasseur2007,Keitt2008,Vasseur2014,Sheppard2016,Defriez2016,Defriez2017,Defriez2017b,Desharnais2018,Anderson2021}.
+The results of our present study extend this earlier work by showing that interactions between Moran effects 
+are also timescale-specific, differing stongly in strength, and in sign, across timescales. 
+A non-timescale-specific version of our theory could be obtained by appropriately integrating our main equation 
+(\ref{rhoww_T1to3}) across frequencies. But doing so would reduce insight by conflating distinct and
+often disparate processes. For instance, if the terms of (\ref{rhoww_T1to3}) were integrated 
+across frequencies for our central CA kelp example, positive interactions between Moran drivers on short timescales 
+(Fig. \ref{fig:SummaryKelpFig}a) would be summed with and partially cancel 
+negative interactions on long timescales (Fig. \ref{fig:SummaryKelpFig}c),
+falsely suggesting reduced importance of interaction effects. Our results also have implications given the 
+short duration of most time series in ecology. 
+Analyses based on short time series can only be expected to reveal Moran effects or interactions between Moran
+effects occurring on short timescales, which our results show can differ substantially from long-timescale results. 
+It has not escaped our notice that kelp time series even longer than ours, once 
+available, may reveal Moran effects and interactions on timescales longer than ours which differ from
+our results. In our view this provides another strong argument, among many others, in support of 
+long-term monitoring of ecosystems. 
+
+%DECIDED NOT TO WRITE*Revisitation of diffs between SoCal and CentCal
 %Note that we get differences in intereaction effects between central and southern CA because we 
 %have lagged effects of nitrate on observed kelp density in central CA, but unlagged effects in southern
 %CA (to see this, look at the regression coefficients computed to get the models used for the
@@ -831,41 +927,6 @@ influences of the two environmental variables.
 %   Tom also told me in a meeting zoom call that in central CA growth of new fronds will be slower because 
 %there are not other fronds (left) on the same plant to provide a sugar subsidy to new fronds. In central CA,
 %basically all fronds from the same plant are ripped out.
-
-%Need a paragraph (already mentioned above) on how a frequency/timescale-specific approach
-%is necessary for all this. Need to think more about it first, i.e., how would you attempt to 
-%do this without such an approach, and how far would you get? Or maybe that is not quite the 
-%right at it (though you should try thinking that through and see what you get), maybe another
-%possibly better way would be to see that everything we list here can depend on timescale.
-%You can get a non-timescale-specific approach just by integrating our main equation across
-%frequencies. However, that will obscure the fact that you can get strong positive interaction 
-%effects on some timescales and strong negative ones on others. What would you get in our 
-%theoretical case studies if you integrated and would it reveal what's really going on? What 
-%are the implications of timescale structure for practical situations where populations and
-%environmental variables are measured over a certain typical duration (i.e, short time series)?
-
-%We definitely need a discussion para comparing my results to those of Max and Lawrence (hopefully they are 
-%basically consistent). Note differences in methods. Note differences in results (hopefully small). 
-%Explain/explore how my theory goes beyond what they did - the intention is to get at the mechanism
-%better and how it actually works. It may be sufficient to keep this a fairly brief para. One diff is that
-%my Fourier approach facilitates analytic examination of interaction effects for the model I consider.
-%Their approach is better for dealing with non-stationarity and other features of some datasets. My
-%approach facilitates understanding the inner workings of the mechanism of interacting Moran effects, 
-%their approach facilitates identifying such effects in datasets.
-
-%Go back to the Kendall study of 2000 (I think that's the year), the one that looked at interactions
-%between Moran and dispersal causes of synchrony. If I remember it correctly (review it), it's a bit silly,
-%because all it basically does it turn dispersal and Moran drivers on and off in a model and show that
-%you get more or less synchrony from the both-on case that you would get by summing the synchrony 
-%you get from each of the one-on cases. But the expectation that correlations should sum is naive anyway - 
-%correlation is not a linear operator (though covariance is - check to make sure they use cor instead of
-%cov, and how would their results be different if they used cov?).
-%Our study has a better baseline to compare to than the sum - the baseline is if the two Moran drivers are
-%independent (or, rather, it's a bit less than that, and has to do with the cross synchrony measure
-%being 0). This is not to belittle the achievements of that paper, which was groundbreaking in its time,
-%instead it's just to explore the value of perspective that we now have based on 20 years of hindsight
-%and ongoing work. Note that you cannot really make dispersal and Moran effects independent/uncorrelated
-%in the same way you can make two Moran effects independent/uncorrelated.
 
 \bibliographystyle{ecology_letters2}
 \bibliography{refs} 
