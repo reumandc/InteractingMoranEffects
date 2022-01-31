@@ -1,10 +1,15 @@
 # How environmental drivers of synchrony interact - Introduction to the repository of analyses supporting the paper
 
 Daniel C. Reuman, University of Kansas, reuman@ku.edu
+
 Max Castorani, University of Virginia
+
 Kyle Cavanaugh, UCLA
+
 Lawrence W. Sheppard, Marine Biological Association of the United Kingdom
+
 Jonathan Walter, University of Virginia
+
 Tom Bell, UCSB and Woods Hole Oceanographic Institution
 
 ## Introduction
