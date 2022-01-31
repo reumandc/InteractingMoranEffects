@@ -1,5 +1,7 @@
 #Makes a map figure for the paper that orients the reader to the kelp data we used
 
+rm(list=ls())
+
 #***
 #External codes needed
 #***
@@ -22,12 +24,9 @@ if (!dir.exists(resloc))
 
 #load the data
 datloc<-"../Results/Kelp_DataAfterAllCleaning/"
-kelp<-readRDS(paste0(datloc,"Kelp_Quarterly_CleanedFinal.Rds")) 
-NO3<-readRDS(paste0(datloc,"NO3_Quarterly_CleanedFinal.Rds")) 
-waves<-readRDS(paste0(datloc,"Waves_Quarterly_CleanedFinal.Rds")) 
+kelp<-readRDS(paste0(datloc,"Kelp_Quarterly_CleanedFinal_NDT.Rds")) 
 locs<-readRDS(paste0(datloc,"Locs_CleanedFinal.Rds"))
 quarters<-readRDS(paste0(datloc,"Quarters_CleanedFinal.Rds"))
-climinds<-readRDS(paste0(datloc,"Climinds_Quarterly_CleanedFinal.Rds"))
 times<-1:(dim(quarters)[1])
 
 numts<-dim(kelp)[1]
@@ -127,4 +126,3 @@ saveRDS(CC1locs,file=paste0(resloc,"CC1locs.Rds"))
 saveRDS(CC2locs,file=paste0(resloc,"CC2locs.Rds"))
 saveRDS(SBlocs,file=paste0(resloc,"SBlocs.Rds"))
 
-#OK, MAX, TAKE IT FROM HERE...

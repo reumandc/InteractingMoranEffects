@@ -58,11 +58,15 @@ for (counter in 1:(dim(kelp)[1]))
 {
   kelp[counter,]<-kelp[counter,]/(unname(quantile(kelpA[counter,],prob=.9))) #use the 90th percentile for robustness, instead of the max
 }
+kelpNDT<-kelp
 kelp<-wsyn::cleandat(kelp,times,2)$cdat
 
 #***
-#Save the final version of cleaned data
+#Save the final version of cleaned data, save the non-detrended data separately
 #***
+
+saveRDS(kelpNDT,file=paste0(resloc1,"Kelp_Quarterly_CleanedFinal_NDT.Rds"))
+write.table(kelpNDT,file=paste0(resloc1,"Kelp_Quarterly_CleanedFinal_NDT.csv"),row.names = FALSE,col.names = FALSE,sep=",")
 
 saveRDS(kelp,file=paste0(resloc1,"Kelp_Quarterly_CleanedFinal.Rds"))
 write.table(kelp,file=paste0(resloc1,"Kelp_Quarterly_CleanedFinal.csv"),row.names = FALSE,col.names = FALSE,sep=",")

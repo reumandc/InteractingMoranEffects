@@ -325,23 +325,6 @@ by an amount $l_1-l_2$. The lack of a similar term in the expressions for $\rho_
 or $\rho_{\epsilon^{(2)}\epsilon^{(2)}}$ reflects that fact that there are no lags built into within-variable
 synchrony in this example. 
 
-\begin{figure}
-\includegraphics[width=.75\textwidth]{../Results/Theory/TheoryFigCaseC_v01_rhos.pdf}\\
-\includegraphics[width=.75\textwidth]{../Results/Theory/TheoryFigCaseC_v02_rhos.pdf}
-\caption[Spectral quantities for noise used in case study C]{The quantities $\rho_{\epsilon^{(1)} \epsilon^{(1)}}$,
-$\rho_{\epsilon^{(2)} \epsilon^{(2)}}$, and $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ for the noise
-described in SI section \ref{sect:examples_cross_sync} and used for theoretical case study C. 
-These are complex-valued functions of timescale; their magnitude is displayed on vertical axes and
-their phase is displayed in color. Two alternative sets of parameters
-were used for panels a-c and d-f, respectively, and are also used in the two scenarios
-considered for case study C. Parameters were:
-$N=\Sexpr{N_C1}$, $c_1=\Sexpr{ns_C1[1]}$, $c_2=\Sexpr{round(ns_C1[2],4)}$, 
-$w_{11}=w{22}=\Sexpr{ns_C1[5]}$ and $w_{12}=\Sexpr{ns_C1[7]}$ for both sets of panels;
-$l_1=\Sexpr{ns_C1[3]}$ and $l_2=\Sexpr{ns_C1[4]}$ for panels a-c; and 
-$l_1=\Sexpr{ns_C2[3]}$ and $l_2=\Sexpr{ns_C2[4]}$ for panels d-f.
-}\label{fig:rhosForC}
-\end{figure}
-
 \begin{thm}\label{thm:useful_thm}
 If $\zeta(t)$ is an $N$-dimensional second-order stationary ergodic stochastic process with 
 component expected values $0$, if
@@ -570,7 +553,25 @@ $\rho_{\epsilon^{(1)} \epsilon^{(1)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \
 $\rho_{\epsilon^{(2)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{22}$ and 
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{12} \exp(-2 \pi \iota f (l_1-l_2))$.
 
-\section{Supporting results for kelp}
+\clearpage
+\newpage
+
+\begin{figure}
+\includegraphics[width=.75\textwidth]{../Results/Theory/TheoryFigCaseC_v01_rhos.pdf}\\
+\includegraphics[width=.75\textwidth]{../Results/Theory/TheoryFigCaseC_v02_rhos.pdf}
+\caption[Spectral quantities for noise used in case study C]{The quantities $\rho_{\epsilon^{(1)} \epsilon^{(1)}}$,
+$\rho_{\epsilon^{(2)} \epsilon^{(2)}}$, and $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ for the noise
+described in SI section \ref{sect:examples_cross_sync} and used for theoretical case study C. 
+These are complex-valued functions of timescale; their magnitude is displayed on vertical axes and
+their phase is displayed in color. Two alternative sets of parameters
+were used for panels a-c and d-f, respectively, and are also used in the two scenarios
+considered for case study C. Parameters were:
+$N=\Sexpr{N_C1}$, $c_1=\Sexpr{ns_C1[1]}$, $c_2=\Sexpr{round(ns_C1[2],4)}$, 
+$w_{11}=w{22}=\Sexpr{ns_C1[5]}$ and $w_{12}=\Sexpr{ns_C1[7]}$ for both sets of panels;
+$l_1=\Sexpr{ns_C1[3]}$ and $l_2=\Sexpr{ns_C1[4]}$ for panels a-c; and 
+$l_1=\Sexpr{ns_C2[3]}$ and $l_2=\Sexpr{ns_C2[4]}$ for panels d-f.
+}\label{fig:rhosForC}
+\end{figure}
 
 \begin{figure}[!h]
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_MainPlot_ForMS.pdf}
