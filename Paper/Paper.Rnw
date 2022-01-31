@@ -113,7 +113,18 @@ CC2locstouse<-readRDS(paste0(resloc,"CC2locstouse.Rds"))
 \maketitle
 
 \begin{abstract}
-Place abstract here
+\noindent Spatial synchrony, the tendency for populations across space to show correlated fluctuations, is a fundamental 
+feature of population dynamics, linked to central topics of ecology such as population cycling, extinction 
+risk, and ecosystem stability. 
+A common mechanism of spatial synchrony is the Moran effect, whereby spatially synchronized environmental signals 
+drive population dynamics and hence induce population synchrony. We here elaborate a general theory of how 
+Moran effects of different environmental drivers acting on the same populations can interact, either 
+synergistically or destructively, to produce either substantially more or markedly less population synchrony 
+than would otherwise occur. 
+We provide intuition for how this newly recognized mechanism works through theoretical case studies and 
+application of our theory to California populations of giant kelp.
+We argue that Moran interactions should be common.     
+Our general theory explains an important new aspect of a fundamental feature of spatiotemporal population dynamics. 
 \end{abstract}
 
 \keywords{Fourier, interactions, kelp, \emph{Macrocyctis pyrifera}, Moran effects, nutrients, synchrony, waves}
@@ -971,6 +982,15 @@ our results. In our view this provides another strong argument, among many other
 long-term on-the-ground or remote-sensing efforts to monitor ecosystems, such as the efforts 
 from which our kelp data are derived. 
 
+\section{Acknowledgments}
+This study was partly funded by the U.S. National Science Foundation (NSF) through linked NSF-OCE awards 
+2023555, 2023523, 2140335, and 2023474 to M.C.N.C, K.C.C., T.W.B, and D.C.R., respectively; and by NSF-Math Bio award 
+1714195 to D.C.R.; and by support to D.C.R. from the James S. McDonnell Foundation and the California Department of Fish
+and Wildlife Delta Science Program. This project used data developed through the Santa Barbara Coastal 
+Long Term Ecological Research project, funded through NSF-OCE award 1831937. The authors thank Vadim Karatayev, 
+Maowei Liang, Kyle Emery, Nat Coombs, Adeola Adeboje and Ethan Kadiyala for helpful discussions.
+%***DAN: If you end up adding any of these people to the author list, take them off here.
+
 \bibliographystyle{ecology_letters2}
 \bibliography{refs} 
 
@@ -1009,6 +1029,7 @@ rendering of all figures.}\label{fig:IntroTheory}
 \newpage
 
 \begin{figure}
+\includegraphics[width=\textwidth]{./Fig2.pdf}
 \caption{Kelp sampling sites and example time series. Sampling sites (a) were from three regions,
 central California 1 (CCA1, blue points), central california 2 (CCA2, green points) and the region
 around Santa Barbara (SB, red points). Kelp density is shown with color intensity in (b)-(d),

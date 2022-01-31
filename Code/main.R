@@ -55,8 +55,8 @@ source("Kelp_AnalysisStep_CleanData_Final.R")
 #***
 
 print("Mapping the system...")
-source("Kelp_AnalysisStep_MakeMapFigDat.R") #preps the data for Max Castorani code
-#source("Kelp_AnalysisStep_MakeMapFig.R") #this is Max's code
+source("Kelp_AnalysisStep_MakeMapFigDat.R") #preps the data for Max Castorani code,
+#run separately on another machine to produce Fig. 2, which is purely descriptive
 
 #***
 #Do the spectra decomposition analysis for kelp
