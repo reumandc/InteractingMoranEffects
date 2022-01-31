@@ -57,7 +57,6 @@ This study was partly funded by the U.S. National Science Foundation (NSF) throu
 and Wildlife Delta Science Program. This project used data developed through the Santa Barbara Coastal 
 Long Term Ecological Research project, funded through NSF-OCE award 1831937. The authors thank Vadim Karatayev, 
 Maowei Liang, Kyle Emery, Nat Coombs, Adeola Adeboje and Ethan Kadiyala for helpful discussions.
-%***DAN: If you end up adding any of these people to the author list, take them off here.
 Any opinions, findings, and conclusions or recommendations expressed in this material are those of 
 the authors and do not necessarily reflect the views of the National Science Foundation or the other funders. 
 
