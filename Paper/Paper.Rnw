@@ -1,9 +1,11 @@
 \documentclass[letterpaper,11pt]{article}
+%\documentclass[letterpaper,12pt]{article}
 
 %packages
 \usepackage{amsfonts}
 \usepackage{graphicx}
-\usepackage[left=2cm,top=2cm,right=2cm,bottom=2cm,head=.5cm,foot=.5cm]{geometry}
+%\usepackage[left=2cm,top=2cm,right=2cm,bottom=2cm,head=.5cm,foot=.5cm]{geometry}
+\usepackage[left=1in,top=1in,right=1in,bottom=1in,head=.5cm,foot=.5cm]{geometry}
 \usepackage{url}
 \usepackage{multirow}
 \usepackage{longtable}
@@ -16,6 +18,7 @@
 \usepackage{xr}
 \usepackage{authblk}
 \usepackage{lineno}
+\usepackage{times}
 
 %new commands and so on
 \providecommand{\keywords}[1]
@@ -38,6 +41,8 @@
 \linenumbers
 \DeclareCaptionFont{linenumbers}{\internallinenumbers}
 \captionsetup[figure]{font+=linenumbers} % use \internallinenumbers inside figure caption
+
+%\doublespacing
 
 %header material for paper
 \title{How environmental drivers of synchrony interact}
@@ -132,7 +137,7 @@ Our general theory explains an important new aspect of a fundamental feature of 
 \section{Introduction}
 
 Spatial synchrony, the tendency for geographically disjunct populations to show correlated fluctuations 
-through time, is a fundamental feature of population dynamics, linked, for instance, to important topics such as 
+through time, is a fundamental feature of population dynamics, linked to important topics such as 
 population cycling \citep{Anderson2021}, extinction risk \citep{Ghosh2020}, and the 
 stability of regional populations and ecosystem functioning \citep{Wilcox2017}. Though spatial synchrony (henceforth, 
 \emph{synchrony}) has been studied for decades
@@ -158,12 +163,12 @@ One of the classically theorized \citep{Moran1953} and now widely empirically va
 synchrony, called the Moran effect, operates when spatially synchronized environmental signals, such
 as temperature or precipitation, help drive population dynamics and thereby induce synchrony in
 populations. Two recent papers have documented that Moran effects of distinct 
-environmental drivers can, in fact, interact, either syergistically or antagonistically,
+environmental drivers can, in fact, interact, either synergistically or antagonistically,
 so that total population synchrony can be either greater or less than if the distinct Moran 
 drivers operated independently \citep{Sheppard2019,CastoraniSheppardKelp}. Effects can be strong.
 \cite{Sheppard2019} showed that long-timescale ($>4$y period) synchrony in a chlorophyll density index 
 in the seas around the United Kingdom is substantially augmented by interactions between environmental 
-drivers of synchrony and drivers linked with consumption by a copepod predator.
+drivers of synchrony and drivers linked with consumption by a copepod consumer.
 \cite{CastoraniSheppardKelp} showed that nutrient dynamics and wave disturbance, two Moran drivers
 of synchrony in giant kelp populations on the California (CA) coast, interact either synergistically 
 or destructively, depending on which portion of the CA coast is examined and on 
@@ -1014,12 +1019,12 @@ component at the same timescale for another environmental variable, $\epsilon_i^
 oscillations are lagged from each other by an amount $l_n$. Environmental effects on 
 the population, $w_i(t)$, in location $i$ are also lagged, by amounts $l_{e1}$ and
 $l_{e2}$. For this setup, a positive interaction between Moran effects can occur on the
-given timescale when lags align, i.e, $l_{e1}-l_{e2}+l_n=0$, as in panel (a), so that environmental
+given timescale when lags align, i.e, $l_{e1}-l_{e2}+l_n=0$, as in panel (b), so that environmental
 effects on the population coincide and reinforce each other. All environmental effects on 
 populations are assumed positive in these examples. A negative
 effect can occur when lags produce out-of-phase influence of environmental variables on
 populations, e.g., $l_{e1}-l_{e2}+l_n$ equals half the given timescale/period,
-as in panel (b), so that the distinct influences tend to work against each other in 
+as in panel (c), so that the distinct influences tend to work against each other in 
 bringing about population oscillations on the given timescale.  
 A timescale-specific approach is essential to this reasoning. See the online version for a color
 rendering of all figures.}\label{fig:IntroTheory}
