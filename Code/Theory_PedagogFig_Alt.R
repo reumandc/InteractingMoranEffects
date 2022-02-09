@@ -1,5 +1,5 @@
 #This script makes an alternative pedagogical figure, may turn out to be an improvement. No modelling here, 
-#just presentation.
+#just presentation. For the early part of the paper.
 
 rm(list=ls())
 
