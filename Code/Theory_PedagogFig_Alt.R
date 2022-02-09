@@ -27,13 +27,14 @@ set.seed(102)
 
 #dimensions for the figure to be generated, inches
 titlespace<-.25
-totwd<-3.5
+totwd<-7
 gap<-0.25
 xaxht<-0.45
 yaxwd<-0.25
-panwd<-(totwd-gap-yaxwd)
+panwd<-(totwd-gap-2*yaxwd)/2
 panht<-panwd/2.1
-totht<-(xaxht+panht+gap+panht+titlespace)*2
+totht<-(xaxht+panht+gap+panht+titlespace)
+
 
 pdf(file=paste0(resloc,"PedagogFig_Alt.pdf"),height=totht,width=totwd)
 
@@ -78,8 +79,8 @@ le2<-8
 #set up the panel for the Moran effects of the first env var
 par(fig=c((yaxwd)/totwd,
           (yaxwd+panwd)/totwd,
-          (xaxht+panht+gap+panht+titlespace+xaxht+panht+gap)/totht,
-          (xaxht+panht+gap+panht+titlespace+xaxht+panht+gap+panht)/totht),
+          (xaxht+panht+gap)/totht,
+          (xaxht+panht+gap+panht)/totht),
     mai=c(0,0,0,0),mgp=c(3,.15,0),tcl=-.25)
 
 #do the start of the plotting
@@ -157,8 +158,8 @@ text(sintro_1_x[2,3]+le1/2,vertoffset-1+1.75,latex2exp::TeX("$l_{e1}$"),cex=0.7,
 text(sinpks_1_x[1,4]+le1/2,1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label and title
-text(xlimits[1],ylimits[2],"(a)",adj=c(1.1,0),xpd=NA)
-mtext("Synergistic Moran interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=c(-.1))
+mtext("Synergistic Moran interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+text(xlimits[1],ylimits[2],"(a)",adj=c(0,1))
 
 #label ln
 par(xpd=NA)
@@ -167,7 +168,7 @@ par(xpd=FALSE)
 mtext(latex2exp::TeX("$l_{n}$"),side=1,line=0,at=mean(c(sinpks_1_x[1,1],sinpks_2_x[3,1])),cex=0.7,adj=c(.5,.5))
 
 #box around the whole thing
-par(fig=c(0.005,0.995,.505,0.995),
+par(fig=c(0.005,.495,0.005,0.995),
     mai=c(0,0,0,0),mgp=c(3,.15,0),tcl=-.25,new=TRUE)
 plot(1:3,1:3,type="n",xaxt="n",yaxt="n")
 
@@ -175,8 +176,8 @@ plot(1:3,1:3,type="n",xaxt="n",yaxt="n")
 #set up the panel for the Moran effects of the second env var
 par(fig=c((yaxwd)/totwd,
           (yaxwd+panwd)/totwd,
-          (xaxht+panht+gap+panht+titlespace+xaxht)/totht,
-          (xaxht+panht+gap+panht+titlespace+xaxht+panht)/totht),
+          (xaxht)/totht,
+          (xaxht+panht)/totht),
     mai=c(0,0,0,0),mgp=c(3,.15,0),tcl=-.25,new=TRUE)
 
 #do the start of the plotting
@@ -253,7 +254,7 @@ text(sintro_2_x[2,3]+le2/2,vertoffset-1+2.2,latex2exp::TeX("$l_{e2}$"),cex=0.7,a
 text(sinpks_2_x[1,4]+le2/2,1+.5,latex2exp::TeX("$l_{e2}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label
-text(xlimits[1],ylimits[2],"(b)",adj=c(1.1,0),xpd=NA)
+text(xlimits[1],ylimits[2],"(b)",adj=c(0,1))
 
 #label ln
 par(xpd=NA)
@@ -298,8 +299,8 @@ le1<-3
 le2<-16
 
 #set up the panel
-par(fig=c((yaxwd)/totwd,
-          (yaxwd+panwd)/totwd,
+par(fig=c((yaxwd+panwd+yaxwd)/totwd,
+          (yaxwd+panwd+yaxwd+panwd)/totwd,
           (xaxht+panht+gap)/totht,
           (xaxht+panht+gap+panht)/totht),
     mai=c(0,0,0,0),mgp=c(3,.15,0),tcl=-.25,new=TRUE)
@@ -379,8 +380,8 @@ text(sintro_1_x[2,3]+le1/4,vertoffset-1+1.75,latex2exp::TeX("$l_{e1}$"),cex=0.7,
 text(sinpks_1_x[1,4]+le1/4,1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label and title
-text(xlimits[1],ylimits[2],"(c)",adj=c(1.1,0),xpd=NA)
-mtext("Antagonistic Moran interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=c(-.1))
+mtext("Antagonistic Moran interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+text(xlimits[1],ylimits[2],"(c)",adj=c(0,1))
 
 #label ln
 par(xpd=NA)
@@ -389,13 +390,13 @@ par(xpd=FALSE)
 mtext(latex2exp::TeX("$l_{n}$"),side=1,line=0,at=mean(c(sinpks_1_x[1,1],sinpks_2_x[3,1])),cex=0.7,adj=c(.5,.5))
 
 #box around the whole thing
-par(fig=c(0.005,0.995,.005,0.495),
+par(fig=c(0.505,0.995,.005,0.995),
     mai=c(0,0,0,0),mgp=c(3,.15,0),tcl=-.25,new=TRUE)
 plot(1:3,1:3,type="n",xaxt="n",yaxt="n")
 
 #set up the panel
-par(fig=c((yaxwd)/totwd,
-          (yaxwd+panwd)/totwd,
+par(fig=c((yaxwd+panwd+yaxwd)/totwd,
+          (yaxwd+panwd+yaxwd+panwd)/totwd,
           (xaxht)/totht,
           (xaxht+panht)/totht),
     mai=c(0,0,0,0),mgp=c(3,.15,0),tcl=-.25,new=TRUE)
@@ -474,7 +475,7 @@ text(sinpks_2_x[3,2]+3*le2/5,2*vertoffset+1+.5,latex2exp::TeX("$l_{e2}$"),cex=0.
 #text(sinpks_2_x[1,4]+le2/2,1+.5,latex2exp::TeX("$l_{e2}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label
-text(xlimits[1],ylimits[2],"(d)",adj=c(1.1,0),xpd=NA)
+text(xlimits[1],ylimits[2],"(d)",adj=c(0,1))
 
 #label ln
 par(xpd=NA)
