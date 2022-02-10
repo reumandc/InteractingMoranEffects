@@ -31,8 +31,8 @@ source("Theory_CaseStudyC.R")
 print("Theory example in intro...")
 source("Theory_IntroExample.R")
 
-print("Pedagogical figure...")
-source("Theory_PedagogFig.R")
+print("Pedagogical figures...")
+source("Theory_PedagogFig_Alt.R")
 
 #***
 #Clean the data

@@ -158,7 +158,7 @@ text(sintro_1_x[2,3]+le1/2,vertoffset-1+1.75,latex2exp::TeX("$l_{e1}$"),cex=0.7,
 text(sinpks_1_x[1,4]+le1/2,1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label and title
-mtext("Synergistic Moran interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+mtext("Scenario 1: Synergistic interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
 text(xlimits[1],ylimits[2],"(a)",adj=c(0,1))
 
 #label ln
@@ -380,7 +380,7 @@ text(sintro_1_x[2,3]+le1/4,vertoffset-1+1.75,latex2exp::TeX("$l_{e1}$"),cex=0.7,
 text(sinpks_1_x[1,4]+le1/4,1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label and title
-mtext("Antagonistic Moran interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+mtext("Scenario 2: Antagonistic interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
 text(xlimits[1],ylimits[2],"(c)",adj=c(0,1))
 
 #label ln

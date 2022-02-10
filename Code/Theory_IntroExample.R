@@ -104,7 +104,7 @@ text(-.25,0,"Negative \n interaction \n effects",adj=c(0.5,1))
 shape::Arrows(.5,.5,.7,.72)
 text(.5,.5,"Positive \n interaction \n effects",adj=c(0.5,1))
 
-text(-1,.75,"(a)",cex=1.1,adj=c(0,0))
+#text(-1,.75,"(a)",cex=1.1,adj=c(0,0))
 
 legend(x="bottomright",legend=c("Pop. sync.","Pop. sync. with interaction \n effects removed"),cex=.85,lty=c("solid","dashed"))
 
