@@ -21,6 +21,11 @@ if (!dir.exists(resloc))
 
 set.seed(102)
 
+#This wrapper just tweaks a couple things to give the main text or sup mat figures
+#
+twoways<-function(maintext=TRUE)
+{
+  
 #***
 #Make the figure
 #***
@@ -35,8 +40,13 @@ panwd<-(totwd-gap-2*yaxwd)/2
 panht<-panwd/2.1
 totht<-(xaxht+panht+gap+panht+titlespace)
 
-
-pdf(file=paste0(resloc,"PedagogFig_Alt.pdf"),height=totht,width=totwd)
+if (maintext)
+{
+  pdf(file=paste0(resloc,"PedagogFig_Alt.pdf"),height=totht,width=totwd)
+}else
+{
+  pdf(file=paste0(resloc,"PedagogFig_Alt_SM.pdf"),height=totht,width=totwd)
+}
 
 #***part 1, which shows synergistic effects
 
@@ -158,7 +168,13 @@ text(sintro_1_x[2,3]+le1/2,vertoffset-1+1.75,latex2exp::TeX("$l_{e1}$"),cex=0.7,
 text(sinpks_1_x[1,4]+le1/2,1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label and title
-mtext("Scenario 1: Synergistic interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+if (maintext)
+{
+  mtext("Scenario 1: Synergistic interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+}else
+{
+  mtext("Scenario 1: Antagonistic interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+}
 text(xlimits[1],ylimits[2],"(a)",adj=c(0,1))
 
 #label ln
@@ -193,8 +209,15 @@ rect(xlimits[1],3*vertoffset/2-1,xlimits[2],3*vertoffset/2+1,col="lightgrey",bor
 rect(xlimits[1],5*vertoffset/2-1,xlimits[2],5*vertoffset/2+1,col="lightgrey",border=NA)
 #put rectangles to highlight the synchrony, only done here so other stuff plots over it
 ep<-1.2
-rect(mean(sintro_2_x[,2])+le2-ep,-0.5,mean(sintro_2_x[,2])+le2+ep,2*vertoffset+4.5,border=NA,col=rgb(255/255,192/255,203/255,.5)) #"pink" is red    255, green  192, blue   203
-rect(mean(sinpks_2_x[,3])+le2-ep,-0.5,mean(sinpks_2_x[,3])+le2+ep,2*vertoffset+4.5,border=NA,col=rgb(135/255,206/255,250/255,.5)) #"lightskyblue" is red    135, green  206, blue   250
+if (maintext)
+{
+  rect(mean(sintro_2_x[,2])+le2-ep,-0.5,mean(sintro_2_x[,2])+le2+ep,2*vertoffset+4.5,border=NA,col=rgb(255/255,192/255,203/255,.5)) #"pink" is red    255, green  192, blue   203
+  rect(mean(sinpks_2_x[,3])+le2-ep,-0.5,mean(sinpks_2_x[,3])+le2+ep,2*vertoffset+4.5,border=NA,col=rgb(135/255,206/255,250/255,.5)) #"lightskyblue" is red    135, green  206, blue   250
+}else
+{
+  rect(mean(sintro_2_x[,2])+le2-ep,-0.5,mean(sintro_2_x[,2])+le2+ep,2*vertoffset+4.5,border=NA,col=rgb(135/255,206/255,250/255,.5)) #"pink" is red    255, green  192, blue   203
+  rect(mean(sinpks_2_x[,3])+le2-ep,-0.5,mean(sinpks_2_x[,3])+le2+ep,2*vertoffset+4.5,border=NA,col=rgb(255/255,192/255,203/255,.5)) #"lightskyblue" is red    135, green  206, blue   250
+}
 #now finish plotting the env vars and proceed
 lines(tim,envvar_2[1,],type="l",lty="dashed")
 lines(tim,envvar_2[2,],type="l",lty="dashed")
@@ -212,39 +235,74 @@ for (csw in 1:dim(sinpks_2_x)[1])
     ex<-sinpks_2_x[csw,cpk]
     sy<-vertoffset*(csw-1)+1
     ey<-sy+.5
-    lines(c(sx,ex),c(sy,ey))
+    if (maintext)
+    {
+      lines(c(sx,ex),c(sy,ey))
+    }else
+    {
+      lines(c(sx,ex),c(sy,ey),col="red")
+    }
     
     sx<-ex
     sy<-ey
     ex<-sx+le2
     ey<-sy
-    lines(c(sx,ex),c(sy,ey))
+    if (maintext)
+    {
+      lines(c(sx,ex),c(sy,ey))
+    }else
+    {
+      lines(c(sx,ex),c(sy,ey),col="red")
+    }
     
     sx<-ex
     xy<-ey
     ex<-sx
     ey<-sy+1
-    shape::Arrows(sx,sy,ex,ey,arr.length=0.15)
+    if (maintext)
+    {
+      shape::Arrows(sx,sy,ex,ey,arr.length=0.15)
+    }else
+    {
+      shape::Arrows(sx,sy,ex,ey,arr.length=0.15,col="red")
+    }
     
     #plot the max negative effects on the pops as red arrows
     sx<-sintro_2_x[csw,cpk]
     ex<-sx
     sy<-vertoffset*(csw-1)-1
     ey<-sy+2.2
-    lines(c(sx,ex),c(sy,ey),col="red")
+    if (maintext)
+    {
+      lines(c(sx,ex),c(sy,ey),col="red")
+    }else
+    {
+      lines(c(sx,ex),c(sy,ey))
+    }
     
     sx<-ex
     sy<-ey
     ex<-sx+le2
     ey<-sy
-    lines(c(sx,ex),c(sy,ey),col="red")
+    if (maintext)
+    {
+      lines(c(sx,ex),c(sy,ey),col="red")
+    }else
+    {
+      lines(c(sx,ex),c(sy,ey))
+    }
     
     sx<-ex
     xy<-ey
     ex<-sx
     ey<-sy+1.3
-    #lines(c(sx,ex),c(sy,ey))
-    shape::Arrows(sx,sy,ex,ey,arr.length=0.15,col="red")
+    if (maintext)
+    {
+      shape::Arrows(sx,sy,ex,ey,arr.length=0.15,col="red")
+    }else
+    {
+      shape::Arrows(sx,sy,ex,ey,arr.length=0.15)
+    }
   }
 }
 
@@ -380,7 +438,13 @@ text(sintro_1_x[2,3]+le1/4,vertoffset-1+1.75,latex2exp::TeX("$l_{e1}$"),cex=0.7,
 text(sinpks_1_x[1,4]+le1/4,1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label and title
-mtext("Scenario 2: Antagonistic interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+if (maintext)
+{
+  mtext("Scenario 2: Antagonistic interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+}else
+{
+  mtext("Scenario 2: Synergistic interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+}
 text(xlimits[1],ylimits[2],"(c)",adj=c(0,1))
 
 #label ln
@@ -414,8 +478,15 @@ rect(xlimits[1],3*vertoffset/2-1,xlimits[2],3*vertoffset/2+1,col="lightgrey",bor
 rect(xlimits[1],5*vertoffset/2-1,xlimits[2],5*vertoffset/2+1,col="lightgrey",border=NA)
 #put rectangles to highlight the synchrony, only done here so other stuff plots over it
 ep<-1.2
-rect(mean(sintro_2_x[,2])+le2-ep,-0.5,mean(sintro_2_x[,2])+le2+ep,2*vertoffset+4.5,border=NA,col=rgb(255/255,192/255,203/255,.5)) #"pink" is red    255, green  192, blue   203
-rect(mean(sinpks_2_x[,2])+le2-ep,-0.5,mean(sinpks_2_x[,2])+le2+ep,2*vertoffset+4.5,border=NA,col=rgb(135/255,206/255,250/255,.5)) #"lightskyblue" is red    135, green  206, blue   250
+if (maintext)
+{
+  rect(mean(sintro_2_x[,2])+le2-ep,-0.5,mean(sintro_2_x[,2])+le2+ep,2*vertoffset+4.5,border=NA,col=rgb(255/255,192/255,203/255,.5)) #"pink" is red    255, green  192, blue   203
+  rect(mean(sinpks_2_x[,2])+le2-ep,-0.5,mean(sinpks_2_x[,2])+le2+ep,2*vertoffset+4.5,border=NA,col=rgb(135/255,206/255,250/255,.5)) #"lightskyblue" is red    135, green  206, blue   250
+}else
+{
+  rect(mean(sintro_2_x[,2])+le2-ep,-0.5,mean(sintro_2_x[,2])+le2+ep,2*vertoffset+4.5,border=NA,col=rgb(135/255,206/255,250/255,.5)) #"pink" is red    255, green  192, blue   203
+  rect(mean(sinpks_2_x[,2])+le2-ep,-0.5,mean(sinpks_2_x[,2])+le2+ep,2*vertoffset+4.5,border=NA,col=rgb(255/255,192/255,203/255,.5)) #"lightskyblue" is red    135, green  206, blue   250
+}
 #now finish plotting the env vars and proceed
 lines(tim,envvar_2[1,],type="l",lty="dashed")
 lines(tim,envvar_2[2,],type="l",lty="dashed")
@@ -433,39 +504,74 @@ for (csw in 1:dim(sinpks_2_x)[1])
     ex<-sinpks_2_x[csw,cpk]
     sy<-vertoffset*(csw-1)+1
     ey<-sy+.5
-    lines(c(sx,ex),c(sy,ey))
+    if (maintext)
+    {
+      lines(c(sx,ex),c(sy,ey))
+    }else
+    {
+      lines(c(sx,ex),c(sy,ey),col="red")
+    }
     
     sx<-ex
     sy<-ey
     ex<-sx+le2
     ey<-sy
-    lines(c(sx,ex),c(sy,ey))
+    if (maintext)
+    {
+      lines(c(sx,ex),c(sy,ey))
+    }else
+    {
+      lines(c(sx,ex),c(sy,ey),col="red")
+    }
     
     sx<-ex
     xy<-ey
     ex<-sx
     ey<-sy+1
-    shape::Arrows(sx,sy,ex,ey,arr.length=0.15)
+    if (maintext)
+    {
+      shape::Arrows(sx,sy,ex,ey,arr.length=0.15)
+    }else
+    {
+      shape::Arrows(sx,sy,ex,ey,arr.length=0.15,col="red")
+    }
     
     #plot the max negative effects on the pops as red arrows
     sx<-sintro_2_x[csw,cpk]
     ex<-sx
     sy<-vertoffset*(csw-1)-1
     ey<-sy+2.2
-    lines(c(sx,ex),c(sy,ey),col="red")
+    if (maintext)
+    {
+      lines(c(sx,ex),c(sy,ey),col="red")
+    }else
+    {
+      lines(c(sx,ex),c(sy,ey))
+    }
     
     sx<-ex
     sy<-ey
     ex<-sx+le2
     ey<-sy
-    lines(c(sx,ex),c(sy,ey),col="red")
+    if (maintext)
+    {
+      lines(c(sx,ex),c(sy,ey),col="red")
+    }else
+    {
+      lines(c(sx,ex),c(sy,ey))
+    }
     
     sx<-ex
     xy<-ey
     ex<-sx
     ey<-sy+1.3
-    #lines(c(sx,ex),c(sy,ey))
-    shape::Arrows(sx,sy,ex,ey,arr.length=0.15,col="red")
+    if (maintext)
+    {
+      shape::Arrows(sx,sy,ex,ey,arr.length=0.15,col="red")
+    }else
+    {
+      shape::Arrows(sx,sy,ex,ey,arr.length=0.15)
+    }
   }
 }
 
@@ -483,3 +589,8 @@ lines(rep(sinpks_2_x[3,1],2),c(2*vertoffset+1+.5,2*vertoffset+1+7.5),type="l",lt
 par(xpd=FALSE)
 
 dev.off()
+
+}
+
+twoways(TRUE)
+twoways(FALSE)
