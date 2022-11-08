@@ -196,7 +196,7 @@ frequency-$f$ oscillations of $\epsilon^{(2)}_j$.
 
 The following examples should help clarify the properties of our definition of cross synchrony.
 For pedagogical clarity, we start with a white-noise example that does not illustrate the full value of the
-idea of cross synchrony, but which is simple; we subsequently move on to an example which is more
+idea of cross synchrony, but which is simple; we then move on to an example which is more
 complex but also more illustrative. These examples are also used in the theoretical case studies (main text).
 
 For the simple example, to be used in theoretical case studies A and B (Methods), we 
@@ -320,7 +320,7 @@ $\rho_{\epsilon^{(1)}\epsilon^{(1)}}$, $\rho_{\epsilon^{(2)}\epsilon^{(2)}}$ and
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ for periodically oscillating quantities should also have a peak at the 
 timescale of oscillation. 
 The term $\exp(-2 \pi \iota f (l_1-l_2))$ in the expression for 
-$\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ reflects that fact that cross variable synchrony for this example is lagged
+$\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ reflects the fact that cross variable synchrony for this example is lagged
 by an amount $l_1-l_2$. The lack of a similar term in the expressions for $\rho_{\epsilon^{(1)}\epsilon^{(1)}}$
 or $\rho_{\epsilon^{(2)}\epsilon^{(2)}}$ reflects that fact that there are no lags built into within-variable
 synchrony in this example. 
@@ -514,10 +514,10 @@ of total useable habitat at a site. Kelp establish on rocky substrate, and areas
 sedimented substrate are not useable kelp habitat. All time series were then linearly detrended,
 and only those time series were utilized which were located within the three regions pictured
 in Fig. \ref{MT-fig:map} in the main text. Regions were selected to represent distinct dynamical
-patterns known to occur in central and southern CA, and also to have another the same number
+patterns known to occur in central and southern CA, and also to have about the same number
 of time series per selected region.
 
-Wave nutrient data were also available for each quarter at each location. Wave data were derived 
+Wave and nutrient data were also available for each quarter at each location. Wave data were derived 
 by applying a swell propagation model with bouy-based wave measurements and a validation 
 techniques \citep{Wingeart2001,Hansen2009,Bell2015,OReilly2016}. Data on nitrates 
 were produced \citep{Snyder2020} by exploiting an established empirical 
