@@ -47,7 +47,7 @@
 \captionsetup[figure]{font+=linenumbers} % use \internallinenumbers inside figure caption
 
 %header material for paper
-\title{Supporting information for ``Environmental drivers of synchrony and their interactions''}
+\title{Supporting information for ``How environmental drivers of spatial synchrony interact''}
 \date{}
 
 %***Tentative author order, Bell last for his data contributions

@@ -323,6 +323,10 @@ do_analysis<-function(Args)
 explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
                           fnpre,plottype,PlotForMSArgs)
 {
+  #***
+  #preparation
+  #***
+  
   #unpack plotting params
   fP1_short_ylims<-PlotForMSArgs$ExplainInteractingMoran_fP1_short_ylims
   fP1_mid_ylims<-PlotForMSArgs$ExplainInteractingMoran_fP1_mid_ylims
@@ -340,6 +344,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   Prod_mid_ylims<-PlotForMSArgs$ExplainInteractingMoran_Prod_mid_ylims
   Prod_long_ylims<-PlotForMSArgs$ExplainInteractingMoran_Prod_long_ylims
   ExplainInteractingMoran_PanLabs<-PlotForMSArgs$ExplainInteractingMoran_PanLabs
+  ExplainInteractingMoran_short_PanLabs<-PlotForMSArgs$ExplainInteractingMoran_short_PanLabs
   
   #constraint to certain frequencies, for plotting
   fP1<-fP1[frg[1]<freq & freq<=frg[2]]
@@ -355,6 +360,10 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   xlimits_short<-c(xlimits[1],log2(8))
   xlimits_mid<-c(log2(8),log2(16))
   xlimits_long<-c(log2(16),xlimits[2])
+  
+  #***
+  #the long version, with panels for all the parts of the theory
+  #***
   
   #panel layout quantities
   gap<-.15
@@ -800,12 +809,483 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   text(xlimits_long[1],ylimits[2],ExplainInteractingMoran_PanLabs[15],adj=c(-0.1,1))
   
   dev.off()
+  
+  #***
+  #the short version, with only the panels for the noise
+  #***
+  
+  #panel layout quantities
+  gap<-.15
+  yaxnumwd<-.4
+  yaxlabwd<-.4
+  yaxwd<-yaxnumwd+yaxlabwd
+  xaxht<-yaxwd
+  panht<-1.25
+  panwd_short<-2
+  panwd_mid<-1
+  panwd_long<-2
+  totpanwd<-panwd_short+panwd_mid+panwd_long
+  totht<-xaxht+panht+gap
+  totwd<-yaxwd+2*yaxnumwd+totpanwd+gap
+  lnwid<-2.5
+  
+  #get the plotting device
+  if (plottype=="jpg")
+  {
+    jpeg(paste0(resloc,fnpre,"_ExplainInteractingMoran_ForMS_short.jpg"),quality=95,width=totwd,height=totht,units="in",res=300)
+  }
+  if (plottype=="pdf")
+  {
+    pdf(paste0(resloc,fnpre,"_ExplainInteractingMoran_ForMS_short.pdf"),width=totwd,height=totht)
+  }
+  
+  #technical stuff for the circular colorbar for phases
+  breaks<-seq(from=-pi,to=pi,length.out=201)
+  colbarQuad1<-rgb(red=1,green=seq(from=1,to=0,length.out=50),blue=seq(from=1,to=0,length.out=50))
+  #plot(1:50,1:50,col=colbarQuad1,pch=20,cex=2)
+  colbarQuad2<-rgb(red=seq(from=1,to=0,length.out=50),green=0,blue=0)
+  #plot(1:50,1:50,col=colbarQuad2,pch=20,cex=2)
+  colbarQuad3<-rgb(red=0,green=0,blue=seq(from=0,to=1,length.out=50))
+  #plot(1:50,1:50,col=colbarQuad3,pch=20,cex=2)
+  colbarQuad4<-rgb(red=seq(from=0,to=1,length.out=50),green=seq(from=0,to=1,length.out=50),blue=1)
+  #plot(1:50,1:50,col=colbarQuad4,pch=20,cex=2)
+  colbar<-c(colbarQuad3,colbarQuad4,colbarQuad1,colbarQuad2)
+  #plot(1:200,1:200,col=colbar,pch=20,cex=2)
+  
+  # #***panels for fP1 
+  # htind<-5
+  # 
+  # #short timescales
+  # #the panel for short (annual) timescales
+  # par(fig=c((yaxwd)/totwd,
+  #           (yaxwd+panwd_short)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0))
+  # inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  # inds<-c(inds[1]-1,inds)
+  # y<-Mod(fP1[inds])
+  # if (is.na(fP1_short_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP1_short_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # h<-Arg(fP1[inds])
+  # h[h==-pi]<-pi
+  # cols<-colbar[WhichBreak(breaks=breaks,h)] 
+  # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
+  # mtext(latex2exp::TeX("$f_{P^{(1)}}$"),2,1.7,cex=2) 
+  # graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
+  # text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[1],adj=c(-0.1,1))
+  # 
+  # #make the colorbar, which applies to all panels
+  # bds<-seq(from=.6*xlimits_short[1]+.4*xlimits_short[2],to=.1*xlimits_short[1]+.9*xlimits_short[2],
+  #          length.out=length(breaks))
+  # rect(xleft=bds[1:(length(bds)-1)],
+  #      ybottom=.1*ylimits[1]+.9*ylimits[2],
+  #      xright=bds[2:length(bds)],
+  #      ytop=ylimits[2],
+  #      col=colbar,
+  #      border=NA)
+  # ytags<-c(.1*ylimits[1]+.9*ylimits[2],.15*ylimits[1]+.85*ylimits[2],.175*ylimits[1]+.825*ylimits[2])
+  # lines(rep(.6*xlimits_short[1]+.4*xlimits_short[2],2),ytags[1:2])
+  # text(.6*xlimits_short[1]+.4*xlimits_short[2],ytags[3],latex2exp::TeX("$-\\pi$"),adj=c(.5,1))
+  # lines(rep((.6-.25)*xlimits_short[1]+(.4+.25)*xlimits_short[2],2),ytags[1:2])
+  # text((.6-.25)*xlimits_short[1]+(.4+.25)*xlimits_short[2],ytags[3],"0",adj=c(.5,1))
+  # lines(rep(.1*xlimits_short[1]+.9*xlimits_short[2],2),ytags[1:2])
+  # text(.1*xlimits_short[1]+.9*xlimits_short[2],ytags[3],latex2exp::TeX("$\\pi$"),adj=c(.5,1))
+  # 
+  # #mid timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  # inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
+  # y<-Mod(fP1[inds])
+  # if (is.na(fP1_mid_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP1_mid_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # h<-Arg(fP1[inds])
+  # h[h==-pi]<-pi
+  # cols<-colbar[WhichBreak(breaks=breaks,h)]
+  # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(8,16)),labels=FALSE)
+  # text(xlimits_mid[1],ylimits[2],ExplainInteractingMoran_PanLabs[6],adj=c(-0.1,1))
+  # 
+  # #long timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd+panwd_long)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  # inds<-c(inds,inds[length(inds)]+1)
+  # y<-Mod(fP1[inds])
+  # if (is.na(fP1_long_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP1_long_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # h<-Arg(fP1[inds])
+  # h[h==-pi]<-pi
+  # cols<-colbar[WhichBreak(breaks=breaks,h)]
+  # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_long,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(16,32,64,128)),labels=FALSE)
+  # text(xlimits_long[1],ylimits[2],ExplainInteractingMoran_PanLabs[11],adj=c(-0.1,1))
+  # 
+  # #***panels for fP2 
+  # htind<-4
+  # 
+  # #short timescales
+  # #the panel for short (annual) timescales
+  # par(fig=c((yaxwd)/totwd,
+  #           (yaxwd+panwd_short)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  # inds<-c(inds[1]-1,inds)
+  # y<-Mod(fP2[inds])
+  # if (is.na(fP2_short_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP2_short_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # h<-Arg(fP2[inds])
+  # h[h==-pi]<-pi
+  # cols<-colbar[WhichBreak(breaks=breaks,h)] 
+  # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
+  # mtext(latex2exp::TeX("$f_{P^{(2)}}$"),2,1.7,cex=2) 
+  # graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
+  # text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[2],adj=c(-0.1,1))
+  # 
+  # #mid timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  # inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
+  # y<-Mod(fP2[inds])
+  # if (is.na(fP2_mid_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP2_mid_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # h<-Arg(fP2[inds])
+  # h[h==-pi]<-pi
+  # cols<-colbar[WhichBreak(breaks=breaks,h)]
+  # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(8,16)),labels=FALSE)
+  # text(xlimits_mid[1],ylimits[2],ExplainInteractingMoran_PanLabs[7],adj=c(-0.1,1))
+  # 
+  # #long timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd+panwd_long)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  # inds<-c(inds,inds[length(inds)]+1)
+  # y<-Mod(fP2[inds])
+  # if (is.na(fP2_long_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP2_long_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # h<-Arg(fP2[inds])
+  # h[h==-pi]<-pi
+  # cols<-colbar[WhichBreak(breaks=breaks,h)]
+  # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_long,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(16,32,64,128)),labels=FALSE)
+  # text(xlimits_long[1],ylimits[2],ExplainInteractingMoran_PanLabs[12],adj=c(-0.1,1))
+  # 
+  # #***panels for fP1*Conj(fP2)
+  # htind<-3
+  # fP1ConjfP2<-fP1*Conj(fP2)
+  # 
+  # #short timescales
+  # #the panel for short (annual) timescales
+  # par(fig=c((yaxwd)/totwd,
+  #           (yaxwd+panwd_short)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  # inds<-c(inds[1]-1,inds)
+  # y<-Mod(fP1ConjfP2[inds])
+  # if (is.na(fP1ConjfP2_short_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP1ConjfP2_short_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # h<-Arg(fP1ConjfP2[inds])
+  # h[h==-pi]<-pi
+  # cols<-colbar[WhichBreak(breaks=breaks,h)] 
+  # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
+  # mtext(latex2exp::TeX("$f_{P^{(1)}} \\bar{f_{P^{(2)}}}$"),2,1.7,cex=2) 
+  # graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
+  # text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[3],adj=c(-0.1,1))
+  # 
+  # #mid timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  # inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
+  # y<-Mod(fP1ConjfP2[inds])
+  # if (is.na(fP1ConjfP2_mid_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP1ConjfP2_mid_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # h<-Arg(fP1ConjfP2[inds])
+  # h[h==-pi]<-pi
+  # cols<-colbar[WhichBreak(breaks=breaks,h)]
+  # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(8,16)),labels=FALSE)
+  # text(xlimits_mid[1],ylimits[2],ExplainInteractingMoran_PanLabs[8],adj=c(-0.1,1))
+  # 
+  # #long timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd+panwd_long)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  # inds<-c(inds,inds[length(inds)]+1)
+  # y<-Mod(fP1ConjfP2[inds])
+  # if (is.na(fP1ConjfP2_long_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP1ConjfP2_long_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # h<-Arg(fP1ConjfP2[inds])
+  # h[h==-pi]<-pi
+  # cols<-colbar[WhichBreak(breaks=breaks,h)]
+  # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_long,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(16,32,64,128)),labels=FALSE)
+  # text(xlimits_long[1],ylimits[2],ExplainInteractingMoran_PanLabs[13],adj=c(-0.1,1))
+  
+  #***panels for Se1e2_avg
+  htind<-2
+  
+  #short timescales
+  #the panel for short (annual) timescales
+  par(fig=c((yaxwd)/totwd,
+            (yaxwd+panwd_short)/totwd,
+            (xaxht)/totht,
+            (xaxht+panht)/totht),
+      mai=c(0,0,0,0),mgp=c(3,0.75,0))
+  inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
+  y<-Mod(Se1e2_avg[inds])
+  if (is.na(Se1e2_short_ylims[1]))
+  {
+    ylimits<-range(y)
+  }else
+  {
+    ylimits<-Se1e2_short_ylims    
+  }
+  ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  h<-Arg(Se1e2_avg[inds])
+  h[h==-pi]<-pi
+  cols<-colbar[WhichBreak(breaks=breaks,h)] 
+  plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
+  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(1)}\\epsilon^{(2)}}$"),2,1.7,cex=2) 
+  graphics::axis(1,at=log2(c(2,4,8)),labels=c(0.5,1,2))
+  text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_short_PanLabs[1],adj=c(-0.1,1))
+  
+  #make the colorbar, which applies to all panels
+  bds<-seq(from=.6*xlimits_short[1]+.4*xlimits_short[2],to=.1*xlimits_short[1]+.9*xlimits_short[2],
+           length.out=length(breaks))
+  rect(xleft=bds[1:(length(bds)-1)],
+       ybottom=.1*ylimits[1]+.9*ylimits[2],
+       xright=bds[2:length(bds)],
+       ytop=ylimits[2],
+       col=colbar,
+       border=NA)
+  ytags<-c(.1*ylimits[1]+.9*ylimits[2],.15*ylimits[1]+.85*ylimits[2],.175*ylimits[1]+.825*ylimits[2])
+  lines(rep(.6*xlimits_short[1]+.4*xlimits_short[2],2),ytags[1:2])
+  text(.6*xlimits_short[1]+.4*xlimits_short[2],ytags[3],latex2exp::TeX("$-\\pi$"),adj=c(.5,1))
+  lines(rep((.6-.25)*xlimits_short[1]+(.4+.25)*xlimits_short[2],2),ytags[1:2])
+  text((.6-.25)*xlimits_short[1]+(.4+.25)*xlimits_short[2],ytags[3],"0",adj=c(.5,1))
+  lines(rep(.1*xlimits_short[1]+.9*xlimits_short[2],2),ytags[1:2])
+  text(.1*xlimits_short[1]+.9*xlimits_short[2],ytags[3],latex2exp::TeX("$\\pi$"),adj=c(.5,1))
+  
+  #mid timescales
+  par(fig=c((yaxwd+panwd_short+yaxnumwd)/totwd,
+            (yaxwd+panwd_short+yaxnumwd+panwd_mid)/totwd,
+            (xaxht)/totht,
+            (xaxht+panht)/totht),
+      mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
+  y<-Mod(Se1e2_avg[inds])
+  if (is.na(Se1e2_mid_ylims[1]))
+  {
+    ylimits<-range(y)
+  }else
+  {
+    ylimits<-Se1e2_mid_ylims    
+  }
+  ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  h<-Arg(Se1e2_avg[inds])
+  h[h==-pi]<-pi
+  cols<-colbar[WhichBreak(breaks=breaks,h)]
+  plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
+  graphics::axis(1,at=log2(c(8,16)),labels=c(2,4))
+  text(xlimits_mid[1],ylimits[2],ExplainInteractingMoran_short_PanLabs[2],adj=c(-0.1,1))
+  mtext("Timescale, years",1,2.3,cex=2)
+  
+  #long timescales
+  par(fig=c((yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd)/totwd,
+            (yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd+panwd_long)/totwd,
+            (xaxht)/totht,
+            (xaxht+panht)/totht),
+      mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
+  y<-Mod(Se1e2_avg[inds])
+  if (is.na(Se1e2_long_ylims[1]))
+  {
+    ylimits<-range(y)
+  }else
+  {
+    ylimits<-Se1e2_long_ylims    
+  }
+  ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  h<-Arg(Se1e2_avg[inds])
+  h[h==-pi]<-pi
+  cols<-colbar[WhichBreak(breaks=breaks,h)]
+  plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_long,xaxs="i",xaxt="n")
+  graphics::axis(1,at=log2(c(16,32,64,128)),labels=c(4,8,16,32))
+  text(xlimits_long[1],ylimits[2],ExplainInteractingMoran_short_PanLabs[3],adj=c(-0.1,1))
+  
+  # #***panels for fP1*Conj(fP2)*Se1e2_avg
+  # htind<-1
+  # Prod<-fP1*Conj(fP2)*Se1e2_avg
+  # 
+  # #short timescales
+  # #the panel for short (annual) timescales
+  # par(fig=c((yaxwd)/totwd,
+  #           (yaxwd+panwd_short)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  # inds<-c(inds[1]-1,inds)
+  # y<-Mod(Prod[inds])
+  # if (is.na(Prod_short_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-Prod_short_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # h<-Arg(Prod[inds])
+  # h[h==-pi]<-pi
+  # cols<-colbar[WhichBreak(breaks=breaks,h)] 
+  # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
+  # mtext(latex2exp::TeX("$f_{P^{(1)}} \\bar{f_{P^{(2)}}} \\rho_{\\epsilon^{(1)}\\epsilon^{(2)}}$"),2,1.7,cex=2) 
+  # graphics::axis(1,at=log2(c(2,4,8)),labels=c(0.5,1,2))
+  # text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[5],adj=c(-0.1,1))
+  # 
+  # #mid timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  # inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
+  # y<-Mod(Prod[inds])
+  # if (is.na(Prod_mid_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-Prod_mid_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # h<-Arg(Prod[inds])
+  # h[h==-pi]<-pi
+  # cols<-colbar[WhichBreak(breaks=breaks,h)]
+  # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(8,16)),labels=c(2,4))
+  # mtext("Timescale, years",1,2.3,cex=2)
+  # text(xlimits_mid[1],ylimits[2],ExplainInteractingMoran_PanLabs[10],adj=c(-0.1,1))
+  # 
+  # #long timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd+panwd_long)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  # inds<-c(inds,inds[length(inds)]+1)
+  # y<-Mod(Prod[inds])
+  # if (is.na(Prod_long_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-Prod_long_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # h<-Arg(Prod[inds])
+  # h[h==-pi]<-pi
+  # cols<-colbar[WhichBreak(breaks=breaks,h)]
+  # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_long,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(16,32,64,128)),labels=c(4,8,16,32))
+  # text(xlimits_long[1],ylimits[2],ExplainInteractingMoran_PanLabs[15],adj=c(-0.1,1))
+  
+  dev.off()
 }
 
 #A function for making the manuscript plots explaining direct Moran effects
 #
 explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnpre,plottype,PlotForMSArgs)
 {
+  #***
+  #preparation
+  #***
+  
   #unpack plotting params
   fP1_short_ylims<-PlotForMSArgs$ExplainDirectMoran_fP1_short_ylims
   fP1_mid_ylims<-PlotForMSArgs$ExplainDirectMoran_fP1_mid_ylims
@@ -823,6 +1303,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   fB_mid_ylims<-PlotForMSArgs$ExplainDirectMoran_fB_mid_ylims
   fB_long_ylims<-PlotForMSArgs$ExplainDirectMoran_fB_long_ylims
   ExplainDirectMoran_PanLabs<-PlotForMSArgs$ExplainDirectMoran_PanLabs
+  ExplainDirectMoran_short_PanLabs<-PlotForMSArgs$ExplainDirectMoran_short_PanLabs
   
   #constraint to certain frequencies, for plotting
   fP1<-fP1[frg[1]<freq & freq<=frg[2]]
@@ -840,6 +1321,10 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   xlimits_short<-c(xlimits[1],log2(8))
   xlimits_mid<-c(log2(8),log2(16))
   xlimits_long<-c(log2(16),xlimits[2])
+  
+  #***
+  #long version, more panels
+  #***
   
   #panel layout quantities
   gap<-.15
@@ -1205,6 +1690,375 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_long,xaxs="i",xaxt="n")
   graphics::axis(1,at=log2(c(16,32,64,128)),labels=c(4,8,16,32))
   text(xlimits_long[1],ylimits[2],ExplainDirectMoran_PanLabs[15],adj=c(-0.1,1))
+  
+  dev.off()
+  
+  #***
+  #now the short version, which has only the noise panels
+  #***
+  
+  #panel layout quantities
+  gap<-.15
+  yaxnumwd<-.4
+  yaxlabwd<-.4
+  yaxwd<-yaxnumwd+yaxlabwd
+  xaxht<-yaxwd
+  panht<-1.25
+  panwd_short<-2
+  panwd_mid<-1
+  panwd_long<-2
+  totpanwd<-panwd_short+panwd_mid+panwd_long
+  totht<-2*panht+3*gap
+  totwd<-yaxwd+2*yaxnumwd+totpanwd+gap
+  
+  #get the plotting device
+  if (plottype=="jpg")
+  {
+    jpeg(paste0(resloc,fnpre,"_ExplainDirectMoran_ForMS_short.jpg"),quality=95,width=totwd,height=totht,units="in",res=300)
+  }
+  if (plottype=="pdf")
+  {
+    pdf(paste0(resloc,fnpre,"_ExplainDirectMoran_ForMS_short.pdf"),width=totwd,height=totht)
+  }
+  
+  # #***panels for fP1 
+  # htind<-5
+  # 
+  # #short timescales
+  # #the panel for short (annual) timescales
+  # par(fig=c((yaxwd)/totwd,
+  #           (yaxwd+panwd_short)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0))
+  # inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  # inds<-c(inds[1]-1,inds)
+  # y<-(Mod(fP1[inds]))^2
+  # if (is.na(fP1_short_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP1_short_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
+  # mtext(latex2exp::TeX("$|f_{P^{(1)}}|^2$"),2,1.7,cex=2) 
+  # graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
+  # text(xlimits_short[1],ylimits[2],ExplainDirectMoran_PanLabs[1],adj=c(-0.1,1))
+  # 
+  # #mid timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  # inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
+  # y<-(Mod(fP1[inds]))^2
+  # if (is.na(fP1_mid_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP1_mid_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(8,16)),labels=FALSE)
+  # text(xlimits_mid[1],ylimits[2],ExplainDirectMoran_PanLabs[6],adj=c(-0.1,1))
+  # 
+  # #long timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd+panwd_long)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  # inds<-c(inds,inds[length(inds)]+1)
+  # y<-(Mod(fP1[inds]))^2
+  # if (is.na(fP1_long_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP1_long_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_long,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(16,32,64,128)),labels=FALSE)
+  # text(xlimits_long[1],ylimits[2],ExplainDirectMoran_PanLabs[11],adj=c(-0.1,1))
+   
+  #***panels for Se1e1
+
+  #short timescales
+  #the panel for short (annual) timescales
+  par(fig=c((yaxwd)/totwd,
+            (yaxwd+panwd_short)/totwd,
+            (panht+2*gap)/totht,
+            (2*panht+2*gap)/totht),
+      mai=c(0,0,0,0),mgp=c(3,0.75,0))
+  inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
+  y<-Se1e1_avg[inds]
+  if (is.na(Se1e1_short_ylims[1]))
+  {
+    ylimits<-range(y)
+  }else
+  {
+    ylimits<-Se1e1_short_ylims    
+  }
+  ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
+  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(1)}\\epsilon^{(1)}}$"),2,1.7,cex=2) 
+  graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
+  text(xlimits_short[],ylimits[2],ExplainDirectMoran_short_PanLabs[1],adj=c(-0.1,1))
+  
+  #mid timescales
+  par(fig=c((yaxwd+panwd_short+yaxnumwd)/totwd,
+            (yaxwd+panwd_short+yaxnumwd+panwd_mid)/totwd,
+            (panht+2*gap)/totht,
+            (2*panht+2*gap)/totht),
+      mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
+  y<-Se1e1_avg[inds]
+  if (is.na(Se1e1_mid_ylims[1]))
+  {
+    ylimits<-range(y)
+  }else
+  {
+    ylimits<-Se1e1_mid_ylims    
+  }
+  ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
+  graphics::axis(1,at=log2(c(8,16)),labels=FALSE)
+  text(xlimits_mid[1],ylimits[2],ExplainDirectMoran_short_PanLabs[3],adj=c(-0.1,1))
+  
+  #long timescales
+  par(fig=c((yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd)/totwd,
+            (yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd+panwd_long)/totwd,
+            (panht+2*gap)/totht,
+            (2*panht+2*gap)/totht),
+      mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
+  y<-Se1e1_avg[inds]
+  if (is.na(Se1e1_long_ylims[1]))
+  {
+    ylimits<-range(y)
+  }else
+  {
+    ylimits<-Se1e1_long_ylims    
+  }
+  ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_long,xaxs="i",xaxt="n")
+  graphics::axis(1,at=log2(c(16,32,64,128)),labels=FALSE)
+  text(xlimits_long[1],ylimits[2],ExplainDirectMoran_short_PanLabs[5],adj=c(-0.1,1))
+  
+  # #***panels for fP2
+  # htind<-3
+  # 
+  # #short timescales
+  # #the panel for short (annual) timescales
+  # par(fig=c((yaxwd)/totwd,
+  #           (yaxwd+panwd_short)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  # inds<-c(inds[1]-1,inds)
+  # y<-(Mod(fP2[inds]))^2
+  # if (is.na(fP2_short_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP2_short_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
+  # mtext(latex2exp::TeX("$|f_{P^{(2)}}|^2$"),2,1.7,cex=2) 
+  # graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
+  # text(xlimits_short[1],ylimits[2],ExplainDirectMoran_PanLabs[3],adj=c(-0.1,1))
+  # 
+  # #mid timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  # inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
+  # y<-(Mod(fP2[inds]))^2
+  # if (is.na(fP2_mid_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP2_mid_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(8,16)),labels=FALSE)
+  # text(xlimits_mid[1],ylimits[2],ExplainDirectMoran_PanLabs[8],adj=c(-0.1,1))
+  # 
+  # #long timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd+panwd_long)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  # inds<-c(inds,inds[length(inds)]+1)
+  # y<-(Mod(fP2[inds]))^2
+  # if (is.na(fP2_long_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fP2_long_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_long,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(16,32,64,128)),labels=FALSE)
+  # text(xlimits_long[1],ylimits[2],ExplainDirectMoran_PanLabs[13],adj=c(-0.1,1))
+  
+  #***panels for Se2e2
+ 
+  #short timescales
+  #the panel for short (annual) timescales
+  par(fig=c((yaxwd)/totwd,
+            (yaxwd+panwd_short)/totwd,
+            (gap)/totht,
+            (panht+gap)/totht),
+      mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  inds<-c(inds[1]-1,inds)
+  y<-Se2e2_avg[inds]
+  if (is.na(Se2e2_short_ylims[1]))
+  {
+    ylimits<-range(y)
+  }else
+  {
+    ylimits<-Se2e2_short_ylims    
+  }
+  ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
+  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(2)}\\epsilon^{(2)}}$"),2,1.7,cex=2) 
+  graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
+  text(xlimits_short[1],ylimits[2],ExplainDirectMoran_short_PanLabs[2],adj=c(-0.1,1))
+  
+  #mid timescales
+  par(fig=c((yaxwd+panwd_short+yaxnumwd)/totwd,
+            (yaxwd+panwd_short+yaxnumwd+panwd_mid)/totwd,
+            (gap)/totht,
+            (panht+gap)/totht),
+      mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
+  y<-Se2e2_avg[inds]
+  if (is.na(Se2e2_mid_ylims[1]))
+  {
+    ylimits<-range(y)
+  }else
+  {
+    ylimits<-Se2e2_mid_ylims    
+  }
+  ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
+  graphics::axis(1,at=log2(c(8,16)),labels=FALSE)
+  text(xlimits_mid[1],ylimits[2],ExplainDirectMoran_short_PanLabs[4],adj=c(-0.1,1))
+  
+  #long timescales
+  par(fig=c((yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd)/totwd,
+            (yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd+panwd_long)/totwd,
+            (gap)/totht,
+            (panht+gap)/totht),
+      mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  inds<-c(inds,inds[length(inds)]+1)
+  y<-Se2e2_avg[inds]
+  if (is.na(Se2e2_long_ylims[1]))
+  {
+    ylimits<-range(y)
+  }else
+  {
+    ylimits<-Se2e2_long_ylims    
+  }
+  ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_long,xaxs="i",xaxt="n")
+  graphics::axis(1,at=log2(c(16,32,64,128)),labels=FALSE)
+  text(xlimits_long[1],ylimits[2],ExplainDirectMoran_short_PanLabs[6],adj=c(-0.1,1))
+  
+  # #***panels for fB
+  # htind<-1
+  # 
+  # #short timescales
+  # #the panel for short (annual) timescales
+  # par(fig=c((yaxwd)/totwd,
+  #           (yaxwd+panwd_short)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_short[1] & l2timescales<=xlimits_short[2])
+  # inds<-c(inds[1]-1,inds)
+  # y<-1/((Mod(fB[inds]))^2)
+  # if (is.na(fB_short_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fB_short_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
+  # mtext(latex2exp::TeX("$1/|f_B|^2$"),2,1.7,cex=2) 
+  # graphics::axis(1,at=log2(c(2,4,8)),labels=c(0.5,1,2))
+  # text(xlimits_short[1],ylimits[2],ExplainDirectMoran_PanLabs[5],adj=c(-0.1,1))
+  # 
+  # #mid timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_mid[1] & l2timescales<=xlimits_mid[2])
+  # inds<-c(inds[1]-1,inds,inds[length(inds)]+1)
+  # y<-1/((Mod(fB[inds]))^2)
+  # if (is.na(fB_mid_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fB_mid_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(8,16)),labels=c(2,4))
+  # mtext("Timescale, years",1,2.3,cex=2)
+  # text(xlimits_mid[1],ylimits[2],ExplainDirectMoran_PanLabs[10],adj=c(-0.1,1))
+  # 
+  # #long timescales
+  # par(fig=c((yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd)/totwd,
+  #           (yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd+panwd_long)/totwd,
+  #           (xaxht+(htind-1)*(panht+gap))/totht,
+  #           (xaxht+(htind-1)*(panht+gap)+panht)/totht),
+  #     mai=c(0,0,0,0),mgp=c(3,0.75,0),new=TRUE)
+  # inds<-which(l2timescales>=xlimits_long[1] & l2timescales<=xlimits_long[2])
+  # inds<-c(inds,inds[length(inds)]+1)
+  # y<-1/((Mod(fB[inds]))^2)
+  # if (is.na(fB_long_ylims[1]))
+  # {
+  #   ylimits<-range(y)
+  # }else
+  # {
+  #   ylimits<-fB_long_ylims    
+  # }
+  # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
+  # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_long,xaxs="i",xaxt="n")
+  # graphics::axis(1,at=log2(c(16,32,64,128)),labels=c(4,8,16,32))
+  # text(xlimits_long[1],ylimits[2],ExplainDirectMoran_PanLabs[15],adj=c(-0.1,1))
   
   dev.off()
 }
@@ -1762,6 +2616,7 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("(a)","(b)","(c)"),
                     ExplainDirectMoran_fB_mid_ylims=c(0.8,1.65),
                     ExplainDirectMoran_fB_long_ylims=c(1.2,3),
                     ExplainDirectMoran_PanLabs=paste0("(",letters[1:15],")"),
+                    ExplainDirectMoran_short_PanLabs=paste0("(",letters[c(1,2,4,5,7,8)],")"),
                     ExplainInteractingMoran_fP1_short_ylims=c(0.064,0.15),
                     ExplainInteractingMoran_fP1_mid_ylims=c(0.0716,0.117),
                     ExplainInteractingMoran_fP1_long_ylims=c(0.0725,0.1125),
@@ -1777,7 +2632,8 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("(a)","(b)","(c)"),
                     ExplainInteractingMoran_Prod_short_ylims=c(0,0.7),
                     ExplainInteractingMoran_Prod_mid_ylims=c(0,0.028),
                     ExplainInteractingMoran_Prod_long_ylims=c(0.002,0.08),
-                    ExplainInteractingMoran_PanLabs=paste0("(",letters[1:15],")"))
+                    ExplainInteractingMoran_PanLabs=paste0("(",letters[1:15],")"),
+                    ExplainInteractingMoran_short_PanLabs=paste0("(",letters[c(3,6,9)],")"))
 
 Args<-list(locstouse=CC1locstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 RegionalAnalysis_CentCal1_KelpLag4<-do_analysis(Args)
@@ -1785,8 +2641,10 @@ saveRDS(RegionalAnalysis_CentCal1_KelpLag4,paste0(resloc,"RegionalAnalysis_CentC
 #RegionalAnalysis_CentCal1_KelpLag4<-readRDS(paste0(resloc,"RegionalAnalysis_CentCal1_KelpLag4.Rds"))
 
 PlotForMSArgs$cov_MainPlot_PanLabs=c("(d)","(e)","(f)")
-PlotForMSArgs$ExplainDirectMoran_PanLabs=c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
-PlotForMSArgs$ExplainInteractingMoran_PanLabs=c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
+PlotForMSArgs$ExplainDirectMoran_PanLabs<-c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
+PlotForMSArgs$ExplainDirectMoran_short_PanLabs<-c("(j)","(k)","(m)","(n)","(p)","(q)")
+PlotForMSArgs$ExplainInteractingMoran_PanLabs<-c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
+PlotForMSArgs$ExplainInteractingMoran_short_PanLabs<-c("(l)","(o)","(r)")
 Args<-list(locstouse=SBlocstouse,lags=c(4,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag4",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 RegionalAnalysis_SoCal_KelpLag4<-do_analysis(Args)
 saveRDS(RegionalAnalysis_SoCal_KelpLag4,paste0(resloc,"RegionalAnalysis_SoCal_KelpLag4.Rds"))
@@ -1822,6 +2680,7 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("(a)","(b)","(c)"),
                     ExplainDirectMoran_fB_mid_ylims=c(1.2,1.9),
                     ExplainDirectMoran_fB_long_ylims=c(1.5,3),
                     ExplainDirectMoran_PanLabs=paste0("(",letters[1:15],")"),
+                    ExplainDirectMoran_short_PanLabs=paste0("(",letters[c(1,2,4,5,7,8)],")"),
                     ExplainInteractingMoran_fP1_short_ylims=c(0.051,0.145),
                     ExplainInteractingMoran_fP1_mid_ylims=c(0.058,0.115),
                     ExplainInteractingMoran_fP1_long_ylims=c(0.05885,0.111),
@@ -1837,7 +2696,8 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("(a)","(b)","(c)"),
                     ExplainInteractingMoran_Prod_short_ylims=c(0,.45),
                     ExplainInteractingMoran_Prod_mid_ylims=c(0.00125,0.02),
                     ExplainInteractingMoran_Prod_long_ylims=c(0.002,0.06),
-                    ExplainInteractingMoran_PanLabs=paste0("(",letters[1:15],")"))
+                    ExplainInteractingMoran_PanLabs=paste0("(",letters[1:15],")"),
+                    ExplainInteractingMoran_short_PanLabs=paste0("(",letters[c(3,6,9)],")"))
 
 Args<-list(locstouse=CC1locstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 RegionalAnalysis_CentCal1_KelpLag8<-do_analysis(Args)
@@ -1847,6 +2707,8 @@ saveRDS(RegionalAnalysis_CentCal1_KelpLag8,paste0(resloc,"RegionalAnalysis_CentC
 PlotForMSArgs$cov_MainPlot_PanLabs=c("(d)","(e)","(f)")
 PlotForMSArgs$ExplainDirectMoran_PanLabs=c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
 PlotForMSArgs$ExplainInteractingMoran_PanLabs=c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
+PlotForMSArgs$ExplainDirectMoran_short_PanLabs<-c("(j)","(k)","(m)","(n)","(p)","(q)")
+PlotForMSArgs$ExplainInteractingMoran_short_PanLabs<-c("(l)","(o)","(r)")
 Args<-list(locstouse=SBlocstouse,lags=c(8,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag8",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 RegionalAnalysis_SoCal_KelpLag8<-do_analysis(Args)
 saveRDS(RegionalAnalysis_SoCal_KelpLag8,paste0(resloc,"RegionalAnalysis_SoCal_KelpLag8.Rds"))
@@ -1882,6 +2744,7 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("(a)","(b)","(c)"),
                     ExplainDirectMoran_fB_mid_ylims=NA,
                     ExplainDirectMoran_fB_long_ylims=NA,
                     ExplainDirectMoran_PanLabs=paste0("(",letters[1:15],")"),
+                    ExplainDirectMoran_short_PanLabs=paste0("(",letters[c(1,2,4,5,7,8)],")"),
                     ExplainInteractingMoran_fP1_short_ylims=NA,
                     ExplainInteractingMoran_fP1_mid_ylims=NA,
                     ExplainInteractingMoran_fP1_long_ylims=NA,
@@ -1897,7 +2760,8 @@ PlotForMSArgs<-list(cov_MainPlot_PanLabs=c("(a)","(b)","(c)"),
                     ExplainInteractingMoran_Prod_short_ylims=NA,
                     ExplainInteractingMoran_Prod_mid_ylims=NA,
                     ExplainInteractingMoran_Prod_long_ylims=NA,
-                    ExplainInteractingMoran_PanLabs=paste0("(",letters[1:15],")"))
+                    ExplainInteractingMoran_PanLabs=paste0("(",letters[1:15],")"),
+                    ExplainInteractingMoran_short_PanLabs=paste0("(",letters[c(3,6,9)],")"))
 
 Args<-list(locstouse=CC1locstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_CentCal1_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 RegionalAnalysis_CentCal1_KelpLag12<-do_analysis(Args)
@@ -1907,6 +2771,8 @@ saveRDS(RegionalAnalysis_CentCal1_KelpLag12,paste0(resloc,"RegionalAnalysis_Cent
 PlotForMSArgs$cov_MainPlot_PanLabs=c("(d)","(e)","(f)")
 PlotForMSArgs$ExplainDirectMoran_PanLabs=c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
 PlotForMSArgs$ExplainInteractingMoran_PanLabs=c(paste0("(",letters[16:26],")"),"(aa)","(bb)","(cc)","(dd)")
+PlotForMSArgs$ExplainDirectMoran_short_PanLabs<-c("(j)","(k)","(m)","(n)","(p)","(q)")
+PlotForMSArgs$ExplainInteractingMoran_short_PanLabs<-c("(l)","(o)","(r)")
 Args<-list(locstouse=SBlocstouse,lags=c(12,1,0),frg=c(0,.5),fnpre="RegionalAnalysis_SoCal_KelpLag12",plottype="pdf",PlotForMSArgs=PlotForMSArgs)
 RegionalAnalysis_SoCal_KelpLag12<-do_analysis(Args)
 saveRDS(RegionalAnalysis_SoCal_KelpLag12,paste0(resloc,"RegionalAnalysis_SoCal_KelpLag12.Rds"))
