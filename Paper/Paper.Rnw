@@ -20,6 +20,13 @@
 \usepackage{lineno}
 \usepackage{times}
 
+%Found this online. Makes figures on pages by themselves appear at the top instead of 
+%vertically centered
+\makeatletter
+\setlength{\@fptop}{0pt}
+\setlength{\@fpbot}{0pt plus 1fil}
+\makeatother
+
 %new commands and so on
 \providecommand{\keywords}[1]
 {
@@ -290,8 +297,8 @@ influence of environmental variable 2, reducing synchrony relative to the case o
 Intermediate scenarios are possible, as will be revealed by the theory. If we replace the assumption that
 larger values of both environmental variables are beneficial to populations with an assuption that larger 
 values of the first variable and smaller values of the second are beneficial, scenarios of synergistic versus
-antagonistic Moran interactions are reversed, but with the same general concepts nevertheless still operating 
-(Fig. \ref{fig:PedagogAlt_SM}). 
+antagonistic Moran interactions are reversed, but with the same general concepts still operating 
+(Fig. \ref{fig:PedagogAlt}). 
 
 Our formal theory requires a conceptual understanding of the \emph{spectrum} of an environmental 
 or population time series, as well as of the \emph{cospectrum} and \emph{cross spectrum} of two time series,
@@ -404,7 +411,11 @@ synchrony between those processes:
 Here, $f_{\mcB} = 1-b_1 \mu - b_2 \mu^2 - \cdots - b_n \mu^n$, 
 $f_{\mcP^{(1)}} = p_0^{(1)} + p_1^{(1)} \mu + \cdots + p_{m_1}^{(1)} \mu^{m_1}$, and
 $f_{\mcP^{(2)}} = p_0^{(2)} + p_1^{(2)} \mu + \cdots + p_{m_2}^{(2)} \mu^{m_2}$, where 
-$\mu=\exp(-2 \pi \iota f)$, and where $\iota$, the Greek letter iota, represents the imaginary unit.
+$\mu=\exp(-2 \pi \iota f)$, and where $\iota$, the Greek letter iota, is the imaginary unit.
+
+Comparing the terms on the right
+of (\ref{rhoww_T1to3}) gives the relative contributions of direct Moran effects and interactions 
+between Moran effects. 
 The first term on the right of (\ref{rhoww_T1to3}) is the component of population synchrony 
 due to the direct Moran effects of $\epsilon^{(1)}$, the second term is 
 the component due to the direct Moran effects of $\epsilon^{(2)}$, 
@@ -414,19 +425,29 @@ The ``other contributions'' above correspond to synchronizing influences of
 $\delta$ and of interactions between $\delta$ and the $\epsilon^{(i)}$. Such contributions would be
 difficult to assess because $\delta$ was unmeasured. 
 
-Comparing the terms on the right
-of (\ref{rhoww_T1to3}) gives the relative contributions of direct Moran effects and interactions 
-between Moran effects. 
+The way direct Moran effects work in our theory is fairly straightforward.
 The magnitudes of the quantities $f_{\mcP^{(1)}}$ and $f_{\mcP^{(2)}}$ quantify the strength of 
 influence of $\epsilon^{(1)}$ and $\epsilon^{(2)}$ on populations at the timescale $\sigma=1/f$. 
-The phases of these quantities encode the lags in the influences of 
+The direct Moran effect
+term in (\ref{rhoww_T1to3}) for $\epsilon^{(1)}$, i.e., 
+$|f_{\mcP^{(1)}}|^2 \rho_{\epsilon^{(1)} \epsilon^{(1)}}/|f_{\mcB}|^2$, 
+equals the synchrony of the $\epsilon^{(1)}$ time series themselves, 
+$\rho_{\epsilon^{(1)} \epsilon^{(1)}}$, times the 
+timescale-specific strength of influence of $\epsilon^{(1)}$ on the populations, 
+$|f_{\mcP^{(1)}}|^2$, and modulated
+by the autoregressive nature of kelp dynamics,
+$1/|f_{\mcB}|^2$. The term for the direct Moran effects of $\epsilon^{(2)}$
+is interpreted similarly.
+
+The components of the interacting Moran effects term are also interpretable.
+The phases of the quantities $f_{\mcP^{(1)}}$ and $f_{\mcP^{(2)}}$ quantify the lags in the population influences of 
 $\epsilon^{(1)}$ and $\epsilon^{(2)}$, 
-represented on Figs \ref{fig:PedagogAlt} and \ref{fig:PedagogAlt_SM} by $l_{e1}$ and $l_{e2}$,
+represented on Fig. \ref{fig:PedagogAlt} by $l_{e1}$ and $l_{e2}$,
 relative to the timescale $\sigma$. The lag 
-$l_n$ on Figs \ref{fig:PedagogAlt} and \ref{fig:PedagogAlt_SM}  manifests in the theory 
+$l_n$ on Fig. \ref{fig:PedagogAlt} manifests in the theory 
 through the phase of $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$. 
-The expression $l_{e1}-l_{e2}+l_{n}$, which quantifies the degree of mismatch among the lags
-(see above text and Figs \ref{fig:PedagogAlt}, \ref{fig:PedagogAlt_SM}) corresponds to the phase of the expression 
+The expression $l_{e1}-l_{e2}+l_{n}$, which quantifies the degree of mismatch among the lags,
+corresponds to the phase of the expression 
 $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$, because the phase of
 this product equals the phase of $f_{\mcP^{(1)}}$ (which corresponds to $l_{e1}$), minus 
 the phase of $f_{\mcP^{(2)}}$
@@ -434,13 +455,13 @@ the phase of $f_{\mcP^{(2)}}$
 of $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ (which corresponds to $l_n$). 
 The real part of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$
 is positive and larger whenever the phase of this quantity is close to zero, i.e., when    
-$l_{e1}-l_{e2}+l_n$ is close to zero (Fig. \ref{fig:PedagogAlt}a, b), and is increasingly negative as 
+$l_{e1}-l_{e2}+l_n$ is close to zero (e.g., Fig. \ref{fig:PedagogAlt}a, b), and is increasingly negative as 
 the phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$ gets
 close to $\pi$, e.g., when $l_{e1}-l_{e2}+l_n$ is close to half the period of oscillation
-(Fig. \ref{fig:PedagogAlt}c, d). The factor $1/|f_{\mcB}|^2$ is how the intrinsic nature of population
+(Fig. \ref{fig:PedagogAlt}c, d). The factor $1/|f_{\mcB}|^2$ is again how the intrinsic nature of population
 dynamics modulates Moran influences.
-The derivation of the theory and details supporting the above interpretations of 
-constituents of the theory are in SI section \ref{SM-sect:derivation}. 
+The derivation of the theory and further information supporting the above interpretations 
+are in SI section \ref{SM-sect:derivation}. 
 %***DAN: I need to add some stuff to the SI section mentioned to support the claim that 
 %"details supporting the above assertions are in SI section X"
 
@@ -474,8 +495,8 @@ and the components of $\epsilon^{(1)}(t)$ were positively correlated with those 
 For CaseC, the noise processes $\epsilon^{(1)}$ and $\epsilon^{(2)}$ are
 each assumed to exhibit spatially synchronous periodic oscillations of period one year, i.e.,
 four model time steps, but with different phases. Peaks in $\epsilon^{(1)}$ are assumed to 
-either lead or lag peaks in $\epsilon^{(2)}$ by $1$q (we consider two scenarios, CaseC1 and CaseC2).
-Such scenarios could be realized by annually 
+either lead or lag peaks in $\epsilon^{(2)}$ by $1$q (we consider two sub-cases, CaseC1 and CaseC2).
+Such a situation could be realized by annually 
 periodic environmental fluctuations sampled quarterly,
 e.g., kelp wave action in central CA peaks annually in the winter, whereas surface-water
 nitrate concentrations also fluctuate with period one year, but peak in the spring, a delay of $1$q
@@ -637,15 +658,16 @@ CaseA and CaseB assumed white noise processes, and therefore $l_n$ was $0$.
 But CaseC illustrates what can happen when noise processes have periodic components and lagged associations, e.g., 
 both processes oscillate with annual periodicity and distinct phenology, an important scenario because seasonality is common.
 Recall that, for CaseC, $\epsilon^{(1)}$ effects on populations were positive and lagged by $1$q, i.e., $l_{e1}=1$ in the 
-language of Fig. \ref{fig:PedagogAlt_SM}; whereas 
+language of Fig. \ref{fig:PedagogAlt}; whereas 
 $\epsilon^{(2)}$ effects were unlagged and negative, i.e., $l_{e2}=0$ (Methods). 
-We compare CaseC to Fig. \ref{fig:PedagogAlt_SM} instead of Fig. \ref{fig:PedagogAlt} because
-$\epsilon^{(2)}$ effects were negative for CaseC, the situation considered by Fig. \ref{fig:PedagogAlt_SM}.
+We compare CaseC to the Fig. \ref{fig:PedagogAlt} $\beta$ scenarios instead of the Fig. \ref{fig:PedagogAlt} 
+$\alpha$ scenarios because
+$\epsilon^{(2)}$ effects were negative for CaseC, the situation considered by the $\beta$ scenarios.
 For CaseC1, peaks in the periodic
 noise process $\epsilon^{(1)}$ were set up to lag peaks in the periodic process $\epsilon^{(2)}$ by
 $1$q (Methods, SI section \ref{SM-sect:examples_cross_sync}), so that $l_n=1$. 
 Thus $l_n+l_{e1}-l_{e2}=2 \text{q}=0.5 \text{y}$, and, on annual timescales, lags compounded, similar to 
-Fig. \ref{fig:PedagogAlt_SM}b: the 
+Fig. \ref{fig:PedagogAlt}g, h: the 
 annual positive population effects of $\epsilon^{(1)}$ 
 were exactly $2$q offset from the annual negative effects of $\epsilon^{(2)}$,
 one quarter because of the lag of $\epsilon^{(1)}$ peaks behind $\epsilon^{(2)}$ peaks,
@@ -656,7 +678,7 @@ as reflected by our theory (Fig. \ref{fig:TheoryCaseA}e,f).
 Contrastingly, for CaseC2, peaks in the periodic
 noise process $\epsilon^{(2)}$ were set up to lag peaks in the periodic process $\epsilon^{(1)}$ by
 $1$q, so that $l_n=-1$. Thus $l_n+l_{e1}-l_{e2}=0$ and, on annual timescales, lags cancelled,
-similar to Fig. \ref{fig:PedagogAlt_SM}a: the annual positive population effects of $\epsilon^{(1)}$
+similar to Fig. \ref{fig:PedagogAlt}e, f: the annual positive population effects of $\epsilon^{(1)}$
 coincided with the negative effects of $\epsilon^{(2)}$ every year, because $\epsilon^{(1)}$
 peaks came $1$q ahead of $\epsilon^{(2)}$ peaks each year, but population influences of $\epsilon^{(1)}$ were 
 delayed by $1$q. This produced negative interactions between the Moran influences of 
@@ -674,7 +696,7 @@ $\epsilon^{(1)}$ and $\epsilon^{(2)}$ on annual timescales, as also reflected by
 %variables align or misalign, with alignment
 %reflected in the real part of this quantity, which is half the interaction term in our theory (\ref{rhoww_T1to3}).
 On long timescales, interactions were the
-same in the two scenarios, and were negative, because, on those timescales, sub-annual lags 
+same in the two sub-cases, and were negative, because, on those timescales, sub-annual lags 
 make negligible difference, and the effects of $\epsilon^{(1)}$ on populations were 
 positive and those of $\epsilon^{(2)}$ were negative.
 
@@ -695,50 +717,34 @@ Second, interaction effects could be positive (e.g., annual timescales, CCA1 reg
 they were positive on annual timescales (Fig. \ref{fig:SummaryKelpFig}a) and
 negative on timescales $>8$y (Fig. \ref{fig:SummaryKelpFig}c). 
 
-%***DAN: start from here after making the new version of the figure sketched in a separate planning doc
-
 %Direct Moran effects
 %***DAN: Do I really want to spend all this space (and reader mental energy), including 
 %a very complex figure, on direct Moran effects, when the paper is not even about that?
 %***DAN: And this paragraph also requires plotting all these inner portions of the
 %theory, which I am starting to think is not really going to work for an ecological 
 %audience.
-The way direct Moran effects work in our theory is fairly straightforward. 
-%***DAN: Why is the following sentence not in the Theory section?
-For instance, the direct Moran effect
-term in (\ref{rhoww_T1to3}) for nitrates, 
-$|f_{\mcP^{(1)}}|^2 \rho_{\epsilon^{(1)} \epsilon^{(1)}}/|f_{\mcB}|^2$, 
-equals the synchrony of the nitrate time series themselves, 
-$\rho_{\epsilon^{(1)} \epsilon^{(1)}}$, times the 
-timescale-specific strength of influence of nitrates on kelp, 
-$|f_{\mcP^{(1)}}|^2$, and modulated
-by the autoregressive nature of kelp dynamics,
-$1/|f_{\mcB}|^2$. These components are plotted in Fig. \ref{fig:directMoran} (CCA1 and SB) and 
-Fig. \ref{SM-fig:directMoran_SM_lag4} (CCA2) so their 
-effects on synchrony can be assessed across timescales and regions.
+Direct Moran effects for kelp and how they manifest in our theopry are fairly straightforward. 
 Nitrates are henceforth identified with $\epsilon^{(1)}$ and waves with $\epsilon^{(2)}$. 
 Both nitrates and waves fluctuate seasonally in CA \citep{Schiel2015}. 
 Thus nitrate and wave 
-synchrony had a strong annual component (Fig. \ref{fig:directMoran}b,d,q,s), which produced 
+synchrony had a strong annual component (Fig. \ref{fig:noise}a,b,j,k), which produced 
 some of the annual synchrony observed in kelp 
 (Fig. \ref{fig:SummaryKelpFig}a,d, green and blue lines).
 Nitrates and waves are also synchronous on long timescales $>8$y  
-(Fig. \ref{fig:directMoran}l,n,aa,cc), possibly due to the North Pacific Gyre Oscillation 
+(Fig. \ref{fig:noise}g,h,p,q), possibly due to the North Pacific Gyre Oscillation 
 \citep{CastoraniSheppardKelp}. The long-timescale synchrony
 in nitrates and waves produced some of the long-timescale
 synchrony in kelp (Fig. \ref{fig:SummaryKelpFig}c,f, green and blue lines).
 Kelp synchrony was stronger in CCA1 than in SB 
 (Fig. \ref{fig:SummaryKelpFig}a-c v. d-f, black lines) in part because the synchrony of nitrates, and of 
 waves, was more pronounced in CCA1 than in SB 
-(Fig. \ref{fig:directMoran}b,g,l v. q,v,aa, and 
-Fig. \ref{fig:directMoran}d,i,n v. s,x,cc), and also because waves
-had a stronger influence on kelp in CCA1 than in SB (Fig. \ref{fig:directMoran}c,h,m v. r,w,bb).
-Regression coefficients determining $f_{\mcP^{(1)}}$, $f_{\mcP^{(2)}}$
+(Fig. \ref{fig:noise}), and also because waves
+had a stronger influence on kelp in CCA1 than in SB:
+regression coefficients determining $f_{\mcP^{(1)}}$, $f_{\mcP^{(2)}}$
 and $f_{\mcB}$ (Methods) are in Table \ref{SM-tab:regcoefs}.
 
-%***DAN: You need to combine the current figs 2 and 3, saving that for later.
+%***DAN: start from here 
 
-%***DAN: Stopped here 2022 11 15, 230pm
 
 %Interactions between Moran effects, CCA1
 %***DAN: In previous comments I have begun outlining how I might simplify
@@ -932,7 +938,7 @@ a multi-year period of abundant nutrients in location B, the multi-year-average 
 in A will tend to be reduced, whereas the multi-year-average kelp abundance in B will
 tend to be augmented, reducing long-timescale synchrony. Lags and interactions between
 drivers must always be compared to the timescale of interest to determine interaction effects,
-as in Figs \ref{fig:PedagogAlt}, \ref{fig:PedagogAlt_SM}, and as captured formally in our theory.
+as in Fig. \ref{fig:PedagogAlt}, and as captured formally in our theory.
 
 %*DONE Comparison to Castorani et al paper, and maybe also a bit on comparison to the Sheppard et al 2019 paper
 Our results about kelp were consistent with those of \cite{CastoraniSheppardKelp}, though
@@ -1061,51 +1067,49 @@ renderings of all figures.}\label{fig:IntroTheory}
 
 \begin{figure}
 \includegraphics[width=\textwidth]{../Results/Theory/PedagogFig_Alt.pdf}
+\includegraphics[width=\textwidth]{../Results/Theory/PedagogFig_Alt_SM.pdf}
 \caption{%\doublespacing 
-Illustration of the main concept of synergistically (a, b) or antagonistically (c, d) interacting Moran effects.
+Illustration of the main concept of synergistically or antagonistically interacting Moran effects.
 Interactions require that each environmental variable itself be spatially synchronous; and then 
-the alignment or misalignment of three types of lag (see below) determine the sign and strength of the interactions. 
+the alignment or misalignment of three types of lag determine the sign and strength of the interactions. 
 Solid-line sinusoids represent the period-20 components of an environmental 
 variable in three locations ($\epsilon_i^{(1)}$ for $i=1,2,3$) and dashed-line sinusoids represent the period-20 components of 
 a different environmental variable in the same locations
-($\epsilon_i^{(2)}$ for $i=1,2,3$). Black arrows represent peak positive influences of environmental 
-variables on populations, which are lagged by an amount $l_{e1}$ for $\epsilon_i^{(1)}$ and by 
-an amount $l_{e2}$ for $\epsilon_i^{(2)}$, where these lags differ across the scenarios but are the same 
-in all locations within a scenario.
-Analogously, red arrows represent maximally negative effects.
-Oscillations are separately spatially synchronous for each environmental variable in 
-each scenario, illustrated with blue and pink rectangles: due to this environmental synchrony, peak positive population effects 
-of the same variable occur at similar times across locations, and likewise for peak negative effects.
-In the synergistic scenario, the lag between the environmental variables ($l_n$) and the lags of the population effects
-of the variables ($l_{e1}$ and $l_{e2}$) are aligned, i.e., $l_n+l_{e1}=l_{e2}$, so that peak positive 
-effects of $\epsilon_i^{(1)}$ coincide with peak positive effects of $\epsilon_i^{(2)}$ (the pink rectangles are
-aligned on a, b), augmenting synchrony. Likewise negative effects are aligned (blue rectangles).
-In the antagonistic scenario, lags are misaligned, i.e., $l_n+l_{e1}=l_{e2}+\sigma/2$, where $\sigma=20$ is the period, 
-so that peak positive 
-effects of $\epsilon_i^{(1)}$ coincide with maximally negative effects of $\epsilon_i^{(2)}$, and  maximally 
-negative effects of $\epsilon_i^{(1)}$ coincide with peak positive effects of $\epsilon_i^{(2)}$ 
-(pink rectangles on c are aligned with blue ones on d, and vice versa), reducing synchrony. 
-See the online version for color
-renderings of all figures.}\label{fig:PedagogAlt}
+($\epsilon_i^{(2)}$ for $i=1,2,3$). For the scenarios $\alpha 1$ (a-b) and $\alpha 2$ (c-d), 
+black arrows represent}\label{fig:PedagogAlt}
 \end{figure}
 
 \clearpage
-\newpage
 
-\begin{figure}
-\includegraphics[width=\textwidth]{../Results/Theory/PedagogFig_Alt_SM.pdf}
-\caption{Similar to Fig. \ref{fig:PedagogAlt}, but for slightly altered 
-scenarios. For Fig. \ref{fig:PedagogAlt}, for simplicity, we assumed that larger values of environmental variables had 
-more positive influences on populations. We here assume that larger values of $\epsilon_i^{(1)}$ have more 
-positive influences, but that smaller values of $\epsilon_i^{(2)}$ have more positive influences.
-In scenario 1 here, $l_n+l_{e1}=l_{e2}$, but Moran interactions are nonetheless antagonistic because the 
-altered direction of effects of $\epsilon_i^{(2)}$ means that the peak positive effects of that
-variable correspond to the peak negative effects of $\epsilon_i^{(1)}$. In scenario 2 here, 
+\noindent peak positive influences of environmental 
+variables on populations, which are lagged by an amount $l_{e1}$ for $\epsilon_i^{(1)}$ and by 
+an amount $l_{e2}$ for $\epsilon_i^{(2)}$, where these lags differ across the scenarios $\alpha 1$ and $\alpha 2$, 
+but are the same in all locations within one of these scenarios.
+Analogously, red arrows represent maximally negative effects.
+Due to environmental synchrony, peak positive population effects 
+of the same variable occur at similar times across locations, and likewise for peak negative effects,
+illustrated with blue and pink rectangles.
+In the synergistic scenario ($\alpha 1$), the lag between 
+the environmental variables ($l_n$) and the lags of the population effects
+of the variables ($l_{e1}$ and $l_{e2}$) are aligned, i.e., $l_n+l_{e1}=l_{e2}$, so that peak positive 
+effects of $\epsilon_i^{(1)}$ coincide with peak positive effects of $\epsilon_i^{(2)}$ (the pink rectangles are
+aligned on a, b), augmenting synchrony. Likewise negative effects are aligned (blue rectangles).
+In the antagonistic scenario ($\alpha 2$), lags are misaligned, i.e., 
+$l_n+l_{e1}=l_{e2}+\sigma/2$, where $\sigma=20$ is the period, so that peak positive 
+effects of $\epsilon_i^{(1)}$ coincide with maximally negative effects of $\epsilon_i^{(2)}$, and  maximally 
+negative effects of $\epsilon_i^{(1)}$ coincide with peak positive effects of $\epsilon_i^{(2)}$ 
+(pink rectangles on c are aligned with blue ones on d, and vice versa), reducing synchrony.
+For the scenarios $\beta 1$ (e-f) and $\beta 2$ (g-h), we assume that larger values of $\epsilon_i^{(1)}$ have more 
+positive population influences (as in the $\alpha$ scenarios), but that larger values of 
+$\epsilon_i^{(2)}$ have more negative population influences (contrasting
+with the $\alpha$ scenarios).
+In scenario $\beta 1$, $l_n+l_{e1}=l_{e2}$, as in $\alpha 1$; but Moran interactions are nonetheless antagonistic because the 
+negative effects of $\epsilon_i^{(2)}$ means that the peak positive effects of that
+variable correspond to the peak negative effects of $\epsilon_i^{(1)}$. In scenario $\beta 2$, as in $\alpha 2$,
 $l_n+l_{e1}=l_{e2}+\sigma/2$ for $\sigma=20$ the period, but Moran interactions are synergistic because the 
-altered direction of effects of $\epsilon_i^{(2)}$ means that the peak positive effects of that
-variable correspond to the peak positive effects of $\epsilon_i^{(1)}$. See the online version for color
-renderings of all figures.}\label{fig:PedagogAlt_SM}
-\end{figure}
+negative effects of $\epsilon_i^{(2)}$ means that the peak positive effects of that
+variable correspond to the peak positive effects of $\epsilon_i^{(1)}$. 
+See the online version for color renderings of all figures.
 
 \clearpage
 \newpage

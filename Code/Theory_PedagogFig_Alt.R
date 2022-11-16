@@ -170,12 +170,13 @@ text(sinpks_1_x[1,4]+le1/2,1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1
 #panel label and title
 if (maintext)
 {
-  mtext("Scenario 1: Synergistic interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+  mtext(expression(paste("Scenario ",alpha,"1: Synergistic interactions")),side=3,line=0,cex=1,at=xlimits[1],adj=0)
+  text(xlimits[1],ylimits[2],"(a)",adj=c(0,1))
 }else
 {
-  mtext("Scenario 1: Antagonistic interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+  mtext(expression(paste("Scenario ",beta,"1: Antagonistic interactions")),side=3,line=0,cex=1,at=xlimits[1],adj=0)
+  text(xlimits[1],ylimits[2],"(e)",adj=c(0,1))
 }
-text(xlimits[1],ylimits[2],"(a)",adj=c(0,1))
 
 #label ln
 par(xpd=NA)
@@ -312,7 +313,13 @@ text(sintro_2_x[2,3]+le2/2,vertoffset-1+2.2,latex2exp::TeX("$l_{e2}$"),cex=0.7,a
 text(sinpks_2_x[1,4]+le2/2,1+.5,latex2exp::TeX("$l_{e2}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label
-text(xlimits[1],ylimits[2],"(b)",adj=c(0,1))
+if (maintext)
+{
+  text(xlimits[1],ylimits[2],"(b)",adj=c(0,1))
+} else
+{
+  text(xlimits[1],ylimits[2],"(f)",adj=c(0,1))
+}
 
 #label ln
 par(xpd=NA)
@@ -440,12 +447,13 @@ text(sinpks_1_x[1,4]+le1/4,1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1
 #panel label and title
 if (maintext)
 {
-  mtext("Scenario 2: Antagonistic interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+  mtext(expression(paste("Scenario ",alpha,"2: Antagonistic interactions")),side=3,line=0,cex=1,at=xlimits[1],adj=0)
+  text(xlimits[1],ylimits[2],"(c)",adj=c(0,1))
 }else
 {
-  mtext("Scenario 2: Synergistic interactions",side=3,line=0.1,cex=1,at=xlimits[1],adj=0)
+  mtext(expression(paste("Scenario ",beta,"2: Synergistic interactions")),side=3,line=0,cex=1,at=xlimits[1],adj=0)
+  text(xlimits[1],ylimits[2],"(g)",adj=c(0,1))
 }
-text(xlimits[1],ylimits[2],"(c)",adj=c(0,1))
 
 #label ln
 par(xpd=NA)
@@ -581,7 +589,13 @@ text(sinpks_2_x[3,2]+3*le2/5,2*vertoffset+1+.5,latex2exp::TeX("$l_{e2}$"),cex=0.
 #text(sinpks_2_x[1,4]+le2/2,1+.5,latex2exp::TeX("$l_{e2}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label
-text(xlimits[1],ylimits[2],"(d)",adj=c(0,1))
+if (maintext)
+{
+  text(xlimits[1],ylimits[2],"(d)",adj=c(0,1))
+} else
+{
+  text(xlimits[1],ylimits[2],"(h)",adj=c(0,1))
+}
 
 #label ln
 par(xpd=NA)
