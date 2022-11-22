@@ -175,7 +175,7 @@ if (maintext)
 }else
 {
   mtext(expression(paste("Scenario ",beta,"1: Antagonistic interactions")),side=3,line=0,cex=1,at=xlimits[1],adj=0)
-  text(xlimits[1],ylimits[2],"(e)",adj=c(0,1))
+  text(xlimits[1],ylimits[2],"(a)",adj=c(0,1))
 }
 
 #label ln
@@ -318,7 +318,7 @@ if (maintext)
   text(xlimits[1],ylimits[2],"(b)",adj=c(0,1))
 } else
 {
-  text(xlimits[1],ylimits[2],"(f)",adj=c(0,1))
+  text(xlimits[1],ylimits[2],"(b)",adj=c(0,1))
 }
 
 #label ln
@@ -452,7 +452,7 @@ if (maintext)
 }else
 {
   mtext(expression(paste("Scenario ",beta,"2: Synergistic interactions")),side=3,line=0,cex=1,at=xlimits[1],adj=0)
-  text(xlimits[1],ylimits[2],"(g)",adj=c(0,1))
+  text(xlimits[1],ylimits[2],"(c)",adj=c(0,1))
 }
 
 #label ln
@@ -594,7 +594,7 @@ if (maintext)
   text(xlimits[1],ylimits[2],"(d)",adj=c(0,1))
 } else
 {
-  text(xlimits[1],ylimits[2],"(h)",adj=c(0,1))
+  text(xlimits[1],ylimits[2],"(d)",adj=c(0,1))
 }
 
 #label ln

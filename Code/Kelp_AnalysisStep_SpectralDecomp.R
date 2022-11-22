@@ -393,15 +393,15 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   #technical stuff for the circular colorbar for phases
   breaks<-seq(from=-pi,to=pi,length.out=201)
   colbarQuad1<-rgb(red=1,green=seq(from=1,to=0,length.out=50),blue=seq(from=1,to=0,length.out=50))
-  #plot(1:50,1:50,col=colbarQuad1,pch=20,cex=2)
+  #plot(1:50,1:50,col=colbarQuad1,pch=20,cex=1.5)
   colbarQuad2<-rgb(red=seq(from=1,to=0,length.out=50),green=0,blue=0)
-  #plot(1:50,1:50,col=colbarQuad2,pch=20,cex=2)
+  #plot(1:50,1:50,col=colbarQuad2,pch=20,cex=1.5)
   colbarQuad3<-rgb(red=0,green=0,blue=seq(from=0,to=1,length.out=50))
-  #plot(1:50,1:50,col=colbarQuad3,pch=20,cex=2)
+  #plot(1:50,1:50,col=colbarQuad3,pch=20,cex=1.5)
   colbarQuad4<-rgb(red=seq(from=0,to=1,length.out=50),green=seq(from=0,to=1,length.out=50),blue=1)
-  #plot(1:50,1:50,col=colbarQuad4,pch=20,cex=2)
+  #plot(1:50,1:50,col=colbarQuad4,pch=20,cex=1.5)
   colbar<-c(colbarQuad3,colbarQuad4,colbarQuad1,colbarQuad2)
-  #plot(1:200,1:200,col=colbar,pch=20,cex=2)
+  #plot(1:200,1:200,col=colbar,pch=20,cex=1.5)
 
   #***panels for fP1 
   htind<-5
@@ -428,7 +428,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   h[h==-pi]<-pi
   cols<-colbar[WhichBreak(breaks=breaks,h)] 
   plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$f_{P^{(1)}}$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$f_{P^{(1)}}$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[1],adj=c(-0.1,1))
   
@@ -522,7 +522,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   h[h==-pi]<-pi
   cols<-colbar[WhichBreak(breaks=breaks,h)] 
   plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$f_{P^{(2)}}$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$f_{P^{(2)}}$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[2],adj=c(-0.1,1))
   
@@ -600,7 +600,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   h[h==-pi]<-pi
   cols<-colbar[WhichBreak(breaks=breaks,h)] 
   plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$f_{P^{(1)}} \\bar{f_{P^{(2)}}}$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$f_{P^{(1)}} \\bar{f_{P^{(2)}}}$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[3],adj=c(-0.1,1))
   
@@ -677,7 +677,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   h[h==-pi]<-pi
   cols<-colbar[WhichBreak(breaks=breaks,h)] 
   plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(1)}\\epsilon^{(2)}}$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(1)}\\epsilon^{(2)}}$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[4],adj=c(-0.1,1))
   
@@ -755,7 +755,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   h[h==-pi]<-pi
   cols<-colbar[WhichBreak(breaks=breaks,h)] 
   plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$f_{P^{(1)}} \\bar{f_{P^{(2)}}} \\rho_{\\epsilon^{(1)}\\epsilon^{(2)}}$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$f_{P^{(1)}} \\bar{f_{P^{(2)}}} \\rho_{\\epsilon^{(1)}\\epsilon^{(2)}}$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=c(0.5,1,2))
   text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[5],adj=c(-0.1,1))
   
@@ -781,7 +781,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   cols<-colbar[WhichBreak(breaks=breaks,h)]
   plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
   graphics::axis(1,at=log2(c(8,16)),labels=c(2,4))
-  mtext("Timescale, years",1,2.3,cex=2)
+  mtext("Timescale, years",1,2.3,cex=1.5)
   text(xlimits_mid[1],ylimits[2],ExplainInteractingMoran_PanLabs[10],adj=c(-0.1,1))
   
   #long timescales
@@ -842,15 +842,15 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   #technical stuff for the circular colorbar for phases
   breaks<-seq(from=-pi,to=pi,length.out=201)
   colbarQuad1<-rgb(red=1,green=seq(from=1,to=0,length.out=50),blue=seq(from=1,to=0,length.out=50))
-  #plot(1:50,1:50,col=colbarQuad1,pch=20,cex=2)
+  #plot(1:50,1:50,col=colbarQuad1,pch=20,cex=1.5)
   colbarQuad2<-rgb(red=seq(from=1,to=0,length.out=50),green=0,blue=0)
-  #plot(1:50,1:50,col=colbarQuad2,pch=20,cex=2)
+  #plot(1:50,1:50,col=colbarQuad2,pch=20,cex=1.5)
   colbarQuad3<-rgb(red=0,green=0,blue=seq(from=0,to=1,length.out=50))
-  #plot(1:50,1:50,col=colbarQuad3,pch=20,cex=2)
+  #plot(1:50,1:50,col=colbarQuad3,pch=20,cex=1.5)
   colbarQuad4<-rgb(red=seq(from=0,to=1,length.out=50),green=seq(from=0,to=1,length.out=50),blue=1)
-  #plot(1:50,1:50,col=colbarQuad4,pch=20,cex=2)
+  #plot(1:50,1:50,col=colbarQuad4,pch=20,cex=1.5)
   colbar<-c(colbarQuad3,colbarQuad4,colbarQuad1,colbarQuad2)
-  #plot(1:200,1:200,col=colbar,pch=20,cex=2)
+  #plot(1:200,1:200,col=colbar,pch=20,cex=1.5)
   
   # #***panels for fP1 
   # htind<-5
@@ -877,7 +877,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   # h[h==-pi]<-pi
   # cols<-colbar[WhichBreak(breaks=breaks,h)] 
   # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  # mtext(latex2exp::TeX("$f_{P^{(1)}}$"),2,1.7,cex=2) 
+  # mtext(latex2exp::TeX("$f_{P^{(1)}}$"),2,1.7,cex=1.5) 
   # graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   # text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[1],adj=c(-0.1,1))
   # 
@@ -971,7 +971,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   # h[h==-pi]<-pi
   # cols<-colbar[WhichBreak(breaks=breaks,h)] 
   # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  # mtext(latex2exp::TeX("$f_{P^{(2)}}$"),2,1.7,cex=2) 
+  # mtext(latex2exp::TeX("$f_{P^{(2)}}$"),2,1.7,cex=1.5) 
   # graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   # text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[2],adj=c(-0.1,1))
   # 
@@ -1049,7 +1049,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   # h[h==-pi]<-pi
   # cols<-colbar[WhichBreak(breaks=breaks,h)] 
   # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  # mtext(latex2exp::TeX("$f_{P^{(1)}} \\bar{f_{P^{(2)}}}$"),2,1.7,cex=2) 
+  # mtext(latex2exp::TeX("$f_{P^{(1)}} \\bar{f_{P^{(2)}}}$"),2,1.7,cex=1.5) 
   # graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   # text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[3],adj=c(-0.1,1))
   # 
@@ -1126,7 +1126,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   h[h==-pi]<-pi
   cols<-colbar[WhichBreak(breaks=breaks,h)] 
   plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(1)}\\epsilon^{(2)}}$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(1)}\\epsilon^{(2)}}$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=c(0.5,1,2))
   text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_short_PanLabs[1],adj=c(-0.1,1))
   
@@ -1170,7 +1170,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
   graphics::axis(1,at=log2(c(8,16)),labels=c(2,4))
   text(xlimits_mid[1],ylimits[2],ExplainInteractingMoran_short_PanLabs[2],adj=c(-0.1,1))
-  mtext("Timescale, years",1,2.3,cex=2)
+  mtext("Timescale, years",1,2.3,cex=1.5)
   
   #long timescales
   par(fig=c((yaxwd+panwd_short+yaxnumwd+panwd_mid+yaxnumwd)/totwd,
@@ -1222,7 +1222,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   # h[h==-pi]<-pi
   # cols<-colbar[WhichBreak(breaks=breaks,h)] 
   # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  # mtext(latex2exp::TeX("$f_{P^{(1)}} \\bar{f_{P^{(2)}}} \\rho_{\\epsilon^{(1)}\\epsilon^{(2)}}$"),2,1.7,cex=2) 
+  # mtext(latex2exp::TeX("$f_{P^{(1)}} \\bar{f_{P^{(2)}}} \\rho_{\\epsilon^{(1)}\\epsilon^{(2)}}$"),2,1.7,cex=1.5) 
   # graphics::axis(1,at=log2(c(2,4,8)),labels=c(0.5,1,2))
   # text(xlimits_short[1],ylimits[2],ExplainInteractingMoran_PanLabs[5],adj=c(-0.1,1))
   # 
@@ -1248,7 +1248,7 @@ explain_interacting_Moran<-function(freq,frg,fP1,fP2,Se1e2_avg,
   # cols<-colbar[WhichBreak(breaks=breaks,h)]
   # plotColLine(x=l2timescales[inds],y=y,cols=cols,lnwid=lnwid,ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
   # graphics::axis(1,at=log2(c(8,16)),labels=c(2,4))
-  # mtext("Timescale, years",1,2.3,cex=2)
+  # mtext("Timescale, years",1,2.3,cex=1.5)
   # text(xlimits_mid[1],ylimits[2],ExplainInteractingMoran_PanLabs[10],adj=c(-0.1,1))
   # 
   # #long timescales
@@ -1372,7 +1372,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   }
   ylimits[2]<-ylimits[2]+.2*diff(ylimits)
   plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$|f_{P^{(1)}}|^2$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$|f_{P^{(1)}}|^2$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   text(xlimits_short[1],ylimits[2],ExplainDirectMoran_PanLabs[1],adj=c(-0.1,1))
   
@@ -1440,7 +1440,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   }
   ylimits[2]<-ylimits[2]+.2*diff(ylimits)
   plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(1)}\\epsilon^{(1)}}$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(1)}\\epsilon^{(1)}}$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   text(xlimits_short[],ylimits[2],ExplainDirectMoran_PanLabs[2],adj=c(-0.1,1))
   
@@ -1508,7 +1508,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   }
   ylimits[2]<-ylimits[2]+.2*diff(ylimits)
   plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$|f_{P^{(2)}}|^2$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$|f_{P^{(2)}}|^2$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   text(xlimits_short[1],ylimits[2],ExplainDirectMoran_PanLabs[3],adj=c(-0.1,1))
   
@@ -1576,7 +1576,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   }
   ylimits[2]<-ylimits[2]+.2*diff(ylimits)
   plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(2)}\\epsilon^{(2)}}$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(2)}\\epsilon^{(2)}}$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   text(xlimits_short[1],ylimits[2],ExplainDirectMoran_PanLabs[4],adj=c(-0.1,1))
   
@@ -1644,7 +1644,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   }
   ylimits[2]<-ylimits[2]+.2*diff(ylimits)
   plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$1/|f_B|^2$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$1/|f_B|^2$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=c(0.5,1,2))
   text(xlimits_short[1],ylimits[2],ExplainDirectMoran_PanLabs[5],adj=c(-0.1,1))
   
@@ -1667,7 +1667,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   ylimits[2]<-ylimits[2]+.2*diff(ylimits)
   plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
   graphics::axis(1,at=log2(c(8,16)),labels=c(2,4))
-  mtext("Timescale, years",1,2.3,cex=2)
+  mtext("Timescale, years",1,2.3,cex=1.5)
   text(xlimits_mid[1],ylimits[2],ExplainDirectMoran_PanLabs[10],adj=c(-0.1,1))
   
   #long timescales
@@ -1743,7 +1743,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   # }
   # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
   # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  # mtext(latex2exp::TeX("$|f_{P^{(1)}}|^2$"),2,1.7,cex=2) 
+  # mtext(latex2exp::TeX("$|f_{P^{(1)}}|^2$"),2,1.7,cex=1.5) 
   # graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   # text(xlimits_short[1],ylimits[2],ExplainDirectMoran_PanLabs[1],adj=c(-0.1,1))
   # 
@@ -1810,7 +1810,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   }
   ylimits[2]<-ylimits[2]+.2*diff(ylimits)
   plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(1)}\\epsilon^{(1)}}$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(1)}\\epsilon^{(1)}}$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   text(xlimits_short[],ylimits[2],ExplainDirectMoran_short_PanLabs[1],adj=c(-0.1,1))
   
@@ -1878,7 +1878,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   # }
   # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
   # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  # mtext(latex2exp::TeX("$|f_{P^{(2)}}|^2$"),2,1.7,cex=2) 
+  # mtext(latex2exp::TeX("$|f_{P^{(2)}}|^2$"),2,1.7,cex=1.5) 
   # graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   # text(xlimits_short[1],ylimits[2],ExplainDirectMoran_PanLabs[3],adj=c(-0.1,1))
   # 
@@ -1945,7 +1945,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   }
   ylimits[2]<-ylimits[2]+.2*diff(ylimits)
   plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(2)}\\epsilon^{(2)}}$"),2,1.7,cex=2) 
+  mtext(latex2exp::TeX("$\\rho_{\\epsilon^{(2)}\\epsilon^{(2)}}$"),2,1.7,cex=1.5) 
   graphics::axis(1,at=log2(c(2,4,8)),labels=FALSE)
   text(xlimits_short[1],ylimits[2],ExplainDirectMoran_short_PanLabs[2],adj=c(-0.1,1))
   
@@ -2013,7 +2013,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   # }
   # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
   # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_short,xaxs="i",xaxt="n")
-  # mtext(latex2exp::TeX("$1/|f_B|^2$"),2,1.7,cex=2) 
+  # mtext(latex2exp::TeX("$1/|f_B|^2$"),2,1.7,cex=1.5) 
   # graphics::axis(1,at=log2(c(2,4,8)),labels=c(0.5,1,2))
   # text(xlimits_short[1],ylimits[2],ExplainDirectMoran_PanLabs[5],adj=c(-0.1,1))
   # 
@@ -2036,7 +2036,7 @@ explain_direct_Moran_ForMS<-function(freq,frg,fP1,fP2,fB,Se1e1_avg,Se2e2_avg,fnp
   # ylimits[2]<-ylimits[2]+.2*diff(ylimits)
   # plot(l2timescales[inds],y,type="l",col="black",ylim=ylimits,xlim=xlimits_mid,xaxs="i",xaxt="n")
   # graphics::axis(1,at=log2(c(8,16)),labels=c(2,4))
-  # mtext("Timescale, years",1,2.3,cex=2)
+  # mtext("Timescale, years",1,2.3,cex=1.5)
   # text(xlimits_mid[1],ylimits[2],ExplainDirectMoran_PanLabs[10],adj=c(-0.1,1))
   # 
   # #long timescales

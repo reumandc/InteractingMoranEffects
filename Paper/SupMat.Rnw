@@ -540,18 +540,40 @@ $\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$, and
 $\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$.
 
 For case study B, details presented in Methods of the main text imply that 
-$f_{\mcB}=1-b_1 \mu$, $f_{\mcP^{(1)}}=p_n^{(1)} \mu^n$ and $f_{\mcP^{(2)}}=p_0^{(2)}$. 
+$f_{\mcB}=1-b_1 \mu$, $f_{\mcP^{(1)}}=p_n^{(1)} \mu^n$ for $n=3$, and $f_{\mcP^{(2)}}=p_0^{(2)}$. 
 Because the noise process for B is taken to be the same as that for A, we again have 
 $\rho_{\epsilon^{(1)} \epsilon^{(1)}}=v_{11}$,
 $\rho_{\epsilon^{(2)} \epsilon^{(2)}}=v_{22}$ and 
 $\rho_{\epsilon^{(1)} \epsilon^{(2)}}=v_{12}$.
 
 For case study C, again using details from Methods, $f_{\mcB}=1-b_1 \mu$, 
-$f_{\mcP^{(1)}}=p_{n_1}^{(1)} \mu^{n_1}$ and $f_{\mcP^{(2)}}=p_{n_2}^{(2)} \mu^{n_2}$. 
+$f_{\mcP^{(1)}}=p_{n_1}^{(1)} \mu^{n_1}$ for $n_1=1$, and $f_{\mcP^{(2)}}=p_{n_2}^{(2)} \mu^{n_2}$ for $n_2=0$. 
 In SI section \ref{sect:examples_cross_sync}, we computed that
 $\rho_{\epsilon^{(1)} \epsilon^{(1)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{11}$,
 $\rho_{\epsilon^{(2)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{22}$ and 
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{12} \exp(-2 \pi \iota f (l_1-l_2))$.
+
+% \section{Detailed breakdown of terms in the general theory for the case studies}\label{sect:breakdown_case_studies}
+% 
+% We here provide a detailed technical breakdown how the terms in our main theoretical equation, 
+% (\ref{MT-rhoww_T1to3}), capture the complexities of CaseA described in the main text.
+% The size of the $1$q lag of the effects of 
+% 
+% 
+% Theory captures these complexities because
+% the size of the $1$q lag of this scenario, relative to a timescale, $\sigma$, is captured by
+% the phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$, which equals the phase of
+% $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$ because $l_n=0$ and $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ is a real number
+% (SI section \ref{SM-sect:examples_cross_sync}). But $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}=
+% p_1^{(1)} p_0^{(2)} \mu = p_1^{(1)} p_0^{(2)} \exp(-2 \pi \iota f) =
+% p_1^{(1)} p_0^{(2)} \exp(-2 \pi \iota /\sigma)$ (SI section \ref{SM-sect:details_case_studies}),
+% which has phase $-\pi$ at short timescales
+% and phase almost $0$ at long timescales (Fig. \ref{fig:TheoryCaseA}b,c).
+% The phase controls the sign of $2\Rp(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}})$, the
+% interaction term in (\ref{rhoww_T1to3}), as described in General Theory.
+% 
+% 
+% \section{Detailed breakdown of terms in the general theory for kelp}\label{sect:breakdown_kelp}
 
 \clearpage
 \newpage
@@ -577,7 +599,7 @@ $l_1=\Sexpr{ns_C2[3]}$ and $l_2=\Sexpr{ns_C2[4]}$ for panels d-f.
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_MainPlot_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_MainPlot_ForMS.pdf} \\
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag4_MainPlot_ForMS.pdf}
-\caption[Extension of main text Fig. \ref{MT-fig:SummaryKelpFig}]{Same format as Fig. \ref{MT-fig:SummaryKelpFig} of the main text, but including not only results
+\caption[Extension of main text Fig. \ref{MT-fig:SummaryKelpFig} to include the CCA2 region]{Same format as Fig. \ref{MT-fig:SummaryKelpFig} of the main text, but including not only results
 for the CCA1 region (a-c) and the SB region (d-f), but also results from the 
 CCA2 region (g-i).}\label{fig:SummaryKelpFig_SM_lag4}
 \end{figure}
@@ -605,16 +627,18 @@ the same as for Fig. \ref{fig:SummaryKelpFig_SM_lag4}.}\label{fig:SummaryKelpFig
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_ExplainDirectMoran_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_ExplainDirectMoran_ForMS.pdf} \\
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag4_ExplainDirectMoran_ForMS.pdf}
-\caption[Extension of main text Fig. \ref{MT-fig:directMoran}]{Same format as Fig. \ref{MT-fig:directMoran} of the main text, but including not only results
-for the CCA1 region (a-o) and the SB region (p-dd), but also results from the 
-CCA2 region (ee-ss).}\label{fig:directMoran_SM_lag4}
+\caption[All theory constituents for kelp for direct Moran effects terms, kelp lags up to 4 quarters]{Plots of all constituents of 
+the terms in theory that pertain to direct Moran effects, for kelp, for the CCA1 region (a-o), the SB region
+(p-dd) and the CCA2 region (ee-ss), based on a model that considered 
+potential kelp lag effects from up to 4 quarters in the past (see Methods).}\label{fig:directMoran_SM_lag4}
 \end{figure}
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag8_ExplainDirectMoran_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag8_ExplainDirectMoran_ForMS.pdf} \\
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag8_ExplainDirectMoran_ForMS.pdf}
-\caption[Like Fig. \ref{fig:directMoran_SM_lag4} but with kelp lag effects up to 8 quarters]{Same format as Fig. \ref{fig:directMoran_SM_lag4}, but based on a model that considered 
+\caption[Like Fig. \ref{fig:directMoran_SM_lag4} but with kelp lag effects up to 8 quarters]{Same format 
+as Fig. \ref{fig:directMoran_SM_lag4}, but based on a model that considered 
 potential kelp lag effects from up to 8 quarters in the past (see Methods). Results were substantively
 the same as for Fig. \ref{fig:directMoran_SM_lag4}.}\label{fig:directMoran_SM_lag8}
 \end{figure}
@@ -623,19 +647,20 @@ the same as for Fig. \ref{fig:directMoran_SM_lag4}.}\label{fig:directMoran_SM_la
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag12_ExplainDirectMoran_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag12_ExplainDirectMoran_ForMS.pdf} \\
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag12_ExplainDirectMoran_ForMS.pdf}
-\caption[Like Fig. \ref{fig:directMoran_SM_lag4} but with kelp lag effects up to 12 quarters]{Same format as Fig. \ref{fig:directMoran_SM_lag4}, but based on a model that considered 
+\caption[Like Fig. \ref{fig:directMoran_SM_lag4} but with kelp lag effects up to 12 quarters]{Same format 
+as Fig. \ref{fig:directMoran_SM_lag4}, but based on a model that considered 
 potential kelp lag effects from up to 12 quarters in the past (see Methods). Results were substantively
 the same as for Fig. \ref{fig:directMoran_SM_lag4}.}\label{fig:directMoran_SM_lag12}
 \end{figure}
-
 
 \begin{figure}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_ExplainInteractingMoran_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_ExplainInteractingMoran_ForMS.pdf} \\
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag4_ExplainInteractingMoran_ForMS.pdf} 
-\caption[Extension of main text Fig. \ref{MT-fig:indirectMoran}]{Same format as Fig. \ref{MT-fig:indirectMoran} of the main text, but including not only results
-for the CCA1 region (a-o) and the SB region (p-dd), but also results from the 
-CCA2 region (ee-ss).}\label{fig:indirectMoran_SM_lag4}
+\caption[All theory constituents for kelp for Moran interaction terms, kelp lags up to 4 quarters]{Plots of 
+all constituents of the terms in theory that pertain to interactions between Moran effects, for kelp, for CCA1 region
+(a-o), the SB region (p-dd), and the CCA2 region (ee-ss), based on a model that considered 
+potential kelp lag effects from up to 4 quarters in the past (see Methods).}\label{fig:indirectMoran_SM_lag4}
 \end{figure}
 
 \begin{figure}
