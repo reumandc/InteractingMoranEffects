@@ -462,24 +462,6 @@ the phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon
 close to $\pi$, e.g., when $l_{e1}-l_{e2}+l_n$ is close to $-\sigma/2$
 (Fig. \ref{fig:PedagogAlt}c, d). The factor $1/|f_{\mcB}|^2$ again captures how 
 the intrinsic nature of population dynamics modulates Moran influences.
-%***DAN: I need to add some stuff to the SI section mentioned to support the claim that 
-%"details supporting the above assertions are in SI section X"
-%***DAN: I am currently (2022 11 17) unsure of how much of this belongs in the main text
-%versus the sup mat, and how to structure new material I will add to the sup mat, which will 
-%influence what section I site above (currently not the right section). 
-%***DAN: One way to go may be to put the 2 paras immediately above at the end of the theory
-%derivation section in sup mat, and just state here that interpretations of theory 
-%consituents, as well as the derivation itself, are in that section. The you could add 
-%a detailed elaboration of the theoretical constituents for the theory case studies to S6,
-%including a reinstatement of the components of Fig. 5 that were cut. And then I guess you could
-%add a new SI section S7 which would have a detailed exploration of the theory constituents
-%for kelp.
-%***DAN: Decision, and also started implementing a bit: Keep the above paras, no extension of
-%them in sup mat, but do add 
-%a detailed elaboration of the theoretical constituents for the theory case studies to S6,
-%including a reinstatement of the components of Fig. 5 that were cut. And then 
-%add a new SI section S7 which would have a detailed exploration of the theory constituents
-%for kelp.
 
 \section{Methods}
 
@@ -629,8 +611,6 @@ Comparing
 Fig. \ref{fig:TheoryCaseA}a and b shows the additional influence of autoregressive population effects, which
 simply multiply all Moran influences by the same timescale-dependent non-negative 
 quantity, not altering their relative importance or sign [see (\ref{rhoww_T1to3})].
-%See SI section \ref{SM-sect:breakdown_case_studies} for a detailed technical breakdown of how the terms in 
-%our theory capture the complexities described above.
 
 %Case study B
 CaseB reveals how Moran effects can interact when lags are longer than 1 model time step. 
@@ -650,14 +630,6 @@ lines level off in Fig. \ref{fig:TheoryCaseA}a, c).
 The quantity $l_{e1}-l_{e2}+l_n=3$q exactly equaled the timescale for $\sigma=3 \text{q} = 0.75 \text{y}$ and 
 equaled half the timescale for $\sigma=6 \text{q} = 1.5 \text{y}$, hence interactions effect
 were, respectively, positive and negative for these timescales (Fig. \ref{fig:TheoryCaseA}c). 
-%See SI section \ref{SM-sect:breakdown_case_studies} for a detailed technical breakdown of how the terms in 
-%our theory capture the complexities described above.
-%***DAN: May again want to cite a new section of sup mat, in a similar way suggested in a comment in the previous paragraph
-%Theory captures these complexities because 
-%the size of the $3$q sum of lags for this scenario, relative to $\sigma$,
-%is again captured by the phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$; the phase of that
-%quantity, represented by colors on Fig. \ref{fig:TheoryCaseA}f,g, fluctuates analogously to the
-%interaction effects on Fig. \ref{fig:TheoryCaseA}a.
 
 %Case study C
 CaseA and CaseB assumed white noise processes, and therefore $l_n$ was $0$.
@@ -690,23 +662,10 @@ peaks came $1$q ahead of $\epsilon^{(2)}$ peaks each year, but population influe
 delayed by $1$q. This produced negative interactions between the Moran influences of 
 $\epsilon^{(1)}$ and $\epsilon^{(2)}$ on annual timescales, as also reflected by our theory
 (Fig. \ref{fig:TheoryCaseA}g,h). 
-%***DAN: Maybe cite a new sup mat section here, once written
-%Our theory captures these complexities
-%because $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}}$
-%quantifies the degree of alignment between the effects of $\epsilon^{(1)}$ and 
-%$\epsilon^{(2)}$ compared to a given timescale, while 
-%$\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ captures the degree of alignment between 
-%oscillations in the variables themselves, compared to the timescale (Fig. \ref{fig:TheoryCaseA}j,k,n,o).
-%The phase of $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$
-%therefore captures whether delays in effects and lags between 
-%variables align or misalign, with alignment
-%reflected in the real part of this quantity, which is half the interaction term in our theory (\ref{rhoww_T1to3}).
 On long timescales, interactions were the
 same for C1 and C2, and were negative, because, on those timescales, sub-annual lags 
 make negligible difference, and the effects of $\epsilon^{(1)}$ on populations were 
 positive and those of $\epsilon^{(2)}$ were negative.
-%See SI section \ref{SM-sect:breakdown_case_studies} for a detailed technical breakdown of how the terms in 
-%our theory capture the complexities described above.
 
 %Paralels the first para, but for kelp
 We now apply our theory to kelp, fulfilling goal G3 of the Introduction. Kelp results confirm
@@ -757,14 +716,8 @@ In CCA1, nitrates had $1$q-delayed positive effects on observed
 kelp populations and waves had immediate negative effects \citep{Cavanaugh2011,Bell2015,Schiel2015}, 
 just as $\epsilon^{(1)}$ effects in CaseC1 
 were positive and delayed by $1$q and $\epsilon^{(2)}$ effects were negative and immediate.
-%Delayed effects are reflected, for CCA1, in Fig. \ref{fig:indirectMoran}a, and for 
-%CaseC1, in Fig. \ref{fig:TheoryCaseA}j, both of which show 
-%that $f_{\mcP^{(1)}}$ has phase about $-\pi/2$ at the annual timescale. 
 The delayed effects of nitrates in CCA1 are reflected in Table \ref{SM-tab:regcoefs}, where 
 regression results for $p_0^{(1)}$ are close to $0$ and those for $p_1^{(1)}$ are positive.
-%Immediate negative effects of waves in CCA1 are reflected in Fig. \ref{fig:indirectMoran}b,g,l
-%and for CaseC1 in Fig. \ref{fig:TheoryCaseA}j, both of which show 
-%that $f_{\mcP^{(2)}}$ has phase $-\pi$ at all timescales. 
 Immediate negative effects of waves in CCA1 are also reflected in Table \ref{SM-tab:regcoefs},
 where entries for $p_0^{(2)}$ are negative.
 In CCA1, annual peak nitrates tend to come in spring, whereas annual peak waves 
@@ -772,29 +725,12 @@ tend to come in winter \citep{Schiel2015,Bell2015}.
 Thus annual nitrate peaks tend to lag annual 
 wave peaks by $1$q, just as $\epsilon^{(1)}$ peaks lagged $\epsilon^{(2)}$
 peaks by $1$q in CaseC1.
-%***DAN: We would keep the portion of the following sentence that is about CCA1,
-%and we would keep a version of Fig 8d, which shows the cross synchrony between 
-%these drivers corresponds to a lag of 1 quarter. The reference to 4k will just 
-%be dropped, since anyway we built that theoretical case study to have that lag 
-%so don't need a confusing spectral reflection of the lag. In the sup mat section 
-%where we go through the constituents of the theory in detail can have this kinda 
-%stuff.
 For CCA1, this is reflected in Fig. \ref{fig:noise}c, which shows that 
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$
 has a phase of about $-\pi/2$ at the annual timescale.
 Thus lags compound on the annual timescale, in the CCA1 case as in CaseC1: the annual positive 
 effects of nitrates on kelp tend to come in summer, and the annual negative effects of waves come in winter,
 producing reinforcing interactions between Moran effects. 
-%Likewise, the $\pi/2$ phase 
-%of $f_{\mcP^{(1)}}\overline{f_{\mcP^{(2)}}}$ on annual timescales 
-%(Fig. \ref{fig:indirectMoran}c for CCA1, Fig. \ref{fig:TheoryCaseA}k for CaseC1)
-%approximately cancels the $-\pi/2$ phase of $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ on annual timescales
-%(Fig. \ref{fig:indirectMoran}d for CCA1, Fig. \ref{fig:TheoryCaseA}k for CaseC1), so that  
-%$f_{\mcP^{(1)}}\overline{f_{\mcP^{(2)}}}\rho_{\epsilon^{(1)}\epsilon^{(2)}}$ has phase 
-%approximately $0$, making the interaction-effect term 
-%$\Rp(f_{\mcP^{(1)}}\overline{f_{\mcP^{(2)}}}\rho_{\epsilon^{(1)}\epsilon^{(2)}})$ strongly positive 
-%on annual timescales for both the theoretical and emprical cases 
-%(Fig. \ref{fig:indirectMoran}e for CCA1, Fig. \ref{fig:TheoryCaseA}k for CaseC1). 
 Interactions between Moran effects on long-timescales ($>8$y) were also similar for both CCA1 and
 CaseC1 (compare Figs \ref{fig:TheoryCaseA}e and \ref{fig:SummaryKelpFig}c), 
 and for the same reason in both cases: on long timescales, sub-annual lags
@@ -809,12 +745,9 @@ mechanism in SB compared to CCA1, leading to the slightly negative versus positi
 documented on annual timescales for the two regions (Fig. \ref{fig:SummaryKelpFig}d v. a). 
 Whereas in CCA1, nitrate effects on observed kelp density were delayed by $1$q, in SB nitrate effects 
 were observable within the same quarter: 
-%(Fig. \ref{fig:indirectMoran}a v. p; see also 
 see Table \ref{SM-tab:regcoefs}, where $p_0^{(1)}$ terms were close to zero for CCA1 and positive for SB,
 whereas $p_1^{(1)}$ terms were positive for CCA1 and close to zero for SB. Wave effects were negative and
 immediate in both regions, i.e., $p_0^{(2)}<0$ in Table \ref{SM-tab:regcoefs}. 
-%(Fig. \ref{fig:indirectMoran}b,g,l v. q,v,aa; see also 
-%Table \ref{SM-tab:regcoefs}). 
 Annual peaks in nitrates still tended to lag annual peaks in waves by $1$q in SB,
 as in CCA1, though the seasonal periodicity of both variables was reduced in SB compared to 
 CCA1 (Fig. \ref{fig:noise}l v. c). 
