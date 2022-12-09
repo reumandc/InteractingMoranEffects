@@ -553,8 +553,8 @@ $\rho_{\epsilon^{(1)} \epsilon^{(1)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \
 $\rho_{\epsilon^{(2)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{22}$ and 
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{12} \exp(-2 \pi \iota f (l_1-l_2))$.
 
-% \section{Detailed breakdown of terms in the general theory for the case studies}\label{sect:breakdown_case_studies}
-% 
+%\section{Detailed breakdown of terms in the general theory for the case studies}\label{sect:breakdown_case_studies}
+%
 % We here provide a detailed technical breakdown how the terms in our main theoretical equation, 
 % (\ref{MT-rhoww_T1to3}), capture the complexities of CaseA described in the main text.
 % The size of the $1$q lag of the effects of 
