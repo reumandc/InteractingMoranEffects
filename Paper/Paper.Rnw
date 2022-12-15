@@ -458,8 +458,7 @@ represented on Fig. \ref{fig:PedagogAlt} by $l_{e1}$ and $l_{e2}$,
 relative to the timescale $\sigma=1/f$. The lag 
 $l_n$ on Fig. \ref{fig:PedagogAlt} manifests in the theory 
 through the phase of $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$. 
-The expression $l_{e1}-l_{e2}+l_{n}$, which quantifies the degree of mismatch among the lags,
-corresponds to the phase of the expression 
+The environmental effect alignment measure, $l_{e1}-l_{e2}+l_{n}$, corresponds to the phase of the expression 
 $f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}$, because the phase of
 this product equals the phase of $f_{\mcP^{(1)}}$ (which corresponds to $l_{e1}$), minus 
 the phase of $f_{\mcP^{(2)}}$
@@ -610,14 +609,14 @@ $\epsilon^{(2)}$ effects were unlagged (Methods). So, in the language of Fig. \r
 $l_{e1}=1$q and $l_{e2}=0$q. 
 The between-noise lag, $l_n$, of Fig. \ref{fig:PedagogAlt} is $0$q because $(\epsilon^{(1)},\epsilon^{(2)})$ was 
 taken to be a white noise process (see SI section \ref{SM-sect:examples_cross_sync} for details).
-Thus, what determines the sign of interactions between Moran effects for this example is how 
-$l_{e1}-l_{e2}+l_n=1$q compares to the timescale/period, $\sigma$, being considered. 
+Thus, the environmental effect alignment measure, $l_{e1}-l_{e2}+l_n$, equals $1$q.
+What determines the sign of interactions between Moran effects for this example is how 
+this measure compares to the timescale/period, $\sigma$, being considered. 
 On the shortest timescales ($\sigma=0.5 \text{y} = 2 \text{q}$; Fig. \ref{fig:TheoryCaseA}a, left side of panel), $1$q
 is half the period, so interaction effects are negative. On long timescales (e.g., $\sigma>8$y), $1$q is a negligible portion of the
-period, so $l_{e1}-l_{e2}+l_n=1$q is close to zero, relative to that period, and interaction effects
+period, so $l_{e1}-l_{e2}+l_n$ is close to zero, relative to that period, and interaction effects
 are positive: compared to such long timescales, $\epsilon^{(1)}$ and $\epsilon^{(2)}$ effects happen close to simultaneously, so
-the two noise variables reinforce each other.
-Comparing
+the two noise variables reinforce each other. Comparing
 Fig. \ref{fig:TheoryCaseA}a and b shows the additional influence of autoregressive population effects, which
 simply multiply all Moran influences by the same timescale-dependent non-negative 
 quantity, not altering their relative importance or sign [see (\ref{rhoww_T1to3})].
@@ -627,7 +626,7 @@ CaseB reveals how Moran effects can interact when lags are longer than 1 model t
 For CaseB, recall that $\epsilon^{(1)}$ effects on populations were lagged by $3$q but 
 $\epsilon^{(2)}$ effects were unlagged (Methods), so $l_{e1}=3$q and $l_{e2}=0$q in the language of Fig. \ref{fig:PedagogAlt}. 
 As for CaseA, because $(\epsilon^{(1)},\epsilon^{(2)})$ was 
-a white noise process for CaseB, $l_n=0$.
+a white noise process for CaseB, $l_n=0$, so the environmental effect alignment measure is $3$q.
 Interaction effects were again negative on short timescales 
 ($\sigma=0.5 \text{y} = 2 \text{q}$; Fig. \ref{fig:TheoryCaseA}c, far left side of panel)
 because $l_{e1}-l_{e2}+l_n=3$q was $1.5\sigma$ on that timescale, and so effects of 
@@ -654,7 +653,8 @@ $\epsilon^{(2)}$ effects were negative for CaseC, the situation considered by th
 For CaseC1, peaks in the periodic
 noise process $\epsilon^{(1)}$ were set up to lag peaks in the periodic process $\epsilon^{(2)}$ by
 $1$q (Methods, SI section \ref{SM-sect:examples_cross_sync}), so that $l_n=1$. 
-Thus $l_{e1}-l_{e2}+l_n=2 \text{q}=0.5 \text{y}$, and, on annual timescales, lags compounded, similar to 
+Thus the environmental effect alignment measure, $l_{e1}-l_{e2}+l_n$, equals $2 \text{q}=0.5 \text{y}$, 
+and, on annual timescales, lags compounded, similar to 
 Fig. \ref{fig:PedagogAlt2}c, d: the 
 annual positive population effects of $\epsilon^{(1)}$ 
 were exactly $2$q offset from the annual negative effects of $\epsilon^{(2)}$,
@@ -738,7 +738,8 @@ peaks by $1$q in CaseC1.
 For CCA1, this is reflected in Fig. \ref{fig:noise}c, which shows that 
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$
 has a phase of about $-\pi/2$ at the annual timescale.
-Thus lags compound on the annual timescale, in the CCA1 case as in CaseC1: the annual positive 
+Thus $l_{e1}=1$q, $l_{e2}=0$q, $l_n=1$q, and so the environmental effect alignment measures is 
+$l_{e1}-l_{e2}+l_n=2$q. Lags compound on the annual timescale, in the CCA1 case as in CaseC1: the annual positive 
 effects of nitrates on kelp tend to come in summer, and the annual negative effects of waves come in winter,
 producing reinforcing interactions between Moran effects. 
 Interactions between Moran effects on long-timescales ($>8$y) were also similar for both CCA1 and
@@ -760,7 +761,8 @@ whereas $p_1^{(1)}$ terms were positive for CCA1 and close to zero for SB. Wave 
 immediate in both regions, i.e., $p_0^{(2)}<0$ in Table \ref{SM-tab:regcoefs}. 
 Annual peaks in nitrates still tended to lag annual peaks in waves by $1$q in SB,
 as in CCA1, though the seasonal periodicity of both variables was reduced in SB compared to 
-CCA1 (Fig. \ref{fig:noise}l v. c). 
+CCA1 (Fig. \ref{fig:noise}l v. c). Thus, in SB, the environment effect alignment measure was 
+$1$q, contrasting with its value of $2$q in CCA1.
 Whereas in CCA1, the tendency of nitrate annual peaks to follow wave annual peaks by $1$q, together with to the tendency of 
 nitrate effects on kelp to be delayed by $1$q, resulted in summer positive nitrate effects and winter 
 negative wave effects which reinforced sycnhrony; in SB nitrate instead both peaked and had its positive effects on kelp in spring,
@@ -790,10 +792,11 @@ sign. We used our theory and several case studies based on models and
 kelp populations to provide intuition about the new mechanism.
 Because Moran effects are ubiquitous and interactions 
 between Moran effects were detected on both of the two occassions they have been tested 
-for \citep{Sheppard2019,CastoraniSheppardKelp}, interactions may be common. 
+for \citep{Sheppard2019,CastoraniSheppardKelp}, interactions may be common (also see below). 
 Moran interactions are therefore
 a newly recognized and potentially widespread aspect of a fundamental means (Moran effects) by which 
-environmental factors influence populations.
+environmental factors influence populations and diverse, synchrony-related phenomena such as ecosystem stability 
+\citep{Wilcox2017}, population cycling \citep{Anderson2021}, and extinction \citep{Ghosh2020}.
 Climate change is altering many aspects of environmental variables, including their means, variances and
 spatial correlations \citep{Lyon2019,Keelings2020}, as well as 
 relationships between environmental variables and the nature of 
@@ -818,7 +821,7 @@ measured in the same season may be particularly important candidates for interac
 the well known joint influence of these variables on plants. 
 
 %*DONE Revist intuition
-We again revisit the intuition behind interacting Moran effects, using the central CA kelp
+We again revisit the intuition behind interacting Moran effects using the central CA kelp
 example as a vehicle. Large winter waves 
 have immediate negative effects on kelp in central CA, whereas the positive
 effects of spring nitrates manifest in summer. So nutrient and wave effects can 
@@ -837,7 +840,7 @@ a multi-year period of abundant nutrients in location B, the multi-year-average 
 in A will tend to be reduced, whereas the multi-year-average kelp abundance in B will
 tend to be augmented, reducing long-timescale synchrony. Lags and interactions between
 drivers must always be compared to the timescale of interest to determine interaction effects,
-as in Fig. \ref{fig:PedagogAlt}, and as captured formally in our theory.
+as in Figs \ref{fig:PedagogAlt} and \ref{fig:PedagogAlt2}, and as captured formally in our theory.
 
 %*DONE Comparison to Castorani et al paper, and maybe also a bit on comparison to the Sheppard et al 2019 paper
 Our results about kelp were consistent with those of \cite{CastoraniSheppardKelp}, though
@@ -850,12 +853,13 @@ timescales in both central and southern CA. And both studies
 show positive interactions between nutrient and wave Moran effects on annual timescales
 in central CA, but negative interactions in southern CA on annual timescales and in both central
 and southern CA on long timescales. The Fourier approach of our study was designed to facilitate 
-mathematical examination of interactions between Moran effect as a general mechanism and development
-of general theory, whereas the 
+mathematical examination of interactions between Moran effect as a general mechanism, and development
+of general theory; whereas the 
 wavelet approach of \cite{CastoraniSheppardKelp} was instead optimized for detecting interactions 
 and identifying Moran mechanisms in data, in spite of non-stationarity and
 other complicating features which are present in many ecological datasets. The study of
-\cite{Sheppard2019} developed the wavelet methods applied by \cite{CastoraniSheppardKelp}.
+\cite{Sheppard2019} developed the wavelet methods applied by \cite{CastoraniSheppardKelp}; an open-source implementation of 
+these methods \citep{wsyn} can facilitate future work.
 The modelling approach of this study relates indirectly to the approach of \cite{Anderson2021}, though that
 study concerned different research questions.
 
@@ -863,13 +867,14 @@ study concerned different research questions.
 It has been a frequent topic of research why populations are often less synchronous, or sychronous over a smaller
 spatial extent, than might be expected given the strength and extent of 
 synchrony of environmental drivers \citep{Herfindal2022}.
-Antagonistic interactions between Moran drivers may be one common and previously
-unrecognized mechanism contributing to this discrepancy. On the other hand,
+Mechanisms include demographic stochasticity, measurement error, and influences of unmeasured environmental variables. 
+Antagonistic interactions between Moran drivers may be a common and previously
+unrecognized mechanism also contributing to this discrepancy. On the other hand,
 two recent papers descibed ``enhanced Moran effects'' by which specific 
 patterns of temporal autocorrelation
 in Moran drivers can theoretically cause greater synchrony in populations 
 than in drivers \citep{Massie2015,Desharnais2018}.
-Synergistic interaction effects is another mechanism by which populations can
+Synergistic interaction effects are another mechanism by which populations can
 be more synchronous than expected.
 
 % %*DONE Revisit the kendall paper, briefly. Talk about possible three-way interactions.
@@ -1149,6 +1154,7 @@ $w_i(t)$ & A population index at location $i$ and time $t$ \\
 $\epsilon_i^{(a)}(t)$ & Environmental variable $a$ measured at location $i$ and time $t$ \\
 $l_{ek}$ & Lag of the effects of environmental variable $k$ on populations \\
 $l_n$ & A lag between two environmental variables \\
+$l_{e1}-l_{e2}+l_n$ & The \emph{environmental effect alignment measure} \\
 $\sigma$ & A timescale \\
 $f=1/\sigma$ & Frequency \\
 $S_{w_i w_i}$ & The power spectrum of the process $w_i$ \\
