@@ -52,18 +52,19 @@
 
 %***Tentative author order, Bell last for his data contributions
 \author[a,*]{Daniel C. Reuman}
-\author[b]{Max Castorani}
-\author[c]{Kyle Cavanaugh}
+\author[b]{Max C.N. Castorani}
+\author[c]{Kyle C. Cavanaugh}
 \author[d]{Lawrence W. Sheppard}
-\author[b]{Jonathan Walter}
-\author[e,f]{Tom Bell}
+\author[e]{Jonathan A. Walter}
+\author[f,g]{Tom W. Bell}
 
 \affil[a]{Department of Ecology and Evolutionary Biology and Center for Ecological Research, University of Kansas}
 \affil[b]{Department of Environmental Sciences, University of Virginia}
 \affil[c]{Department of Geography, University of California, Los Angeles}
 \affil[d]{Marine Biological Association of the United Kingdom}
-\affil[e]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
-\affil[f]{Earth Research Institute, University of California, Santa Barbara}
+\affil[e]{Center for Watershed Sciences, University of California, Davis}
+\affil[f]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
+\affil[g]{Earth Research Institute, University of California, Santa Barbara}
 \affil[*]{Corresponding author, reuman@ku.edu}
 
 \begin{document}
