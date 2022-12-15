@@ -202,21 +202,22 @@ The basic fact that Moran drivers can interact, synergistically or destructively
 with a very simple model which we now elaborate, though understanding the full nature of the interaction
 mechanism will require the rest of this paper. Suppose $\epsilon_i^{(1)}(t)$ and $\epsilon_i^{(2)}(t)$
 are environmental random variables measured in locations $i=1,2$ at times $t$, and assume these are independent
-through time and standard normally distributed for all $i$ and $t$. If a population index $w_i(t)$ 
+through time and standard normally distributed for all $i$ and $t$. 
+If a population index $w_i(t)$ 
 follows the autoregressive process $w_i(t)=b w_i(t-1)+\epsilon_i^{(1)}(t)$ for $i=1,2$, then the classic Moran theorem 
 \citep{Moran1953} implies that temporal population correlation equals temporal environmental correlation, i.e., 
 $\cor(w_1,w_2)=\cor(\epsilon_1^{(1)},\epsilon_2^{(1)})$. If, instead, 
 $w_i(t)=b w_i(t-1)+\epsilon_i^{(1)}(t)+\epsilon_i^{(2)}(t)$, so that both environmental variables influence 
 populations, the Moran theorem then implies that population synchrony is $\cor(w_1,w_2)=
-\cor(\epsilon_1^{(1)}+\epsilon_1^{(2)},\epsilon_2^{(1)}+\epsilon_2^{(2)})=
-[\cov(\epsilon_1^{(1)},\epsilon_2^{(1)})+\cov(\epsilon_1^{(1)},\epsilon_2^{(2)})+
-\cov(\epsilon_1^{(2)},\epsilon_2^{(1)})+\cov(\epsilon_1^{(2)},\epsilon_2^{(2)})]/
-[\sqrt{2+2\cov(\epsilon_1^{(1)},\epsilon_1^{(2)})}\sqrt{2+2\cov(\epsilon_2^{(1)},\epsilon_2^{(2)})}]$,
-a quantity which depends not only on the standard environmental synchrony 
+\cor(\epsilon_1^{(1)}+\epsilon_1^{(2)},\epsilon_2^{(1)}+\epsilon_2^{(2)})$.
+As we show in detail in SI section \ref{SM-Sect:IntroExample}, it is straightforward to show that 
+this quantity depends not only on the standard environmental synchrony 
 measures $\cov(\epsilon_1^{(a)},\epsilon_2^{(a)})$, for 
 $a=1,2$, but also on the ``cross synchrony'' measures $\cov(\epsilon_1^{(a)},\epsilon_2^{(b)})$
-for $a \neq b$. Cross synchrony measures represent synchrony between an environmental variable in one location and 
-a different variable in another location. Fig. \ref{fig:IntroTheory} illustrates how population synchrony can 
+for $a \neq b$. 
+Cross synchrony measures represent synchrony between an environmental variable in one location and 
+a different variable in another location. Fig. \ref{fig:IntroTheory} illustrates, using this model, 
+how population synchrony can 
 therefore differ from what synchrony would be if the environmental processes $\epsilon^{(1)}$ and 
 $\epsilon^{(2)}$ were unrelated, so that covariances between components of those processes are zero. 
 The difference is due to interactions
@@ -228,7 +229,10 @@ are summarized in Table \ref{tab:notation}.
 Having demonstrated that interactions between Moran effects can occur, we now 
 use a simple analogy from everyday experience to begin to provide intuition. 
 Consider $N$ children, each riding on their own playground swing and each
-being pushed both by their own mother and father. If the fathers from seperate families
+being pushed both by their own mother and father. 
+Here, the children correspond to ecological populations and the parental pushing to environmental
+influences on the populations. 
+If the fathers from seperate families
 were to synchronize their pushes, they would act as a Moran-like influence, tending to synchronize
 the swinging motions of the children. Likewise, if the mothers from seperate families were to
 synchronize their pushes, it would tend to have a separate synchronizing effect. If the pushes
@@ -237,16 +241,19 @@ would also swing more synchronously, demonstrating a synergistic interaction bet
 effects, i.e., a tendency for the two synchronizing effects to reinforce each other. On the 
 other hand, if the maternal and paternal pushes
 were not appropriately coordinated, the children 
-would swing more or less randomly, with small amplitude, and would become asynchronous with each other. 
+would swing more or less randomly, with smaller amplitude, and would become asynchronous with each other. 
 This second case demonstrates
 an antagonistic interaction between synchronizing effects, i.e., a tendency for the two synchronizing
-effects to cancel. As oscillators, children on swings are distinct in many ways from ecological
+effects to cancel. As oscillators, children on swings are distinct in many ways from 
 populations, not least because swings oscillate on one frequency/timescale, whereas populations
-typically oscillate simultaneously on many timescales, having a broadband spectrum. 
-We will see that a key insight of our theory is the use of a timescale-specific approach: 
-environmental signals are decomposed, using Fourier analysis, into components that occur 
-on different timescales,
-and the nature of interacting Moran effects can be understood on a timescale-by-timescale basis.
+typically oscillate simultaneously on many timescales. 
+We will see that 
+a key insight is the use of a timescale-specific approach. By timescale-specific, we mean that 
+fluctuations having different characteristic periods, which are superimposed in actual population time series data, 
+can be understood separately. 
+Timescale-specific approaches have been shown to be important to understanding synchrony and other 
+phenomena (e.g., \citealp{Sheppard2016,Anderson2021,Zhao2020}). 
+In the approach used in this paper, environmental and population signals are decomposed using Fourier analysis.
 The simple swing analogy turns out to supply, in much idealized form, the basic intuition our formal
 theory will extend.
 
@@ -284,23 +291,27 @@ spatially synchronous environmental variables measured in sampling locations
 $i=1,2,3$, and one way these can influence populations. The components are
 lagged, relative to each other, in the timing of their peaks ($l_n$ on the figure). They are also lagged in their 
 effects on populations, by the amounts $l_{e1}$ and $l_{e2}$, respectively, i.e., peaks in the environmental signals
-manifest as maximum positive influence on populations after delays of $l_{e1}$ and $l_{e2}$, respectively. In this example,
+manifest as maximum positive influence on populations after delays of $l_{e1}$ and $l_{e2}$, respectively. 
+Such delays can be due to a variety of biological mechanisms associated with the life history of the organisms 
+which comprise the populations. In this example,
 we assume for simplicity that larger values of both environmental variables are beneficial to 
 populations, though the general
 theory described below does not require that assumption, and see also the next example which makes a
-different assumption. If, as in Fig. \ref{fig:PedagogAlt}a, b, $l_n+l_{e1}=l_{e2}$ (or $l_n+l_{e1}-l_{e2}$ is any integer
+different assumption. If, as in Fig. \ref{fig:PedagogAlt}a, b, $l_{e1}-l_{e2}+l_n=0$ (or $l_{e1}-l_{e2}+l_n$ is any integer
 multiple of $\sigma=20$, the period), then the 
 periodic maximal positive influences of the two environmental variables coincide with each other as well as being 
 spatial synchronous. This alignment of influences produces additional synchrony in populations, 
 beyond what would manifest if environmental fluctuations were unrelated, because positive 
 influences of variable 1 in location $i$ will
 tend to coincide with positive influences of variable 2 in location $j$. In contrast, Fig. \ref{fig:PedagogAlt}c, d
-shows the opposite scenario, for which $l_n+l_{e1}=l_{e2}-\sigma/2$. Thus
+shows the opposite scenario, for which $l_{e1}-l_{e2}+l_n=-\sigma/2$. Thus
 the periodic maximal positive influence of environmental variable 1 coincides with the periodic maximal negative
 influence of environmental variable 2, reducing synchrony relative to the case of unrelated environmental variables. 
-(The same outcome would occur if $l_n+l_{e1}-l_{e2}$ were any integer multiple of $\sigma$ plus or minus $\sigma/2$.)
+(The same outcome would occur if $l_{e1}-l_{e2}+l_n$ were any integer multiple of $\sigma$ plus or minus $\sigma/2$.)
 Intermediate scenarios between the two scenarios of Fig. \ref{fig:PedagogAlt} are also possible, as will be revealed by 
-the theory. If we replace the assumption that
+the theory. We henceforth refer to the quantity $l_{e1}-l_{e2}+l_n$ as the \emph{environmental effect alignment measure},
+because it measures the extent to which the timing of the population influences of the two environmental variables
+are aligned. If we replace the assumption that
 larger values of both environmental variables are beneficial to populations with an assuption that larger 
 values of the first variable and smaller values of the second are beneficial, scenarios of synergistic versus
 antagonistic Moran interactions are reversed, but with the same general concepts still operating 
@@ -505,8 +516,7 @@ the autoregressive order of population dynamics is assumed, for simplicity, to b
 but $b_i=0$ for $i>1$. 
 
 %Description of data after cleaning
-The core of this paper is the theory, but to help illustrate that theory, for goal G3 of the 
-Introduction, we also apply
+To help illustrate our theory, for goal G3 of the Introduction, we also apply
 the theory to an exceptional dataset on giant kelp (\emph{Macrocyctis pyrifera}) dynamics off the CA coast, and 
 associated environmental measurements. 
 The data are based on a subset of those used by \cite{CastoraniSheppardKelp} and
@@ -551,7 +561,7 @@ take time for damaged kelp to grow back to the surface
 \citep{Cavanaugh2011,Bell2015,Schiel2015}. 
 Therefore $m_1=1$ was used. Kelp holdfasts on the sea floor can 
 last for multiple years, so kelp lag effects were considered:
-we used $n=4, 8, 12$ in separate analysis, with this choice making no substantive difference to results (see Results).
+we used $n=4, 8, 12$q in separate analyses, with this choice making no substantive difference to results (see Results).
 Fitted regression coefficients determined the quantities $b_1,\ldots,b_n$, $p_0^{(1)}$, $p_1^{(1)}$, and $p_0^{(2)}$
 in (\ref{main_model_1})-(\ref{main_model_3}), and therefore $f_{\mcB}$, $f_{\mcP^{(1)}}$ and
 $f_{\mcP^{(2)}}$ in (\ref{rhoww_T1to3}), for each of our three regions.
@@ -767,11 +777,6 @@ influences of the two environmental variables.
 
 \section{Discussion}
 
-%***DAN: Another potentially good Discussion para: make connections to the work (or Wang and Loreau and
-%others) that is fusing spatial and community ecology. What are the implications of this work for that work?
-%Making such additions may help it appeal to a broader audience, which is something we need to work on as 
-%much as we can for Ecol Lett.
-
 %*DONE Summary
 We provided a general mathematical theory of the new mechanism of 
 interactions between Moran effects. When two related spatially 
@@ -813,7 +818,6 @@ measured in the same season may be particularly important candidates for interac
 the well known joint influence of these variables on plants. 
 
 %*DONE Revist intuition
-%***DAN: Do we still need this if we're cutting? Are we cutting?
 We again revisit the intuition behind interacting Moran effects, using the central CA kelp
 example as a vehicle. Large winter waves 
 have immediate negative effects on kelp in central CA, whereas the positive
@@ -836,7 +840,6 @@ drivers must always be compared to the timescale of interest to determine intera
 as in Fig. \ref{fig:PedagogAlt}, and as captured formally in our theory.
 
 %*DONE Comparison to Castorani et al paper, and maybe also a bit on comparison to the Sheppard et al 2019 paper
-%***DAN: Could we put this in sup mat if we're cutting? Are we cutting?
 Our results about kelp were consistent with those of \cite{CastoraniSheppardKelp}, though
 that study uses distinct methods; our results complement the results of \cite{CastoraniSheppardKelp} 
 in important ways. In spite of 
@@ -857,7 +860,6 @@ The modelling approach of this study relates indirectly to the approach of \cite
 study concerned different research questions.
 
 %*DONE relationship to earlier papers comparing synchrony of drivers and pops
-%***DAN: I guess you could move this to sup mat if we're cutting
 It has been a frequent topic of research why populations are often less synchronous, or sychronous over a smaller
 spatial extent, than might be expected given the strength and extent of 
 synchrony of environmental drivers \citep{Herfindal2022}.
@@ -871,7 +873,7 @@ Synergistic interaction effects is another mechanism by which populations can
 be more synchronous than expected.
 
 % %*DONE Revisit the kendall paper, briefly. Talk about possible three-way interactions.
-% %***DAN: Could def put this in sup mat if we're cutting
+% %***DAN: Could def put this in sup mat if we're cutting, or drop it because it's a bit lame
 % \cite{Kendall2000} considered interactions between mechanisms of synchrony. Their research 
 % questions were distinct from ours, but combining their viewpoints and ours may lead to valuable
 % future work. \cite{Kendall2000} considered interactions between dispersal and Moran causes of 
@@ -915,7 +917,7 @@ outlined above are sufficient to warrant further investigation.
 % %*DONE How/why a frequency-specific approach is necessary for all this
 % %***DAN: You could also move this to sup mat, as the point that "timescale structure is important"
 % %has been made many other places. Though I DO like the ending of this para, the ending of the prior
-% %para is also a good place to stop, maybe better. 
+% %para is also a good place to stop, maybe better. Anyway, just drop it.
 % An ever growing body of work shows that synchrony is, and should be analyzed as, a timescale-specific 
 % phenomenon \citep{Vasseur2007,Keitt2008,Vasseur2014,Sheppard2016,Defriez2016,Defriez2017,Defriez2017b,Desharnais2018,Anderson2021}.
 % The results of our present study extend this earlier work by showing that interactions between Moran effects 
@@ -986,11 +988,12 @@ of the same variable occur at similar times across locations, and likewise for p
 illustrated with blue and pink rectangles.
 In the synergistic scenario ($\alpha 1$), the lag between 
 the environmental variables ($l_n$) and the lags of the population effects
-of the variables ($l_{e1}$ and $l_{e2}$) are aligned, i.e., $l_n+l_{e1}=l_{e2}$, so that peak positive 
+of the variables ($l_{e1}$ and $l_{e2}$) are aligned, i.e., the \emph{environmental effect alignment measure},
+$l_n+l_{e1}-l_{e2}$ (see main text), equals $0$. So peak positive 
 effects of $\epsilon_i^{(1)}$ coincide with peak positive effects of $\epsilon_i^{(2)}$ (the pink rectangles are
 aligned on a, b), augmenting synchrony. Likewise negative effects are aligned (blue rectangles).
 In the antagonistic scenario ($\alpha 2$), lags are misaligned, i.e., 
-$l_n+l_{e1}=l_{e2}-\sigma/2$, where $\sigma=20$ is the period, so that peak positive 
+$l_n+l_{e1}-l_{e2}=-\sigma/2$, where $\sigma=20$ is the period. So peak positive 
 effects of $\epsilon_i^{(1)}$ coincide with maximally negative effects of $\epsilon_i^{(2)}$, and  maximally 
 negative effects of $\epsilon_i^{(1)}$ coincide with peak positive effects of $\epsilon_i^{(2)}$ 
 (pink rectangles on c are aligned with blue ones on d, and vice versa), reducing synchrony.
@@ -1012,7 +1015,8 @@ with Fig. \ref{fig:PedagogAlt}). In scenario $\beta 1$,
 $l_n+l_{e1}=l_{e2}$, as in $\alpha 1$; but Moran interactions are nonetheless antagonistic because the 
 negative effects of $\epsilon_i^{(2)}$ means that the peak positive effects of that
 variable correspond to the peak negative effects of $\epsilon_i^{(1)}$. In scenario $\beta 2$, as in $\alpha 2$,
-$l_n+l_{e1}=l_{e2}-\sigma/2$ for $\sigma=20$ the period, but Moran interactions are synergistic because the 
+the environmental effect alignment measure, $l_n+l_{e1}-l_{e2}$, equals $-\sigma/2$ for $\sigma=20$ the period. 
+But Moran interactions are synergistic because the 
 negative effects of $\epsilon_i^{(2)}$ means that the peak positive effects of that
 variable correspond to the peak positive effects of $\epsilon_i^{(1)}$. 
 See the online version for color renderings of all figures.}\label{fig:PedagogAlt2}
