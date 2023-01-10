@@ -119,7 +119,7 @@ SBl12<-readRDS(paste0(resloc,"RegionalAnalysis_SoCal_KelpLag12.Rds"))
 \maketitle
 
 \tableofcontents
-%\listoftables
+\listoftables
 \listoffigures
 
 \section{Mathematical details of the example in the Introduction}\label{Sect:IntroExample}

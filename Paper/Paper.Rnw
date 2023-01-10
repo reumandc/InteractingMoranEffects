@@ -79,7 +79,7 @@
 \author[b]{Max C.N. Castorani}
 \author[c]{Kyle C. Cavanaugh}
 \author[d]{Lawrence W. Sheppard}
-\author[e]{Jonathan A. Walter}
+\author[b,e]{Jonathan A. Walter}
 \author[f,g]{Tom W. Bell}
 
 \affil[a]{Department of Ecology and Evolutionary Biology and Center for Ecological Research, University of Kansas}
@@ -159,7 +159,7 @@ through time, is a fundamental feature of population dynamics, linked to importa
 population cycling \citep{Anderson2021}, extinction risk \citep{Ghosh2020}, and the 
 stability of regional populations and ecosystem functioning \citep{Wilcox2017}. Though spatial synchrony (henceforth, 
 \emph{synchrony}) has been studied for decades
-in a wide variety of species ranging from viruses to plants to mammals, and at 
+in a wide variety of species ranging from viruses and plants to mammals, and at 
 spatial scales ranging from centimeters to over 1000 km \citep{Liebhold2004},
 recent advances in statistical methods and improvements in data availability have led to several 
 major advances in our understanding of synchrony and its causes and consequences. 
@@ -171,8 +171,9 @@ is important for system stability \citep{Ghosh2020b,Ghosh2020c,Walter2021}. Our 
 synchrony is much improved in recent years \citep{Sheppard2016,Defriez2017b,Walter2017,Anderson2018,Sheppard2019}, 
 and there is also growing evidence
 that synchrony is changing as a newly recognized component of climate 
-change \citep{Defriez2016,Sheppard2016,Hansen2020}. Spatial and community 
-viewpoints on synchrony are becoming integrated, leading to a more wholistic understanding 
+change \citep{Defriez2016,Sheppard2016,Hansen2020}. 
+Distinct viewpoints on synchrony from population and community ecology are 
+becoming integrated, leading to a more wholistic understanding 
 of the importance of synchrony for ecosystem stability \citep{Wang2014}. These new developments 
 have led to an increasingly central role of the phenomenon of synchrony in many of the most 
 important research topics in ecology. 
@@ -183,7 +184,7 @@ synchrony, called the Moran effect, operates when spatially synchronized environ
 as temperature or precipitation, help drive population dynamics and thereby induce synchrony in
 populations. Two recent papers have documented that Moran effects of distinct 
 environmental drivers can, in fact, interact, either synergistically or antagonistically,
-so that total population synchrony can be either greater or less than if the distinct Moran 
+so that total population synchrony can be either greater than or less than what synchrony would be if the distinct Moran 
 drivers operated independently \citep{Sheppard2019,CastoraniSheppardKelp}. 
 \cite{Sheppard2019} showed that long-timescale ($>4$y period) synchrony in a chlorophyll density index 
 in the seas around the United Kingdom is substantially augmented by interactions between environmental 
@@ -228,16 +229,18 @@ are summarized in Table \ref{tab:notation}.
 
 %Intutitive idea with the swing analogy
 Having demonstrated that interactions between Moran effects can occur, we now 
-use a simple analogy from everyday experience to begin to provide intuition. 
+use a simple analogy from common experience to begin to provide intuition. 
 Consider $N$ children, each riding on their own playground swing and each
-being pushed both by their own mother and father. 
+being pushed both by their own mother and their own father. 
 Here, the children correspond to ecological populations and the parental pushing to environmental
 influences on the populations. 
 If the fathers from seperate families
 were to synchronize their pushes, they would act as a Moran-like influence, tending to synchronize
 the swinging motions of the children. Likewise, if the mothers from seperate families were to
 synchronize their pushes, it would tend to have a separate synchronizing effect. If the pushes
-of the fathers were appropriately coordinated with the pushes of the mothers, the children would swing higher, and
+of the fathers were appropriately coordinated with the pushes of the mothers (either happening at the same
+time, if the mothers and fathers are standing on the same sides of the swining children, or at
+opposite times in the swing period if the parents are on opposite sides), the children would swing higher, and
 would also swing more synchronously, demonstrating a synergistic interaction between synchronizing
 effects, i.e., a tendency for the two synchronizing effects to reinforce each other. On the 
 other hand, if the maternal and paternal pushes
@@ -616,7 +619,8 @@ this measure compares to the timescale/period, $\sigma$, being considered.
 On the shortest timescales ($\sigma=0.5 \text{y} = 2 \text{q}$; Fig. \ref{fig:TheoryCaseA}a, left side of panel), $1$q
 is half the period, so interaction effects are negative. On long timescales (e.g., $\sigma>8$y), $1$q is a negligible portion of the
 period, so $l_{e1}-l_{e2}+l_n$ is close to zero, relative to that period, and interaction effects
-are positive: compared to such long timescales, $\epsilon^{(1)}$ and $\epsilon^{(2)}$ effects happen close to simultaneously, so
+are positive: relative to long timescales, $\epsilon^{(1)}$ 
+and $\epsilon^{(2)}$ effects happen close to simultaneously, so
 the two noise variables reinforce each other. Comparing
 Fig. \ref{fig:TheoryCaseA}a and b shows the additional influence of autoregressive population effects, which
 simply multiply all Moran influences by the same timescale-dependent non-negative 
@@ -739,7 +743,7 @@ peaks by $1$q in CaseC1.
 For CCA1, this is reflected in Fig. \ref{fig:noise}c, which shows that 
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$
 has a phase of about $-\pi/2$ at the annual timescale.
-Thus $l_{e1}=1$q, $l_{e2}=0$q, $l_n=1$q, and so the environmental effect alignment measures is 
+Thus $l_{e1}=1$q, $l_{e2}=0$q, $l_n=1$q, and so the environmental effect alignment measure is 
 $l_{e1}-l_{e2}+l_n=2$q. Lags compound on the annual timescale, in the CCA1 case as in CaseC1: the annual positive 
 effects of nitrates on kelp tend to come in summer, and the annual negative effects of waves come in winter,
 producing reinforcing interactions between Moran effects. 
@@ -764,7 +768,7 @@ Annual peaks in nitrates still tended to lag annual peaks in waves by $1$q in SB
 as in CCA1, though the seasonal periodicity of both variables was reduced in SB compared to 
 CCA1 (Fig. \ref{fig:noise}l v. c). Thus, in SB, the environment effect alignment measure was 
 $1$q, contrasting with its value of $2$q in CCA1.
-Whereas in CCA1, the tendency of nitrate annual peaks to follow wave annual peaks by $1$q, together with to the tendency of 
+Whereas in CCA1, the tendency of nitrate annual peaks to follow wave annual peaks by $1$q, together with the tendency of 
 nitrate effects on kelp to be delayed by $1$q, resulted in summer positive nitrate effects and winter 
 negative wave effects which reinforced sycnhrony; in SB nitrate instead both peaked and had its positive effects on kelp in spring,
 while waves still had negative effects on kelp in winter. Thus the effects of nitrates and waves in SB
@@ -815,7 +819,10 @@ phenomena such as the North Pacific Gyre Oscillation or El Ni\~{n}o Southern Osc
 Driver pairs which may commonly produce interacting Moran effects include instances where the same quantity 
 is measured in distinct parts of the year (e.g., spring and summer temperatures, or March and April rainfall); 
 or when distinct variables are measured in the same part of the 
-year (e.g., spring temperature and precipitation). Future work should systematically 
+year (e.g., spring temperature and precipitation). Such scenarios involving seasonality of effects, 
+which were recently explored by \cite{WalterInPress}, can produce specific manifestations of the general mechanisms
+explored here. \cite{WalterInPress} found interactions and cross synchrony to be important.
+Future work should systematically 
 investigate cross synchrony ($\rho_{\epsilon^{(1)} \epsilon^{(2)}}$) of environmental 
 variables. Temperature and precipitation variables
 measured in the same season may be particularly important candidates for interactions because of
@@ -911,9 +918,11 @@ If climate change modifies environmental effects on populations in a related way
 be expected to produce similarly large changes in Moran interactions. Nitrate effects on kelp 
 are probably delayed by a quarter in central CA because winter waves commonly remove kelp,
 and it takes time for kelp to grow to the surface and become detectable by satellite, only
-then revealing the effects of elevated nitrates. In southern CA, kelp are less likely to be
-completely removed by winter waves. Effects of elevated nitrates on the growth of kelp stands already reaching
-the surface can be immediately observed. Climate change may similarly alter 
+then revealing the effects of elevated nitrates \citep{Cavanaugh2011,Bell2015,Schiel2015}. 
+In southern CA, kelp are less likely to be completely removed by winter waves. 
+Effects of elevated nitrates on the growth of kelp stands already reaching
+the surface can be immediately observed \citep{Cavanaugh2011,Bell2015,Schiel2015}. 
+Climate change may similarly alter 
 lags and delays associated with environmental effects on populations in at least two ways:
 1) by altering species phenology; and 2) by increasing or decreasing growth rates and thereby
 decreasing or increasing delays. Though it is too early to conclude that
