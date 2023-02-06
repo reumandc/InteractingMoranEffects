@@ -182,11 +182,27 @@ of the importance of synchrony for ecosystem stability \citep{Wang2014}. These n
 have led to an increasingly central role of the phenomenon of synchrony in many of the most 
 important research topics in ecology. 
 
-%Intro to Moran effects and interactions
-One of the classically theorized \citep{Moran1953} and now widely empirically validated mechanisms of 
-synchrony, called the Moran effect, operates when spatially synchronized environmental signals, such
-as temperature or precipitation, help drive population dynamics and thereby induce synchrony in
-populations. Two recent papers have documented that Moran effects of distinct 
+%Intro to Moran effects and history of the early years where people had trouble identifying them
+Spatial autocorrelations in fluctuating environmental drivers of populations are now known to be one of the most important
+causes of synchrony, through a process called the Moran effect. But this effect was originally proposed 
+theoretically \citep{Moran1953}, and decades passed during which it was 
+considered difficult to distinguish this cause of synchrony from others, except under special circumstances.
+Synchrony has long been thought to have three causes: dispersal, and trophic interactions with a synchronous or
+mobile species, in addition to the Moran effect \citep{Liebhold2004}. But using common past approaches
+examining declines in population correlations with distance, statistical patterns of synchrony produced
+by each of these mechanisms are quite similar \citep{Ranta1999,Abbott2007,Liebhold2004,Walter2017}. So examination
+of such patterns provides little or no traction for performing inferences about causes of synchrony. 
+Early papers demonstrating the importance of Moran effects resorted to special cases where dispersal was 
+impossible and predators were absent \citep{Grenfell1998,Tedesco2004}. Though controlled experiments revealed that all
+three mechanisms could be involved in synchrony [e.g., \citealp{Vasseur2009}], the problem of determining
+the relative contribution of each mechanism to synchrony observed in field systems was considered a challenge 
+for decades.
+
+%Recent statistical explorations of Moran effects
+
+
+%Intro to interactions
+Two recent papers have documented that Moran effects of distinct 
 environmental drivers can, in fact, interact, either synergistically or antagonistically,
 so that total population synchrony can be either greater than or less than what synchrony would be if the distinct Moran 
 drivers operated independently \citep{Sheppard2019,CastoraniSheppardKelp}. 
@@ -869,10 +885,12 @@ in A will tend to be reduced, whereas the multi-year-average kelp abundance in B
 tend to be augmented, reducing long-timescale synchrony. Lags and interactions between
 drivers must always be compared to the timescale of interest to determine interaction effects,
 as in Figs \ref{fig:PedagogAlt} and \ref{fig:PedagogAlt2}, and as captured formally in our theory.
-Thus interactions between Moran effects provide yet another reason, among reasons our previous work
-has already documented (e.g., \citealp{Sheppard2016,Walter2017,Anderson2021,Zhao2020}), that patterns 
-of synchrony mush be considered from a timescale-specific 
-viewpoint to achieve fuller understanding. 
+Thus interactions between Moran effects provide yet another reason, among many reasons previous work
+has already documented (e.g., \citealp{Vasseur2007,Keitt2008,Vasseur2014,Sheppard2016,
+Defriez2016,Defriez2017,Defriez2017b,Desharnais2018,Walter2017,
+Anderson2021,Zhao2020}), that patterns 
+of synchrony must be considered from a timescale-specific 
+viewpoint for full understanding. 
 
 %*DONE Comparison to Castorani et al paper, and maybe also a bit on comparison to the Sheppard et al 2019 paper
 Our results about kelp were consistent with those of \cite{CastoraniSheppardKelp}, though
@@ -915,19 +933,6 @@ be more synchronous than expected. Although we considered only two drivers in
 our theory and examples, populations may, in principle, depend on many environmental
 factors, all related to a large-scale climatic phenomenon such as 
 ENSO and hence related to each other. Future work should consider whether and when such scenarios can lead to elevated synchrony. 
-
-% %*DONE Revisit the kendall paper, briefly. Talk about possible three-way interactions.
-% %***DAN: Could def put this in sup mat if we're cutting, or drop it because it's a bit lame
-% \cite{Kendall2000} considered interactions between mechanisms of synchrony. Their research 
-% questions were distinct from ours, but combining their viewpoints and ours may lead to valuable
-% future work. \cite{Kendall2000} considered interactions between dispersal and Moran causes of 
-% synchrony, whereas we analyzed interactions between two Moran drivers, a distinct context.
-% But it seems likely that numuerous ecological systems involve important dispersal effects on 
-% synchrony as well as influences of at least two Moran effects. It may be necessary in future
-% work to consider three-way interactions between dispersal and two Moran drivers and their 
-% influence on synchrony. Dispersal can readily be added to our modelling framework.
-% \cite{Desharnais2018} performed a spectral analysis on a model similar to ours
-% which included dispersal but which only considered two habitat patches and one environmental driver.
 
 %*DONE Climate change
 Climate change has the potential to influence interactions between Moran effects in two specific ways
@@ -976,6 +981,19 @@ outlined above are sufficient to warrant further investigation.
 % available, may reveal novel Moran effects and interactions on timescales longer than ours, 
 % providing another argument, among many, in support of 
 % long-term ecosystem monitoring. 
+
+% %*DONE Revisit the kendall paper, briefly. Talk about possible three-way interactions.
+% %***DAN: Could def put this in sup mat if we're cutting, or drop it because it's a bit lame
+% \cite{Kendall2000} considered interactions between mechanisms of synchrony. Their research 
+% questions were distinct from ours, but combining their viewpoints and ours may lead to valuable
+% future work. \cite{Kendall2000} considered interactions between dispersal and Moran causes of 
+% synchrony, whereas we analyzed interactions between two Moran drivers, a distinct context.
+% But it seems likely that numuerous ecological systems involve important dispersal effects on 
+% synchrony as well as influences of at least two Moran effects. It may be necessary in future
+% work to consider three-way interactions between dispersal and two Moran drivers and their 
+% influence on synchrony. Dispersal can readily be added to our modelling framework.
+% \cite{Desharnais2018} performed a spectral analysis on a model similar to ours
+% which included dispersal but which only considered two habitat patches and one environmental driver.
 
 \section{Acknowledgments}
 This study was partly funded by the U.S. National Science Foundation (NSF) through linked NSF-OCE awards 
