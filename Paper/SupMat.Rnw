@@ -50,7 +50,7 @@
 \title{Supporting information for ``How environmental drivers of spatial synchrony interact''}
 \date{}
 
-%***Tentative author order, Bell last for his data contributions
+%authors
 \author[a,*]{Daniel C. Reuman}
 \author[b]{Max C.N. Castorani}
 \author[c]{Kyle C. Cavanaugh}
@@ -369,13 +369,15 @@ w_i(t) &= b_1 w_i(t-1)+ \cdots + b_n w_i(t-n) \label{main_model_1} \\
 where $i=1,\ldots,N$ indexes habitat patches or sampling locations, $w_i(t)$ is a measure of the 
 population in location $i$ at time $t$, and $\epsilon^{(1)}=(\epsilon_1^{(1)},\ldots,\epsilon_N^{(1)})$,
 $\epsilon^{(2)}=(\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)})$ and $\delta=(\delta_1,\ldots,\delta_N)$ are
-environmental processes influencing the populations. Note that this model assumes from the outset 
-a homogeneous influence of the environmental variables on the populations in the different
-sampling locations, i.e., the parameters $p$ are spatially homogeneous. 
-%We also assume spatial homogeneity of the AR coefficients, need to add a mention of that
-We also assume that the 
-combined process $(\epsilon_1^{(1)},\ldots,\epsilon_N^{(1)},\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)},\delta_1,\ldots,\delta_N)$ is a second-order stationary stochastic process \citep{Brillinger2001}
-with the expected values of its component processes equal to $0$. Finally, we assume the complex roots of the
+environmental processes influencing the populations. Note that this model makes some assumptions from the outset. 
+First, it assumes a homogeneous influence of the environmental variables on the populations in the different
+sampling locations, i.e., the parameters $p$ are spatially homogeneous. Second, autoregressive population effects
+are also assumed spatially homogeneous. Third, we assume that the 
+combined process $(\epsilon_1^{(1)},\ldots,\epsilon_N^{(1)},\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)},\delta_1,\ldots,\delta_N)$ 
+is a second-order stationary stochastic process \citep{Brillinger2001}
+with the expected values of its component processes equal to $0$. We do \emph{not} assume that the unmeasured 
+noise terms $(\delta_1,\ldots,\delta_N)$ are spatially asynchronous or independent through time. 
+Finally, we assume the complex roots of the
 polynomial $1-b_1 z - \cdots - b_n z^n = 0$ have modulus greater than $1$, an assumption needed for the 
 existence of a stationary stochastic process solution for the model and for invertability of
 the filter $\mcB$ which we will define below. See \cite{Reinsel1997,Shumway2000,Brillinger2001}
