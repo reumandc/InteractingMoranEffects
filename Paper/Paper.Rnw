@@ -183,27 +183,61 @@ have led to an increasingly central role of the phenomenon of synchrony in many 
 important research topics in ecology. 
 
 %Intro to Moran effects and history of the early years where people had trouble identifying them
-Spatial autocorrelations in fluctuating environmental drivers of populations are now known to be one of the most important
-causes of synchrony, through a process called the Moran effect. But this effect was originally proposed 
+Correlations between weather time series measured in different locations can 
+induce synchrony between populations in those locations if the weather variables influence
+population processes. This mechanism, called the Moran effect, is now known to be one of the most
+important causes of synchrony. But the mechanism was originally proposed 
 theoretically \citep{Moran1953}, and decades passed during which it was 
-considered difficult to distinguish this cause of synchrony from others, except under special circumstances.
+considered difficult to distinguish this potential cause of synchrony from others in field systems.
 Synchrony has long been thought to have three causes: dispersal, and trophic interactions with a synchronous or
-mobile species, in addition to the Moran effect \citep{Liebhold2004}. But using common past approaches
-examining declines in population correlations with distance, statistical patterns of synchrony produced
-by each of these mechanisms are quite similar \citep{Ranta1999,Abbott2007,Liebhold2004,Walter2017}. So examination
-of such patterns provides little or no traction for performing inferences about causes of synchrony. 
-Early papers demonstrating the importance of Moran effects resorted to special cases where dispersal was 
-impossible and predators were absent \citep{Grenfell1998,Tedesco2004}. Though controlled experiments revealed that all
-three mechanisms could be involved in synchrony [e.g., \citealp{Vasseur2009}], the problem of determining
-the relative contribution of each mechanism to synchrony observed in field systems was considered a challenge 
-for decades.
+mobile species, in addition to the Moran effect \citep{Liebhold2004}. But using common past statistical approaches
+which focussed on declines in population correlations with distance, patterns of synchrony produced
+by each of these mechanisms are quite similar \citep{Ranta1999,Abbott2007,Liebhold2004,Walter2017}; so examination
+of such patterns provides little or no traction for inferring the causes of synchrony. 
+Early papers demonstrating the Moran effect mechanism resorted to special cases where dispersal was 
+impossible and predators were absent \citep{Grenfell1998,Tedesco2004}. Controlled experiments also confirmed that all
+three theorized mechanisms could be involved in synchrony [e.g., \citealp{Vasseur2009}]. But the problem of inferring
+the relative contribution of the three mechanisms in field systems was considered a challenge 
+until recently.
 
 %Recent statistical explorations of Moran effects
-
+Recent research has provided new statistical viewpoints which have, when sufficient data are available, 
+essentially solved the problem of inference
+of the causes of synchrony, and the research has revealed the broad importance of Moran effects. 
+%geographic approaches
+Approaches based on formal statistical comparisons between population synchrony maps and maps of 
+environmental correlations produced inferences that precipitation and temperature Moran effects are important
+causes of synchrony of terrestrial \citep{Defriez2017b} and marine \citep{Defriez2017} primary productivity. 
+Another geographic approach, based on multiple regression of distance matrices (MRM), was used in an early paper
+to infer that a precipitation Moran effect is a cause of synchrony for the spongy moth \citep{Haynes2013},
+an invasive forest pest whose name was recently changed from ``gypsy moth.'' 
+Geographic approaches to identifying causes of synchrony, often MRM approaches 
+specifically \citep{Koenig2017,Walter2020,Bogdziewicz2021}, 
+have become widespread, and the geography of synchrony has become a mainstream area of study \citep{Walter2017}.
+The approach of \cite{Gouveia2016}, called ``noncentered local indicators of spatial association'' (ncLISA), is another 
+geographic approach; as is the ``fluvial synchrogram'' of \cite{Larsen2021}, a tool for studying synchrony in 
+river networks.
+MRM approaches have also been used to identify dispersal as a cause of synchrony \citep{Anderson2018},
+sometimes combined with genetic methods \cite{Haynes2022}.
+%Time and timescale methods
+Another class of methods exploit the time and timescale structure of synchrony.
+Using a method that examined the match between temporal variations in population and environmental synchrony, 
+\cite{Allstadt2015} confirmed the importance of a precipitation Moran effect for synchrony of spongy moth.
+A suite of wavelet and related Fourier techniques have been developed that can comprehensively describe the time and timescale
+structure of synchrony, identify Moran drivers of synchrony opperating in distinct timescale bands, and apportion fractions
+of observed synchrony to respective Moran drivers \citep{Sheppard2016,Sheppard2017,Desharnais2018,Sheppard2019,wsyn,Anderson2021}.
+The methods have been used, for instance, to provide one of the first clear demonstrations that changes in 
+Moran effects are another of the impacts of climatic changes \citep{Sheppard2016,Sheppard2019}; and to illustrate the importance of the
+timescale structure of environmental covariation for altering Moran effects \citep{Desharnais2018}.
+These methods have since been used to identify Moran effects in several additional systems
+(e.g., \citealp{Anderson2019,Walter2019,Walter2019,GarciaCarreras2022,CastoraniSheppardKelp}).
 
 %Intro to interactions
-Two recent papers have documented that Moran effects of distinct 
-environmental drivers can, in fact, interact, either synergistically or antagonistically,
+The techniques reviewed above have made it possible for several recent papers to identify cases in which two or more
+distinct Moran drivers opperate simultaneously on the same populations 
+(e.g., \citealp{Defriez2017b,Haynes2019,Walter2019,Walter2020,Anderson2021}).
+In fact, two recent papers have documented that Moran effects of distinct 
+environmental drivers can interact, either synergistically or antagonistically,
 so that total population synchrony can be either greater than or less than what synchrony would be if the distinct Moran 
 drivers operated independently \citep{Sheppard2019,CastoraniSheppardKelp}. 
 \cite{Sheppard2019} showed that long-timescale ($>4$y period) synchrony in a chlorophyll density index 
@@ -366,7 +400,7 @@ of $w_i(t)$ and $w_j(t)$ are strong and in a consistent phase relationship to ea
 and the complex phase of the cross spectrum at $f$ then quantifies
 that relationship. The notation $S_{ww}(f)$ refers to the \emph{spectral matrix}, 
 which has $ij^{\text{th}}$ entry $S_{w_i w_j}(f)$. Spectral methods are standard  
-[e.g., \cite{Vasseur2007,Reuman2008,Defriez2017}], and many background references are available 
+[e.g., \cite{Vasseur2007,Defriez2017}], and many background references are available 
 [e.g., \cite{Brillinger2001}]. 
 
 Much prior work demonstrates the importance of a frequency- or timescale-specific approach to
@@ -420,7 +454,7 @@ a linearization of a very general dynamical model, influenced by ``weak noise'' 
 SI section S1.2 of \cite{Desharnais2018} and SI section S1 of \cite{Walter2017}].
 Linearization and ``weak noise'' assumptions have been commonly adopted to make
 theoretical progress in ecology, and it has been demonstrated that results based on a
-weak noise assumption often hold for noise which is fairly strong \citep{Nisbet1977,Reuman2006,Desharnais2018}.
+weak noise assumption often hold for noise which is fairly strong \citep{Nisbet1977,Desharnais2018}.
 See \cite{Brillinger2001} for background on stochastic processes.
 
 Fulfilling goal G1 of the Introduction (i.e., to elaborate theory of interacting Moran effects), 
@@ -929,10 +963,7 @@ patterns of temporal autocorrelation
 in Moran drivers can theoretically cause greater synchrony in populations 
 than in drivers \citep{Massie2015,Desharnais2018}.
 Synergistic interaction between Moran drivers are another mechanism by which populations can
-be more synchronous than expected. Although we considered only two drivers in 
-our theory and examples, populations may, in principle, depend on many environmental
-factors, all related to a large-scale climatic phenomenon such as 
-ENSO and hence related to each other. Future work should consider whether and when such scenarios can lead to elevated synchrony. 
+be more synchronous than expected. 
 
 %*DONE Climate change
 Climate change has the potential to influence interactions between Moran effects in two specific ways
@@ -982,18 +1013,27 @@ outlined above are sufficient to warrant further investigation.
 % providing another argument, among many, in support of 
 % long-term ecosystem monitoring. 
 
-% %*DONE Revisit the kendall paper, briefly. Talk about possible three-way interactions.
-% %***DAN: Could def put this in sup mat if we're cutting, or drop it because it's a bit lame
-% \cite{Kendall2000} considered interactions between mechanisms of synchrony. Their research 
-% questions were distinct from ours, but combining their viewpoints and ours may lead to valuable
-% future work. \cite{Kendall2000} considered interactions between dispersal and Moran causes of 
-% synchrony, whereas we analyzed interactions between two Moran drivers, a distinct context.
-% But it seems likely that numuerous ecological systems involve important dispersal effects on 
-% synchrony as well as influences of at least two Moran effects. It may be necessary in future
-% work to consider three-way interactions between dispersal and two Moran drivers and their 
-% influence on synchrony. Dispersal can readily be added to our modelling framework.
-% \cite{Desharnais2018} performed a spectral analysis on a model similar to ours
-% which included dispersal but which only considered two habitat patches and one environmental driver.
+%*Revisit the kendall paper, briefly. Talk about possible three-way interactions.
+We have focussed on interactions between two Moran drivers, but synchrony in most systems
+may be a phenomenon with multiple (more than two) interacting causes.
+\cite{Kendall2000} considered interactions between dispersal and a Moran mechanism of synchrony. Their research
+questions were therefore distinct from ours, but combining their viewpoints and ours may lead to 
+future work about interactions between dispersal and more than one Moran driver of synchrony. 
+Although we considered only two Moran drivers in 
+our theory and examples, essentially all population systems are influenced by multiple environmental drivers,
+and environmental drivers very commonly are associated with large scale climatic phenomena
+such as ENSO, and hence are associated with each other. Thus it may be quite common for synchrony to simultaneously be caused by dispersal and
+multiple distinct Moran effects, and these influences may interact in multifarious combinations. 
+It may be necessary in future
+work to consider interactions between dispersal and two Moran drivers. 
+It may be useful to consider cases for which multiple related Moran drivers all interact.
+Dispersal can readily be added to our modelling framework:
+\cite{Desharnais2018} performed a spectral analysis on a model similar to ours
+which included dispersal.
+Future work should consider whether and when scenarios of multi-driver interactions between causes of synchrony 
+can lead to synchrony patterns which differ fundamentally from what one would expect from one
+or two mechanisms. Potential interactions increase as the square of the number of 
+drivers, so interactions seem likely to become more important as our viewpoint of synchrony expands.
 
 \section{Acknowledgments}
 This study was partly funded by the U.S. National Science Foundation (NSF) through linked NSF-OCE awards 
