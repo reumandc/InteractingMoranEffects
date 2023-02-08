@@ -51,6 +51,11 @@
 
 %\doublespacing
 
+%length stats
+%Intro through Discussion: 7719 as of 2023 02 08 (limit is 7500)
+%7 figures, 1 table (limit is 10)
+%so I think I'm OK - slightly over on the words, but with 2 fewer displays
+
 %header material for paper
 \title{How environmental drivers of spatial synchrony interact}
 \date{}
@@ -87,7 +92,7 @@
 \affil[c]{Department of Geography, University of California, Los Angeles}
 \affil[d]{Marine Biological Association of the United Kingdom}
 \affil[e]{Center for Watershed Sciences, University of California, Davis}
-\affil[f]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
+\affil[f]{Department of Applied Ocean Physics and Engineering, Woods Hole Oceanographic Institution}
 \affil[g]{Earth Research Institute, University of California, Santa Barbara}
 \affil[*]{Corresponding author, reuman@ku.edu}
 
@@ -183,6 +188,7 @@ have led to an increasingly central role of the phenomenon of synchrony in many 
 important research topics in ecology. 
 
 %Intro to Moran effects and history of the early years where people had trouble identifying them
+%***DAN: new review para for ecography
 Correlations between weather time series measured in different locations can 
 induce synchrony between populations in those locations if the weather variables influence
 population processes. This mechanism, called the Moran effect, is now known to be one of the most
@@ -190,17 +196,18 @@ important causes of synchrony. But the mechanism was originally proposed
 theoretically \citep{Moran1953}, and decades passed during which it was 
 considered difficult to distinguish this potential cause of synchrony from others in field systems.
 Synchrony has long been thought to have three causes: dispersal, and trophic interactions with a synchronous or
-mobile species, in addition to the Moran effect \citep{Liebhold2004}. But using common past statistical approaches
+mobile species, in addition to the Moran effect \citep{Liebhold2004}. However, using common past statistical approaches
 which focussed on declines in population correlations with distance, patterns of synchrony produced
 by each of these mechanisms are quite similar \citep{Ranta1999,Abbott2007,Liebhold2004,Walter2017}; so examination
 of such patterns provides little or no traction for inferring the causes of synchrony. 
 Early papers demonstrating the Moran effect mechanism resorted to special cases where dispersal was 
 impossible and predators were absent \citep{Grenfell1998,Tedesco2004}. Controlled experiments also confirmed that all
-three theorized mechanisms could be involved in synchrony [e.g., \citealp{Vasseur2009}]. But the problem of inferring
-the relative contribution of the three mechanisms in field systems was considered a challenge 
+three theorized mechanisms could be involved in synchrony [e.g., \citealp{Vasseur2009}]. Nevertheless, the problem of inferring
+specific mechanisms of synchrony in field systems was considered a challenge 
 until recently.
 
 %Recent statistical explorations of Moran effects
+%***DAN: new review para for ecography
 Recent research has provided new statistical viewpoints which have, when sufficient data are available, 
 essentially solved the problem of inference
 of the causes of synchrony, and the research has revealed the broad importance of Moran effects. 
@@ -218,7 +225,7 @@ The approach of \cite{Gouveia2016}, called ``noncentered local indicators of spa
 geographic approach; as is the ``fluvial synchrogram'' of \cite{Larsen2021}, a tool for studying synchrony in 
 river networks.
 MRM approaches have also been used to identify dispersal as a cause of synchrony \citep{Anderson2018},
-sometimes combined with genetic methods \cite{Haynes2022}.
+sometimes combined with genetic methods \citep{Haynes2022}.
 %Time and timescale methods
 Another class of methods exploit the time and timescale structure of synchrony.
 Using a method that examined the match between temporal variations in population and environmental synchrony, 
@@ -230,7 +237,7 @@ The methods have been used, for instance, to provide one of the first clear demo
 Moran effects are another of the impacts of climatic changes \citep{Sheppard2016,Sheppard2019}; and to illustrate the importance of the
 timescale structure of environmental covariation for altering Moran effects \citep{Desharnais2018}.
 These methods have since been used to identify Moran effects in several additional systems
-(e.g., \citealp{Anderson2019,Walter2019,Walter2019,GarciaCarreras2022,CastoraniSheppardKelp}).
+(e.g., \citealp{Anderson2019,Walter2019,Walter2020,GarciaCarreras2022,CastoraniSheppardKelp}).
 
 %Intro to interactions
 The techniques reviewed above have made it possible for several recent papers to identify cases in which two or more
@@ -247,6 +254,8 @@ drivers of synchrony and drivers linked with consumption by a copepod consumer.
 of synchrony in giant kelp populations on the California (CA) coast, interact either synergistically 
 or destructively, depending on which portion of the CA coast is examined and on 
 the timescale of analysis. 
+
+%main purpose
 The main purpose of this study is to establish a general theory of the mechanism
 of interacting Moran effects and to use examples and applications of the theory to provide 
 ecological intuition for how the mechanism of interacting Moran effects works. Our goals are
@@ -781,9 +790,6 @@ waves, was more pronounced in CCA1 than in SB
 had a stronger influence on kelp in central California than in SB:
 regression coefficients determining $f_{\mcP^{(1)}}$, $f_{\mcP^{(2)}}$
 and $f_{\mcB}$ are in Table \ref{SM-tab:regcoefs}.
-%***DAN: Later you will have to make sure all rules are followed for citing all sup mat figures and 
-%tables and sections from the main text, in order. I think currently they are not all cited, in part
-%because I have been shifting around what information is where in the whole paper. 
 
 \subsection{Building intuition for Moran interactions: kelp examples}
 
@@ -977,7 +983,7 @@ the term $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$ should be systematically compute
 of environmental variables, to assess whether interactions between Moran effects are likely to
 be general. As part of that process, the potential for changes in $\rho_{\epsilon^{(1)} \epsilon^{(2)}}$
 could also be assessed, by using either time-windowed versions or wavelet adaptations 
-of this statistic, applied to either long-term climate records or future climate scanarios. 
+of this statistic, applied to either long-term climate records or future climate scenarios. 
 Differences in $f_{\mcP^{(1)}}$ were responsible for differences
 in the nature of Moran interactions between central CA and southern CA (Results), specifically
 differences between the two regions in the lag of nitrate effects on kelp populations. 
@@ -1014,6 +1020,7 @@ outlined above are sufficient to warrant further investigation.
 % long-term ecosystem monitoring. 
 
 %*Revisit the kendall paper, briefly. Talk about possible three-way interactions.
+%***DAN: new review para for ecography
 We have focussed on interactions between two Moran drivers, but synchrony in most systems
 may be a phenomenon with multiple (more than two) interacting causes.
 \cite{Kendall2000} considered interactions between dispersal and a Moran mechanism of synchrony. Their research

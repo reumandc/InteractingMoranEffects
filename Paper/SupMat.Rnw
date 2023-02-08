@@ -63,7 +63,7 @@
 \affil[c]{Department of Geography, University of California, Los Angeles}
 \affil[d]{Marine Biological Association of the United Kingdom}
 \affil[e]{Center for Watershed Sciences, University of California, Davis}
-\affil[f]{Applied Ocean Physics and Engineering Department, Woods Hole Oceanographic Institution}
+\affil[f]{Department of Applied Ocean Physics and Engineering, Woods Hole Oceanographic Institution}
 \affil[g]{Earth Research Institute, University of California, Santa Barbara}
 \affil[*]{Corresponding author, reuman@ku.edu}
 
@@ -680,7 +680,7 @@ the same as for Fig. \ref{fig:indirectMoran_SM_lag4}.}\label{fig:indirectMoran_S
 \clearpage
 
 \begin{table}[!h]
-\caption{Regression coefficients used to parameters (\ref{MT-main_model_1})-(\ref{MT-main_model_4}) of the main text for each 
+\caption{Regression coefficients used to parameterize (\ref{MT-main_model_1})-(\ref{MT-main_model_4}) of the main text for each 
 of our three regions. All values rounded to two decimal places.}\label{tab:regcoefs}
 \begin{center}
 \begin{tabular}{r|l|l|l|l|l}
