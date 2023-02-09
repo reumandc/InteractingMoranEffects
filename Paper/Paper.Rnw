@@ -49,7 +49,7 @@
 \DeclareCaptionFont{linenumbers}{\internallinenumbers}
 \captionsetup[figure]{font+=linenumbers} % use \internallinenumbers inside figure caption
 
-%\doublespacing
+\doublespacing
 
 %length stats
 %Intro through Discussion: 7719 as of 2023 02 08 (limit is 7500)
@@ -139,6 +139,10 @@ CC2locstouse<-readRDS(paste0(resloc,"CC2locstouse.Rds"))
 
 \maketitle
 
+\newpage
+
+\large{\textbf{How environmental drivers of spatial synchrony interact}}
+
 \begin{abstract}
 \noindent Spatial synchrony, the tendency for populations across space to show correlated fluctuations, is a fundamental 
 feature of population dynamics, linked to central topics of ecology such as population cycling, extinction 
@@ -158,7 +162,7 @@ We argue that Moran interactions should be common.
 Our theory and analysis explain an important new aspect of a fundamental feature of spatiotemporal population dynamics. 
 \end{abstract}
 
-\keywords{Fourier, interactions, kelp, \emph{Macrocystis pyrifera}, Moran effects, nutrients, synchrony, waves}
+\keywords{Fourier, interactions, kelp, \emph{Macrocystis pyrifera}, Moran effects, synchrony}
 
 \section{Introduction}
 
