@@ -94,12 +94,12 @@ par(fig=c((yaxwd)/totwd,
     mai=c(0,0,0,0),mgp=c(3,.15,0),tcl=-.25)
 
 #do the start of the plotting
+xlimits<-c(0,60) #range(tim)
 ylimits<-range(envvar_1)
 ylimits[2]<-ylimits[2]+.2*diff(ylimits)
-plot(tim,envvar_1[1,],type="n",ylim=ylimits,xaxs="i",xaxt="n",yaxt="n")
+plot(tim,envvar_1[1,],type="n",ylim=ylimits,xlim=xlimits,xaxs="i",xaxt="n",yaxt="n")
 axis(side=1,label=FALSE)
 #put the population rectangles, only done here so other stuff plots over it
-xlimits<-range(tim)
 rect(xlimits[1],vertoffset/2-1,xlimits[2],vertoffset/2+1,col="lightgrey",border=NA)
 rect(xlimits[1],3*vertoffset/2-1,xlimits[2],3*vertoffset/2+1,col="lightgrey",border=NA)
 rect(xlimits[1],5*vertoffset/2-1,xlimits[2],5*vertoffset/2+1,col="lightgrey",border=NA)
@@ -116,9 +116,9 @@ text(10,3*vertoffset/2,latex2exp::TeX("population, $w_2(t)"),adj=c(0,.5),cex=0.6
 text(10,5*vertoffset/2,latex2exp::TeX("population, $w_1(t)"),adj=c(0,.5),cex=0.6)
 
 #add arrows showing max positive and negative effects on the pops
-for (csw in 1:dim(sinpks_1_x)[1])
+for (csw in 1:(dim(sinpks_1_x)[1]))
 {
-  for (cpk in 1:dim(sinpks_1_x)[2])
+  for (cpk in 1:(dim(sinpks_1_x)[2]))
   {
     #plot the max positive effects on the pops as black arrows
     sx<-sinpks_1_x[csw,cpk]
@@ -164,8 +164,8 @@ for (csw in 1:dim(sinpks_1_x)[1])
 
 #label the arrows to show the lags
 text(sinpks_1_x[3,2]+le1/2,2*vertoffset+1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
-text(sintro_1_x[2,3]+le1/2,vertoffset-1+1.75,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
-text(sinpks_1_x[1,4]+le1/2,1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
+text(sintro_1_x[2,1]+le1/2,vertoffset-1+1.75,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
+text(sinpks_1_x[1,2]+le1/2,1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label and title
 if (maintext)
@@ -198,9 +198,10 @@ par(fig=c((yaxwd)/totwd,
     mai=c(0,0,0,0),mgp=c(3,.15,0),tcl=-.25,new=TRUE)
 
 #do the start of the plotting
+xlimits<-c(0,60) #range(tim)
 ylimits<-range(envvar_2)
 ylimits[2]<-ylimits[2]+.2*diff(ylimits)
-plot(tim,envvar_2[1,],type="n",ylim=ylimits,lty="dashed",xaxs="i",xaxt="n",yaxt="n")
+plot(tim,envvar_2[1,],type="n",ylim=ylimits,xlim=xlimits,lty="dashed",xaxs="i",xaxt="n",yaxt="n")
 axis(side=1,label=TRUE)
 mtext("Time",side=1,line=1.1)
 #put the population rectangles, only done here so other stuff plots over it
@@ -309,8 +310,8 @@ for (csw in 1:dim(sinpks_2_x)[1])
 
 #label the arrows to show the lags
 text(sinpks_2_x[3,2]+le2/2,2*vertoffset+1+.5,latex2exp::TeX("$l_{e2}$"),cex=0.7,adj=c(0.5,-.1))
-text(sintro_2_x[2,3]+le2/2,vertoffset-1+2.2,latex2exp::TeX("$l_{e2}$"),cex=0.7,adj=c(0.5,-.1))
-text(sinpks_2_x[1,4]+le2/2,1+.5,latex2exp::TeX("$l_{e2}$"),cex=0.7,adj=c(0.5,-.1))
+text(sintro_2_x[2,1]+le2/2,vertoffset-1+2.2,latex2exp::TeX("$l_{e2}$"),cex=0.7,adj=c(0.5,-.1))
+text(sinpks_2_x[1,2]+le2/2,1+.5,latex2exp::TeX("$l_{e2}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label
 if (maintext)
@@ -371,12 +372,12 @@ par(fig=c((yaxwd+panwd+yaxwd)/totwd,
     mai=c(0,0,0,0),mgp=c(3,.15,0),tcl=-.25,new=TRUE)
 
 #do the start of the plotting
+xlimits<-c(0,60) #range(tim)
 ylimits<-range(envvar_1)
 ylimits[2]<-ylimits[2]+.2*diff(ylimits)
-plot(tim,envvar_1[1,],type="n",ylim=ylimits,xaxs="i",xaxt="n",yaxt="n")
+plot(tim,envvar_1[1,],type="n",ylim=ylimits,xlim=xlimits,xaxs="i",xaxt="n",yaxt="n")
 axis(side=1,label=FALSE)
 #put the population rectangles, only done here so other stuff plots over it
-xlimits<-range(tim)
 rect(xlimits[1],vertoffset/2-1,xlimits[2],vertoffset/2+1,col="lightgrey",border=NA)
 rect(xlimits[1],3*vertoffset/2-1,xlimits[2],3*vertoffset/2+1,col="lightgrey",border=NA)
 rect(xlimits[1],5*vertoffset/2-1,xlimits[2],5*vertoffset/2+1,col="lightgrey",border=NA)
@@ -441,8 +442,8 @@ for (csw in 1:dim(sinpks_1_x)[1])
 
 #label the arrows to show the lags
 text(sinpks_1_x[3,2]+le1/4,2*vertoffset+1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
-text(sintro_1_x[2,3]+le1/4,vertoffset-1+1.75,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
-text(sinpks_1_x[1,4]+le1/4,1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
+text(sintro_1_x[2,1]+le1/4,vertoffset-1+1.75,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
+text(sinpks_1_x[1,2]+le1/4,1+.5,latex2exp::TeX("$l_{e1}$"),cex=0.7,adj=c(0.5,-.1))
 
 #panel label and title
 if (maintext)
@@ -474,13 +475,13 @@ par(fig=c((yaxwd+panwd+yaxwd)/totwd,
     mai=c(0,0,0,0),mgp=c(3,.15,0),tcl=-.25,new=TRUE)
 
 #do the start of the plotting
+xlimits<-c(0,60) #range(tim)
 ylimits<-range(envvar_2)
 ylimits[2]<-ylimits[2]+.2*diff(ylimits)
-plot(tim,envvar_2[1,],type="n",ylim=ylimits,lty="dashed",xaxs="i",xaxt="n",yaxt="n")
+plot(tim,envvar_2[1,],type="n",ylim=ylimits,xlim=xlimits,lty="dashed",xaxs="i",xaxt="n",yaxt="n")
 axis(side=1,label=TRUE)
 mtext("Time",side=1,line=1.1)
 #put the population rectangles, only done here so other stuff plots over it
-xlimits<-range(tim)
 rect(xlimits[1],vertoffset/2-1,xlimits[2],vertoffset/2+1,col="lightgrey",border=NA)
 rect(xlimits[1],3*vertoffset/2-1,xlimits[2],3*vertoffset/2+1,col="lightgrey",border=NA)
 rect(xlimits[1],5*vertoffset/2-1,xlimits[2],5*vertoffset/2+1,col="lightgrey",border=NA)

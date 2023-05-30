@@ -41,9 +41,6 @@
 \newcommand{\Rp}{\text{Re}}
 \let\conj\overline
 
-%external documents
-\externaldocument[SM-]{SupMat}
-
 %Get line numbers to work, also in figure captions
 \linenumbers
 \DeclareCaptionFont{linenumbers}{\internallinenumbers}
@@ -149,9 +146,7 @@ feature of population dynamics, linked to central topics of ecology such as popu
 risk, and ecosystem stability. 
 A common mechanism of spatial synchrony is the Moran effect, whereby spatially synchronized environmental signals 
 drive population dynamics and hence induce population synchrony. 
-%***DAN: the below line is the new line added to fit into Ecography, delete if you don't go that way
 After reviewing recent progress in understanding Moran effects, 
-%***DAN: the above line is the new line added to fit into Ecography, delete if you don't go that way
 we here elaborate a general theory of how 
 Moran effects of different environmental drivers acting on the same populations can interact, either 
 synergistically or destructively, to produce either substantially more or markedly less population synchrony 
@@ -179,8 +174,11 @@ major advances in our understanding of synchrony and its causes and consequences
 For instance, the timescale structure of synchrony is now known to be 
 important [\cite{Sheppard2016,Desharnais2018,Sheppard2019}, see also \cite{Keitt2008}],
 synchrony is now known to have a complex and pronounced geography \citep{Defriez2017,Defriez2017b,Walter2017,Walter2020}, 
-and patterns of synchrony are now known to be asymmetric in distribution tails in a way that
-is important for system stability \citep{Ghosh2020b,Ghosh2020c,Walter2021}. Our ability to infer the causes of 
+and patterns of synchrony are now known to be ``asymmetric in distribution tails'' in a way that
+is important for system stability \citep{Ghosh2020b,Ghosh2020c,Walter2021}. 
+Synchrony is asymmetric in distribution tails when two positively associated (synchronous) variables are 
+more (respectively, less) synchronous in the lower parts of their distributions than in the 
+upper parts. Our ability to infer the causes of 
 synchrony is much improved in recent years \citep{Sheppard2016,Defriez2017b,Walter2017,Anderson2018,Sheppard2019}, 
 and there is also growing evidence
 that synchrony is changing as a newly recognized component of climate 
@@ -192,56 +190,45 @@ have led to an increasingly central role of the phenomenon of synchrony in many 
 important research topics in ecology. 
 
 %Intro to Moran effects and history of the early years where people had trouble identifying them
-%***DAN: new review para for ecography
 Correlations between weather time series measured in different locations can 
 induce synchrony between populations in those locations if the weather variables influence
 population processes. This mechanism, called the Moran effect, is now known to be one of the most
 important causes of synchrony. But the mechanism was originally proposed 
 theoretically \citep{Moran1953}, and decades passed during which it was 
-considered difficult to distinguish this potential cause of synchrony from others in field systems.
+considered difficult to distinguish this potential cause of synchrony from others (e.g., dispersal) in field systems.
 Synchrony has long been thought to have three causes: dispersal, and trophic interactions with a synchronous or
 mobile species, in addition to the Moran effect \citep{Liebhold2004}. However, using common past statistical approaches
 which focussed on declines in population correlations with distance, patterns of synchrony produced
 by each of these mechanisms are quite similar \citep{Ranta1999,Abbott2007,Liebhold2004,Walter2017}; so examination
 of such patterns provides little or no traction for inferring the causes of synchrony. 
-Early papers demonstrating the Moran effect mechanism resorted to special cases where dispersal was 
+Early empirical papers demonstrating the Moran effect mechanism resorted to special cases where dispersal was 
 impossible and predators were absent \citep{Grenfell1998,Tedesco2004}. Controlled experiments also confirmed that all
 three theorized mechanisms could be involved in synchrony [e.g., \citealp{Vasseur2009}]. Nevertheless, the problem of inferring
 specific mechanisms of synchrony in field systems was considered a challenge 
 until recently.
 
 %Recent statistical explorations of Moran effects
-%***DAN: new review para for ecography
 Recent research has provided new statistical viewpoints which have, when sufficient data are available, 
 essentially solved the problem of inference
-of the causes of synchrony, and the research has revealed the broad importance of Moran effects. 
+of the causes of synchrony (including identifying specific Moran drivers), and the research has 
+revealed the broad importance of Moran effects.
 %geographic approaches
-Approaches based on formal statistical comparisons between population synchrony maps and maps of 
-environmental correlations produced inferences that precipitation and temperature Moran effects are important
+Approaches based on spatial statistics produced inferences that precipitation and temperature Moran effects are important
 causes of synchrony of terrestrial \citep{Defriez2017b} and marine \citep{Defriez2017} primary productivity. 
-Another geographic approach, based on multiple regression of distance matrices (MRM), was used in an early paper
-to infer that a precipitation Moran effect is a cause of synchrony for the spongy moth \citep{Haynes2013},
-an invasive forest pest whose name was recently changed from ``gypsy moth.'' 
-Geographic approaches to identifying causes of synchrony, often MRM approaches 
-specifically \citep{Koenig2017,Walter2020,Bogdziewicz2021}, 
-have become widespread, and the geography of synchrony has become a mainstream area of study \citep{Walter2017}.
-The approach of \cite{Gouveia2016}, called ``noncentered local indicators of spatial association'' (ncLISA), is another 
-geographic approach; as is the ``fluvial synchrogram'' of \cite{Larsen2021}, a tool for studying synchrony in 
-river networks.
+Another geographic approach, based on multiple regression of distance matrices (MRM), was used 
+to infer that a precipitation Moran effect is a cause of synchrony for the spongy moth \citep{Haynes2013}. 
+Geographic approaches to identifying causes of synchrony \citep{Koenig2017,Walter2020,Bogdziewicz2021} 
+have become widespread \citep{Gouveia2016,Walter2017,Larsen2021}.
 MRM approaches have also been used to identify dispersal as a cause of synchrony \citep{Anderson2018},
 sometimes combined with genetic methods \citep{Haynes2022}.
 %Time and timescale methods
 Another class of methods exploit the time and timescale structure of synchrony.
-Using a method that examined the match between temporal variations in population and environmental synchrony, 
-\cite{Allstadt2015} confirmed the importance of a precipitation Moran effect for synchrony of spongy moth.
-A suite of wavelet and related Fourier techniques have been developed that can comprehensively describe the time and timescale
-structure of synchrony, identify Moran drivers of synchrony opperating in distinct timescale bands, and apportion fractions
-of observed synchrony to respective Moran drivers \citep{Sheppard2016,Sheppard2017,Desharnais2018,Sheppard2019,wsyn,Anderson2021}.
-The methods have been used, for instance, to provide one of the first clear demonstrations that changes in 
-Moran effects are another of the impacts of climatic changes \citep{Sheppard2016,Sheppard2019}; and to illustrate the importance of the
-timescale structure of environmental covariation for altering Moran effects \citep{Desharnais2018}.
-These methods have since been used to identify Moran effects in several additional systems
-(e.g., \citealp{Anderson2019,Walter2019,Walter2020,GarciaCarreras2022,CastoraniSheppardKelp}).
+E.g., \cite{Allstadt2015} confirmed the importance of a precipitation Moran effect in spongy moth.
+A suite of wavelet and related Fourier techniques have been developed that can comprehensively 
+describe the time and timescale
+structure of synchrony, identify Moran drivers of synchrony operating in distinct timescale bands, and apportion fractions
+of observed synchrony to respective Moran 
+drivers \citep{Sheppard2016,Sheppard2017,Desharnais2018,Sheppard2019,wsyn,Anderson2021}.
 
 %Intro to interactions
 The techniques reviewed above have made it possible for several recent papers to identify cases in which two or more
@@ -275,21 +262,20 @@ through time and standard normally distributed for all $i$ and $t$.
 If a population index $w_i(t)$ 
 follows the autoregressive process $w_i(t)=b w_i(t-1)+\epsilon_i^{(1)}(t)$ for $i=1,2$, then the classic Moran theorem 
 \citep{Moran1953} implies that temporal population correlation equals temporal environmental correlation, i.e., 
-$\cor(w_1,w_2)=\cor(\epsilon_1^{(1)},\epsilon_2^{(1)})$. If, instead, 
+$\cor(\epsilon_1^{(1)},\epsilon_2^{(1)})$. If, instead, 
 $w_i(t)=b w_i(t-1)+\epsilon_i^{(1)}(t)+\epsilon_i^{(2)}(t)$, so that both environmental variables influence 
-populations, the Moran theorem then implies that population synchrony is $\cor(w_1,w_2)=
-\cor(\epsilon_1^{(1)}+\epsilon_1^{(2)},\epsilon_2^{(1)}+\epsilon_2^{(2)})$.
-As we show in detail in SI section \ref{SM-Sect:IntroExample}, it is straightforward to show that 
+populations, the Moran theorem then implies that population synchrony is 
+$\cor(\epsilon_1^{(1)}+\epsilon_1^{(2)},\epsilon_2^{(1)}+\epsilon_2^{(2)})$.
+As we show in detail Supporting information, it is straightforward to show that 
 this quantity depends not only on the standard environmental synchrony 
-measures $\cov(\epsilon_1^{(a)},\epsilon_2^{(a)})$, for 
-$a=1,2$, but also on the ``cross synchrony'' measures $\cov(\epsilon_1^{(a)},\epsilon_2^{(b)})$
-for $a \neq b$. 
+measures $\cov(\epsilon_1^{(1)},\epsilon_2^{(1)})$ and $\cov(\epsilon_1^{(2)},\epsilon_2^{(2)})$, 
+but also on ``cross synchrony'' measures such as $\cov(\epsilon_1^{(1)},\epsilon_2^{(2)})$
+and $\cov(\epsilon_1^{(2)},\epsilon_2^{(1)})$. 
 Cross synchrony measures represent synchrony between an environmental variable in one location and 
 a different variable in another location. Fig. \ref{fig:IntroTheory} illustrates, using this model, 
 how population synchrony can 
 therefore differ from what synchrony would be if the environmental processes $\epsilon^{(1)}$ and 
-$\epsilon^{(2)}$ were unrelated, so that covariances between components of those processes are zero. 
-The difference is due to interactions
+$\epsilon^{(2)}$ were unrelated. The difference is due to interactions
 between the two Moran effects, and can be substantially positive or negative. This example was adapted 
 from SI section S1 of \cite{Sheppard2019}. All notation and abbreviations used throughout the paper 
 are summarized in Table \ref{tab:notation}.
@@ -347,9 +333,11 @@ theory of interacting Moran effects which allows a detailed understanding of how
 which illuminate the intuition behind how Moran effects may interact in real systems. Third, (G3) we will 
 apply our theory to populations of giant kelp off the CA coast. Whereas \cite{CastoraniSheppardKelp}
 already carried out a detailed analysis of interacting Moran effects in CA kelp populations and their importance 
-for kelp ecology, we instead use a simplified subset of the available kelp data. Our kelp analysis is intended 
-to illuminate the inner workings of the general mechanism we describe rather than being an exploration
-of kelp dynamics, specifically. Overall, this study introduces a general theory of Moran interactions and uses it to conceptually
+for kelp ecology, we instead use a simplified subset of the available kelp data. 
+Our kelp results are not intended to extend what is known about kelp ecology (beyond what was discovered 
+in our earlier paper, \citealp{CastoraniSheppardKelp}), but rather serve as a
+vehicle for understanding the inner workings of our general theory of interacting Moran effects.
+Overall, this study introduces a general theory of Moran interactions and uses it to conceptually
 illuminate this newly observed but potentially quite important mechanism of spatiotemporal population dynamics. 
 
 \section{General Theory}
@@ -382,13 +370,13 @@ the periodic maximal positive influence of environmental variable 1 coincides wi
 influence of environmental variable 2, reducing synchrony relative to the case of unrelated environmental variables. 
 (The same outcome would occur if $l_{e1}-l_{e2}+l_n$ were any integer multiple of $\sigma$ plus or minus $\sigma/2$.)
 Intermediate scenarios between the two scenarios of Fig. \ref{fig:PedagogAlt} are also possible, as will be revealed by 
-the theory. We henceforth refer to the quantity $l_{e1}-l_{e2}+l_n$ as the \emph{environmental effect alignment measure},
+our theory. We henceforth refer to the quantity $l_{e1}-l_{e2}+l_n$ as the \emph{environmental effect alignment measure},
 because it measures the extent to which the timing of the population influences of the two environmental variables
 are aligned. If we replace the assumption that
 larger values of both environmental variables are beneficial to populations with an assuption that larger 
 values of the first variable and smaller values of the second are beneficial, scenarios of synergistic versus
 antagonistic Moran interactions are reversed, but with the same general concepts still operating 
-(Fig. \ref{fig:PedagogAlt2}). 
+(Supporting information analogue of Fig. \ref{fig:PedagogAlt}). 
 
 \subsection{Formal theory}
 
@@ -399,7 +387,8 @@ If $w_i(t)$ is a stochastic process or time series measured at location $i$ (e.g
 of a species of interest in that location), the spectrum $S_{w_i w_i}(f)$ is a function
 of frequency, $f$. For a periodic ocillation, $f$ can be defined as one over 
 the timescale, or period, $\sigma$, of the oscillation. 
-The spectrum $S_{w_i w_i}(f)$ is larger for frequencies at which $w_i(t)$ oscillates more. So, for example, a 
+The spectrum $S_{w_i w_i}(f)$ is larger for frequencies at which $w_i(t)$ oscillates with 
+larger amplitude. So, for example, a 
 population $w_i(t)$ that shows strong oscillatory dynamics of $5$-year period will have a large value of 
 $S_{w_i w_i}(f)$ for $f=\frac{1}{5} \text{ y}^{-1}$. The spectrum separates the overall variance of a time series into
 contributions which occur at different frequencies, in the sense that an integral of $S_{w_i w_i}(f)$ across all 
@@ -412,7 +401,9 @@ The cross-spectrum takes large-magnitude values at frequencies, $f$, for which t
 of $w_i(t)$ and $w_j(t)$ are strong and in a consistent phase relationship to each other; 
 and the complex phase of the cross spectrum at $f$ then quantifies
 that relationship. The notation $S_{ww}(f)$ refers to the \emph{spectral matrix}, 
-which has $ij^{\text{th}}$ entry $S_{w_i w_j}(f)$. Spectral methods are standard  
+which has $ij^{\text{th}}$ entry $S_{w_i w_j}(f)$. The notation $S_{w_i w_i}$ for the spectrum makes sense
+and is consistent with the notation $S_{w_i w_j}$ for the cross spectrum because the spectrum of $w_i$ is the 
+cross spectrum of $w_i$ with itself. Spectral methods are standard  
 [e.g., \cite{Vasseur2007,Defriez2017}], and many background references are available 
 [e.g., \cite{Brillinger2001}]. 
 
@@ -427,13 +418,17 @@ were gathered at locations $i=1,\ldots,N$, our synchrony measure is simply
 $\rho_{ww}=\left( \sum_{i \neq j} S_{w_i w_j} \right)/(N^2-N)$, the average of the cross spectra for all pairs
 of distinct locations. This is a real-valued function of frequency, an integral (across frequencies) of which
 is the classic, non-frequency-specific synchrony 
-measure $\left( \sum_{i \neq j} \cov(w_i,w_j) \right)/(N^2-N)$ (see SI section
-\ref{SM-Sect:measuring_sync} for details, here). If two time series $\epsilon_i^{(1)}(t)$ and $\epsilon_i^{(2)}(t)$
-($t=1,\ldots,T$ and $i=1,\ldots,N$) were measured at each sampling location (e.g., two environmental variables),
+measure $\left( \sum_{i \neq j} \cov(w_i,w_j) \right)/(N^2-N)$ (see Supporting information 
+for details, here, and additional comparisons to previous measures of synchrony). 
+Because $\rho_{ww}$ is a real-valued function of frequency, it equals $\rho_{ww}=\Rp(\rho_{ww})=
+\left( \sum_{i \neq j} \Rp(S_{w_i w_j}) \right)/(N^2-N)$, which only involves the cospectrum, $\Rp(S_{w_i w_j})$,
+not the full cross-spectrum, $S_{w_i w_j}$.
+If two time series $\epsilon_i^{(1)}(t)$ and $\epsilon_i^{(2)}(t)$ (e.g., two environmental variables)
+were measured at each sampling location and time,
 cross-variable synchrony (or, simply, \emph{cross synchrony}) between the variables
 is defined as $\rho_{\epsilon^{(1)}\epsilon^{(2)}}=\left( \sum_{i \neq j} S_{\epsilon_i^{(1)}\epsilon_j^{(2)}} \right)/(N^2-N)$. 
 This is interpretable as pertaining to spatial synchrony because it makes comparisons across 
-distinct locations, i.e., $i \neq j$. 
+distinct locations. 
 It is interpretable as cross-variable synchrony because comparisons are between the two variables, i.e., cross spectra 
 between time series components of $\epsilon^{(1)}$ and $\epsilon^{(2)}$ are used. The new index 
 takes into account possible time lags. For instance, if both $\epsilon^{(1)}$ and $\epsilon^{(2)}$ show strong,
@@ -442,7 +437,7 @@ oscillations, but peaks in the $\epsilon^{(2)}$ oscillations consistently lag pe
 by a year, then $\rho_{\epsilon^{(1)}\epsilon^{(2)}}$, which is complex valued, will have high magnitude at
 timescale $4$y, equivalent to frequency $f=\frac{1}{4} \text{ y}^{-1}$, and will have  
 phase at that frequency equal to $\pi/2$, reflecting the one-year lag.
-See SI section \ref{SM-sect:examples_cross_sync} for detailed examples.
+See Supporting information for detailed examples of cross synchrony.
 
 Our population model is 
 \begin{linenomath}
@@ -461,13 +456,14 @@ taken to be measured, whereas $\delta$ represents the
 aggregate influence of unmeasured processes. We assume that the combined process 
 $(\epsilon_1^{(1)},\ldots,\epsilon_N^{(1)},\epsilon_1^{(2)},\ldots,\epsilon_N^{(2)},\delta_1,\ldots,\delta_N)$ is an ergodic second-order stationary stochastic process \citep{Brillinger2001}
 with expected values of its components equal to $0$. We make additional mild
-regularity assumptions for model stability 
-(SI section \ref{SM-sect:model_spec}). This model can be seen as 
+regularity assumptions for model stability, detailed in the Supporting information. 
+Our model can be seen as 
 a linearization of a very general dynamical model, influenced by ``weak noise'' [see, e.g.,
 SI section S1.2 of \cite{Desharnais2018} and SI section S1 of \cite{Walter2017}].
 Linearization and ``weak noise'' assumptions have been commonly adopted to make
 theoretical progress in ecology, and it has been demonstrated that results based on a
 weak noise assumption often hold for noise which is fairly strong \citep{Nisbet1977,Desharnais2018}.
+The topic of nonlinearity is revisited in the Discussion.
 See \cite{Brillinger2001} for background on stochastic processes.
 
 Fulfilling goal G1 of the Introduction (i.e., to elaborate theory of interacting Moran effects), 
@@ -486,7 +482,8 @@ Here, $f_{\mcB} = 1-b_1 \mu - b_2 \mu^2 - \cdots - b_n \mu^n$,
 $f_{\mcP^{(1)}} = p_0^{(1)} + p_1^{(1)} \mu + \cdots + p_{m_1}^{(1)} \mu^{m_1}$, and
 $f_{\mcP^{(2)}} = p_0^{(2)} + p_1^{(2)} \mu + \cdots + p_{m_2}^{(2)} \mu^{m_2}$, where 
 $\mu=\exp(-2 \pi \iota f)$, and where $\iota$, the Greek letter iota, is the imaginary unit.
-The derivation of the theory is in SI section \ref{SM-sect:derivation}. 
+The derivation of the theory is in Supporting information, 
+where additional perspectives on our theory can also be found.
 
 Comparing the terms on the right
 of (\ref{rhoww_T1to3}) gives the relative contributions of direct Moran effects and interactions 
@@ -548,17 +545,14 @@ four time steps per year. This makes no real mathematical difference, but was do
 facilitate later comparisons with results for kelp data, which were sampled quarterly. 
 For case study A (henceforth CaseA),  the environmental variable 
 $\epsilon^{(1)}$ is assumed to have a simple positive effect on populations, but 
-lagged by one model time step (1q), i.e.,
-$p_1^{(1)}>0$, and $p_i^{(1)}=0$ for $i \neq 1$. 
+lagged by one model time step (1q). 
 For case study B (henceforth CaseB), $\epsilon^{(1)}$ is again assumed to have a simple 
 positive effect on populations,
-but now lagged by $3$q, so that $p_3^{(1)}>0$ while $p_i^{(1)}=0$ for $i \neq 3$.
+but now lagged by $3$q.
 For both CaseA and CaseB, the effects of $\epsilon^{(2)}$
-are assumed to be un-lagged and positive, i.e., $p_0^{(2)} > 0$ and $p_i^{(2)}=0$ for $i>0$.
+are assumed to be un-lagged and positive.
 For case study C (CaseC), the effects of $\epsilon^{(1)}$ are positive and lagged by $1$q and the 
-effects of $\epsilon^{(2)}$ are unlagged and negative, i.e.,
-$p_{1}^{(1)} > 0$ while $p_i^{(1)}=0$ for $i \neq 1$, and 
-$p_{0}^{(2)} < 0$ while $p_i^{(2)}=0$ for $i \neq 0$.
+effects of $\epsilon^{(2)}$ are unlagged and negative.
 The noise process
 $(\epsilon^{(1)},\epsilon^{(2)})$ is assumed to be a Gaussian white-noise process 
 for both CaseA and CaseB. So 
@@ -573,13 +567,15 @@ Such a situation could be realized by annually
 periodic environmental fluctuations sampled quarterly,
 e.g., wave action in central CA peaks annually in the winter, whereas surface-water
 nitrate concentrations also fluctuate with period one year, but peak in the spring, a delay of $1$q
-compared to the wave peak. 
-Details of the noise processes are in SI section \ref{SM-sect:examples_cross_sync}.
-For all case studies,
-the autoregressive order of population dynamics is assumed, for simplicity, to be $1$, i.e, $b_1 \neq 0$ 
-but $b_i=0$ for $i>1$. Case studies do not cover the full range of possible scenarios which can be illuminated by 
-our general theory; they were selected for the intuition they provide, and for the correspondence of some of the cases to the 
-kelp examples we later discuss.
+compared to the wave peak. For all case studies,
+the autoregressive order of population dynamics is assumed, for simplicity, to be $1$.
+Details of the noise processes are Supporting information in the same section that
+has cross synchrony examples. 
+Model coefficients and other setup details for the theoretical case studies are also 
+specified in the Supporting information.
+Our case studies do not cover the full range of possible scenarios which can be illuminated by 
+our general theory; they were selected for the intuition they provide, and for the 
+correspondence of some of the cases to the kelp examples we later discuss.
 
 \subsection{Kelp examples}
 
@@ -588,7 +584,7 @@ To help illustrate our theory, for goal G3 of the Introduction, we also apply
 the theory to an exceptional dataset on giant kelp (\emph{Macrocystis pyrifera}) dynamics off the CA coast, and 
 associated environmental measurements. 
 The data are based on a subset of those used by \cite{CastoraniSheppardKelp} and
-\cite{Walter2021}, and data details are given in those papers and in SI section \ref{SM-sect:data};
+\cite{Walter2021}, and data details are given in those papers and in Supporting information;
 \cite{CastoraniSheppardKelp} and \cite{Walter2021} also provide an introduction to 
 kelp ecology, and information on why giant kelp is an excellent species 
 for studies of synchrony. We here summarize the format of the data after a 
@@ -605,7 +601,7 @@ from southern CA, close to Santa Barbara
 mean quarterly kelp canopy biomass (kg wet) per unit 
 useable habitat ($\text{m}^2$) along a 500m stretch of coastline. We used coastline segments where kelp was persistent
 through essentially all of the $\Sexpr{quarters[1,2]}$-$\Sexpr{quarters[dim(quarters)[1],2]}$ 
-period (SI section \ref{SM-sect:data}). We also had estimates
+period (Supporting information). We also had estimates
 of maximum wave height and mean nitrate concentration for each quarter and location. Both waves
 and nutrients influence kelp dynamics and synchrony 
 \citep{Cavanaugh2013,CastoraniSheppardKelp}.
@@ -646,7 +642,8 @@ theoretical case studies by plotting the components of (\ref{rhoww_T1to3}) for e
 
 Data for the project are publicly archived \citep{SBCLTER2021}.
 All computations were done in R version 3.6.3 on a laptop running Ubuntu Linux
-16.04. Complete codes for the project workflow are at \url{https://github.com/reumandc/InteractingMoranEffects.git}.
+16.04. Complete codes for the project workflow will be published online, simultaneously with the final version of the paper.
+%are at \url{https://github.com/reumandc/InteractingMoranEffects.git}.
 
 \section{Results}
 
@@ -666,11 +663,14 @@ showed negative interaction effects on short timescales (Fig. \ref{fig:TheoryCas
 CaseC1 showed negative interactions on
 long timescales (Fig. \ref{fig:TheoryCaseA}e); and CaseC2 showed negative interactions on all timescales 
 (Fig. \ref{fig:TheoryCaseA}g).
-Thus interaction effects can either augment or reduce synchrony. Finally, interaction effects depended strongly on timescale 
+Thus interaction effects can either augment or reduce synchrony. Finally, 
+interaction effects depended strongly on timescale 
 for all case studies. This result complements earlier studies that showed direct Moran effects can 
 depend on timescale \citep{Defriez2016,Sheppard2016,Desharnais2018,Anderson2021}. The results of this paragraph
 also follow from \cite{Sheppard2019} and \cite{CastoraniSheppardKelp}, though not 
 straightforwardly, and those papers are case studies, whereas our results provide general theory.
+See Supporting information for mathematical details
+of the theoretical case studies.
 
 \subsection{Building intuition for Moran interactions: case studies}
 
@@ -681,7 +681,7 @@ For CaseA, $\epsilon^{(1)}$ effects on populations were lagged by $1$q but
 $\epsilon^{(2)}$ effects were unlagged (Methods). So, in the language of Fig. \ref{fig:PedagogAlt},
 $l_{e1}=1$q and $l_{e2}=0$q. 
 The between-noise lag, $l_n$, of Fig. \ref{fig:PedagogAlt} is $0$q because $(\epsilon^{(1)},\epsilon^{(2)})$ was 
-taken to be a white noise process (see SI section \ref{SM-sect:examples_cross_sync} for details).
+taken to be a white noise process (Methods).
 Thus, the environmental effect alignment measure, $l_{e1}-l_{e2}+l_n$, equals $1$q.
 What determines the sign of interactions between Moran effects for this example is how 
 this measure compares to the timescale/period, $\sigma$, being considered. 
@@ -717,19 +717,22 @@ were, respectively, positive and negative for these timescales (Fig. \ref{fig:Th
 %Case study C
 CaseA and CaseB assumed white noise processes, and therefore $l_n$ was $0$.
 But CaseC illustrates what can happen when noise processes have lagged associations, e.g., 
-both processes oscillate with annual periodicity and distinct phenology, an important scenario because seasonality is common.
-Recall that, for CaseC, $\epsilon^{(1)}$ effects on populations were positive and lagged by $1$q, i.e., $l_{e1}=1$ in the 
-language of Fig. \ref{fig:PedagogAlt2}; whereas 
+both processes oscillate with annual periodicity and distinct phenology, an important 
+scenario because seasonality is common.
+Recall that, for CaseC, $\epsilon^{(1)}$ effects on populations were positive 
+and lagged by $1$q, i.e., $l_{e1}=1$ in the 
+language of the Supporting information analogue of Fig. \ref{fig:PedagogAlt}; whereas 
 $\epsilon^{(2)}$ effects were unlagged and negative, i.e., $l_{e2}=0$ (Methods). 
-We compare CaseC to the Fig. \ref{fig:PedagogAlt2} $\beta$ scenarios instead of the Fig. \ref{fig:PedagogAlt} 
-$\alpha$ scenarios because
+We compare CaseC to the $\beta$ scenarios in the Supporting information analogue of Fig. \ref{fig:PedagogAlt}
+instead of the $\alpha$ scenarios of Fig. \ref{fig:PedagogAlt} itself because
 $\epsilon^{(2)}$ effects were negative for CaseC, the situation considered by the $\beta$ scenarios.
 For CaseC1, peaks in the periodic
 noise process $\epsilon^{(1)}$ were set up to lag peaks in the periodic process $\epsilon^{(2)}$ by
-$1$q (Methods, SI section \ref{SM-sect:examples_cross_sync}), so that $l_n=1$. 
+$1$q (Methods, Fig. \ref{fig:TheoryCaseA}), so that $l_n=1$. 
 Thus the environmental effect alignment measure, $l_{e1}-l_{e2}+l_n$, equals $2 \text{q}=0.5 \text{y}$, 
 and, on annual timescales, lags compounded, similar to 
-Fig. \ref{fig:PedagogAlt2}c, d: the 
+panels c, d of the Supporting information analogue of 
+Fig. \ref{fig:PedagogAlt}: the 
 annual positive population effects of $\epsilon^{(1)}$ 
 were exactly $2$q offset from the annual negative effects of $\epsilon^{(2)}$,
 one quarter because of the lag of $\epsilon^{(1)}$ peaks behind $\epsilon^{(2)}$ peaks,
@@ -740,7 +743,8 @@ as reflected by our theory (Fig. \ref{fig:TheoryCaseA}e,f).
 Contrastingly, for CaseC2, peaks in the periodic
 noise process $\epsilon^{(2)}$ were set up to lag peaks in the periodic process $\epsilon^{(1)}$ by
 $1$q, so that $l_n=-1$. Thus $l_{e1}-l_{e2}+l_n=0$ and, on annual timescales, lags cancelled,
-similar to Fig. \ref{fig:PedagogAlt2}a, b: the annual positive population effects of $\epsilon^{(1)}$
+similar to panels a, b of the Supporting information analogue of Fig. \ref{fig:PedagogAlt}: 
+the annual positive population effects of $\epsilon^{(1)}$
 coincided with the negative effects of $\epsilon^{(2)}$ every year, because $\epsilon^{(1)}$
 peaks came $1$q ahead of $\epsilon^{(2)}$ peaks each year, but population influences of $\epsilon^{(1)}$ were 
 delayed by $1$q. This produced negative interactions between the Moran influences of 
@@ -762,7 +766,7 @@ effects; 2) can be either synergistic or destructive; and 3) can
 depend strongly on timescale.
 First, for all of our regions and for essentially all timescales, the magnitude of interaction 
 effects was comparable to that of direct Moran effects (Fig. \ref{fig:SummaryKelpFig}
-for the CCA1 and SB regions and Fig. \ref{SM-fig:SummaryKelpFig_SM_lag4} for the CCA2 region).
+for the CCA1 and SB regions and Supporting information for the CCA2 region).
 Second, interaction effects could be positive (e.g., annual timescales, CCA1 region on Fig. 
 \ref{fig:SummaryKelpFig}a), or negative (e.g., annual timescales, SB region on Fig. 
 \ref{fig:SummaryKelpFig}d; or long timescales $>8$y for either region, Fig. 
@@ -778,11 +782,11 @@ Nitrates are henceforth identified with $\epsilon^{(1)}$ and waves with $\epsilo
 Both nitrates and waves fluctuate seasonally in CA \citep{Schiel2015}. 
 Thus nitrate and wave 
 synchrony had a strong annual component (Fig. \ref{fig:noise}a,b,j,k for the CCA1 and SB regions,
-Fig. \ref{SM-fig:directMoran_SM_lag4} for CCA2), which produced 
+Supporting information for CCA2), which produced 
 some of the annual synchrony observed in kelp 
 (Fig. \ref{fig:SummaryKelpFig}a,d, green and blue lines).
 Nitrates and waves are also synchronous on long timescales $>8$y  
-(Fig. \ref{fig:noise}g,h,p,q for the CCA1 and SB regions, Fig. \ref{SM-fig:directMoran_SM_lag4} 
+(Fig. \ref{fig:noise}g,h,p,q for the CCA1 and SB regions, Supporting information 
 for CCA2), possibly due to the North Pacific Gyre Oscillation 
 \citep{CastoraniSheppardKelp, DiLorenzo2008}. The long-timescale synchrony
 in nitrates and waves produced some of the long-timescale
@@ -793,7 +797,7 @@ waves, was more pronounced in CCA1 than in SB
 (Fig. \ref{fig:noise}), and also because waves
 had a stronger influence on kelp in central California than in SB:
 regression coefficients determining $f_{\mcP^{(1)}}$, $f_{\mcP^{(2)}}$
-and $f_{\mcB}$ are in Table \ref{SM-tab:regcoefs}.
+and $f_{\mcB}$ are Supporting information.
 
 \subsection{Building intuition for Moran interactions: kelp examples}
 
@@ -803,9 +807,10 @@ In CCA1, nitrates had $1$q-delayed positive effects on observed
 kelp populations and waves had immediate negative effects \citep{Cavanaugh2011,Bell2015,Schiel2015}, 
 just as $\epsilon^{(1)}$ effects in CaseC1 
 were positive and delayed by $1$q and $\epsilon^{(2)}$ effects were negative and immediate.
-The delayed effects of nitrates in CCA1 are reflected in Table \ref{SM-tab:regcoefs}, where 
-regression results for $p_0^{(1)}$ are close to $0$ and those for $p_1^{(1)}$ are positive.
-Immediate negative effects of waves in CCA1 are also reflected in Table \ref{SM-tab:regcoefs},
+The delayed effects of nitrates in CCA1 are reflected in the tabulated regression results of 
+Supporting information, where 
+results for $p_0^{(1)}$ are close to $0$ and those for $p_1^{(1)}$ are positive.
+Immediate negative effects of waves in CCA1 are also reflected in the same table,
 where entries for $p_0^{(2)}$ are negative.
 Nitrate effects on kelp 
 are probably delayed by a quarter in central CA because winter waves commonly remove kelp,
@@ -828,7 +833,7 @@ CaseC1 (compare Figs \ref{fig:TheoryCaseA}e and \ref{fig:SummaryKelpFig}c),
 and for the same reason in both cases: on long timescales, sub-annual lags
 are inconsequential, and the positive effects of nitrates/$\epsilon^{(1)}$ and the negative
 effects of waves/$\epsilon^{(2)}$ therefore lead to negative interactions.
-Interactions between Moran effects in CCA2 operated similarly to CCA1 (Fig. \ref{SM-fig:indirectMoran_SM_lag4}).
+Interactions between Moran effects in CCA2 operated similarly to CCA1 (Supporting information).
 
 %Interactions between Moran effects, SB
 Due to different nitrate effects on observable kelp growth in SB compared to 
@@ -837,10 +842,11 @@ mechanism in SB compared to CCA1, leading to the slightly negative versus positi
 documented on annual timescales for the two regions (Fig. \ref{fig:SummaryKelpFig}d v. a). 
 Whereas in CCA1, nitrate effects on observed kelp density were delayed by $1$q, in SB nitrate effects 
 were observable within the same quarter: 
-see Table \ref{SM-tab:regcoefs}, where $p_0^{(1)}$ terms were close to zero for CCA1 and positive for SB,
+see the tabulated regression results of Supporting information, 
+where $p_0^{(1)}$ terms were close to zero for CCA1 and positive for SB,
 whereas $p_1^{(1)}$ terms were positive for CCA1 and close to zero for SB. 
 Wave effects were negative and
-immediate in both regions, i.e., $p_0^{(2)}<0$ in Table \ref{SM-tab:regcoefs}. 
+immediate in both regions, i.e., $p_0^{(2)}<0$ in the same Supporting information table. 
 In southern CA, kelp are less likely to be completely removed by winter waves \citep{Reed2011}. 
 Effects of elevated nitrates on the growth of kelp stands already reaching
 the surface can be observed within the quarter \citep{Cavanaugh2011,Bell2015,Schiel2015}. 
@@ -864,7 +870,7 @@ influences of the two environmental variables.
 
 \section{Discussion}
 
-%*DONE Summary
+%Summary
 We provided a general mathematical theory of the new mechanism of 
 interactions between Moran effects. When two related spatially 
 synchronous environmental drivers both influence a set of populations across a landscape, interactions can make 
@@ -889,9 +895,9 @@ their influences on populations. There is therefore also potential for climate c
 between Moran effects, in ways our new theory may help researchers to understand.  
 The augmented fundamental understanding of Moran effects which we have provided may 
 substantially benefit both basic \citep{Liebhold2004} 
-and applied \citep{Hansen2020,Larsen2021,Herfindal2022} ecological research.
+and applied [\cite{Hansen2020,Larsen2021,Herfindal2022}, see also below] ecological research.
 
-%*DONE arguments about likelihood that interactions will be common, extending earlier arguments
+%arguments about likelihood that interactions will be common, extending earlier arguments
 We argue that it is likely that interactions between Moran effect are common. Most species
 are influenced by more than one environmental driver. Drivers are frequently spatially autocorrelated,
 and are also often related to each other because of their common origin in underlying climatic 
@@ -908,7 +914,7 @@ variables. Temperature and precipitation variables
 measured in the same season may be particularly important candidates for interactions because of
 the well known joint influence of these variables on plants. 
 
-%*DONE Revist intuition
+%Revist intuition
 We again revisit the intuition behind interacting Moran effects using the central CA kelp
 example as a vehicle. Large winter waves 
 have immediate negative effects on kelp in central CA, whereas the positive
@@ -928,7 +934,7 @@ a multi-year period of abundant nutrients in location B, the multi-year-average 
 in A will tend to be reduced, whereas the multi-year-average kelp abundance in B will
 tend to be augmented, reducing long-timescale synchrony. Lags and interactions between
 drivers must always be compared to the timescale of interest to determine interaction effects,
-as in Figs \ref{fig:PedagogAlt} and \ref{fig:PedagogAlt2}, and as captured formally in our theory.
+as in Figs \ref{fig:PedagogAlt} and its analogue in Supporting information, and as captured formally in our theory.
 Thus interactions between Moran effects provide yet another reason, among many reasons previous work
 has already documented (e.g., \citealp{Vasseur2007,Keitt2008,Vasseur2014,Sheppard2016,
 Defriez2016,Defriez2017,Defriez2017b,Desharnais2018,Walter2017,
@@ -936,28 +942,39 @@ Anderson2021,Zhao2020}), that patterns
 of synchrony must be considered from a timescale-specific 
 viewpoint for full understanding. 
 
-%*DONE Comparison to Castorani et al paper, and maybe also a bit on comparison to the Sheppard et al 2019 paper
+%Comparison to Castorani et al paper
 Our results about kelp were consistent with those of \cite{CastoraniSheppardKelp}, though
-that study uses distinct methods; our results complement the results of \cite{CastoraniSheppardKelp} 
-in important ways. In spite of 
+that study uses distinct methods. In spite of 
 numerous methodological choices which differed between the 
 two studies, both our results and \cite{CastoraniSheppardKelp}
 show positive effects of both nutrients and waves on synchrony on both annual and long ($>4$y)
 timescales in both central and southern CA. And both studies
 show positive interactions between nutrient and wave Moran effects on annual timescales
 in central CA, but negative interactions in southern CA on annual timescales and in both central
-and southern CA on long timescales. The Fourier approach of our study was designed to facilitate 
+and southern CA on long timescales. As stated in the Introduction, our results about kelp 
+were not intended to reveal new aspects of kelp ecology -- we did that already in 
+\cite{CastoraniSheppardKelp} -- instead our purpose was to use kelp as a vehicle for helping explain 
+the mechanism of interacting Moran effects. Kelp is a good vehicle for this purpose
+because of the clarity of the lagged effects in the kelp system, and the differences in the 
+lags between Southern and Central CA.
+
+%Fourier versus wavelet
+Since both our Fourier approach and the wavelet methods of \cite{CastoraniSheppardKelp} provided
+similar results when applied to kelp, when should one approach be applied in favor of the other?
+The Fourier approach of our study was designed to facilitate 
 mathematical examination of interactions between Moran effect as a general mechanism, and development
-of general theory; whereas the 
-wavelet approach of \cite{CastoraniSheppardKelp} was instead optimized for detecting interactions 
+of general theory. The Fourier
+approach facilitates deriving analytic results from mathematical models such as (\ref{main_model_4}).
+The wavelet approach of \cite{CastoraniSheppardKelp} was instead optimized for detecting interactions 
 and identifying Moran mechanisms in data, in spite of non-stationarity and
-other complicating features which are present in many ecological datasets. The study of
+other complicating features which are present in many ecological datasets. 
+The study of
 \cite{Sheppard2019} developed the wavelet methods applied by \cite{CastoraniSheppardKelp}; an open-source implementation of 
 these methods \citep{wsyn} can facilitate future work.
 The modelling approach of this study relates indirectly to the approach of \cite{Anderson2021}, though that
 study concerned different research questions.
 
-%*DONE relationship to earlier papers comparing synchrony of drivers and pops
+%relationship to earlier papers comparing synchrony of drivers and pops
 It has been a frequent topic of research why populations are often less synchronous, or sychronous over a smaller
 spatial extent, than might be expected given the strength and extent of 
 synchrony of an environmental driver \citep{Herfindal2022}. Our new mechanism
@@ -975,7 +992,52 @@ than in drivers \citep{Massie2015,Desharnais2018}.
 Synergistic interaction between Moran drivers are another mechanism by which populations can
 be more synchronous than expected. 
 
-%*DONE Climate change
+%nonlinearity
+Our model is a linear population dynamical model, but most population dynamics are probably 
+nonlinear, at least to some degree. We speculate on what may be the outcome if future work
+explores interactions between two or more Moran effects using nonlinear population dynamical 
+models. 
+Some researchers have explored Moran effects of one environmental variable acting on nonlinear
+population models and found generally that synchronous environmental fluctuations tend to promote
+synchronous population fluctuations, in spite of nonlinearities, though often to a lesser 
+degree than for the linear case \citep{Royama2005,Engen2005}. 
+Our model is a linearization of a very general population dynamical model [SI section
+S1.2 of \cite{Desharnais2018} and SI section S1 of \cite{Walter2017}], and it is well known
+that analytic results for a linearized models, such as we have developed, also hold, approximately, for
+the original nonlinear model, as long as the noise impinging the model is sufficiently weak. 
+How weak is ``sufficiently weak'' is model dependent, but prior work examining that question
+provided evidence that weak noise approximations using linearizations of commonly used 
+ecological models are often actually quite accurate, even for fairly strong 
+noise \cite{Nisbet1977}. 
+Therefore we speculate that our main observations will hold even for nonlinear systems:
+1) Moran effects can substantially interact, either synergistically or destructively;
+2) interactions can depend on timescale; and 3) the nature of effects depend on relative,
+timescale-specific lags of environmental influences on populations and between 
+environmental variables. However, future work should nevertheless examine Moran interactions and 
+nonlinear models, since much has been learned by exploring deviations of ecological models 
+from predictions of theory based on linearization (e.g., \citealp{Reuman2006}). 
+
+%Conservation
+Improved understanding of fundamental ecological phenomena often can be used to improve 
+conservation efforts. But how, specifically, might the improved understanding of Moran effects that 
+this study provides aid kelp conservation or restoration? Coauthor TWB is part of an effort
+%***add detail on what effort, official names, maybe funders, etc. - whatever is appropriate to identify the project officially
+to develop a stability model that informs the when, where and how of kelp restoration
+following the 20XX crash of kelp populations in large areas along the west coast from X down to Y.
+%***Tom to fill in the above missing info
+Specifically, the stability model informs kelp restoration efforts by... 
+%***Tom to fill in a very brief summary of how it works
+It is well known that stability of regional populations is closely related to synchrony,
+both generally \citep{Wilcox2017} and for kelp specifically \citep{Walter2021};
+and the first step in the decision tree that TWB and his collaborators have developed 
+involves computing the predicted stability of every subtidal reef across a large area.
+%***Tom, we should cite your report, or other appropriate reference, somewhere around here.
+Future iterations of TWB's and others' efforts to understand kelp stability and thereby 
+support kelp restoration initiatives should incorporate consideration of interacting Moran
+effects and their impacts on stability, and such consideration could likely be straightforwardly
+integrated since existing methods already compute stability metrics as a key part of their process.
+
+%Climate change
 Climate change has the potential to influence interactions between Moran effects in two specific ways
 which can be illuminated by our theory, and this potential should be investigated in
 future work. Examining the third term of (\ref{rhoww_T1to3}), climate change could
@@ -1007,7 +1069,7 @@ outlined above are sufficient to warrant further investigation.
 % An ever growing body of work shows that synchrony is, and should be analyzed as, a timescale-specific 
 % phenomenon \citep{Vasseur2007,Keitt2008,Vasseur2014,Sheppard2016,Defriez2016,Defriez2017,Defriez2017b,Desharnais2018,Anderson2021}.
 % The results of our present study extend this earlier work by showing that interactions between Moran effects 
-% are also timescale-specific, differing stongly in strength, and in sign, across timescales. 
+% are also timescale-specific, differing strongly in strength, and in sign, across timescales. 
 % A non-timescale-specific version of our theory could be obtained by appropriately integrating our main equation 
 % (\ref{rhoww_T1to3}) across frequencies. But doing so would reduce insight by conflating distinct and
 % often disparate processes. For instance, if the terms of (\ref{rhoww_T1to3}) were integrated 
@@ -1023,9 +1085,8 @@ outlined above are sufficient to warrant further investigation.
 % providing another argument, among many, in support of 
 % long-term ecosystem monitoring. 
 
-%*Revisit the kendall paper, briefly. Talk about possible three-way interactions.
-%***DAN: new review para for ecography
-We have focussed on interactions between two Moran drivers, but synchrony in most systems
+%Revisit the kendall paper, briefly. Talk about possible three-way interactions.
+We have focused on interactions between two Moran drivers, but synchrony in most systems
 may be a phenomenon with multiple (more than two) interacting causes.
 \cite{Kendall2000} considered interactions between dispersal and a Moran mechanism of synchrony. Their research
 questions were therefore distinct from ours, but combining their viewpoints and ours may lead to 
@@ -1055,6 +1116,15 @@ and Wildlife Delta Science Program. This project used data developed through the
 Long Term Ecological Research project, funded through NSF-OCE award 1831937. The authors thank Vadim Karatayev, 
 Maowei Liang, Kyle Emery, Nat Coombs, Adeola Adeboje and Ethan Kadiyala for helpful discussions.
 
+\section{Author contributions}
+DCR conceptualized the paper, developed methodology, performed formal analysis and 
+investigation, carried out project administration and supervision, provided computing 
+resources, wrote and validated the software, produced most of the figures and wrote the 
+first draft. KCC and TWB performed data curation. MCNC helped with data visualization 
+and curation and project conceptualization. JAW and LWS helped with conceptualization, 
+methodology and formal analysis. MCNC and JAW helped with project administration. 
+All authors acquired the funding and performed substantial editing of manuscript drafts.
+
 \bibliographystyle{ecology_letters2}
 \bibliography{refs} 
 
@@ -1069,8 +1139,7 @@ is based on the very simple model described in the Introduction, shows that
 interaction effects are possible, and can be substantially positive or negative. 
 We used $\cov(\epsilon_1^{(1)},\epsilon_2^{(1)})=\cov(\epsilon_1^{(2)},\epsilon_2^{(2)})=0.7$,
 and the values $\cov(\epsilon_i^{(1)},\epsilon_j^{(2)})$, for $i,j=1,2$, were all set equal to each
-other and to a parameter, $\varphi$, which appears on the horizontal axis and which characterizes the 
-strength of cross synchrony of the environmental variables. 
+other and the common value appears on the horizontal axis -- cross synchrony of the environmental variables. 
 See the online version for color
 renderings of all figures.}\label{fig:IntroTheory}
 \end{figure}
@@ -1113,28 +1182,6 @@ See the online version for color renderings of all figures.}\label{fig:PedagogAl
 \newpage
 
 \begin{figure}
-\includegraphics[width=\textwidth]{../Results/Theory/PedagogFig_Alt_SM.pdf}
-\caption{%\doublespacing 
-Similar to Fig. \ref{fig:PedagogAlt}, but for slightly altered scenarios. For Fig. \ref{fig:PedagogAlt},
-for simplicity, we assumed that larger values of environmental variables had more positive influences
-on populations. We here assume that larger values of $\epsilon_i^{(1)}$ have more 
-positive population influences (as in Fig. \ref{fig:PedagogAlt}), 
-but that larger values of $\epsilon_i^{(2)}$ have more negative population influences (contrasting
-with Fig. \ref{fig:PedagogAlt}). In scenario $\beta 1$, 
-$l_n+l_{e1}=l_{e2}$, as in $\alpha 1$; but Moran interactions are nonetheless antagonistic because the 
-negative effects of $\epsilon_i^{(2)}$ means that the peak positive effects of that
-variable correspond to the peak negative effects of $\epsilon_i^{(1)}$. In scenario $\beta 2$, as in $\alpha 2$,
-the environmental effect alignment measure, $l_n+l_{e1}-l_{e2}$, equals $-\sigma/2$ for $\sigma=20$ the period. 
-But Moran interactions are synergistic because the 
-negative effects of $\epsilon_i^{(2)}$ means that the peak positive effects of that
-variable correspond to the peak positive effects of $\epsilon_i^{(1)}$. 
-See the online version for color renderings of all figures.}\label{fig:PedagogAlt2}
-\end{figure}
-
-\clearpage
-\newpage
-
-\begin{figure}
 \includegraphics[width=\textwidth]{./Fig2.pdf}
 \caption{%\doublespacing 
 Kelp sampling sites and example time series. Sampling sites (a) were from three regions,
@@ -1155,7 +1202,7 @@ See the online version for color renderings of all figures.}\label{fig:map}
 \includegraphics[width=.4\textwidth]{../Results/Theory/TheoryFigCaseC_v01_MT.pdf}\\
 \includegraphics[width=.4\textwidth]{../Results/Theory/TheoryFigCaseC_v02_MT.pdf}
 \caption{%\doublespacing 
-Theoretical case studies A (panels a-b), B (c-d), C1 (e-f) and C2 (g-h). 
+Results from theoretical case studies A (panels a-b), B (c-d), C1 (e-f) and C2 (g-h). 
 Left panels (a, c, e, g) show the terms on the right side
 of (\ref{rhoww_T1to3}). On those panels, the green line is 
 $\frac{|f_{\mcP^{(1)}}|^2}{|f_{\mcB}|^2} \rho_{\epsilon^{(1)} \epsilon^{(1)}}$, quantifying 
@@ -1168,18 +1215,10 @@ quantifying population synchrony due to interacting Moran effects.
 The functions plotted on b, d, f, h are those on a, c, e, g, respectively, times 
 $|f_{\mcB}|^2$, plotted to illustrate how autoregressive population effects modulate
 synchrony [see (\ref{rhoww_T1to3})].
-Model parameters were: $N=\Sexpr{N_A}$ and $b_1=\Sexpr{b_A}$ for all case studies; 
-$p_1^{(1)}=\Sexpr{p1_A[2]}$ and $p_0^{(2)}=\Sexpr{p2_A}$ for case study A; 
-$p_3^{(1)}=\Sexpr{p1_B[4]}$ and $p_0^{(2)}=\Sexpr{p2_B[1]}$ for case study B;
-$p_1^{(1)}=\Sexpr{p1_C1[2]}$, $p_0^{(2)}=\Sexpr{p2_C1[1]}$ 
-%$c_1=0$ and $c_2=-4/9$ 
-for case study C. For C1, peaks in the periodic noise process $\epsilon^{(2)}$
+For C1, peaks in the periodic noise process $\epsilon^{(2)}$
 lagged peaks in the periodic process $\epsilon^{(1)}$ by 1 quarter
 (e-f), and for C2, $\epsilon^{(1)}$ lagged $\epsilon^{(2)}$ by the same
 amount (g-h).
-See SI section \ref{SM-sect:examples_cross_sync} and Fig. \ref{SM-fig:rhosForC} for 
-parameters associated with the noise for each case study,
-and see Methods and SI section \ref{SM-sect:details_case_studies} for additional details.
 Synch. contrib. = Synchrony contribution refers to contributions to synchrony of the individual 
 terms in our theory; Rel. synch. contrib. = Relative synchrony contribution refers to contributions 
 expressed without accounting for the influence of autoregressive population effects. 
@@ -1215,11 +1254,10 @@ very different $y$-axis ranges.
 The CCA1 results approximately parallel the 
 results for theoretical case
 study C scenario 1 (Fig. \ref{fig:TheoryCaseA}e; see text for details).
-See Fig. \ref{SM-fig:SummaryKelpFig_SM_lag4} for the central CA 2 (CCA2) region,
+See Supporting information for the central CA 2 (CCA2) region,
 for which results were substantially the same as for CCA1. This figure used 
 kelp lag $n=4$ [see (\ref{main_model_1})]; 
-see Figs \ref{SM-fig:SummaryKelpFig_SM_lag8} 
-and \ref{SM-fig:SummaryKelpFig_SM_lag12} for $n=8, 12$, respectively.
+see analogue figures in Supporting information for $n=8, 12$.
 See the online version for color renderings of all 
 figures.}\label{fig:SummaryKelpFig}
 \end{figure}
@@ -1240,10 +1278,9 @@ Nitrates are identified with $\epsilon^{(1)}$ and waves with $\epsilon^{(2)}$.
 Vertical axis extents are the same for corresponding panels for the
 two regions, to facilitate comparisons.
 Cross synchrony is complex valued, with magnitude plotted on the vertical axis and phase displayed using color. 
-See Figs \ref{SM-fig:directMoran_SM_lag4} and \ref{SM-fig:indirectMoran_SM_lag4} for CCA2,
+See Supporting information for CCA2,
 for which results were similar to CCA1. This figure used 
-kelp lag $n=4$; see Figs \ref{SM-fig:directMoran_SM_lag8}, \ref{SM-fig:indirectMoran_SM_lag8}, 
-\ref{SM-fig:directMoran_SM_lag12} and \ref{SM-fig:indirectMoran_SM_lag12} for $n=8$ and $12$.
+kelp lag $n=4$; see analogue figures in Supporting information for $n=8$ and $12$.
 See the online version for color
 renderings of all figures.}\label{fig:noise}
 \end{figure}

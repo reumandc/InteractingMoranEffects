@@ -179,6 +179,57 @@ which is a standard quantity that can be used to measure non-frequency-specific 
 Thus $\rho_{ww}$ is a frequency-specific generalization of a classic, non-frequency-specific 
 measure of synchrony.
 
+We briefly compare our definition of synchrony to other measures and terminology 
+which have been used. Perhaps the most commonly 
+used measure of synchrony is simple Pearson correlation between time series in different locations. When 
+time series from multiple locations are available, pairwise Pearson correlation values have sometimes
+been considered individually, often as a function of geographic distance between pairs of sites \citep{BjornstadFalck2001},
+or have simply been averaged:
+\begin{equation}
+\left( \frac{1}{N^2-N}  \right) \sum_{i \neq j} \cor(w_i,w_j). \label{eq:classic_sync}
+\end{equation}
+As explained above, our metric, $\rho_{ww}$, is a timescale-specific generalization of 
+\begin{equation}
+\left( \frac{1}{N^2-N}  \right) \sum_{i \neq j} \cov(w_i,w_j), \label{eq:nontssync}
+\end{equation}
+which is similar to (\ref{eq:classic_sync}), but weights time series of greater variance
+more heavily in the average. The latter definition, (\ref{eq:nontssync}), is better connected
+to concepts of regional stability because  
+\begin{equation}
+\var(\sum_i w_i) = \sum_{i} \var(w_i) + \sum_{i \neq j} \cov(w_i,w_j).
+\end{equation}
+The quantity $\var(\sum_i w_i)$ and related measures are often used as measures of 
+regional temporal instability.
+
+The concept of \emph{phase synchonization} has sometimes been used in studies
+of populations fluctuating with a single dominant periodicity [e.g., 
+\cite{Blasius1999,Massie2010}]. Phase synchronization refers to the tendency of population
+peaks in different places to occur simultaneously, and phase synchronization
+can occur independently of whether peak magnitudes are related across locations.
+Strong phase synchronization would tend to produce a large value of $\rho_{ww}$ at the
+common frequency of oscillation. 
+
+The term ``asynchrony'' has been used to refer to either
+uncorrelated or independent dynamics in different locations. 
+If the processes $w_i$ and $w_j$ are independent, then not only are the classic synchrony quantities
+$\cor(w_i,w_j)$ and $\cov(w_i,w_j)$ equal to $0$, but so is the cospectrum $\Rp(w_i w_j)$.
+On the other hand, if $\cor(w_i,w_j)=\cov(w_i,w_j)=0$, then the cospectrum may nevertheless be non-zero 
+if it is positive for some 
+frequencies and negative for others in a manner which causes the opposing quantities to cancel.
+Research exploring ``asynchrony'' in a timescale-specific context would therefore have to begin 
+by clarifying the term. 
+
+The term ``anti-synchrony'' has been used to refer to
+two time series which are negatively correlated. 
+Standard past uses of the term ``anti-synchrony'' may likewise need to be clarified 
+in a timescale-specific context.
+A negative correlation, $\cor(w_i,w_j)$, or covariance, $\cov(w_i,w_j)$, 
+may result from negative associations on some timescales outweighing positive 
+associations on other timescales, a pattern which would be clarified by 
+the cospectrum, $\Rp(w_i, w_j)$. Related ideas in a community context
+were explored by \cite{Zhao2020}.
+
+We now move on to defining cross-variable synchrony. 
 If $\epsilon^{(1)}=(\epsilon^{(1)}_1,\ldots,\epsilon^{(1)}_N)$ and 
 $\epsilon^{(2)}=(\epsilon^{(2)}_1,\ldots,\epsilon^{(2)}_N)$
 are two $N$-dimensional stationary stochastic processes, we define the \emph{cross-variable spatial synchrony}
@@ -355,7 +406,7 @@ $f$ is frequency in cycles per time step.
 This theorem is identical to theorem 2 in SI section S1.5 of \cite{Anderson2021}, where a proof is also provided. 
 \end{proof}
 
-\section{Model specification, full details}\label{sect:model_spec}
+\section{Main model specification, full details}\label{sect:model_spec}
 
 The population model is specified starting with the equation
 \begin{linenomath}
@@ -494,7 +545,7 @@ the aggregate effects of unknown processes, then we can write
 \rho_{ww} &= \frac{|f_{\mcP^{(1)}}|^2}{|f_{\mcB}|^2} \rho_{\epsilon^{(1)} \epsilon^{(1)}} \label{rhoww_T1}\\
 &+ \frac{|f_{\mcP^{(2)}}|^2}{|f_{\mcB}|^2} \rho_{\epsilon^{(2)} \epsilon^{(2)}} \label{rhoww_T2}\\
 &+ \frac{2}{|f_{\mcB}|^2} \Rp \left(f_{\mcP^{(1)}} \conj{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}} \right) \label{rhoww_Tint} \\
-&+ \text{other contributions}.
+&+ \text{other contributions}.\label{OCeq}
 \end{align}
 \end{linenomath}
 The term (\ref{rhoww_T1}) is contributions to the synchrony of $w$ due to direct Moran effects of $\epsilon^{(1)}$.
@@ -504,7 +555,135 @@ of $\epsilon^{(1)}$ and $\epsilon^{(2)}$. The ``other contributions'' may includ
 unmeasured environmental factors, as well as interactions between these effects and Moran effects of the 
 measured factors $\epsilon^{(1)}$ and $\epsilon^{(2)}$.
 
-\section{Details of data and data cleaning}\label{sect:data}
+\section{Additional perspectives on the theory}\label{sect:theorypersp}
+
+Our model (\ref{main_model_stochproc}) can be reconceptualized as 
+\begin{equation}
+\mcB w = \epsilon^{(T)} + \delta,\label{eq:model_simple}
+\end{equation}
+if one is willing to consider ``the environment'' to be 
+$\epsilon^{(T)} = \mcP^{(1)} \epsilon^{(1)} + \mcP^{(2)} \epsilon^{(2)}$. 
+This simplifies the model, producing some advantages, but requires an abstract
+definition of the environment which would be harder to measure and less 
+directly interpretable. Though this reconceptualization of our model is not
+directly useful for the main research goals of our paper, we nevertheless
+explore its benefits and drawbacks here, beginning with benefits.
+
+It is straightforward to derive the population spectral characteristics of (\ref{eq:model_simple})
+and a relationship between population synchrony and synchrony of the environment. 
+Taking the spectral matrix of both sides of (\ref{eq:model_simple}) gives
+\begin{equation}
+T(\mcB) S_{ww} T(\mcB)^* = S_{\epsilon^{(T)} \epsilon^{(T)}} + S_{\delta \delta} + S_{\epsilon^{(T)} \delta}
++S_{\delta \epsilon^{(T)}}
+\end{equation}
+and therefore
+\begin{equation}
+S_{ww} = \frac{1}{|f_{\mcB}|^2}[S_{\epsilon^{(T)} \epsilon^{(T)}} + S_{\delta \delta} + S_{\epsilon^{(T)} \delta}
++S_{\delta \epsilon^{(T)}}].
+\end{equation}
+Now averaging over all $i,j$ such that $i \neq j$, we have
+\begin{align}
+\left( \frac{1}{N^2-N}  \right) \sum_{i \neq j} S_{w_i w_j} &= \frac{1}{|f_{\mcB}|^2} \left( \frac{1}{N^2-N}  \right) \sum_{i \neq j} S_{\epsilon^{(T)}_i \epsilon^{(T)}_j} \\
+&+ \frac{1}{|f_{\mcB}|^2} \left( \frac{1}{N^2-N}  \right) \sum_{i \neq j} S_{\delta_i \delta_j} \\
+&+ \frac{2}{|f_{\mcB}|^2} \left( \frac{1}{N^2-N}  \right) \sum_{i \neq j} \Rp (S_{\epsilon^{(T)}_i \delta_j}),
+\end{align}
+which gives
+\begin{align}
+\rho_{ww} &= \frac{1}{|f_{\mcB}|^2} \rho_{\epsilon^{(T)} \epsilon^{(T)}} \label{eq:main_result_simple_1}\\
+&+ \text{other contributions}. \label{eq:main_result_simple_2}
+\end{align}
+This is a simpler version of our main result (equations (\ref{MT-rhoww_T1to3})-(\ref{MT-rhoww_OC})
+of the main text and (\ref{rhoww_T1})-(\ref{OCeq}) of SI section \ref{sect:derivation}),
+and ``other contributions'' has the same meaning as was explained below (\ref{OCeq}).
+
+We can also use (\ref{eq:model_simple}) to recover the classic Moran theorem, as follows.
+If we impose the same assumptions on our model which were used to derive the original
+Moran theorem, i.e., $\epsilon^{(T)}$ is iid through time and $\delta$ is $0$, then 
+(\ref{eq:model_simple}) gives
+\begin{equation}
+S_{ww} = \frac{1}{|f_{\mcB}|^2} S_{\epsilon^{(T)} \epsilon^{(T)}},
+\end{equation}
+and $S_{\epsilon^{(T)} \epsilon^{(T)}}$ does not depend on frequency, $f$.
+For a pair of locations, $i$ and $j$, with $i \neq j$, we get
+\begin{align}
+S_{w_i w_j} &= \frac{1}{|f_{\mcB}|^2} S_{\epsilon^{(T)}_i \epsilon^{(T)}_j}\\
+S_{w_i w_i} &= \frac{1}{|f_{\mcB}|^2} S_{\epsilon^{(T)}_i \epsilon^{(T)}_i}\\
+S_{w_j w_j} &= \frac{1}{|f_{\mcB}|^2} S_{\epsilon^{(T)}_j \epsilon^{(T)}_j},
+\end{align}
+so
+\begin{align}
+\cor(w_i, w_j) &= \frac{\cov(w_i,w_j)}{\sqrt{\var(w_i)\var(w_j)}} \\
+&= \frac{\int S_{w_i w_j} df}{\sqrt{\int S_{w_i w_i} df \int S_{w_j w_j} df}} \\
+&= \frac{\frac{1}{|f_{\mcB}|^2} \int S_{\epsilon^{(T)}_i \epsilon^{(T)}_j} df}{\sqrt{\frac{1}{|f_{\mcB}|^2} \int S_{\epsilon^{(T)}_i \epsilon^{(T)}_i} df \frac{1}{|f_{\mcB}|^2} \int S_{\epsilon^{(T)}_j \epsilon^{(T)}_j} df}} \\
+&= \frac{\int S_{\epsilon^{(T)}_i \epsilon^{(T)}_j} df}{\sqrt{\int S_{\epsilon^{(T)}_i \epsilon^{(T)}_i} df 
+\int S_{\epsilon^{(T)}_j \epsilon^{(T)}_j} df}} \\
+&= \frac{\cov(\epsilon^{(T)}_i,\epsilon^{(T)}_j)}{\sqrt{\var(\epsilon^{(T)}_i)\var(\epsilon^{(T)}_j)}} \\
+&= \cor(\epsilon^{(T)}_i,\epsilon^{(T)}_j),
+\end{align}
+which proves the original Moran theorem. 
+
+Although (\ref{eq:main_result_simple_1})-(\ref{eq:main_result_simple_2}) is simpler than 
+our main result in the main text, and relating our results back to the original Moran 
+theorem is a benefit, (\ref{eq:main_result_simple_1})-(\ref{eq:main_result_simple_2})
+is of limited use for understanding Moran effects because of the abstract notion of 
+the environment that it employs. We explain by way of example. Suppose $\epsilon^{(1)}$ 
+represents temperature and $\epsilon^{(2)}$ represents precipitation. Then $\mcP^{(1)}$
+encodes the nature of the temperature effect on our populations, and $\mcP^{(2)}$
+encodes the precipitation effect. Thus $\mcP^{(1)} \epsilon^{(1)} + \mcP^{(2)} \epsilon^{(2)}$
+is an abstract environmental quantity, incorporating two distinct traditional environmental
+variables and multiple lags. It would not necessarily be straightforward to interpret this
+quantity in a more concrete manner than simply ``the aggregate effect of temperature and 
+precipitation'' on the populations. Ecologists are more directly interested in the effects 
+of directly measurable environmental 
+variables such as temperature and precipitation than they are in the effects of highly derived 
+variables like $\mcP^{(1)} \epsilon^{(1)} + \mcP^{(2)} \epsilon^{(2)}$. Furthermore,
+interactions between Moran drivers cannot be effectively studied if those drivers 
+have been combined into a single unified influence. 
+
+Although the simpler formulation (\ref{eq:model_simple}) has its strengths and weaknesses,
+it is mathematically equivalent to our original model. Because 
+\begin{align}
+S_{\epsilon^{(T)} \epsilon^{(T)}} &= T(\mcP^{(1)}) S_{\epsilon^{(1)} \epsilon^{(1)}} T(\mcP^{(1)})^* \\
+&+ T(\mcP^{(2)}) S_{\epsilon^{(2)} \epsilon^{(2)}} T(\mcP^{(2)})^* \\
+&+ T(\mcP^{(1)}) S_{\epsilon^{(1)} \epsilon^{(2)}} T(\mcP^{(2)})^* \\
+&+ T(\mcP^{(2)}) S_{\epsilon^{(2)} \epsilon^{(1)}} T(\mcP^{(1)})^*,
+\end{align}
+which gives 
+\begin{align}
+S_{\epsilon^{(T)} \epsilon^{(T)}} &= |f_{\mcP^{(1)}}|^2 S_{\epsilon^{(1)} \epsilon^{(1)}}\\
+&= |f_{\mcP^{(2)}}|^2 S_{\epsilon^{(2)} \epsilon^{(2)}}\\
+&= f_{\mcP^{(1)}} \overline{f_{\mcP^{(2)}}} S_{\epsilon^{(1)} \epsilon^{(2)}}\\
+&= f_{\mcP^{(2)}} \overline{f_{\mcP^{(1)}}} S_{\epsilon^{(2)} \epsilon^{(1)}},
+\end{align}
+we can average over $i \neq j$ to see that
+\begin{align}
+\rho_{\epsilon^{(T)} \epsilon^{(T)}} &= |f_{\mcP^{(1)}}|^2 \left( \frac{1}{N^2-N} \right) \sum_{i \neq j} S_{\epsilon_i^{(1)} \epsilon_j^{(1)}} \\
+&+ |f_{\mcP^{(2)}}|^2 \left( \frac{1}{N^2-N} \right) \sum_{i \neq j} S_{\epsilon_i^{(2)} \epsilon_j^{(2)}}\\
+&+ f_{\mcP^{(1)}} \overline{f_{\mcP^{(2)}}} \left( \frac{1}{N^2-N} \right) \sum_{i \neq j} S_{\epsilon_i^{(1)} \epsilon_j^{(2)}}\\
+&+ f_{\mcP^{(2)}} \overline{f_{\mcP^{(1)}}} \left( \frac{1}{N^2-N} \right) \sum_{i \neq j} S_{\epsilon_i^{(2)} \epsilon_j^{(1)}}.
+\end{align}
+Therefore, 
+\begin{align}
+\rho_{\epsilon^{(T)} \epsilon^{(T)}} &= |f_{\mcP^{(1)}}|^2 \rho_{\epsilon^{(1)} \epsilon^{(1)}}\\
+&+ |f_{\mcP^{(2)}}|^2 \rho_{\epsilon^{(2)} \epsilon^{(2)}}\\
+&+ 2\Rp(f_{\mcP^{(1)}} \overline{f_{\mcP^{(2)}}} \rho_{\epsilon^{(1)} \epsilon^{(2)}}).
+\end{align}
+Plugging this into (\ref{eq:main_result_simple_1}) recovers our main result. 
+
+\section{Details of the setup of the theoretical case studies}\label{sect:case_studies_setup}
+
+For CaseA, we assumed $p_1^{(1)}=\Sexpr{p1_A[2]}$, and $p_i^{(1)}=0$ for $i \neq 1$ and 
+$p_0^{(2)}=\Sexpr{p2_A}$ and $p_i^{(2)}=0$ for $i>0$.
+For CaseB, we assumed $p_3^{(1)}=\Sexpr{p1_B[4]}$ while $p_i^{(1)}=0$ for $i \neq 3$ and 
+$p_0^{(2)} = \Sexpr{p2_B[1]}$ and $p_i^{(2)}=0$ for $i>0$.
+For CaseC, we assumed $p_{1}^{(1)} = \Sexpr{p1_C1[2]}$ while $p_i^{(1)}=0$ for $i \neq 1$, and 
+$p_{0}^{(2)} = \Sexpr{p2_C1[1]}$ while $p_i^{(2)}=0$ for $i \neq 0$.
+For all theoretical case studies, we used $N=\Sexpr{N_A}$, $b_1=\Sexpr{b_A}$,
+and $b_i=0$ for $i>1$.
+See SI section \ref{sect:examples_cross_sync} and Fig. \ref{fig:rhosForC} for 
+information and parameters associated with the noise for each case study.
+
+\section{Details of kelp and related data, and data cleaning}\label{sect:data}
 
 Floating surface canopy of kelp was measured by remote sensing, with details and
 validation reported by \cite{Cavanaugh2011} and \cite{Bell2020, Bell2021}. Multispectral Landsat
@@ -544,7 +723,7 @@ and sea surface temperature (SST) in coastal CA \citep{Zimmerman1984,Palacios201
 and SST data derived from Advanced Very High Resolution Radiometer satellite imagery. 
 Wave and nutrient time series in each location were again linearly detrended before use.
 
-\section{Details of the theoretical case studies}\label{sect:details_case_studies}
+\section{Mathematical details of results from the theoretical case studies}\label{sect:details_case_studies}
 
 The noise processes $(\epsilon^{(1)},\epsilon^{(2)})$ used 
 in case studies A, B and C, which were only partly specified in the main text, are fully specified in 
@@ -570,6 +749,28 @@ In SI section \ref{sect:examples_cross_sync}, we computed that
 $\rho_{\epsilon^{(1)} \epsilon^{(1)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{11}$,
 $\rho_{\epsilon^{(2)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{22}$ and 
 $\rho_{\epsilon^{(1)}\epsilon^{(2)}} = \left| \frac{1}{1-c_1 \mu - c_2 \mu^2} \right|^2 w_{12} \exp(-2 \pi \iota f (l_1-l_2))$.
+
+\clearpage
+\newpage
+
+\begin{figure}
+\includegraphics[width=\textwidth]{../Results/Theory/PedagogFig_Alt_SM.pdf}
+\caption[Like main text Fig. \ref{MT-fig:PedagogAlt}, but for slightly altered scenarios]{%\doublespacing 
+Similar to Fig. \ref{MT-fig:PedagogAlt}, but for slightly altered scenarios. For Fig. \ref{MT-fig:PedagogAlt},
+for simplicity, we assumed that larger values of environmental variables had more positive influences
+on populations. We here assume that larger values of $\epsilon_i^{(1)}$ have more 
+positive population influences (as in Fig. \ref{MT-fig:PedagogAlt}), 
+but that larger values of $\epsilon_i^{(2)}$ have more negative population influences (contrasting
+with Fig. \ref{MT-fig:PedagogAlt}). In scenario $\beta 1$, 
+$l_n+l_{e1}=l_{e2}$, as in $\alpha 1$; but Moran interactions are nonetheless antagonistic because the 
+negative effects of $\epsilon_i^{(2)}$ means that the peak positive effects of that
+variable correspond to the peak negative effects of $\epsilon_i^{(1)}$. In scenario $\beta 2$, as in $\alpha 2$,
+the environmental effect alignment measure, $l_n+l_{e1}-l_{e2}$, equals $-\sigma/2$ for $\sigma=20$ the period. 
+But Moran interactions are synergistic because the 
+negative effects of $\epsilon_i^{(2)}$ means that the peak positive effects of that
+variable correspond to the peak positive effects of $\epsilon_i^{(1)}$. 
+See the online version for color renderings of all figures.}\label{fig:PedagogAlt2}
+\end{figure}
 
 \clearpage
 \newpage
@@ -623,7 +824,8 @@ the same as for Fig. \ref{fig:SummaryKelpFig_SM_lag4}.}\label{fig:SummaryKelpFig
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_ExplainDirectMoran_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_ExplainDirectMoran_ForMS.pdf} \\
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag4_ExplainDirectMoran_ForMS.pdf}
-\caption[All theory constituents for kelp for direct Moran effects terms, kelp lags up to 4 quarters]{Plots of all constituents of 
+\caption[Extension of main text Fig. \ref{MT-fig:noise} to CCA2, with additional theoretical components pertaining to direct Moran effects]{Plots 
+of all constituents of 
 the terms in theory that pertain to direct Moran effects, for kelp, for the CCA1 region (a-o), the SB region
 (p-dd) and the CCA2 region (ee-ss), based on a model that considered 
 potential kelp lag effects from up to 4 quarters in the past (see Methods).}\label{fig:directMoran_SM_lag4}
@@ -653,7 +855,7 @@ the same as for Fig. \ref{fig:directMoran_SM_lag4}.}\label{fig:directMoran_SM_la
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal1_KelpLag4_ExplainInteractingMoran_ForMS.pdf}
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_SoCal_KelpLag4_ExplainInteractingMoran_ForMS.pdf} \\
 \includegraphics[width=.5\textwidth]{../Results/Kelp_SpectralDecompResults/RegionalAnalysis_CentCal2_KelpLag4_ExplainInteractingMoran_ForMS.pdf} 
-\caption[All theory constituents for kelp for Moran interaction terms, kelp lags up to 4 quarters]{Plots of 
+\caption[Extension of main text Fig. \ref{MT-fig:noise} to CCA2, with additional theoretical components pertaining to Moran interactions]{Plots of 
 all constituents of the terms in theory that pertain to interactions between Moran effects, for kelp, for CCA1 region
 (a-o), the SB region (p-dd), and the CCA2 region (ee-ss), based on a model that considered 
 potential kelp lag effects from up to 4 quarters in the past (see Methods).}\label{fig:indirectMoran_SM_lag4}
@@ -680,7 +882,7 @@ the same as for Fig. \ref{fig:indirectMoran_SM_lag4}.}\label{fig:indirectMoran_S
 \clearpage
 
 \begin{table}[!h]
-\caption{Regression coefficients used to parameterize (\ref{MT-main_model_1})-(\ref{MT-main_model_4}) of the main text for each 
+\caption[Regression coefficients used to parameterize (\ref{MT-main_model_1})-(\ref{MT-main_model_4}) of the main text for three kelp regions]{Regression coefficients used to parameterize (\ref{MT-main_model_1})-(\ref{MT-main_model_4}) of the main text for each 
 of our three regions. All values rounded to two decimal places.}\label{tab:regcoefs}
 \begin{center}
 \begin{tabular}{r|l|l|l|l|l}

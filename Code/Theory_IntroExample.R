@@ -83,7 +83,7 @@ par(fig=c((yaxwd)/totwd,
 plot(res$od,res$sync,type="l",xlab="Parameter",ylab="Population correlation")
 lines(res$od,res$sync.in,type="l",lty="dashed")
 
-mtext(latex2exp::TeX("Parameter, $\\phi$"),1,1.2)
+mtext("Environmental cross sycnhrony",1,1.2)
 mtext("Population synchrony (correlation)",2,1.2)
 
 inds<-which(res$sync<=res$sync.in)
