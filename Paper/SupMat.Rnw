@@ -42,7 +42,7 @@
 \externaldocument[MT-]{Paper}
 
 %Get line numbers to work, also in figure captions
-\linenumbers
+%\linenumbers
 \DeclareCaptionFont{linenumbers}{\internallinenumbers}
 \captionsetup[figure]{font+=linenumbers} % use \internallinenumbers inside figure caption
 

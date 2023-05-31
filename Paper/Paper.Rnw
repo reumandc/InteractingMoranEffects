@@ -1003,7 +1003,7 @@ synchronous population fluctuations, in spite of nonlinearities, though often to
 degree than for the linear case \citep{Royama2005,Engen2005}. 
 Our model is a linearization of a very general population dynamical model [SI section
 S1.2 of \cite{Desharnais2018} and SI section S1 of \cite{Walter2017}], and it is well known
-that analytic results for a linearized models, such as we have developed, also hold, approximately, for
+that analytic results for linearized models, such as we have developed, also hold, approximately, for
 the original nonlinear model, as long as the noise impinging the model is sufficiently weak. 
 How weak is ``sufficiently weak'' is model dependent, but prior work examining that question
 provided evidence that weak noise approximations using linearizations of commonly used 
@@ -1017,25 +1017,23 @@ environmental variables. However, future work should nevertheless examine Moran 
 nonlinear models, since much has been learned by exploring deviations of ecological models 
 from predictions of theory based on linearization (e.g., \citealp{Reuman2006}). 
 
-%Conservation
-Improved understanding of fundamental ecological phenomena often can be used to improve 
-conservation efforts. But how, specifically, might the improved understanding of Moran effects that 
-this study provides aid kelp conservation or restoration? Coauthor TWB is part of an effort
-%***add detail on what effort, official names, maybe funders, etc. - whatever is appropriate to identify the project officially
-to develop a stability model that informs the when, where and how of kelp restoration
-following the 20XX crash of kelp populations in large areas along the west coast from X down to Y.
-%***Tom to fill in the above missing info
-Specifically, the stability model informs kelp restoration efforts by... 
-%***Tom to fill in a very brief summary of how it works
-It is well known that stability of regional populations is closely related to synchrony,
-both generally \citep{Wilcox2017} and for kelp specifically \citep{Walter2021};
-and the first step in the decision tree that TWB and his collaborators have developed 
-involves computing the predicted stability of every subtidal reef across a large area.
-%***Tom, we should cite your report, or other appropriate reference, somewhere around here.
-Future iterations of TWB's and others' efforts to understand kelp stability and thereby 
-support kelp restoration initiatives should incorporate consideration of interacting Moran
-effects and their impacts on stability, and such consideration could likely be straightforwardly
-integrated since existing methods already compute stability metrics as a key part of their process.
+%Conservation - new
+A better understanding of fundamental ecological phenomena can be used to improve 
+conservation efforts. But how, specifically, might improved understanding of Moran effects 
+from this study aid kelp conservation or restoration? Scientists and managers are 
+currently developing a stability model that informs when, where, and how to restore kelp 
+forests following recent large-scale declines \citep{Bell2023}.
+Specifically, these efforts inform kelp restoration by modeling the 
+dynamics of kelp abundance (measured by diver surveys) as a function of environmental and 
+bathymetric variables. Resulting maps of kelp stability are then compared to maps of recent  
+canopy declines to identify sites where restoration 
+activities are needed and would lead to stable future forests \citep{GiraldoOspinoInPrep}.
+It is well known that stability of regional populations is influenced by synchrony, both 
+generally \citep{Wilcox2017} and for kelp specifically \citep{Walter2021}; and the first step in 
+the emerging kelp restoration decision tree of \cite{Bell2023} and \cite{GiraldoOspinoInPrep} 
+involves predicting kelp stability across all 
+suitable habitat in California. Future iterations of this process may consider 
+interacting Moran effects to better predict stability and thereby better support kelp restoration. 
 
 %Climate change
 Climate change has the potential to influence interactions between Moran effects in two specific ways
