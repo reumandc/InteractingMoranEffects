@@ -642,8 +642,7 @@ theoretical case studies by plotting the components of (\ref{rhoww_T1to3}) for e
 
 Data for the project are publicly archived \citep{SBCLTER2021}.
 All computations were done in R version 3.6.3 on a laptop running Ubuntu Linux
-16.04. Complete codes for the project workflow will be published online, simultaneously with the final version of the paper.
-%are at \url{https://github.com/reumandc/InteractingMoranEffects.git}.
+16.04. Complete codes for the project workflow are at \url{https://github.com/reumandc/InteractingMoranEffects.git}.
 
 \section{Results}
 
@@ -962,7 +961,7 @@ lags between Southern and Central CA.
 Since both our Fourier approach and the wavelet methods of \cite{CastoraniSheppardKelp} provided
 similar results when applied to kelp, when should one approach be applied in favor of the other?
 The Fourier approach of our study was designed to facilitate 
-mathematical examination of interactions between Moran effect as a general mechanism, and development
+mathematical examination of interactions between Moran effects as a general mechanism, and development
 of general theory. The Fourier
 approach facilitates deriving analytic results from mathematical models such as (\ref{main_model_4}).
 The wavelet approach of \cite{CastoraniSheppardKelp} was instead optimized for detecting interactions 
@@ -1008,7 +1007,7 @@ the original nonlinear model, as long as the noise impinging the model is suffic
 How weak is ``sufficiently weak'' is model dependent, but prior work examining that question
 provided evidence that weak noise approximations using linearizations of commonly used 
 ecological models are often actually quite accurate, even for fairly strong 
-noise \cite{Nisbet1977}. 
+noise \citep{Nisbet1977}. 
 Therefore we speculate that our main observations will hold even for nonlinear systems:
 1) Moran effects can substantially interact, either synergistically or destructively;
 2) interactions can depend on timescale; and 3) the nature of effects depend on relative,
@@ -1115,13 +1114,13 @@ Long Term Ecological Research project, funded through NSF-OCE award 1831937. The
 Maowei Liang, Kyle Emery, Nat Coombs, Adeola Adeboje and Ethan Kadiyala for helpful discussions.
 
 \section{Author contributions}
-DCR conceptualized the paper, developed methodology, performed formal analysis and 
-investigation, carried out project administration and supervision, provided computing 
-resources, wrote and validated the software, produced most of the figures and wrote the 
-first draft. KCC and TWB performed data curation. MCNC helped with data visualization 
-and curation and project conceptualization. JAW and LWS helped with conceptualization, 
-methodology and formal analysis. MCNC and JAW helped with project administration. 
-All authors acquired the funding and performed substantial editing of manuscript drafts.
+\textbf{Reuman:} Conceptualization (lead), formal analysis (lead), funding acquisition (equal), investigation (lead), methodology (lead), project administration (equal), resources (lead), software (lead), validation (lead), visualization (lead), writing - original draft (lead), writing - review and editing (lead). 
+\textbf{Castorani:} Conceptualization, data curation, funding acquisition (equal), project administration (equal), visualization, writing - original draft, writing - review and editing.
+\textbf{Cavanaugh:} Data curation, funding acquisition (equal), writing - review and editing. 
+\textbf{Sheppard:} Conceptualization, formal analysis, funding acquisition (equal), methodology, writing - review and editing.
+\textbf{Walter:} Conceptualization, formal analysis, funding acquisition (equal), methodology, project administration (equal), writing - review and editing.
+\textbf{Bell:} Data curation (lead), funding acquisition (equal), writing - review and editing.  
+
 
 \bibliographystyle{ecology_letters2}
 \bibliography{refs} 
