@@ -42,11 +42,11 @@
 \let\conj\overline
 
 %Get line numbers to work, also in figure captions
-\linenumbers
-\DeclareCaptionFont{linenumbers}{\internallinenumbers}
-\captionsetup[figure]{font+=linenumbers} % use \internallinenumbers inside figure caption
+%\linenumbers
+%\DeclareCaptionFont{linenumbers}{\internallinenumbers}
+%\captionsetup[figure]{font+=linenumbers} % use \internallinenumbers inside figure caption
 
-\doublespacing
+%\doublespacing
 
 %length stats
 %Intro through Discussion: 7719 as of 2023 02 08 (limit is 7500)
@@ -54,7 +54,7 @@
 %so I think I'm OK - slightly over on the words, but with 2 fewer displays
 
 %header material for paper
-\title{How environmental drivers of spatial synchrony interact}
+\title{Latex-rendered version of the main text of ``How environmental drivers of spatial synchrony interact''}
 \date{}
 
 %Alternative titles
@@ -135,10 +135,6 @@ CC2locstouse<-readRDS(paste0(resloc,"CC2locstouse.Rds"))
 @
 
 \maketitle
-
-\newpage
-
-\large{\textbf{How environmental drivers of spatial synchrony interact}}
 
 \begin{abstract}
 \noindent Spatial synchrony, the tendency for populations across space to show correlated fluctuations, is a fundamental 
