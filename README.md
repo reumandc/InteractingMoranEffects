@@ -14,11 +14,27 @@ in \emph{Ecography} in 2023.
 
 ## How to compile
 
-If you want to run the unit tests of the function used, make your R working directory equal to the Code directory of the repository and run `testthat::test_dir(".")`. This should take less than 1 minute.
+If you want to run the unit tests of the function used, make your R working directory equal to the Code directory of the repository and run `testthat::test_dir(".")`. This should take less than 1 minute. You may have to install and R version or some R packages
+that you don't have to get these tests to pass. Keep in mind these tests were run when the paper was written, with versions 
+R and R studio and R packages which were current around then (see below), so no guarantees if a lot of time has passed since then.
+You can always run the code on the (now) old version of R and the packages and it should work then, but you'll have to set
+that up yourself.
 
-To run the codes that reproduce the analyses of the paper, make your R working directory equal to the `Code` directory of the repository and run `source("main.R")`. If all dependencies are in place, this will pull data from the `Data` directory and create results and then put them in the `Results` directory. All results are regenerated except Fig. 3, which was produced separately by Max Castorani on his machine, based on data exported by the script `Kelp_AnalysisStep_MakeMapFigDat.R` which is invoked by `main.R`. It was not considered necessary to embed Max's scripts into this workflow because Fig. 3 is purely descriptive, intended solely to introduce the kelp system; main results are not based on Fig. 3. The run will take some time the first time around because of use of the `checkpoint` package (see below). Subsequent runs (if any) should be faster because `checkpoint` will already have installed all the necessary R packages.
-
-To recompile the main text and supporting information of the paper, knit the Latex/Sweave files `Paper.Rnw` and `SupMat.Rnw`, which are in the `Paper` directory. These files will import results from the `Results` directory and will create two pdfs in the `Paper` directory. You may have to do several knits, alternating between the two files, to get all the links to work. 
+To run the codes that reproduce the analyses of the paper, make your R working directory equal to the `Code` directory of the repository 
+and run `source("main.R")`. If all dependencies are in place (see below), this will pull data from the `Data` directory and create 
+results and then put them in the `Results` directory. All results are regenerated except Fig. 3, which was produced separately by Max 
+Castorani on his machine, based on data exported by the script `Kelp_AnalysisStep_MakeMapFigDat.R` which is invoked by `main.R`. It was 
+not considered necessary to embed Max's scripts into this workflow because Fig. 3 is purely descriptive, intended solely to introduce 
+the 
+kelp system; main results are not based on Fig. 3. The run will take some time the first time around because of use of the `checkpoint` 
+package (see below). Subsequent runs (if any) should be faster because `checkpoint` will already have installed all the necessary R 
+packages.
+ 
+ 
+To recompile the main text and supporting information of the paper, knit the Latex/Sweave files `Paper.Rnw` and `SupMat.Rnw`, which are 
+in the `Paper` directory. These files will import results from the `Results` directory and will create two pdfs in the `Paper` 
+directory. 
+You may have to do several knits, alternating between the two files, to get all the links to work. 
 
 ## Dependencies
 
