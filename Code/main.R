@@ -7,17 +7,6 @@ rm(list=ls())
 graphics.off()
 
 #***
-#checkpoint, to help ensure it continues to work into the future
-#***
-
-#print("Running checkpoint, this may take a while the first time...")
-#if (!dir.exists("./.checkpoint/")){
-#  dir.create("./.checkpoint/")
-#}
-#checkpoint::checkpoint(snapshot_date="2023-06-01",r_version=getRversion(),checkpoint_location=getwd(),
-#                       scan_now = TRUE) 
-
-#***
 #Develop the theoretical case studies
 #***
 
@@ -65,4 +54,3 @@ print("Spectral analysis...")
 source("Kelp_AnalysisStep_SpectralDecomp.R")
 print("Done!")
 
-checkpoint::uncheckpoint()

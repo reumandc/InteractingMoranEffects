@@ -6,7 +6,7 @@ rm(list=ls())
 #External codes needed
 #***
 
-#packages needed (invoked with "::"): 
+#packages needed (invoked with "::"): ncf
 
 #***
 #Location for storing results and other prep

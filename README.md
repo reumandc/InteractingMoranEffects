@@ -9,16 +9,16 @@ Tom Bell, UCSB and Woods Hole Oceanographic Institution
 
 ## Introduction
 
-This repository can be used to reproduce the analyses behind the paper "How environmental drivers of synchrony interact" and to recompile the latex of the paper. Data are also included in the repository. The paper has now been accepted for publication
-in \emph{Ecography} in 2023. 
+This repository can be used to reproduce the analyses behind the paper "How environmental drivers of synchrony interact" and to recompile the latex of the paper. Data are also included in the repository. As of June 2023, the paper has now been accepted for publication
+in \emph{Ecography}. 
 
 ## How to compile
 
-If you want to run the unit tests of the function used, make your R working directory equal to the Code directory of the repository and run `testthat::test_dir(".")`. This should take less than 1 minute. You may have to install and R version or some R packages
+If you want to run the unit tests of the function used, make your R working directory equal to the Code directory of the repository and run `testthat::test_dir(".")`. This should take less than 1 minute. You may have to install an R version or some R packages
 that you don't have to get these tests to pass. Keep in mind these tests were run when the paper was written, with versions 
 R and R studio and R packages which were current around then (see below), so no guarantees if a lot of time has passed since then.
 You can always run the code on the (now) old version of R and the packages and it should work then, but you'll have to set
-that up yourself.
+that up yourself. Yes, I have heard of the checkpoint package, but it's such a pain in the neck...
 
 To run the codes that reproduce the analyses of the paper, make your R working directory equal to the `Code` directory of the repository 
 and run `source("main.R")`. If all dependencies are in place (see below), this will pull data from the `Data` directory and create 
@@ -26,10 +26,7 @@ results and then put them in the `Results` directory. All results are regenerate
 Castorani on his machine, based on data exported by the script `Kelp_AnalysisStep_MakeMapFigDat.R` which is invoked by `main.R`. It was 
 not considered necessary to embed Max's scripts into this workflow because Fig. 3 is purely descriptive, intended solely to introduce 
 the 
-kelp system; main results are not based on Fig. 3. The run will take some time the first time around because of use of the `checkpoint` 
-package (see below). Subsequent runs (if any) should be faster because `checkpoint` will already have installed all the necessary R 
-packages.
- 
+kelp system; main results are not based on Fig. 3. 
  
 To recompile the main text and supporting information of the paper, knit the Latex/Sweave files `Paper.Rnw` and `SupMat.Rnw`, which are 
 in the `Paper` directory. These files will import results from the `Results` directory and will create two pdfs in the `Paper` 
@@ -40,31 +37,44 @@ You may have to do several knits, alternating between the two files, to get all 
 
 ### Overview of dependencies
 
-R, R studio, checkpoint package, a setup that can compile Sweave documents. 
+R, R studio, a setup that can compile Sweave documents. 
 
 ### Dependencies on R, R studio
 
-I used R version 4.3.0 running on Ubuntu 18.04, and R studio version 2023.03.0+386. I used version 1.0.2 of the checkpoint package. 
-
-### Dependencies on the R `checkpoint` package
-
-This codes uses the R `checkpoint` package. This is set up in the master file `main.R`, which contains a line of code specifying a date.
-
-`checkpoint::checkpoint(snapshot_date="2022-01-01",r_version=getRversion(),checkpoint_location=getwd(), scan_now = TRUE)` 
-
-The `checkpoint` package then automatically scans through other files looking for other required R packages. It then downloads and installs the newest versions of those packages available on the given date. This helps ensure that re-compiling the document uses exactly the same code that was originally used. This can take some time on first run (as mentioned above) but it is faster on subsequent runs because the packages are already installed. This also means that R package dependencies should only be the `checkpoint` package, since that package should scan for other packages and install them locally. Quite a few MB disk space are used (80-100). The version `checkpoint` that I used was 1.0.2. 
+I used R version 4.3.0 running on Ubuntu 18.04, and R studio version 2023.03.0+386. 
 
 ### Dependencies on a setup for compiling Seave documents
 
 Set your R studio up so there is a button near the top that compiles .Rnw files into pdfs.
 
+### Package versions
+
+The packages I used were current around the time of R version 4.3.0. Specifically:
+matrixcalc, version 1.0-6
+wsyn, version 1.0.4
+ncf, version 1.3-2
+latex2exp, version 0.9.6 
+testthat, version 3.1.9
+mvtnorm, version 1.2-2
+shape, version 1.4.6
+graphics, version 4.3.0
+stats, version 4.3.0
+parallel, version 4.3.0
+
 ### Additional dependencies
 
-The compilation process was tested by Reuman on Ubuntu 18.04 using R version 4.3.0 and R studio version 2023.03.0+386. It has not been tested on other machines. We have endeavored to list all dependencies we can think of above, but we have only compiled on Reuman's machine, so we cannot guarantee that additional dependencies will not also be needed on other machines. This repository is intended to record a workflow, and is not designed or tested for distribution and wide use on multiple machines. It is not guaranteed to work on the first try without any hand-holding on arbitrary computing setups.
+The compilation process was tested by Reuman on Ubuntu 18.04 using R version 4.3.0 and R studio version 2023.03.0+386. 
+It has not been tested on other machines. We have endeavored to list all dependencies we can think of above, but we have 
+only run the code on Reuman's machine, so we cannot guarantee that additional dependencies will not also be needed on other 
+machines. This repository is intended to record a workflow, and is not designed or tested for distribution and wide use on 
+multiple machines. It is not guaranteed to work on the first try without any hand-holding on arbitrary computing setups.
 
 ## Intermediate files:
 
-Knitting the Sweave code automatically produces a lot of 'intermediate' files. Files ending in `.tex` are the converted documents from `.Rnw` including all the R code output and the rest (files ending `.log`, `.aux`, `.lof`, `.lot`, `.toc`  and `.out` ) are intermediate files that `pdflatex` uses to keep track of various parts of the document. Some of these can be useful for diagnosing problems, if any. 
+Knitting the Sweave code automatically produces a lot of 'intermediate' files. Files ending in `.tex` are the converted documents 
+from `.Rnw` including all the R code output and the rest (files ending `.log`, `.aux`, `.lof`, `.lot`, `.toc`  and `.out` ) 
+are intermediate files that `pdflatex` uses to keep track of various parts of the document. Some of these can be useful for 
+diagnosing problems, if any. 
 
 ## Acknowlegements
 

@@ -8,7 +8,7 @@ rm(list=ls())
 #External codes needed
 #***
 
-#packages needed (invoked with "::"): 
+#packages needed (invoked with "::"): wsyn
 
 #***
 #Locations for storing results, and other prep
