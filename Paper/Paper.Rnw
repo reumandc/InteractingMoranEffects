@@ -1175,7 +1175,7 @@ See the online version for color renderings of all figures.}\label{fig:PedagogAl
 \newpage
 
 \begin{figure}
-\includegraphics[width=\textwidth]{./Fig2.pdf}
+\includegraphics[width=\textwidth]{./FigMap.pdf}
 \caption{%\doublespacing 
 Kelp sampling sites and example time series. Sampling sites (a) were from three regions,
 central California 1 (CCA1, blue points), central california 2 (CCA2, green points) and the region
