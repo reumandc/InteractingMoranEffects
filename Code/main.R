@@ -10,13 +10,12 @@ graphics.off()
 #checkpoint, to help ensure it continues to work into the future
 #***
 
-print("Running checkpoint, this may take a while the first time...")
-if (!dir.exists("./.checkpoint/")){
-  dir.create("./.checkpoint/")
-}
-checkpoint::checkpoint(snapshot_date="2022-01-01",r_version=getRversion(),checkpoint_location=getwd(),
-                       scan_now = TRUE) #mine is R-3.6.3
-#The version of the checkpoint package I used was installed from CRAN on 2022 01 31
+#print("Running checkpoint, this may take a while the first time...")
+#if (!dir.exists("./.checkpoint/")){
+#  dir.create("./.checkpoint/")
+#}
+#checkpoint::checkpoint(snapshot_date="2023-06-01",r_version=getRversion(),checkpoint_location=getwd(),
+#                       scan_now = TRUE) 
 
 #***
 #Develop the theoretical case studies

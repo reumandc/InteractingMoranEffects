@@ -28,7 +28,7 @@ R, R studio, checkpoint package, a setup that can compile Sweave documents.
 
 ### Dependencies on R, R studio
 
-I used R version 4.3.0 running on Ubuntu 18.04, and R studio version 2023.03.0+386.
+I used R version 4.3.0 running on Ubuntu 18.04, and R studio version 2023.03.0+386. I used version 1.0.2 of the checkpoint package. 
 
 ### Dependencies on the R `checkpoint` package
 
@@ -44,7 +44,7 @@ Set your R studio up so there is a button near the top that compiles .Rnw files 
 
 ### Additional dependencies
 
-The compilation process was tested by Reuman on Ubuntu 16.04 using R version 3.6.3 and R studio version 1.1.423. It has not been tested on other machines. We have endeavored to list all dependencies we can think of above, but we have only compiled on Reuman's machine, so we cannot guarantee that additional dependencies will not also be needed on other machines. This repository is intended to record a workflow, and is not designed or tested for distribution and wide use on multiple machines. It is not guaranteed to work on the first try without any hand-holding on arbitrary computing setups.
+The compilation process was tested by Reuman on Ubuntu 18.04 using R version 4.3.0 and R studio version 2023.03.0+386. It has not been tested on other machines. We have endeavored to list all dependencies we can think of above, but we have only compiled on Reuman's machine, so we cannot guarantee that additional dependencies will not also be needed on other machines. This repository is intended to record a workflow, and is not designed or tested for distribution and wide use on multiple machines. It is not guaranteed to work on the first try without any hand-holding on arbitrary computing setups.
 
 ## Intermediate files:
 
@@ -54,11 +54,11 @@ Knitting the Sweave code automatically produces a lot of 'intermediate' files. F
 
 This study was partly funded by the U.S. National Science Foundation (NSF) through linked NSF-OCE awards 
 2023555, 2023523, 2140335, and 2023474 to M.C.N.C, K.C.C., T.W.B, and D.C.R., respectively; and by NSF-Math Bio award 
-1714195 to D.C.R.; and by support to D.C.R. from the James S. McDonnell Foundation and the California Department of Fish
-and Wildlife Delta Science Program. This project used data developed through the Santa Barbara Coastal 
-Long Term Ecological Research project, funded through NSF-OCE award 1831937. The authors thank Vadim Karatayev, 
-Maowei Liang, Kyle Emery, Nat Coombs, Adeola Adeboje and Ethan Kadiyala for helpful discussions.
-Any opinions, findings, and conclusions or recommendations expressed in this material are those of 
+1714195 to D.C.R.; and by support to D.C.R. from the James S. McDonnell Foundation, the Humboldt Foundation, 
+and the California Department of Fish and Wildlife Delta Science Program. This project used data developed 
+through the Santa Barbara Coastal Long Term Ecological Research project, funded through NSF-OCE award 1831937. 
+The authors thank Vadim Karatayev, Maowei Liang, Kyle Emery, Nat Coombs, Adeola Adeboje and Ethan Kadiyala for 
+helpful discussions. Any opinions, findings, and conclusions or recommendations expressed in this material are those of 
 the authors and do not necessarily reflect the views of the National Science Foundation or the other funders. 
 
 

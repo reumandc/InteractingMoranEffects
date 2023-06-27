@@ -128,7 +128,7 @@ b_C2<-readRDS(paste0(resloc,"Params_C2_b.rds"))
 resloc<-"../Results/Kelp_DataAfterAllCleaning/"
 quarters<-readRDS(paste0(resloc,"Quarters_CleanedFinal.Rds"))
 
-resloc<-"../Results/Kelp_SpectralDecompResults/"
+resloc<-"../Results/Kelp_MapFig/"
 SBlocstouse<-readRDS(paste0(resloc,"SBlocstouse.Rds"))
 CC1locstouse<-readRDS(paste0(resloc,"CC1locstouse.Rds"))
 CC2locstouse<-readRDS(paste0(resloc,"CC2locstouse.Rds"))
