@@ -10,7 +10,7 @@ Tom Bell, UCSB and Woods Hole Oceanographic Institution
 ## Introduction
 
 This repository can be used to reproduce the analyses behind the paper "How environmental drivers of synchrony interact" and to recompile the latex of the paper. Data are also included in the repository. As of June 2023, the paper has now been accepted for publication
-in \emph{Ecography}. 
+in the journal Ecography. 
 
 ## How to compile
 
