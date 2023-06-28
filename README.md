@@ -18,9 +18,11 @@ If you want to run the unit tests of the function used, make your R working dire
 that you don't have to get these tests to pass. Keep in mind these tests were run when the paper was written, with versions 
 R and R studio and R packages which were current around then (see below), so no guarantees if a lot of time has passed since then.
 You can always run the code on the (now) old version of R and the packages and it should work then, but you'll have to set
-that up yourself. Yes, I have heard of the checkpoint package, but it's such a pain in the neck...
+up a (now) old version of R with (now) old packages yourself. Yes, I have heard of the checkpoint package, Microsoft has now
+abandoned MRAN so this is not a way toward reproducibility anymore.
 
-To run the codes that reproduce the analyses of the paper, make your R working directory equal to the `Code` directory of the repository 
+To run the codes that reproduce the analyses of the paper, make your R working directory equal to the `Code` directory of 
+the repository 
 and run `source("main.R")`. If all dependencies are in place (see below), this will pull data from the `Data` directory and create 
 results and then put them in the `Results` directory. All results are regenerated except Fig. 3, which was produced separately by Max 
 Castorani on his machine, based on data exported by the script `Kelp_AnalysisStep_MakeMapFigDat.R` which is invoked by `main.R`. It was 
@@ -37,7 +39,7 @@ You may have to do several knits, alternating between the two files, to get all 
 
 ### Overview of dependencies
 
-R, R studio, a setup that can compile Sweave documents. 
+R, R studio, a setup that can compile Sweave documents. The right versions of everything may be required - see below.
 
 ### Dependencies on R, R studio
 
@@ -61,9 +63,12 @@ graphics, version 4.3.0
 stats, version 4.3.0
 parallel, version 4.3.0
 
+You may have to install the versions of R, R studio, and the packages listed above to get the code to
+run if a lot of time has passed since publication. 
+
 ### Additional dependencies
 
-The compilation process was tested by Reuman on Ubuntu 18.04 using R version 4.3.0 and R studio version 2023.03.0+386. 
+The code and paper compilation process was tested by Reuman on Ubuntu 18.04 using R version 4.3.0 and R studio version 2023.03.0+386. 
 It has not been tested on other machines. We have endeavored to list all dependencies we can think of above, but we have 
 only run the code on Reuman's machine, so we cannot guarantee that additional dependencies will not also be needed on other 
 machines. This repository is intended to record a workflow, and is not designed or tested for distribution and wide use on 
