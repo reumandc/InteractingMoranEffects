@@ -52,16 +52,16 @@ Set your R studio up so there is a button near the top that compiles .Rnw files 
 ### Package versions
 
 The packages I used were current around the time of R version 4.3.0. Specifically:
-matrixcalc, version 1.0-6
-wsyn, version 1.0.4
-ncf, version 1.3-2
-latex2exp, version 0.9.6 
-testthat, version 3.1.9
-mvtnorm, version 1.2-2
-shape, version 1.4.6
-graphics, version 4.3.0
-stats, version 4.3.0
-parallel, version 4.3.0
+matrixcalc, version 1.0-6;
+wsyn, version 1.0.4;
+ncf, version 1.3-2;
+latex2exp, version 0.9.6; 
+testthat, version 3.1.9;
+mvtnorm, version 1.2-2;
+shape, version 1.4.6;
+graphics, version 4.3.0;
+stats, version 4.3.0;
+parallel, version 4.3.0.
 
 You may have to install the versions of R, R studio, and the packages listed above to get the code to
 run if a lot of time has passed since publication. 
